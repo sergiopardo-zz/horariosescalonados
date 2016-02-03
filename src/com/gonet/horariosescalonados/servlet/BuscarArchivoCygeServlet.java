@@ -96,7 +96,8 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
         
         GcsFilename fileName = new GcsFilename(appName, "Basecyge030216.txt");
 		
-       
+       System.out.println(fileName);
+        
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		
 		
