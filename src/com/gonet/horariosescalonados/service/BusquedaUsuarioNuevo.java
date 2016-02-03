@@ -160,7 +160,7 @@ public class BusquedaUsuarioNuevo
 
 						empleadoNuevo = parser.ConvertirAUsuario(content);
 
-						//System.out.println(resultado);
+						System.out.println(resultado);
 
 						empleadosNuevos.add(empleadoNuevo);
 
