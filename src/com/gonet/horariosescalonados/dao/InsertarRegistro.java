@@ -13,6 +13,7 @@ import com.gonet.horariosescalonados.bean.BeanCyge;
 import com.gonet.horariosescalonados.bean.BeanDocumento;
 import com.gonet.horariosescalonados.bean.BeanEmpleado;
 import com.gonet.horariosescalonados.bean.BeanEmpleadoExterno;
+import com.gonet.horariosescalonados.bean.BeanEmpleadoExternoRRHH;
 import com.gonet.horariosescalonados.bean.EmpleadoExterno;
 import com.gonet.horariosescalonados.bean.BeanEmpleadoHorario;
 import com.gonet.horariosescalonados.bean.BeanHorario;
@@ -76,31 +77,22 @@ public class InsertarRegistro {
 		}
 	}
 	
-	public static void empleadoExterno(BeanEmpleadoExterno empleadoExterno){		
+	public static void empleadoExterno(BeanEmpleadoExternoRRHH empleadoExterno){		
 		try{
 			System.out.println(empleadoExterno);
 			Connection conn = Connector.getConexion();
 			try {	
-				String statement = "INSERT INTO horariosescalonadosv2.empleadoExterno (NoCyge, Usuario, ApePaterno, ApeMaterno, Nombre, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email)"
-									+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				String statement = "INSERT INTO horariosescalonadosv2.EmpleadoExternoRRHH (Usuario, DireccionGeneral, DireccionCorporativa, Area, CRDireccionGeneral, CRDireccionCorporativa, CRArea, Edificio)"
+									+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 				PreparedStatement stmt = conn.prepareStatement(statement);
-				stmt.setString(1, empleadoExterno.getNoCyge());
-			    stmt.setString(2, empleadoExterno.getUsuario());
-			    stmt.setString(3, empleadoExterno.getApePaterno());
-			    stmt.setString(4, empleadoExterno.getApeMaterno());
-			    stmt.setString(5, empleadoExterno.getNombre());
-			    stmt.setString(6, empleadoExterno.getDirGeneral());
-			    stmt.setString(7, empleadoExterno.getDirCorporativa());
-			    stmt.setString(8, empleadoExterno.getArea());
-			    stmt.setString(9, empleadoExterno.getEntOficial());
-			    stmt.setString(10, empleadoExterno.getAutorizadorId());
-			    stmt.setString(11, empleadoExterno.getAutorizador());
-			    stmt.setString(12, empleadoExterno.getProveedor());
-			    stmt.setString(13, empleadoExterno.getProyecto());
-			    stmt.setString(14, empleadoExterno.getEstatus());
-			    stmt.setString(15, empleadoExterno.getEspacioFisico());
-			    stmt.setString(16, empleadoExterno.getLugarAsignadoEdificio());
-			    stmt.setString(17, empleadoExterno.getEmail());
+				stmt.setString(1, empleadoExterno.getStrUsuario());
+			    stmt.setString(2, empleadoExterno.getStrDirGeneral());
+			    stmt.setString(3, empleadoExterno.getStrDirCorporativa());
+			    stmt.setString(4, empleadoExterno.getStrArea());
+			    stmt.setString(5, empleadoExterno.getCRDireccionGeneral());
+			    stmt.setString(6, empleadoExterno.getCRDireccionCorporativa());
+			    stmt.setString(7, empleadoExterno.getCRArea());
+			    stmt.setString(8, empleadoExterno.getEdificio());
 			    int success = 2;
 			    success = stmt.executeUpdate();
 			    if (success == 1) {

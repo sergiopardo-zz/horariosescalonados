@@ -40,10 +40,23 @@ public class BeanEmpleadoExternoRRHH implements Archivo{
 	
 															//CONSTRUCTORES
 	
-	public BeanEmpleadoExternoRRHH()
-	{
-		
+	public BeanEmpleadoExternoRRHH(String usuario,
+			String dirGeneral, String dirCorporativa,
+			String area, String cRDireccionGeneral,
+			String cRDireccionCorporativa, String cRArea,
+			String edificio) {
+		super();
+		this.usuario = usuario;
+		this.dirGeneral = dirGeneral;
+		this.dirCorporativa = dirCorporativa;
+		this.area = area;
+		CRDireccionGeneral = cRDireccionGeneral;
+		CRDireccionCorporativa = cRDireccionCorporativa;
+		CRArea = cRArea;
+		Edificio = edificio;
 	}
+	
+
 	
 	public BeanEmpleadoExternoRRHH(String [] arrstrValores)
 	{

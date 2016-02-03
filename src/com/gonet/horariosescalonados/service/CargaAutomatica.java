@@ -42,7 +42,6 @@ public class CargaAutomatica
 		case CYGE:
 			
 			query.InsertarRegistrosCyge((List<BeanCyge>) registrosArchivo);
-			query.InsertarRegistrosCyge ((List<BeanCyge>) registrosArchivo);
 			
 			BusquedaUsuarioNuevo busquedaUsuario = new BusquedaUsuarioNuevo((List<BeanCyge>) registrosArchivo, key, 1);
 			String pruebaDeEntrada = "asdasd";
