@@ -108,9 +108,6 @@ public class InsertarRegistro {
 		}
 	}
 	
-	
-	
-	
 	public static void empleadoHorario(BeanEmpleado empleado){		
 		try{
 			System.out.println(empleado);

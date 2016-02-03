@@ -32,12 +32,12 @@ public class BusquedaUsuarioNuevo
 	private List<String> listaEmailsUsuarios = null;
 	private PrivateKey key = null;
 	private List<BeanCyge> listaRegistrosCyge = null;
-	private static final Logger log = Logger.getLogger(BusquedaUsuarioNuevo.class.getName());
+	private static final Logger log = Logger.getLogger("BusquedaUsuarioNuevo");
 	List<BeanUsuarioDirectorio> empleadosNuevos = null;
 
 	public void BuscarUsuarioInterno ()
 	{
-		
+		log.fine("Funciona ");
 		List<BeanEmpleado> empleadosInternos = new ArrayList <BeanEmpleado>();
 		List<BeanEmpleadoHorario> empleadosHorarios = new ArrayList <BeanEmpleadoHorario>();
 		empleadosNuevos = BuscarUsuario();
@@ -169,7 +169,6 @@ public class BusquedaUsuarioNuevo
 						System.out.println(resultado);
 
 						empleadosNuevos.add(empleadoNuevo);
-						log.fine(empleadosNuevos.toString());
 						}
 						catch (Exception e)
 						{
@@ -217,7 +216,9 @@ public class BusquedaUsuarioNuevo
 			e.printStackTrace();
 
 		} 
-
+		for(int i = 0; i < empleadosNuevos.size();i++){
+			System.out.println("---> " + empleadosNuevos.get(i).getMail());
+		}
 		return empleadosNuevos;
 	}
 

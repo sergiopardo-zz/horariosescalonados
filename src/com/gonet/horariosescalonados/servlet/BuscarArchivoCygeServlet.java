@@ -115,14 +115,13 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		carga.CargaAutomaticaArchivo();
 		
 		System.out.println("Mapeo Correcto Cyge");
-		
+	
 		req.setAttribute("resultado", inputString);
 		
 		dispatcher = getServletContext().getRequestDispatcher("/bloqueo2.jsp");
 		
 		dispatcher.forward(req, resp);
-		
-		
+			
 		}
 		catch(Exception e)
 		{
