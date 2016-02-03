@@ -180,6 +180,8 @@ public class DataNucleusQuery
 			{
 				try
 				{
+				
+					
 					pm.makePersistent(registro);
 
 					/*
@@ -222,6 +224,66 @@ public class DataNucleusQuery
 			pm.close();
 		}
 	}
+
+	/*public void PersisitirEmpleadoExterno (List<BeanEmpleadoExterno> registros)
+	{
+		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
+
+
+		Transaction tx = pm.currentTransaction();
+
+		long startTime = System.currentTimeMillis();
+		try{
+			tx.begin();
+
+			for (BeanEmpleadoExterno registro : registros)
+			{
+				String strQuery = ("insert into horariosescalonadosv2.EmpleadoExterno (NoCyge, Edificio, EspacioFisico, ApeMaterno, ApePaterno, Area, Autorizador, AutorizadorId, CreadoEn, "
+						+ "CreadoPor, DirCorporativa, DirGeneral, EntOficial, Estatus, EstatusArchivo, Nombre, Proveedor, Proyecto, Usuario)" + 
+						"values (" +"'"+ registro.getNoCyge()+ "'"+", "+"'"+registro.getLugarAsignadoEdificio()+"'"+", "+"'"+registro.getEspacioFisico()+"'"+", "+"'"+registro.getApePaterno()+"'"+""
+						+ ", "+"'"+registro.getApeMaterno()+"'"+", "+"'"+registro.getArea()+"'"+", "+"'"+registro.getAutorizador()+"'"+", "+"'"+registro.getAutorizadorId() +"'"+""
+						+"'"+", "+"'"+registro.getDirCorporativa() +"'"+", "+"'"+registro.getDirGeneral() +"'"+""
+						+ ", "+"'"+registro.getEntOficial() +"'"+", "+"'"+registro.getEstatus() +"'"+", "+"'"+registro.getNombre()+"'"+""
+						+ ", "+"'"+registro.getProveedor()+"'"+", "+"'"+registro.getProyecto()+"'"+", "+"'"+registro.getUsuario()+"'"+")" + 
+						"ON DUPLICATE KEY " +
+						"UPDATE Edificio = values(Edificio), EspacioFisico = values(EspacioFisico), "+
+						"ApeMaterno = values(ApeMaterno), ApePaterno = values (ApePaterno),"+ 
+						"Area = values(strArea), Autorizador = values(Autorizador), "+
+						"AutorizadorId = values(AutorizadorId), CreadoEn = values(CreadoEn), "+
+						"strCreadoPor = values(strCreadoPor), strDirCorporativa = values(strDirCorporativa),"+ 
+						"strDirGeneral = values(strDirGeneral), strEntOficial = values(strEntOficial), "+
+						"strEstatus = values(strEstatus), strEstatusArchivo = values(strEstatusArchivo),"+ 
+						"strNombre = values(strNombre), strProveedor = values(strProveedor), " +
+						"strProyecto = values(strProyecto), strUsuario = values(strUsuario);");
+
+				Query q = pm.newQuery("javax.jdo.query.SQL",strQuery);
+
+				q.execute();
+
+			}
+
+			tx.commit();	
+
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		finally {
+			if (tx.isActive()) 
+			{
+				tx.rollback();
+			}
+			pm.close();
+
+			long endTime   = System.currentTimeMillis();
+			long totalTime = endTime - startTime;
+			System.out.println(totalTime);
+			long inSeconds = (totalTime)/1000;
+			System.out.println(inSeconds);
+		}
+	}*/
 
 	public void borrarUsuarios (String UsuarioRepren){
 		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
@@ -503,7 +565,7 @@ public class DataNucleusQuery
 			Query q = pm.newQuery("SQL", "SELECT * FROM horariosescalonadosv2.cumplimiento "
 					+ "where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno "
 					+ "from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' ) "
-					+ "and  '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"' ");
+					+ "and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ");
 			q.setResultClass(BeanCumplimiento.class);
 			resultadosBeanCumplimiento = (List<BeanCumplimiento>)q.execute();
 
@@ -535,13 +597,12 @@ public class DataNucleusQuery
 
 			try{
 
-				Query q = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
-						+ "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
-						+ "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
-						+ "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
-						+ "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, "
-						+ "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal"
-						+ "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
+				Query q = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno,"
+						+ "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.nombre,"
+						+ "horariosescalonadosv2.cumplimiento.nombreCR, horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha,"
+						+ "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae,"
+						+ "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal,"
+						+ "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.jornada,"
 						+ "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
 						+ "FROM horariosescalonadosv2.cumplimiento "
 						+ "where '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"'");
