@@ -113,6 +113,8 @@ public class BusquedaUsuarioNuevo
 					.setServiceAccountScopes(SCOPES)
 					.setServiceAccountUser("juancarlos.ramirez.contractor@bbva.com")
 					.build();
+			
+			System.out.println(credential);
 
 		if(listaRegistrosCyge != null)
 
@@ -151,7 +153,7 @@ public class BusquedaUsuarioNuevo
 
 						try 
 						{
-						String URI = "http://bbva-gapis.appspot.com/gprofile/users/"+registroCyge.getEmail();
+						String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+registroCyge.getEmail();
 						HttpRequestFactory requestFactory = httpTransport.createRequestFactory(credential);
 						GenericUrl url = new GenericUrl(URI);
 						HttpRequest request = requestFactory.buildGetRequest(url);
@@ -185,7 +187,7 @@ public class BusquedaUsuarioNuevo
 
 					/*PRUEBA OFFLINE*/
 
-					String URI = "http://bbva-gapis.appspot.com/gprofile/users/"+strEmailUsuario;
+					String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+strEmailUsuario;
 					HttpRequestFactory requestFactory = httpTransport.createRequestFactory(credential);
 					GenericUrl url = new GenericUrl(URI);
 					HttpRequest request = requestFactory.buildGetRequest(url);
