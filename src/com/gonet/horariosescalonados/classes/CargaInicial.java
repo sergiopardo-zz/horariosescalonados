@@ -12,7 +12,7 @@ public class CargaInicial {
 	//	mensajes();
 	//	horarios();
 	//	creaAdmin();
-		creaExterno();
+	//	creaExterno();
 		
 	}
 	
@@ -28,10 +28,10 @@ public class CargaInicial {
 		InsertarRegistro.empleadoHorario(beanEmpleadoHorario);
 	}*/
 	
-	public static void creaExterno(){
+/*	public static void creaExterno(){
 		BeanEmpleadoExternoRRHH beanEmpleadoExternoRRHH = new BeanEmpleadoExternoRRHH("MB62934", "SISTEMAS Y OPERACIONES","RIESGOS", "SOPORTE Y SEGUIMIENTO OPERAT", "00005833", "01852114", "00010907","CENTRO BANCOMER D.F. (CON COME" );
 		InsertarRegistro.empleadoExterno(beanEmpleadoExternoRRHH);
-	}
+	}*/
 			
 /*	public static void horarios(){
 		Horario creaHorarios = new Horario();

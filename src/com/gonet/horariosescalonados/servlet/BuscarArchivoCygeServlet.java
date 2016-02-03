@@ -100,8 +100,8 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		
 		
-		InputStream input =Channels.newInputStream(readChannel);
-		*/
+		InputStream input =Channels.newInputStream(readChannel);*/
+		
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		
 		copy(inputStreamArchivo,output);
