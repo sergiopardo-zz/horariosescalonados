@@ -1,0 +1,1403 @@
+/************************************ E S T I L O S   G E N E R A L E S *********************************/
+body {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+
+.cajaTexto {
+	border: 1px Solid #898989;
+	height: 20px;
+	width: 99%;
+}
+
+.cajaTexto-1 {
+	border: 1px Solid #898989;
+	height: 20px;
+	width: 60%;
+}
+
+.cajaTexto-2 {
+	border: 1px Solid #898989;
+}
+
+.cajaTexto-3 {
+	border: 1px Solid #898989;
+	height: 20px;
+	width: 80%;
+}
+
+.cajaTexto-4 {
+	border: 1px Solid #898989;
+	width: 97%;
+}
+
+.cajaTexto-5 {
+	border: 1px Solid #898989;
+	font-weight: bold;
+	font-style: italic;
+	width: 100%;
+}
+
+.combo {
+	border: 1px Solid #898989;
+	height: 20px;
+	width: 98%;
+}
+
+.combo-1 {
+	border: 1px Solid #898989;
+	width: 98%;
+}
+
+.combo1 {
+	font-family: Tahoma, Arial, Verdana;
+	font-size: 12px;
+	color: #656565;
+	font-weight: normal;
+	text-align: left;
+	margin-left: 0px;
+	width: 204px;
+}
+
+.texto {
+	font-family: Tahoma, Arial, Verdana;
+	font-size: 12px;
+	color: #656565;
+	font-weight: normal;
+	text-align: left;
+	margin-left: 0px;
+}
+
+.texto-1 {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color: #000;
+}
+
+.fieldset-95 {
+	border: 1px solid #717f95;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #717f95;
+	background-color: #fff;
+	width: 95%;
+	text-align: left;
+	padding: 10px;
+}
+
+.fieldset-1 {
+	border: 1px solid #0080C0;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0080C0;
+	background-color: #fff;
+	width: 80%;
+	text-align: left;
+	padding: 10px;
+}
+
+.fieldset-2 {
+	border: 1px solid #0080C0;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0080C0;
+	background-color: #fff;
+	width: 50%;
+	text-align: left;
+	padding: 10px;
+}
+
+.fieldset-3 {
+	border: 1px solid #0080C0;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0080C0;
+	background-color: #fff;
+	width: 65%;
+	text-align: left;
+	padding: 10px;
+}
+
+.fieldset-4 {
+	border: 1px solid #0080C0;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0080C0;
+	background-color: #fff;
+	width: 16%;
+	text-align: left;
+	padding: 10px;
+}
+
+.tblCandidatoDer {
+	border: 0px solid #999;
+	border-collapse: separate;
+	width: 100%;
+}
+
+.tblCandidatoDer tr th {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	height: 22px;
+	font-size: 12px;
+	color: #fff;
+	background-color: #069;
+	text-align: right;
+	vertical-align: middle;
+	font-weight: bold;
+	padding: 0px 0px 0px 0px;
+}
+
+
+/************************************ F I N   E S T I L O S   G E N E R A L E S *************************/
+
+/************************************ E S T I L O S  B O T O N E S **************************************/
+.mousetoHand
+{
+color:#5B3C1D;
+font-family:Arial;
+font-size:12pt;
+cursor:pointer;
+text-decoration:none;
+
+}
+
+.botonCandidato {
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	font: 12px arial, sans-serif;
+	color: #FFFFFF;
+	/*border: 1px solid #094FA4;*/
+	border: 1px solid #BACCE0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: url(../img/Bt_Azul.png) center no-repeat;
+	/*background: #00559D;
+	/*background: -moz-linear-gradient(top,  #0079C1 0%, #00559D 100%); /* FF3.6+ */
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0079C1), color-stop(100%,#00559D)); /* Chrome,Safari4+ */
+	/*background: -webkit-linear-gradient(top,  #0079C1 0%,#00559D 100%); /* Chrome10+,Safari5.1+ */
+	/*background: -o-linear-gradient(top,  #0079C1 0%,#00559D 100%); /* Opera 11.10+ */
+	/*background: -ms-linear-gradient(top,  #0079C1 0%,#00559D 100%); /* IE10+ */
+	/*background: linear-gradient(to bottom,  #0079C1 0%,#00559D 100%); /* W3C */
+	/*filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#0079C1', endColorstr='#00559D');*/
+	cursor: pointer;
+	height: 32px;
+	margin: 5px 0px 0px 493px;
+}
+
+
+
+.botonCandidato:hover {
+	background: #007DC5;
+	/*
+	background: -moz-linear-gradient(center top , #00559D, #0079C1) repeat scroll 0% 0% transparent;
+ 	background: -webkit-gradient(linear, center top, left bottom, from(#00559D), to(#0079C1) ) repeat scroll 0% 0% transparent;
+ 	background: -webkit-linear-gradient(top,  #00559D 0%,#0079C1 100%);
+ 	background: -o-linear-gradient(top,  #00559D 0%,#0079C1 100%);
+ 	background: -ms-linear-gradient(top,  #00559D 0%,#0079C1 100%);
+ 	background: linear-gradient(to bottom,  #00559D 0%,#0079C1 100%);
+ 	filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#00559D', endColorstr='#0079C1');
+ 	*/
+}
+
+.botonCandidatoDsb {
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	font: 12px arial, sans-serif;
+	color: #898989;
+	/*color: #E2E7EE;*/
+	border: 1px solid #CFD6DE;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: url(../img/Bt_AzulDesactivado.png) no-repeat;
+	background: -moz-linear-gradient(top, #FFFFFF 0%, #CFD6DE 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFFFFF),
+		color-stop(100%, #CFD6DE)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #FFFFFF 0%, #CFD6DE 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #FFFFFF 0%, #CFD6DE 100%);
+	/* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #FFFFFF 0%, #CFD6DE 100%);
+	/* IE10+ */
+	background: linear-gradient(to bottom, #FFFFFF 0%, #CFD6DE 100%);
+	/* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		startColorstr='#FFFFFF', endColorstr='#CFD6DE');
+	height: 32px;
+	margin: 5px 0px 0px 493px;
+}
+/************************************ F I N  E S T I L O S  B O T O N E S *******************************/
+
+/************************************ C O N T E N E D O R E S ******************************************/
+
+/************************************ CONTENEDOR GENERAL (DIV)************************************/
+.division {
+	width: 430px;
+	height: auto;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	z-index: 20;
+}
+
+.alerta {
+	width: 348px;
+	height: auto;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	display: none;
+	z-index: 100;
+}
+
+.buscador {
+	width: 450px;
+	height: 375px;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	display: none;
+	z-index: 20;
+}
+
+.opciones {
+	width: 50%;
+	height: auto;
+	border: none;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	display: none;
+	z-index: 100;
+	text-align: center;
+}
+
+.candidato {
+	width: 858px;
+	height: 488px;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	z-index: 20;
+}
+
+.candidato-2 {
+	width: 858px;
+	height: 488px;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	z-index: 100;
+}
+
+/************************************ TABLA PRINCIPAL ************************************/
+.contenedor1 {
+	border-collapse: collapse;
+	width: 99%;
+	border: none;
+}
+
+/************************************ BARRA DE TITULO ************************************/
+.barraTitulo {
+	background-color: #ccd6e3;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	margin: 5px 0px 3px 0px;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+	color: #005698;
+	width: 100%;
+	cursor: move;
+}
+
+.barraTitulo table {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+	color: #005698;
+	width: 100%;
+}
+
+/************************************ CONTENIDO ************************************/
+.contenido {
+	width: 100%;
+	height: 400px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.contenido table {
+	border-collapse: collapse;
+	border: none;
+	width: 100%;
+}
+
+.contenidoPDF {
+	width: 100%;
+	height: 380px;
+}
+
+.contenidoSol {
+	width: 100%;
+	height: 290px;
+}
+
+.contenidoSol-1 {
+	width: 100%;
+	height: 360px;
+}
+
+.contenidoSol-2 {
+	width: 90%;
+	height: 335px;
+	overflow-y: scroll;
+}
+
+.contenidoBusqueda {
+	width: 100%;
+	height: 290px;
+	overflow-y: scroll;
+}
+
+.contenidoBusqueda-2 {
+	width: 100%;
+	overflow-y: scroll;
+	height: 250px;
+}
+
+/************************************ BOTONES ************************************/
+.botones {
+	border-top: 1px solid #ccd6e3;
+	padding: 0px 0px 10px 0px;
+	text-align: center;
+	width: 100%;
+	height: 30px;
+}
+
+.botones table {
+	border-collapse: collapse;
+	text-align: center;
+	border: none;
+	width: 100%;
+}
+
+/************************************ MENSAJES ************************************/
+.confirmacion {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #005698;
+	height: 20px;
+}
+
+.exito {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #005698;
+}
+
+.error {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #c8175e;
+}
+/************************************ F I N  C O N T E N E D O R E S ************************************************/
+/************************************ C O N T E N E D O R E S ******************************************/
+
+/******************************************************************************* E S P E C I A L   P A R A   C A N D I D A T O S . J S P *********/
+/****** OPCIONES DE INCIO - CARGA DE CAMPOS POR TIPO DE CANTIDATO ******/
+.opcionesTitulo {
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	background-color: #ccd6e3;
+	font-size: 13px;
+	font-weight: bold;
+	color: #1768B3;
+	width: 100%;
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+}
+
+.opcionesTabla {
+	border-collapse: collapse;
+	border: 0px solid #ccd6e3;
+	width: 100%;
+}
+
+.opciones span {
+	margin: 0px 10px 0px 10px;
+	cursor: pointer;
+}
+
+.opciones span:hover {
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+}
+
+.tblCandidato {
+	border: 0px solid #999;
+	border-collapse: separate;
+	width: 100%;
+}
+
+.tblCandidato tr th {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	height: 22px;
+	font-size: 12px;
+	color: #fff;
+	background-color: #069;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: bold;
+	padding: 0px 0px 0px 0px;
+}
+
+.tblCandidatoH {
+	border: 0px solid #999;
+	border-collapse: separate;
+	width: 33%;
+}
+
+.tblCandidatoH tr th {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	height: 22px;
+	font-size: 12px;
+	color: #fff;
+	background-color: #069;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: bold;
+	padding: 0px 0px 0px 0px;
+}
+
+.tdCandidatoD {
+	background-color: #cedbef;
+	padding-left: 5px;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000082;
+	height: 30px;
+}
+
+.tdCandidatoI {
+	background-color: #eaeaea;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 30px;
+}
+
+.tdBoton {
+	border: 0px solid #999;
+	vertical-align: middle;
+	text-align: left;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 40px;
+}
+
+.tdCandidatoNull {
+	background-color: #fff;
+	font-weight: normal;
+	font-size: 8px;
+	padding: 5px;
+	height: 8px;
+}
+
+.tdCandidato {
+	text-align: left;
+	vertical-align: middle;
+	padding: 4px 6px 4px 6px;
+}
+
+.tdCandidato a {
+	color: #0033FF;
+	font-size: 11px;
+}
+
+.tdCandidato a:hover {
+	color: #C0C0C0;
+	font-size: 11px;
+}
+
+.radioOpcion {
+	display: none;
+}
+
+/******************************************************************************* E S P E C I A L   P A R A   S E G U I M I EN T O . J S P *****/
+.tblSeguimiento {
+	width: 90%;
+	border: none;
+	margin: 0 auto;
+	border-collapse: separate;
+}
+
+.tblSeguimientoT {
+	border-bottom: 1px solid #00a7e7;
+	background-color: #ffffff;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 20px;
+	color: #0080C0;
+	height: 30px;
+}
+
+.tblSeguimientoD {
+	border-bottom-color: #c8175e;
+	border-right-color: #c8175e;
+	border-bottom-style: dotted;
+	border-right-style: dotted;
+	background-color: #ccd6e3;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 25px;
+	text-align: left;
+}
+
+.tblSeguimientoI {
+	border-bottom-color: #f6891e;
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+	background-color: #e9eef5;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 25px;
+	text-align: left;
+}
+
+.tblSeguimientoD-1 {
+	border-bottom-color: #c8175e;
+	border-right-color: #c8175e;
+	border-bottom-style: dotted;
+	border-right-style: dotted;
+	background-color: #ccd6e3;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 25px;
+}
+
+.tblSeguimientoI-1 {
+	border-bottom-color: #f6891e;
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+	background-color: #e9eef5;
+	text-align: center;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 25px;
+}
+
+.tblSeguimientoD-2 {
+	border-bottom-color: #c8175e;
+	border-right-color: #c8175e;
+	border-bottom-style: dotted;
+	border-right-style: dotted;
+	background-color: #bfe7fb;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+}
+
+.tblSeguimientoI-2 {
+	border-bottom-color: #f6891e;
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+	background-color: #E7F7FE;
+	text-align: center;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+}
+
+.tblSeguimientoD1 {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	background-color: #ccd6e3;
+	padding-left: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #005698;
+	height: 25px;
+}
+
+.tblSeguimientoI1 {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-bottom-style: none;
+	border-bottom-width: 1px;
+	background-color: #e9eef5;
+	padding-left: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	color: #005698;
+	height: 25px;
+}
+
+.tblSeguimientoI2 {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-bottom-style: none;
+	border-bottom-width: 1px;
+	background-color: #F9FBFD;
+	padding-left: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	color: #005698;
+	height: 25px;
+}
+
+.tblSeguimientoI3 {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-bottom-style: none;
+	border-bottom-width: 1px;
+	background-color: #E7F7FE;
+	padding-left: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	color: #005698;
+	height: 25px;
+}
+
+.tdCartaBanco-1 {
+	border: 1px solid #000;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color: #000;
+}
+
+.tdCartaBanco-2 {
+	border: 1px solid #000;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: normal;
+	color: #000;
+}
+
+.tdSociolaboral-1 {
+	width: 100%;
+	font-size: 16px;
+	font-weight: bold;
+	color: #002060;
+}
+
+.tdSociolaboral-2 {
+	width: 70%;
+	border: 3px double #95B3D7;
+	font-size: 12px;
+	font-weight: normal;
+	color: #002060;
+}
+
+.tdSociolaboral-2 b {
+	color: #000080;
+}
+
+.tdSociolaboral-3 {
+	width: 50px;
+	border: 1px double #95B3D7;
+	font-size: 12px;
+	font-weight: normal;
+	color: #002060;
+	text-align: center;
+}
+
+.tdSociolaboral-4 {
+	background: #000080;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+	padding: 3px 0px 3px 0px;
+}
+
+/********************************************************************************* C O N T E N E D O R E S   G E N E R A L E S ***************/
+.tituloDC {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+	color: #005698;
+	width: 100%;
+}
+
+.contenidoDC {
+	width: 100%;
+	border-left: 1px solid #ccd6e3;
+	border-bottom: 1px solid #ccd6e3;
+	margin-left: -1px;
+}
+
+.contentCandi {
+	width: 100%;
+	height: 438px;
+	overflow-y: scroll;
+}
+
+.botonC {
+	width: 99%;
+	background-color: #fff;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+/********************************************************************************* E X P E D I E N T E  D E L  C A N D I D A T O ***************/
+.tblExpediente {
+	border-collapse: collapse;
+	width: 99%;
+}
+
+.tdExpediente-1 {
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	background-color: #fff;
+}
+
+.tdExpediente-2 {
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	background-color: #fff;
+	padding-left: 5px;
+}
+
+.tdExpediente-3 {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	background-color: #fff;
+	text-align: center;
+}
+
+.tdExpediente-4 {
+	border: 1px solid #000;
+	background-color: #fff;
+	text-align: center;
+}
+
+.tdExpediente-5 {
+	background-color: #fff;
+	text-align: left;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+	padding-left: 50px;
+}
+
+.tdExpediente-6 {
+	background-color: #fff;
+	text-align: center;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+}
+
+.tdExpediente-7 {
+	background-color: #fff;
+	text-align: left;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+}
+
+.tagExpediente-1 {
+	font-weight: bold;
+	font-size: 11px;
+	color: #000;
+}
+
+.tagExpediente-2 {
+	font-weight: normal;
+	font-size: 11px;
+	margin: 0px 10px 0px 0px;
+	color: #000;
+	width: 100%;
+	text-align: right;
+}
+
+.tagExpediente-3 {
+	border-top: 1px Solid #000;
+	border-bottom: 1px Solid #000;
+	font-weight: bold;
+	font-size: 13px;
+	color: #000;
+	width: 100%;
+	text-align: center;
+}
+
+.cajaTextoEx {
+	border: 1px Solid #898989;
+	height: 20px;
+	width: 80%;
+	text-align: center;
+}
+
+/********************************************************************************* P A S E   C L I N I C A   C A N D I D A T O ***************/
+.tdPaseClinica-1 {
+	background-color: #fff;
+	text-align: right;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+}
+
+.tdPaseClinica-2 {
+	background-color: #fff;
+	text-align: center;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+	border-bottom: 1px solid #000;
+}
+
+.tdPaseClinica-3 {
+	background-color: #fff;
+	text-align: center;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+}
+
+.tdPaseClinica-4 {
+	background-color: #fff;
+	text-align: left;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+}
+
+.tdPaseClinica-5 {
+	background-color: #fff;
+	text-align: left;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+	padding-left: 10px;
+}
+
+.tdPaseClinica-6 {
+	background-color: #fff;
+	text-align: left;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+	border-bottom: 1px solid #000;
+}
+
+.tdPaseClinica-7 {
+	background-color: #fff;
+	text-align: left;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+	border-bottom: 1px dotted #000;
+}
+
+/********************************************************************************* A S I G N A C I O N   D E   V A C A N T E ***************/
+.tblAsginacion {
+	width: 98%;
+	border: 0px solid #ccd6e3;
+}
+
+.tdAsignacion-1 {
+	font-size: 13px;
+	font-weight: bold;
+	color: #000;
+}
+
+/********************************************************************************* P E R M U T A C I O N   D E  C A N D I D A T O ***************/
+#divPermutacion {
+	width: 400px;
+	height: 280px;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	margin: 0 auto;
+	z-index: 20;
+}
+
+.tblPermutacion {
+	/*width: 98%;*/
+	border: 1px solid #ccd6e3;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.tdPermutacion-1 {
+	font-size: 13px;
+	font-weight: bold;
+	color: #000;
+	padding-left: 10px;
+}
+
+/********************************************************************************* C O N T E N E D O R E S   S E G U I M I E N T O ***************/
+.contenedorSeg {
+	width: 858px;
+	height: 418px;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: absolute;
+	margin: 0 auto;
+	z-index: 20;
+	top: 50%;
+	left: 50%;
+	margin-left: -430px;
+	margin-top: -209px;
+}
+
+.contentSeg {
+	width: 100%;
+	height: 328px;
+	overflow-y: scroll;
+}
+
+.contenidoSeg {
+	width: 100%;
+	border-bottom: 1px solid #ccd6e3;
+	margin-left: 0px;
+}
+
+/********************************************************************************* C O N T E N E D O R E S   A S I G N A C I O N ***************/
+.contenedorAsig {
+	width: 858px;
+	height: 528px;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: absolute;
+	margin: 0 auto;
+	z-index: 100;
+	top: 50%;
+	left: 50%;
+	margin-left: -430px;
+	margin-top: -209px;
+}
+
+.contenedorAsig-1 {
+	width: 99%;
+	height: 289px;
+}
+
+.contenedorAsig-2 {
+	width: 100%;
+	height: 289px;
+	overflow-y: scroll;
+}
+
+/************************************************************* E S T I L O S  E S P E C I A L E S  D E M A N D A  S O L I C I C T U D ***************/
+.contenedorDemanda {
+	width: 98%;
+	border: 1px solid #ccd6e3;
+	padding: 5px;
+	margin: 5px 0px 0px 3px;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.contentDivisiones {
+	width: 100%;
+	display: none;
+	overflow-y: scroll;
+	height: 230px;
+}
+
+.tableDemanda-1 {
+	border: 0px solid #999;
+	border-collapse: separate;
+	width: 90%;
+}
+
+.tableDemanda-1 tr th {
+	height: 22px;
+	font-size: 12px;
+	color: #fff;
+	background-color: #069;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: bold;
+	padding: 0px 0px 0px 0px;
+}
+
+.tableDemanda-2 {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.tdDemandaT-1 {
+	background-color: #ccd6e3;
+	border-bottom: 1px solid #363636;
+	border-right: 1px solid #363636;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #404040;
+	height: 25px;
+}
+
+.tdDemandaT-2 {
+	background-color: #e9eef5;
+	border-bottom: 1px solid #363636;
+	border-right: 1px solid #363636;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #404040;
+	height: 25px;
+}
+
+.tdDemandaD-1 {
+	background-color: #89d1f4;
+	border: 1px solid #bfe7fb;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+}
+
+.tdDemandaD-2 {
+	background-color: #bfe7fb;
+	border: 1px solid #89d1f4;
+	padding-left: 5px;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+}
+
+.tdDemandaR-1 {
+	background-color: #85c82d;
+	border: 1px solid #d1e6b7;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+	text-align: center;
+}
+
+.tdDemandaR-2 {
+	background-color: #d1e6b7;
+	border: 1px solid #85c82d;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+	text-align: center;
+}
+
+.tdDemandaC-1 {
+	background-color: #fdbb2c;
+	border: 1px solid #ffe4b7;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+	text-align: center;
+}
+
+.tdDemandaC-2 {
+	background-color: #ffe4b7;
+	border: 1px solid #fdbb2c;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+	text-align: center;
+}
+
+.tdDemandaP-1 {
+	background-color: #7f7f7f;
+	border: 1px solid #cccccc;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+	text-align: center;
+}
+
+.tdDemandaP-2 {
+	background-color: #cccccc;
+	border: 1px solid #7f7f7f;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #000000;
+	height: 20px;
+	text-align: center;
+}
+
+/************************************************************* E S T I L O S  E S P E C I A L E S  D I V I S I O N E S ***************/
+.tblDisiviones {
+	/*width: 90%;*/
+	border: none;
+	border-collapse: collapse;
+}
+
+.tblDisiviones-1 {
+	width: 100%;
+	border: none;
+	border-collapse: collapse;
+}
+
+.tblDisiviones-2 {
+	width: 98%;
+	border: none;
+	border-collapse: collapse;
+}
+
+.tdDivisionesT {
+	border-bottom: 1px solid #00a7e7;
+	background-color: #ffffff;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #00a7e7;
+	height: 30px;
+}
+
+.tdDivisionE-1 {
+	border-bottom: 1px dotted #c8175e;
+	border-right: 1px dotted #c8175e;
+	background-color: #ccd6e3;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 30px;
+	text-align: center;
+}
+
+.tdDivisionE-2 {
+	border-bottom: 1px dotted #85c82d;
+	border-right: 1px dotted #85c82d;
+	background-color: #b1d78a;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	text-align: center;
+	height: 20px;
+}
+
+.tdDivisionC-1 {
+	border-bottom: 1px dotted #f6891e;
+	border-right: 1px dotted #f6891e;
+	background-color: #e9eef5;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 30px;
+}
+
+.tdDivisionC-2 {
+	border-bottom: 1px dotted #85c82d;
+	border-right: 1px dotted #85c82d;
+	background-color: #dceccb;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #005698;
+	height: 20px;
+}
+
+#divCrearGrupo {
+	width: 378px;
+	height: 218px;
+	border: 1px solid #ccd6e3;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: fixed;
+	display: none;
+	z-index: 100;
+}
+
+.tablaPreguntaResp {
+	background-color: #e2e7ee;
+	border: thin solid #717f95;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	margin: 2px;
+	height: 20px;
+	width: 85%;;
+	padding-left: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #005698;
+	padding-left: 5px;
+}
+
+/***********  Pestañas  ****************/
+#pestCaptura {
+	float: top;
+	font-size: 3ex;
+	font-weight: bold;
+}
+
+#pestCaptura ul {
+	margin-left: -40px;
+}
+
+#pestCaptura li {
+	list-style-type: none;
+	float: left;
+	font-size: 15px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-align: center;
+	margin: 0px 2px -2px -0px;
+	background: #e9eef5;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 15px;
+	border: 3px solid double;
+	border-bottom: thick #ccd6e3;
+	padding: 5px 10px 0px 10px;
+}
+
+#pestCaptura a:link {
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	color: #005698;
+	height: 25px;
+}
+
+#pestCaptura a:visited {
+	text-decoration: none;
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	color: #005698;
+	height: 25px;
+}
+
+#contenidopestCaptura {
+	clear: both;
+	/*background: #ccd6e3;
+	/*padding: 20px 0px 20px 20px;*/
+	padding: 1px 1px 2px 1px;
+	border-radius: 5px;
+	border-top-left-radius: 0px;
+	border: 3px solid #ccd6e3;
+	width: 98%;
+}
+
+.botonMsg {
+ text-align: center;
+ text-decoration: none;
+ vertical-align: middle;
+ font: 12px arial, sans-serif;
+ color: #FFFFFF;
+ border: 1px solid #BACCE0;
+ -webkit-border-radius: 4px;
+ -moz-border-radius: 4px;
+ border-radius: 4px;
+ background: url(../img/Bt_Azul.png) center no-repeat;
+ cursor: pointer;
+ height: 32px;
+}
+
+.hrsSeleccionados {
+ text-align: center;
+    color: #0080C0;
+    font-weight: bold;
+    background-color: rgb(235, 235, 228);
+}

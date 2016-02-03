@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence
+    xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+
+  <persistence-unit name="HorariosEscalonadosDev">
+    <class>com.gonet.horariosescalonados.bean.BeanEmpleadoExterno</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+    <properties>
+    	<property name="javax.jdo.PersistenceManagerFactoryClass"
+            value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory" />
+     	<property name="datanucleus.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+      	<property name="datanucleus.ConnectionURL" value="jdbc:mysql://173.194.230.213:3306/horariosescalonadosv2"/>
+    	<property name="datanucleus.ConnectionUserName" value="rogelio"/>
+  		<property name="datanucleus.ConnectionPassword" value="mlgore"/>
+  		<property name="datanucleus.identifier.case" value="PreserveCase"/>
+  		<property name="datanucleus.query.sql.allowAll" value="true"/>
+  		<property name="datanucleus.rdbms.statementBatchLimit" value="-1"/>
+    </properties>
+
+  </persistence-unit>
+  
+    <persistence-unit name="HorariosEscalonados">
+    <class>com.gonet.horariosescalonados.bean.BeanEmpleadoExterno</class>
+	<exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+    	<property name="javax.jdo.PersistenceManagerFactoryClass"
+            value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory" />
+      	<property name="datanucleus.ConnectionDriverName" value="com.mysql.jdbc.GoogleDriver"/>
+		<property name="datanucleus.ConnectionURL" value="jdbc:google:mysql://prueba1towa:horariosescalonados?user=root"/>
+    	<property name="datanucleus.ConnectionUserName" value="rogelio"/>
+  		<property name="datanucleus.ConnectionPassword" value="mlgore"/>
+  		<property name="datanucleus.identifier.case" value="PreserveCase"/>
+  		<property name="datanucleus.query.sql.allowAll" value="true"/>
+  		<property name="datanucleus.rdbms.statementBatchLimit" value="-1"/>
+    </properties>
+
+  </persistence-unit>
+
+</persistence>

@@ -1,0 +1,206 @@
+/*General*/
+input#datepicker {
+    float: left;
+    margin-top: 20px;
+}
+input#fechaDesde {
+     width:149px;
+	 margin-left: 5px;
+}
+
+input#fechaHasta {
+     width:149px;
+	 margin-left: 5px;
+}
+
+input#fechaMes {
+   width: 149px;
+   margin-left: 5px;
+}
+
+img.ui-datepicker-trigger {
+    cursor: pointer;
+    margin-left: 10px;
+    position: absolute;
+	margin-top: 4px;
+}
+/*END General*/
+
+/* TOOLTIP */
+.tooltip {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    opacity: initial;
+    position: relative;
+    z-index: 0;
+}
+
+.tooltip span {
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #cdcdcd;
+    box-shadow: -2px -2px 5px #999999;
+    color: #363636;
+    font-size: 14px;
+    min-width: 100px;
+    padding: 5px;
+    position: absolute;
+    text-align: center;
+    visibility: hidden;
+}
+
+.tooltip:hover .callout {
+    background: url('../img/callout.png');
+    height: 10px;
+    left: 5px;
+    position: absolute;
+    top: -11px;
+    width: 17px;
+    z-index: 2000;
+}
+
+.tooltip:hover span {
+    bottom: 37px;
+    left: -38px;
+    visibility: visible;
+}
+/* END Tooltip */
+
+/* CALENDARIO */
+/*.ui-datepicker {
+    background-color: white;
+    font-size: 15px;
+    font-family: 'Arial', sans-serif;
+    position: absolute;
+    text-align: center;
+    z-index: 1001;
+    width: 155px;
+    border: 1px solid #999999;
+}*/
+.ui-datepicker {
+    width: 11em;
+    padding: .2em .2em 0;
+    display: none;
+}
+.ui-datepicker table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.ui-datepicker table thead tr th {
+    color: #006EC1;
+    border: 1px solid #999999;
+	font-size: 8pt;
+    font-weight: normal;
+    text-align: center;
+}
+
+th.ui-datepicker-week-end {
+    color: #999999;
+    padding: 3px 0;
+}
+
+.ui-datepicker table tbody {
+    font-size: 13pt
+}
+
+.ui-datepicker table tbody tr td {
+    border: 1px solid #999999;
+	font-size: 8pt;
+    line-height: 10px;
+    text-align: center;
+    width: 19px;
+}
+
+td.ui-datepicker-today, 
+td.ui-datepicker-today:hover {
+    background-color: #006EC1;
+}
+
+td.ui-datepicker-today a {
+    color: white;
+}
+
+td.ui-datepicker-week-end:hover {
+    background-color: white;
+}
+
+.ui-datepicker table tbody tr td:hover {
+    background-color: #f2f2f2;
+}
+
+.ui-datepicker_tr{
+    background-color: rgb(0, 110, 193);	
+}
+
+.ui-datepicker table tbody tr td a {
+    color: #4D4D4D;
+    text-align: center;
+    text-decoration: none;
+}
+
+.ui-datepicker-calendar {
+    margin: 0;
+}
+
+.ui-datepicker-week-col {
+    color: #009EE5;
+	font-size: 8pt;
+    width: 25px;
+}
+
+.ui-datepicker-week-end {
+    color: #CCCCCC;
+    width: 19px;
+}
+
+.ui-datepicker-week-end a.ui-state-default {
+    color: #CCCCCC;
+}
+
+.ui-datepicker-header {
+    color:  #006EC1;
+    padding: 0;
+    border: 1px solid #999999;
+}
+
+.ui-datepicker-title {
+	font-size: 10pt;
+    width: 108px;
+	/*background-color: #006EC1;
+    color: white;*/
+    margin-left: 24px;
+}
+
+.arrows{
+	display: none;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    margin: 0 3.3em;
+    line-height: 1.8em;
+    text-align: center;
+}
+/* END CALENDARIO */
+
+/*Flechas*
+.ui-datepicker-prev {
+    background: #f2f2f2 url('../img/arrow-calendar-L.png') no-repeat center center;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+	position: absolute;
+    width: 17px;
+	bottom: 101px;
+}
+.ui-datepicker-next {
+    background: #f2f2f2 url('../img/arrow-calendar-R.png') no-repeat center center;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+    position: absolute;
+    width: 17px;
+    bottom: 101px;
+    left: 138px;
+}
+/ *END Flechas*/

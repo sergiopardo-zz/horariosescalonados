@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+      <url>/BuscarArchivoCyge</url>
+      <description>Testing Upload Cyge</description>
+      <schedule>every day 04:00</schedule>
+      <timezone>America/Mexico_City</timezone>
+  </cron>
+  
+  
+  
+  <cron>
+      <url>/BuscarArchivoZeit</url>
+      <description>Testing Upload Zeit</description>
+      <schedule>every day 05:00</schedule>
+      <timezone>America/Mexico_City</timezone>
+  </cron>
+    
+</cronentries>

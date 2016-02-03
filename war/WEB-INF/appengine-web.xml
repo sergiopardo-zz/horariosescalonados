@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+	<application>prueba1towa</application>
+	<version>1</version>
+
+	<!-- Allows App Engine to send multiple requests to one instance in parallel: -->
+	<threadsafe>true</threadsafe>
+
+	<!-- Configure java.util.logging -->
+	<system-properties>
+		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+		<property name="cloudsql.url" value="jdbc:google:mysql://horariosescalonados-1106:horariosescalonados?user=root"/>
+    	<property name="cloudsql.url.dev" value="jdbc:mysql://173.194.224.29:3306/horariosescalonados"/>
+	</system-properties>
+
+	<resource-files>
+		<include path="/**.xlsx"/>
+		<include path="/**.xls"/>
+		<include path="/**.html"/>
+		<include path="/**.jsp"/>
+	</resource-files>
+	
+	<sessions-enabled>true</sessions-enabled>
+
+	<!-- Enabled MySQL Connector/J -->
+	<use-google-connector-j>true</use-google-connector-j>
+</appengine-web-app>

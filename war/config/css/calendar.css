@@ -1,0 +1,317 @@
+input#datepicker {
+    float: left;
+    margin-top: 20px;
+}
+
+input#fechaDesde {
+     width:149px;
+	 margin-left: 5px;
+}
+
+input#fechaHasta {
+     width:149px;
+	 margin-left: 5px;
+}
+
+input#fechaMes {
+   width: 149px;
+   margin-left: 5px;
+}
+
+img.ui-datepicker-trigger {
+    cursor: pointer;
+    margin-left: 10px;
+    position: absolute;
+	margin-top: 4px;
+}
+
+/* CALENDARIO */
+.ui-datepicker {
+    background-color: white;
+    font-size: 15px;
+    font-family: 'Arial', sans-serif;
+    position: absolute;
+    text-align: center;
+    z-index: 1001;
+    width: 155px;
+}
+
+.ui-datepicker table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.ui-datepicker table thead tr th {
+    color: #006EC1;
+    border: 1px solid #999999;
+    /*font-size: 11pt;*/
+	font-size: 8pt;
+    font-weight: normal;
+    text-align: center;
+}
+
+th.ui-datepicker-week-end {
+    color: #999999;
+    padding: 3px 0;
+}
+
+.ui-datepicker table tbody {
+    font-size: 13pt
+}
+
+.ui-datepicker table tbody tr td {
+    border: 1px solid #999999;
+    /* font-size: 15px; */
+	font-size: 8pt;
+    line-height: 10px;
+    text-align: center;
+    width: 19px;
+}
+
+td.ui-datepicker-today, 
+td.ui-datepicker-today:hover {
+    background-color: #006EC1;
+}
+
+td.ui-datepicker-today a {
+    color: white;
+}
+
+td.ui-datepicker-week-end:hover {
+    background-color: white;
+}
+
+.ui-datepicker table tbody tr td:hover {
+    background-color: #f2f2f2;
+}
+
+/* .ui-datepicker .ui-state-default
+	{
+		background-color: #FFFFFF;
+	}
+	.ui-datepicker .ui-state-active
+	{
+		 background-color: #f2f2f2;
+		color: #FFFFFF;
+	} */
+
+.ui-datepicker_tr{
+    background-color: rgb(0, 110, 193);	
+}
+
+.ui-datepicker table tbody tr td a {
+    color: #4D4D4D;
+    text-align: center;
+    text-decoration: none;
+}
+
+.ui-datepicker-calendar {
+    margin: 0;
+}
+
+.ui-datepicker-week-col {
+    color: #009EE5;
+    /*font-size: 11pt;*/
+	font-size: 8pt;
+    width: 25px;
+}
+
+.ui-datepicker-week-end {
+    color: #CCCCCC;
+    width: 19px;
+}
+
+.ui-datepicker-week-end a.ui-state-default {
+    color: #CCCCCC;
+}
+
+.ui-datepicker-header {
+    color:  #006EC1;
+    padding: 0;
+}
+
+.ui-datepicker-title {
+    background-color: #006EC1;
+    color: white;
+    float: left;
+    /*font-size: 12pt;*/
+	font-size: 10pt;
+    line-height: 16px;
+    padding: 0;
+    width: 108px;
+	border-right: 1px solid #999999;
+    border-left: 1px solid #999999;
+    border-top: 1px solid #999999;
+}
+
+/* ICONOS HEADER */
+.help {
+    background: url('../img/ayuda.png') no-repeat center center;
+    border-left: 1px solid #999999;
+    border-top: 1px solid #999999;
+    float: left;
+    height: 16px;
+    width: 25px;
+}
+
+.close-cal {
+    background: url('../img/cerrar-box.png') no-repeat center center;
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    width: 18px;
+}
+
+.double-arrow-left {
+    background: #f2f2f2 url('../img/double-arrow-calendar-L.png') no-repeat center center;
+    border-left: 1px solid #999999;
+    border-top: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    width: 25px;
+}
+/*
+.arrow-left {
+    background: #f2f2f2 url('../img/arrow-calendar-L.png') no-repeat center center;
+    border-top: 1px solid #999999;
+    border-left: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    position: relative;
+    width: 17px;
+}
+
+.date-name {
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    color: #094FA4;
+    cursor: pointer;
+    float: left;
+	font-size: 10pt;
+    line-height: 16px;
+    text-align: center;
+    width: 72px;
+}
+
+.arrow-right {
+    background: #f2f2f2 url('../img/arrow-calendar-R.png') no-repeat center center;
+    border-top: 1px solid #999999;
+    border-right: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    position: relative;
+    width: 17px;
+}
+
+.double-arrow-right {
+    background: #f2f2f2 url('../img/double-arrow-calendar-R.png') no-repeat center center;
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    width: 18px;
+}
+*/
+/* TOOLTIP */
+.tooltip {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    opacity: initial;
+    position: relative;
+    z-index: 0;
+}
+
+.tooltip span {
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #cdcdcd;
+    box-shadow: -2px -2px 5px #999999;
+    color: #363636;
+    font-size: 14px;
+    min-width: 100px;
+    padding: 5px;
+    position: absolute;
+    text-align: center;
+    visibility: hidden;
+}
+
+.tooltip:hover .callout {
+    background: url('../img/callout.png');
+    height: 10px;
+    left: 5px;
+    position: absolute;
+    top: -11px;
+    width: 17px;
+    z-index: 2000;
+}
+
+.tooltip:hover span {
+    bottom: 37px;
+    left: -38px;
+    visibility: visible;
+}
+
+/* Cambiar color a días desactivados */
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {   
+   color: #999999;
+}
+
+.ui-datepicker-prev {
+    background: #f2f2f2 url('../img/arrow-calendar-L.png') no-repeat center center;
+    border-top: 1px solid #999999;
+    border-left: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    position: relative;
+	position: absolute;
+    width: 17px;
+	margin-left: 26px;
+}
+.date-name {
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    color: #094FA4;
+    cursor: pointer;
+    float: left;
+	font-size: 10pt;
+    line-height: 16px;
+    text-align: center;
+    width: 72px;
+    position: absolute;
+	margin-left: 44px;
+	margin-top: 17px;
+}
+.ui-datepicker-next {
+    background: #f2f2f2 url('../img/arrow-calendar-R.png') no-repeat center center;
+    border-top: 1px solid #999999;
+    border-right: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    position: absolute;
+    width: 17px;
+	margin-left: 118px;
+}
+.double-arrow-right {
+    background: #f2f2f2 url('../img/double-arrow-calendar-R.png') no-repeat center center;
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    width: 18px;
+	position: absolute;	
+	margin-left: 136px;
+	margin-top: 17px;
+}
+
+

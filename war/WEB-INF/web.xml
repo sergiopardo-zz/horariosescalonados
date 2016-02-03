@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>HorariosescalonadosII</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.classes.HorariosescalonadosIIServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HorariosescalonadosII</servlet-name>
+		<url-pattern>/horariosescalonadosii</url-pattern>
+	</servlet-mapping>
+	<!-- Inicio de Aplicacion -->
+	<servlet>
+		<servlet-name>InicioAplicacion</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.InicioServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InicioAplicacion</servlet-name>
+		<url-pattern>/inicioaplicacion</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<!-- Inicio de ConsumeSRestWEBServlet -->
+	<servlet>
+		<servlet-name>ConsumeSRestWEBServlet</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.ConsumeSRestWEBServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConsumeSRestWEBServlet</servlet-name>
+		<url-pattern>/ConsumeSRestWEBServlet</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Eventos de Solicitud -->
+	<servlet>
+		<servlet-name>SolicitudHorario</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.SolicitudServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SolicitudHorario</servlet-name>
+		<url-pattern>/solicitudhorario</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>BuscaSupervisores</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.BuscaSupervisoresServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BuscaSupervisores</servlet-name>
+		<url-pattern>/buscasupervisores</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SupervisorSeleccionado</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.SupervisorSeleccionadoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SupervisorSeleccionado</servlet-name>
+		<url-pattern>/supervisorseleccionado</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GenerarSolicitud</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.GenerarSolicitudServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenerarSolicitud</servlet-name>
+		<url-pattern>/generarsolicitud</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Eventos de Cambio -->
+	<servlet>
+		<servlet-name>CambioHorario</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.CambioHorarioServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CambioHorario</servlet-name>
+		<url-pattern>/cambiohorario</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Eventos de Autorizar -->
+	<servlet>
+		<servlet-name>AutorizarSolicitudes</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.AutorizarSolicitudesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AutorizarSolicitudes</servlet-name>
+		<url-pattern>/autorizarsolicitudes</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Reportes -->
+ 	<servlet>
+  		<servlet-name>CargaReportes</servlet-name>
+  		<servlet-class>com.gonet.horariosescalonados.servlet.ReportesServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+		<servlet-name>CargaReportes</servlet-name>
+  		<url-pattern>/cargareportes</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<servlet>
+		<servlet-name>GeneraExcel</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.GeneraExcelServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GeneraExcel</servlet-name>
+		<url-pattern>/generaexcel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GeneraExcel</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.GeneraExcelServlet</servlet-class>
+	
+	</servlet>
+
+		<servlet>
+		<servlet-name>GeneraExcelEmpleado</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.ExcelEmpleadosServlet</servlet-class>
+	
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GeneraExcelEmpleado</servlet-name>
+		<url-pattern>/excelejemploempleados</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GeneraExcelHorario</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.ExcelHorariosServlet</servlet-class>
+	
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GeneraExcelHorario</servlet-name>
+		<url-pattern>/excelejemplohorarios</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Mantenimiento de Mensajes -->
+	<servlet>
+		<servlet-name>CargaInicialMensajes</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.CargaMensajesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CargaInicialMensajes</servlet-name>
+		<url-pattern>/cargainicialmensajes</url-pattern>
+	</servlet-mapping>	
+	<!-- PerfilConsulta de Externos o Internos -->
+	<servlet>
+	    <servlet-name>PerfilConsulta</servlet-name>
+	    <servlet-class>com.gonet.horariosescalonados.servlet.PerfilConsultaServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>PerfilConsulta</servlet-name>
+	    <url-pattern>/perfilconsulta</url-pattern>
+	</servlet-mapping>
+	<!-- Mantenimiento de Horarios -->
+	<servlet>
+		<servlet-name>CargaInicial</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.CargaHorariosServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CargaInicial</servlet-name>
+		<url-pattern>/cargainicial</url-pattern>
+	</servlet-mapping>
+
+	<!-- Carga de Horarios -->
+	<servlet>
+		<servlet-name>UploadHorarios</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.UploadHorarios</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadHorarios</servlet-name>
+		<url-pattern>/uploadhorarios</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<!-- Carga de Sistema -->
+	<servlet>
+		<servlet-name>UploadEmpleados</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.UploadEmpleados</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadEmpleados</servlet-name>
+		<url-pattern>/uploadempleados</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GeneraDoc</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.GeneraDocServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>GeneraDoc</servlet-name>
+		<url-pattern>/generadoc</url-pattern>
+	</servlet-mapping>
+	
+
+	<!-- Descarga Documento Mensual -->
+	<servlet>
+		<servlet-name>HorariosEscalonados</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.HorariosEscalonadosServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>HorariosEscalonados</servlet-name>
+		<url-pattern>/horariosescalonados</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Carga manual -->
+ 	<servlet>
+  		<servlet-name>CargaManual</servlet-name>
+  		<servlet-class>com.gonet.horariosescalonados.servlet.CargaManualServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+  		<servlet-name>CargaManual</servlet-name>
+  		<url-pattern>/cargamanual</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Carga Documento Mes -->
+	<servlet>
+		<servlet-name>CargaDocumentoMes</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.CargaDocumentoMesServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>CargaDocumentoMes</servlet-name>
+		<url-pattern>/cargadocumentomes</url-pattern>
+	</servlet-mapping>
+
+	<servlet>	
+		<servlet-name>UploadEntradaSalida</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.UploadEntradaSalidaServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>UploadEntradaSalida</servlet-name>
+		<url-pattern>/uploadentradasalida</url-pattern>
+	</servlet-mapping>
+	
+	<!--  Carga Documento Usuarios -->	
+	<servlet>	
+		<servlet-name>UploadUsuario</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.UploadUsuario</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>UploadUsuario</servlet-name>
+		<url-pattern>/uploadusuario</url-pattern>
+	</servlet-mapping>
+	
+	<!--  Carga Archivo Cyge -->	
+	<servlet>	
+		<servlet-name>BuscarArchivoCyge</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.BuscarArchivoCygeServlet</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>BuscarArchivoCyge</servlet-name>
+		<url-pattern>/BuscarArchivoCyge</url-pattern>
+	</servlet-mapping>	
+	
+		<!--  Carga Archivo Zeit -->	
+	<servlet>	
+		<servlet-name>BuscarArchivoZeit</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.BuscarArchivoZeitServlet</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>BuscarArchivoZeit</servlet-name>
+		<url-pattern>/BuscarArchivoZeit</url-pattern>
+	</servlet-mapping>	
+	
+		<!-- Carga Horarios Old Servlet -->
+	<servlet>	
+		<servlet-name>CargaHorariosOld</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.CargaHorariosOldServlet</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>CargaHorariosOld</servlet-name>
+		<url-pattern>/CargaHorariosOld</url-pattern>
+	</servlet-mapping>	
+		<!-- Main Menu Servlet -->
+	<servlet>	
+		<servlet-name>MainMenu</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.MainMenuServlet</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>MainMenu</servlet-name>
+		<url-pattern>/MainMenu</url-pattern>
+	</servlet-mapping>	
+
+	<!-- Pantalla de Bienvenida -->
+	<welcome-file-list>
+		<welcome-file>inicio.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- Se habilita seguridad para session-->      
+	<security-constraint>
+        <web-resource-collection>
+            <web-resource-name>all</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+	<security-constraint>
+    <web-resource-collection>
+        <url-pattern>/BuscarArchivoCyge</url-pattern>
+    </web-resource-collection>
+</security-constraint>
+	
+	<security-constraint>
+    	<web-resource-collection>
+        	<url-pattern>/BuscarArchivoZeit</url-pattern>
+    	</web-resource-collection>
+	</security-constraint>
+	
+</web-app>

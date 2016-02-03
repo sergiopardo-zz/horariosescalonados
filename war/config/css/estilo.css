@@ -1,0 +1,1830 @@
+/* contenedor principal */
+
+.contenedor {
+  width: 1024px;
+  margin: auto;
+  height: 1045px;
+}
+
+/* Estilos del encabezado */
+img{
+	border: none;
+}
+
+.cabecera{
+	background: url(../img/logo.png) no-repeat;
+	color: #52bcec;
+	text-align: right;
+	display:block;
+	position:relative;
+	height: 100px;
+
+}
+
+.cabecera h2 {
+	float:right;
+	display:block;
+	font: 13px arial;
+	margin:0 15px;
+	padding: 0;
+}
+
+.cabCliente{
+	float: right;
+	position: relative;	
+	font-family: 'Arial';
+	font-size: 13px;
+	color: #666666;
+	top: 16px;
+}
+
+.cabTitulo{
+	float:right;
+	clear:right;
+	margin-top: -2px;
+	font-family: 'Stag Sans Light';
+	font-size: 35px;
+	color: #009EE5;
+}
+
+.btnSalir{
+	display:block;
+	float:right;
+	padding: 13px 0px;
+	height:25px;
+	text-decoration:none;
+	color:#0947a4;
+}
+/*Final estilos encabezado*/
+
+body{
+	padding: 0px 13px;
+	margin: 0px;
+}
+
+/* Estilos Menu */
+
+.estiloMenu{
+	text-decoration:none;
+}
+
+.imgPrincipal{		
+	padding-top:1px;
+	height:449px;
+	width:1024px;
+	background: url(../img/Img_Inicio.png) no-repeat;
+	display:block;
+	text-align: right;
+	position:relative;
+}
+
+.imgHorarios{		
+	padding-top:1px;
+	height:449px;
+	width:1024px;
+	background: url(../img/Capture.png) no-repeat;
+	display:block;
+	text-align: right;
+	position:relative;
+	background-position: 0px -1px;
+}
+
+.imgAdm{	
+	padding-top:1px;
+	height:449px;
+	width:1024px;
+	background: url(../img/Img_Reportes.png) no-repeat;
+	display:block;
+	text-align: right;
+	position:relative;
+	background-position: -15px -21px;
+}
+
+.imgTam{	
+	background-position: -21px -21px;
+}
+
+.menuPrincipal {
+	margin-top:376px;
+	height: 70px;
+	width: 100%;
+	display:block;
+	position:relative;
+	background: #FFFFFF;
+	
+	background: rgba(255,255,255,0.8);	
+	/* Theoretically for IE 8 & 9 (more valid) */	
+	/* should come BEFORE filter */
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=80);
+	/* Older than Firefox 0.9 */
+	-moz-opacity:0.8;
+	/* Safari 1.x (pre WebKit!) */
+	-khtml-opacity: 0.8;
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	/*opacity: 0.8;*/
+}
+
+.home{
+	list-style:none;
+	padding-left: 0px;
+    margin-left: 0px;
+	margin-top: 0px;
+    margin-bottom: 0px;
+	height: 70px;
+}
+
+
+/*.transparencia{*/
+	/* Theoretically for IE 8 & 9 (more valid) */	
+	/* should come BEFORE filter */
+	/*-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";*/
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	/*filter: alpha(opacity=80);*/
+	/* Older than Firefox 0.9 */
+	/*-moz-opacity:0.8;*/
+	/* Safari 1.x (pre WebKit!) */
+	/*-khtml-opacity: 0.8;*/
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	/*opacity: 0.8;*/
+/*}*/
+
+
+.btnHome{	
+	border: 1px solid #666666;
+	display:block;
+	width: 70px;
+	height: 68px;
+	background: url(../img/Ic_Home_Encendido.png) no-repeat;
+	background-position: 16px 16px;
+	text-decoration:none;
+	cursor:pointer;
+}
+
+.btnHome:hover{
+	background: url(../img/Ic_Home_Encendido.png) no-repeat;
+	background-position: 16px 16px;
+}
+
+.menu {
+	border: 1px solid #666666;
+	border-left: 0px;
+	display:inline-block;
+	position:relative;
+	top: -70px;
+	margin-left: -4px;
+	height: 68px;
+	width: 475px;
+	cursor:pointer;
+}
+
+.icono {
+	margin-top: 20px;
+	display:inline-block;
+	width: 30px;
+	height: 30px;
+	position: relative;	
+	
+}
+
+.iconoSubMenu {
+	margin-top: 15px;
+	display:inline-block;
+	width: 18px;
+	height: 18px;
+	position: relative;	
+	margin-left: -62px;
+}
+
+.iconoSubMenuAdm {
+	margin-top: 15px;
+	display:inline-block;
+	width: 18px;
+	height: 18px;
+	position: relative;	
+	margin-left: -92px;
+}
+
+
+
+.imgHorario {
+	background: url(../img/Ic_Horario1_Apagado.png) no-repeat;
+}
+
+.imgHorarioSubMenu {
+	background: url(../img/Ic_Horario3_Apagado.png) no-repeat;
+}
+
+.imgAdministracion {
+	background: url(../img/Ic_Administrador_Apagado.png) no-repeat;
+}
+
+.imgAdministracionSubMenu {
+	background: url(../img/Ic_Administrador2_Apagado.png) no-repeat;
+}
+
+.imgDescarga {
+	background: url(../img/Ic_Descarga_Apagado.png) no-repeat;
+}
+
+.imgCarga {
+	background: url(../img/Ic_Carga_Apagado.png) no-repeat;
+}
+
+.imgCliente {
+	float:right;
+	padding: 0px;
+	border: 0px;
+}
+
+.subMenuAdministracion{
+	margin-top:-395px;
+	margin-left: -1px;
+	height: 320px;
+	width: 475px;
+	position:absolute;
+	background-color: #FFFFFF;
+	
+	background-color: rgba(255,255,255,0.8);	
+	/* Theoretically for IE 8 & 9 (more valid) */	
+	/* should come BEFORE filter */
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=80);
+	/* Older than Firefox 0.9 */
+	-moz-opacity:0.8;
+	/* Safari 1.x (pre WebKit!) */
+	-khtml-opacity: 0.8;
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	/*opacity: 0.8;*/
+	
+	display:none;
+	padding-left: 0px;
+}
+
+.subMenuHorarios{
+	margin-top:-211px;
+	margin-left: -1px;
+	height: 135px;
+	width: 475px;
+	position:absolute;
+	background-color: #FFFFFF;
+	
+	background-color: rgba(255,255,255,0.8);	
+	/* Theoretically for IE 8 & 9 (more valid) */	
+	/* should come BEFORE filter */
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=80);
+	/* Older than Firefox 0.9 */
+	-moz-opacity:0.8;
+	/* Safari 1.x (pre WebKit!) */
+	-khtml-opacity: 0.8;
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	/*opacity: 0.8;*/
+	
+	display:none;
+	padding-left: 0px;
+}
+
+.subMenu {
+	border: 1px solid #666666;
+	border-bottom: 0px;
+	position:relative;
+	height: 45px;
+	width: 475px;
+	text-decoration:none;
+	text-align: left;
+}
+
+.subMenu a{
+	padding-left: 239px;
+}
+
+.centro {
+	text-align: center;
+}
+
+.izquierda{
+	text-align: left;
+}
+
+.cursorMenu{
+	cursor:pointer;
+}
+/* Final menu */
+
+/* Estilos contenido */
+
+.imgContenido {
+	padding-top:1px;
+	height:220px;
+	background: url(../img/Ic_Bienvenido.png) no-repeat;
+	display:block;
+	position:relative;
+	padding-left: 50px;
+}
+.contenido{
+	width: 1024px;
+	height: 475px;
+	margin: auto;
+}
+
+.contenidoBienvenido{
+	width: 860px;
+	height: 475px;
+	text-align: center;
+	margin: auto;
+}
+.texto{
+	padding: 22px 10px;
+	display:inline-block;
+	vertical-align: super;
+	font-family: 'Arial Regular';
+	font-size: 24px;
+	color: #666666;
+}
+
+.texto1{
+	font-family: 'Arial';
+	font-size: 50px;
+	color: #094FA4;
+}
+
+.texto2{
+	font-family: 'Arial';
+	font-size: 28px;
+	color: #666666;
+}
+
+.texto3{
+	font-family: 'Arial';
+	font-size: 30px;
+	color: #006EC1;
+}
+
+.texto4{
+	font-family: 'Arial';
+	font-size: 21px;
+	color: #666666;
+}
+
+.texto5{
+	font-family: Arial;
+	font-size: 24px;
+	color: #666666;
+	font-weight: bold;
+}
+
+.texto6{
+	font-family: Arial;
+	font-size: 22px;
+	color: #666666;
+	font-weight: bold;
+}
+
+
+
+.txtAjutado1{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.txtAjutado2{
+	width: 800px;
+}
+
+.txtAjutado3{
+  text-align: left;
+}
+
+.txtAjutado4{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.txtAjutado5{
+  text-align: left;
+  margin-top: 8px;
+}
+
+.txtAjutado6{
+	text-align: left;
+	margin-top: 33px;
+	margin-bottom: 10px;
+}
+
+.txtAjutado7{
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+/* final contenido */
+
+/* Estilos submenu */
+.horario:Hover ul.subMenuHorarios{
+	display:table;
+	list-style: none;
+}
+
+.horario:Hover span.texto{
+	color: #094FA4;
+}
+
+.horario:Hover span.icono{
+	background: url(../img/Ic_Horario1_Encendido.png) no-repeat;
+}
+
+.adm:Hover ul.subMenuAdministracion {
+	display:table;
+	list-style: none;
+}
+
+.adm:Hover span.texto{
+	color: #094FA4;
+}
+
+.adm:Hover span.icono{
+	background: url(../img/Ic_Administrador_Encendido.png) no-repeat;
+}
+
+.subMenu:Hover span.textoSubMenu{
+	color: #094FA4;
+	font-size: 22px;
+	padding: 10px 0px 0px 15px;
+}
+
+.subMenu:Hover span.iconoSubMenu.imgAdministracion{	
+	background: url(../img/Ic_Administrador_Encendido.png) no-repeat;
+}
+
+
+ul.subMenuAdministracion  li.subMenu:hover a span.iconoSubMenuAdm.imgCarga{
+	background: url(../img/Ic_Carga_Encendido.png) no-repeat;
+}
+
+ul.subMenuAdministracion  li.subMenu:hover a span.iconoSubMenuAdm.imgDescarga{
+	background: url(../img/Ic_Descarga_Encendido.png) no-repeat;
+}
+
+ul.subMenuAdministracion  li.subMenu:hover a span.iconoSubMenuAdm.imgAdministracionSubMenu{
+	background: url(../img/Ic_Administrador2_Encendido.png) no-repeat;
+}
+
+.subMenu:Hover span.iconoSubMenu.imgHorarioSubMenu{	
+	background: url(../img/Ic_Horario2_Encendido.png) no-repeat;
+}
+
+.btnHome:checked li.btnHome{
+	background: url(../img/Ic_Horario2_Encendido.png) no-repeat;
+}
+
+.btnHome:checked li.btnHome{
+	background: url(../img/Ic_Horario3_Apagado.png) no-repeat;
+}
+.textoSubMenu{
+	padding: 13px 0px 0px 15px;
+	display: inline;
+	position: absolute;
+	vertical-align: super;
+	font-family: 'Arial';
+	font-size: 18px;
+	color: #666666;
+}
+
+/* final submenu */
+
+/* Inicio Miga */
+
+.contenidoMiga {
+  width: 984px;
+  height: 24px;
+  padding-top: 43px;
+  padding-bottom: 43px;
+  text-align: left;
+}
+
+.posicionMiga {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 24px;
+  list-style: none;
+}
+
+li.menuMiga{
+	margin:0 5px 0 0;
+}
+.menuMiga {
+  /* display: inline-block; */
+  float: left;
+  position: relative;
+}
+
+.imgMiga {
+  background: url(../img/Ic_HorarioMiga.png) no-repeat;
+}
+
+.imgMigaAdm {
+  background: url(../img/Ic_AdministradorMiga.png) no-repeat;
+}
+
+.iconoMiga {
+  margin-top: 0px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  /*padding-right: 20px;*/
+}
+
+.separacionMiga {
+  vertical-align: super;
+  font-family: 'Arial';
+  font-size: 22px;
+  color: #009EE5;
+  /*margin-left: -4px;*/
+}
+
+.tituloMiga {
+  vertical-align: super;
+  font-family: 'Arial';
+  font-size: 22px;
+  color: #009EE5;
+  margin-right: 4px;
+}
+
+/*Fin Miga*/
+
+/*Inicio Aviso*/
+.aviso {
+    background: #F0F9FE  url(../img/Ic_Aviso2.png) no-repeat 10px;
+	font-family: 'Arial Regular';
+	font-size: 12px;
+    color: #666666;
+    width: 960px; 
+    border: 1px solid #D8D8D8;
+    padding: 10px 10px; 
+    padding-left: 52px;
+}
+
+/*Fin Aviso*/
+
+/* Estilos para los botones */
+.boton{
+	clear:both;
+	overflow: hidden;
+	margin:9px auto;
+	height:34px;
+	margin-top: 4%;
+}
+
+.botonExaminar{
+	position: relative;
+	margin-top: 12px;
+	float: left;
+}
+
+.botonCentrado{
+	margin-left: 462px;
+	}
+
+.boton a{
+	margin: 0px;
+	margin-left: 30px;
+	display: inline-block; 
+	width: 100px;
+	height:30px;
+}
+
+.boton a:first-child{
+	margin:0px 0px 0px 0px;
+}
+
+/*BotÃ³n para Reposo*/
+.boton .reposo{
+	text-align:center;
+	text-decoration:none;
+	font-family:'Arial';
+	font-size:14px;
+	color:#ffffff;
+	background: url(../img/Bt_Azul.png) no-repeat;
+	cursor:pointer;
+	background-size: 100px 30px;
+	padding-top: 6px;
+}
+
+/* Efecto del boton */
+.reposo:hover{
+	background: url(../img/Bt_Azul_Hover.png) no-repeat;
+	background-size: 100px 30px;
+}
+
+/*BotÃ³n para Deshabilitado*/
+.boton .deshabilitado{
+	text-align:center;
+	text-decoration:none;
+	font-family:'Arial';
+	font-size:14px;
+	color:#ffffff;
+	background: url(../img/Bt_AzulDesactivado.png) no-repeat;
+	background-size: 100px 30px;
+	padding-top: 6px;
+}
+
+/*BotÃ³n para Cargar usuarios*/
+.boton .cargaUsuario{
+	width: 98px;
+	height:22px;
+	text-align:center;
+	text-decoration:none;
+	font-family:'Arial';
+	font-size:12px;
+	color:#ffffff;
+	background: url(../img/bt_cargausuarios.png) no-repeat;
+	cursor:pointer;
+	background-size: 117px 30px;
+	padding-top: 8px;
+	padding-left: 20px;
+}
+
+/* Efecto del boton */
+.cargaUsuario:hover{
+	background: url(../img/bt_over_cargausuarios.png) no-repeat;
+	background-size: 117px 30px;
+}
+/* termina estilos botones */
+
+
+/*Inicia select*/
+.contenidoSelecciona {
+  height: 23px;
+  border: 1px solid #CCCCCC;
+  color: #CCCCCC;
+  border-radius: 3px;
+  font-family: 'Arial';
+  font-size: 13px;
+  background: url(../img/Ic_Desplegar.png) right no-repeat;
+  cursor: pointer;
+  text-align: left;
+  z-index:2;
+}
+
+.primerOpcion {
+  color: #CCCCCC;
+  margin-top: 4px;
+  margin-left: 6px;
+}
+
+.opcionesSelecciona {
+    background: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #d6d6d6;
+    display: none;
+    margin-top: 4px;
+    position: relative;
+}
+
+.listaSeleccciona {
+  background-color: #FFFFFF;
+  text-indent: 6px;
+  z-index:3;
+}
+
+.listaSeleccciona tr td {
+    height: 20px;
+    width: 260px;
+    text-align: left;
+	border-top: 0px
+}
+
+.valorSeleccionado {
+  color: #363636;
+}
+
+
+.valorSeleccionado:Hover {
+	color: #009EE5;
+}
+
+.colorSeleccionado {
+	color: #1A1A1A;
+}
+
+/*Fin select*/
+
+/* Estilos Scroll */
+.estiloScroll{
+	 scrollbar-face-color:#D8D8D8;
+}
+
+textarea::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment{
+  display:none;
+}
+
+textarea::-webkit-scrollbar{
+  width:10px;
+  height:18px;
+}â€‹
+
+textarea::-webkit-scrollbar-track-piece {
+  background-color:#d8d8d8;
+}
+
+textarea::-webkit-scrollbar-thumb:vertical{
+  height:20px;
+  background-color:#d8d8d8;
+}
+/* Termina estilos Scroll */
+
+/* EStilos tooltip */
+.iconInfo{
+	background: url(../img/Ic_Aviso3.png) no-repeat top;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-bottom:-1px;
+}
+
+#tooltip{
+	z-index: 10;
+	font:12px 'Arial';
+	position:absolute;
+	border:1px solid #cccccc;
+	background:#fff;
+	padding:5px;
+	color:#363636;
+	display:none;
+	border-radius:4px;
+	-moz-border-radius:6px;
+	box-shadow: 1px 1px 4px 0 #d6d6d6;
+	-moz-box-shadow: 1px 1px 4px 0 #d6d6d6;
+}
+/* Termina estilos tooltip */
+
+/* Estilos de tablas */
+.tablah{
+	width: 25%;
+	/* border-top:1px #666666 solid; */
+	/* border-radius: 6px 6px 0 0; */
+	border-collapse: collapse;
+	z-index:1;
+}
+
+.tablah th{
+	font: 14px 'Arial';
+	/* font-size:14px; */
+	/* color: #666666; */
+	height:45px;
+	border-top:1px #D8D8D8 solid;
+	text-align: center;
+}
+
+ .tablah td {
+	height:70px;
+	border-bottom: none;
+	border-right:none;
+	border-left:1px #D8D8D8 solid;
+	border-collapse:collapse;
+	border-top:1px #D8D8D8 solid;
+	text-align: center;
+}
+
+.tablah tr{
+	border-collapse:collapse;
+	border-right:none;
+}
+
+.tablah td:first-child{
+	border-left: none;
+}
+
+
+
+
+
+.tablas{
+	width: 100%;
+	/* border-top:1px #666666 solid; */
+	/* border-radius: 6px 6px 0 0; */
+	border-collapse: collapse;
+	z-index:1;
+}
+
+.tablas th{
+	font: 14px 'Arial';
+	/* font-size:14px; */
+	/* color: #666666; */
+	height:45px;
+	border-top:1px #D8D8D8 solid;
+	text-align: center;
+}
+
+ .tablas td {
+	height:70px;
+	border-bottom: none;
+	border-right:none;
+	border-left:1px #D8D8D8 solid;
+	border-collapse:collapse;
+	border-top:1px #D8D8D8 solid;
+	text-align: center;
+}
+
+.tablas tr{
+	border-collapse:collapse;
+	border-right:none;
+}
+
+.tablas td:first-child{
+	border-left: none;
+}
+
+/* Termina estilos de tabla */
+
+/* TamaÃ±os y colores de texto en tabla */
+.tx1Tabla{
+	text-align:left;
+	font-size:18px;
+	color: #094FA4;
+}
+
+.tx2Tabla{
+	font-size:14px;
+	color: #666666;
+}
+
+.tx3Tabla{
+	font-size:14px;
+	color: #363636;
+}
+
+.tx4Tabla{
+	font-size:20px;
+	color: #363636;
+}
+
+.txtSelect{
+	font-size:13px;
+	font-family: 'Arial';
+	color: #CCCCCC;
+}
+/* TErmina estilos y colores de texto en tabla */
+
+
+/* Estilos de textarea */
+.estilotextarea {
+	font-family: 'Arial';
+	font-size:14px;
+	color: #363636;
+	width:90%;
+	height:60%;
+	border: 1px solid #D8D8D8;
+	resize: none;
+}
+/* termina estilos textarea */
+
+/*moduloContenido*/
+
+div.moduloContenido {
+	border:1px #D8D8D8 solid;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	margin-left: 24px;
+	width: 975px;
+}
+
+div.moduloHorarios {
+	border:1px #D8D8D8 solid;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	margin-left: 185px;
+	width: 700px;
+}
+
+div.moduloReportes {
+	border:1px #D8D8D8 solid;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	margin-left: 24px;
+	width: 975px;
+	margin-top: 25px;
+}
+
+.tituloModulo{
+	font-family: 'Arial';
+	background-color:#F2F2F2;
+	line-height:45px;	
+	padding-left:10px;
+	font-weight:normal;
+	border-radius: 4px 4px 0px 0px;
+}
+
+/* termina modulo contenido */
+
+.noMostrar{
+	display: none;	
+}
+
+/*Inicia Mensajes*/
+
+.contenidoMensajes{
+	width: 1024px;
+	height: 475px;
+	margin: auto;
+}
+
+.tamSelMensajes {
+  width: 260px;
+  margin-left: 30px;
+}
+
+.imgSelMensajes {
+  width: 4px;
+  height: 24px;
+  position: absolute;
+  border-left: 1px solid #D8D8D8;
+  margin-left: 242px;
+}
+
+.inputMensajes {
+  border: 1px solid #D8D8D8;
+  font-family: 'Arial';
+  font-size: 13px;
+  text-align: left;
+  color: #363636;
+  width: 250px;
+  height: 19px;
+  /* height: 25px; */
+  border-radius: 4px;
+  padding: 3px 5px 3px 5px;
+  /* padding: 0px 5px 0px 5px; */
+}
+
+.tamTabla{
+	width: 33%;
+}
+
+/*Final Mensajes*/
+
+
+/*Inicia Cambio*/
+.contenidoCambio{
+	width: 1024px;
+	height: 365px;
+	margin: auto;
+}
+
+.avisoTemporal {
+	height: 65px;
+	width: 690px;
+	margin-left: 165px;
+	text-align: left;
+}
+
+.avisoCambio{
+	padding: 14px 0px 0px 20px;
+	position: absolute;
+	vertical-align: super;
+	font-family: 'Arial';
+	font-size: 30px;
+	color: #666666;	
+}
+
+.iconoAviso{
+	width: 65px;
+	height: 65px;
+	display: inline-block;
+}
+
+.imgAviso {
+	background: url(../img/Aviso1.png) no-repeat;
+}
+
+.imgCargaHorarios {
+	background: url(../img/EjemploImg1.png) no-repeat;
+	height: 137px;
+	margin-left:22px;
+}
+
+.imgCargaSistema {
+	background: url(../img/EjemploImg2.png) no-repeat;
+	height: 137px;
+	margin-left:22px;
+}
+
+.imgResutadoBusqueda {
+	background: url(../img/EjemploImg3.png) no-repeat;
+	height: 137px;
+	margin-left:22px;
+}
+/*Final Cambio*/
+
+
+/*Inicia Solicitud*/
+ .contenidoSolicitud{
+	width: 1024px;
+	height: 475px;
+	text-align: left;
+	margin: auto;
+}
+.check1
+ {
+     width: 16px;
+     height:16px;
+	 background: url(../img/Ic_Checkbox_Apagado.png) no-repeat;
+	 float: left;
+	 display: inline;
+	 list-style: none; 
+ }
+ 
+   .check2
+ {
+     width: 16px;
+     height:16px;
+	background: url(../img/Ic_Checkbox_Encendido.png) !important;
+	background:  no-repeat;
+	background-position: 0px 0px;
+ }
+ 
+ 
+.textoRadio
+ {
+     margin-left: -20px;
+	 margin-right: 14px;
+	 margin-top: 0px;
+	 font-family: 'Arial';
+	 font-size: 13px;
+	 color: #666666;
+	 width: 43px;
+ }
+ .radio-group li
+ {
+     width: 18px;
+     height:18px;
+	 background: url(../img/Ic_Radioboton_Apagado.png) no-repeat;
+	 float: left;
+	 display: inline;
+	 list-style: none;  
+  
+ }
+ 
+ .radio-group:hover
+ {
+	cursor: pointer;
+ }
+ 
+ .radio-group-active
+ {
+
+	 background: url(../img/Ic_Radioboton_Encendido.png) !important;
+	 background:  no-repeat;
+
+}
+
+.subTitulos{
+	font-family: 'Arial';
+	font-size: 22px;
+	color: #009EE5;
+	margin-top: 15px;
+	margin-left: 40px;
+	text-align: left;
+}
+.subTitulos2{
+	font-family: 'Arial';
+    /*font-weight: bold;*/
+	font-size: 16px;
+	color: #006EC1;
+	margin-top: 15px;
+	margin-left: 40px;
+	text-align: left;
+}
+
+.etiqueta1{
+	font-family: 'Arial';
+	font-size: 13px;
+	color: #666666;
+}
+
+.etiqueta2{
+	font-family: 'Arial';
+	font-size: 13px;
+	color: #666666;
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+
+.campos2 {
+	font-family: 'Arial';
+    font-size: 14px;
+    padding: 0 2%;
+    color: #363636;
+    width: 229px;
+    height: 23px;
+	text-align: center;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    border: 1px solid #D8D8D8;
+}
+
+.imagenInput {
+    background: url(../img/Ic_Busqueda.png) no-repeat;
+    width: 15px;
+    height: 16px;
+    margin-left: 465px;
+    margin-top: -19px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.campos {
+    padding: 3px 35px 3px 4px;
+    /* padding-right: 20px; */
+    border-width: 1px;
+    border-style: solid;
+    border: 1px solid #D8D8D8;
+    font-family: 'Arial';
+    font-size: 13px;
+    text-align: center;
+    color: #363636;
+    width: 370px;
+	height: 19px;
+    /* height: 25px; */
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    /* padding-left: 4px; */
+    /* padding-right: 35px; */
+	margin-left: 5px;
+}
+
+.examinar {
+    padding-right: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border: 1px solid #D8D8D8;
+    font-family: 'Arial';
+    font-size: 13px;
+    text-align: center;
+    color: #363636;
+    width: 260px;
+    height: 25px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 35px;
+	margin-left: 5px;
+	margin-right: 12px;
+}
+
+.imagCampo{
+    width: 4px;
+    height: 18px;
+    position: absolute;
+    border-left: 1px solid #D8D8D8;
+    margin-left: 458px;
+    margin-top: -20px;
+	}
+/*Fin Solicitud*/
+
+.imagSelec1 {
+    width: 4px;
+	height: 24px;
+	position: absolute;
+	border-left: 1px solid #D8D8D8;
+	margin-top: 0px;
+	margin-left: 84px;
+}
+
+.imagSelec2 {
+    width: 4px;
+	height: 24px;
+	position: absolute;
+	border-left: 1px solid #D8D8D8;
+	margin-top: 0px;
+	margin-left: 373px;
+}
+
+.imagSelec3 {
+    width: 4px;
+	height: 24px;
+	position: absolute;
+	border-left: 1px solid #D8D8D8;
+	margin-top: 0px;
+	margin-left: 334px;
+}
+
+.tamSeleccionaAutorizar {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.horarioEncendido span.texto{	
+	color: #094FA4;
+}
+
+.horarioEncendido span.icono{
+	background: url(../img/Ic_Horario1_Encendido.png) no-repeat;
+}
+
+.homeApagado {
+	background: url(../img/Ic_Home_Apagado.png) no-repeat;
+	background-position: 16px 16px;
+}
+
+.horarioAdm span.texto{	
+	color: #094FA4;
+}
+
+.horarioAdm span.icono{
+	background: url(../img/Ic_Administrador_Encendido.png) no-repeat;
+}
+
+
+/* Inicio Reportes */
+
+.consultaRepo {
+  margin-right: 45px;
+  margin-left: 45px;
+}
+
+/* Fin Reportes */
+
+
+
+/*Inicio Reportes Semanas*/
+
+.tamSelecciona {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.imgSelSemanas {
+  width: 4px;
+  height: 24px;
+  position: absolute;
+  border-left: 1px solid #D8D8D8;
+  margin-left: 334px;
+}
+
+.inputSemanas {
+  border: 1px solid #D8D8D8;
+  font-family: 'Arial';
+  font-size: 13px;
+  text-align: left;
+  color: #1A1A1A;
+  width: 145px;
+  height: 19px;
+  /* height: 25px; */
+  border-radius: 4px;
+  padding: 3px 5px 3px 5px;
+  /* padding: 0px 5px 0px 5px; */
+  margin-left: 5px;
+}
+
+.botonDerecho {
+  margin-left: 903px;
+}
+
+
+/*Fin Reportes Semanas*/
+
+/*Inicio Ajuste Miga
+.posicionMiga li.menuMiga:first-child {
+  margin: 0 5px 0 0;
+}
+ Fin Ajuste Miga*/
+ 
+ /* estilos calendario por dÃ­a */
+ 
+td.calendarioDia{
+	text-align:left;
+}
+ 
+.alineacionIzq{
+	margin-left: 24px;
+}
+
+.separacionCalendario{
+	margin-left: 58px;
+}
+
+th.tamColumnaPeriodo{
+	width:534px;
+} 
+
+th.tamColumnaReporte{
+	width:439px;
+} 
+ /* termina estilos calendario por dÃ­a */
+ 
+td.linkDescarga{
+	vertical-align:top;
+	color:#009EE5;
+}
+
+/* Estilos asignar perfil consulta */
+.imagenInputPC {
+    background: transparent url("../img/Ic_Busqueda.png") no-repeat scroll 0% 0%;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    cursor: pointer;
+    margin-left: -27px;
+    margin-top: -7px;
+}
+
+.imagCampoPC{
+    width: 4px;
+    height: 24px;
+    border-left: 1px solid #D8D8D8;
+    position: absolute;
+    margin-left: -32px;
+    margin-top: -12px;
+}
+
+.camposPC {
+    border-width: 1px;
+    border-style: solid;
+    border: 1px solid #D8D8D8;
+    font-family: 'Arial Regular';
+    font-size: 13px;
+    text-align: center;
+    color: #363636;
+    height: 21px;
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 35px;
+	margin-left: 5px;
+}
+
+.camposPC2 {
+    border-width: 1px;
+    border-style: solid;
+    border: 1px solid #D8D8D8;
+    font-family: 'Arial';
+    font-size: 13px;
+    text-align: center;
+    color: #363636;
+    height: 21px;
+    border-radius: 4px;
+    padding-left: 4px;
+	margin-left: 5px;
+    display: inline-block;
+    width: 150px;
+    
+}
+
+.camposPC_NU{
+	font-family: 'Arial';
+    font-size: 13px;
+    text-align: center;
+    color: #363636;
+    width: 300px;
+    height: 25px;
+	margin-left: 5px;
+	border:none;
+	border-bottom: 1px solid #D8D8D8;
+}
+
+.margenIzq_PC{
+	margin-left:77px;	
+}
+
+.textoRadio_PC
+ {
+     margin-left: 5px;
+	 margin-right: 20px;
+	 font-family: 'Arial';
+	 font-size: 13px;
+	 color: #666666;
+ }
+
+ .botonesDerecho{
+	margin-left:705px;
+ }
+ 
+ .separacionElementos{
+	margin-top: 4%;	 
+ }
+ 
+ .contenido_PC{
+	width: 1024px;
+	height: auto;
+	margin: auto;
+}
+  
+ /* Termina estilos asignar consulta */ 
+
+table.tabla-solicitud td {
+width: 310px;
+}
+
+
+/***********************************************************************************************/
+
+
+.contertable{
+    margin: 0 auto;
+    width: 973px;
+    
+}
+
+
+caption{
+    font-family: 'Arial';
+    /*font-weight: bold;*/
+	font-size: 16px;
+	color: #006EC1;
+	padding-left: 10px;
+	text-align: left;
+    background-color: #f2f2f2;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #D8D8D8;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    -webkit-box-shadow: 3px 0px 2px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 3px 0px 2px 0px rgba(0,0,0,0.2);
+    box-shadow: 3px 0px 2px 0px rgba(0,0,0,0.2);
+}
+
+table.tabla-general{
+     border: 1px solid #D8D8D8;
+    width: 973px;
+    border-collapse: separate;
+    border-spacing:  0px;
+    -webkit-box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.2);
+    box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.2);
+}
+
+table.tabla-general thead tr td{
+    font-family: 'Arial';
+    font-size: 14px;
+    color: #363636;
+    height: 45px;
+    text-align: center;
+    border-bottom: 1px solid #D8D8D8;
+     background-color: #f2f2f2;
+    
+}
+table.tabla-general tbody tr td{
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    font-family: "Arial";
+    font-size: 14px;
+    color: #363636;
+    border-right: 1px solid #D8D8D8;
+
+}
+
+table.tabla-general tbody tr td:last-child{
+    border-right: none;
+}
+
+ 
+.doubleBoton{
+	background-image: url(../img/Bt_Azul.png);
+	background-repeat: no-repeat;
+	cursor:pointer;
+	background-size: 100px 30px;
+	padding-top: 0px;
+	height:34px;
+	width:47%;
+	border:none;
+	background-color:#fff;
+	position:relative;
+	top:-20px;
+	font-family:'Arial Regular';
+	color:#fff;
+	font-size:14px;
+	left:115px;
+}
+
+.doubleBoton:hover{
+	background-image: url(../img/Bt_Azul_Hover.png);
+	background-repeat: no-repeat;
+}
+
+.doubleBoton:disabled{
+		
+	background-image: url(../img/Bt_AzulDesactivado.png); 
+	background-repeat:no-repeat;
+	background-size: 100px 30px;
+	height:34px;	
+}
+
+/* input[type="checkbox"]{
+    display:none;
+}*/
+
+input[type="checkbox"] + label
+{
+     width: 18px;
+     height:18px;
+	 background: url(../img/Ic_Radioboton_Apagado.png) no-repeat;
+	 float: left;
+	 display: inline;
+	 list-style: none;  
+}
+
+input[type="checkbox"]:checked + label
+{
+	 width: 18px;
+     height:18px;
+	 background-image: url(../img/Ic_Radioboton_Encendido.png);
+	 float: left;
+	 display: inline;
+	 list-style: none;  
+
+}
+
+
+.botonReposo{
+	margin-left: 462px;
+	font-family:'Arial Regular';
+	background-color:#fff;
+	font-size:14px;
+	color:white;
+	background-image: url(../img/Bt_Azul.png);
+	background-repeat: no-repeat;
+
+	cursor:pointer;
+	background-size: 100px 30px;
+	padding-top: 0px;
+	height:34px;
+	width:10%;
+	border:none;
+	
+	
+}
+
+.botonAnadir{
+	margin-left: 450px;
+	font-family:'Arial Regular';
+	background-color:#fff;
+	font-size:14px;
+	color:white;
+	background-image: url(../img/Bt_Azul.png);
+	background-repeat: no-repeat;
+
+	cursor:pointer;
+	background-size: 100px 30px;
+	padding-top: 0px;
+	height:34px;
+	width:18%;
+	border:none;
+
+}
+
+/* Efecto del boton */
+.botonReposo:hover{
+
+	font-family:'Arial Regular';
+	background-color:#fff;
+	font-size:14px;
+	color:white;
+	background-image: url(../img/Bt_Azul_Hover.png);
+	background-repeat: no-repeat;
+	
+}
+  .botonReposo:disabled{
+
+	background-image: url(../img/Bt_AzulDesactivado.png); 
+	background-repeat:no-repeat;
+	background-size: 100px 30px;
+
+	
+	height:34px;
+  }
+ /* Termina estilos asignar consulta */ 
+ 
+ .labelBotonEnviar{
+	font-family:'Arial Regular';
+	color:#fff;
+	font-size:14px;
+	position: relative;
+    left: 492px;
+    top: 24px;
+    cursor:pointer;
+ }
+
+ 
+.subMenuAdministracionAA{
+	margin-top:-119px;
+	margin-left: -1px;
+	height: 46px;
+	width: 475px;
+	position:absolute;
+	background-color: #FFFFFF;
+	background-color: rgba(255,255,255,0.8);	
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	display:none;
+	padding-left: 0px;
+}
+.adm:Hover ul.subMenuAdministracionAA {
+	display:table;
+	list-style: none;
+}
+
+ul.subMenuAdministracionAA  li.subMenu:hover a span.iconoSubMenuAdm.imgCarga{
+	background: url(../img/Ic_Carga_Encendido.png) no-repeat;
+}
+
+ul.subMenuAdministracionAA  li.subMenu:hover a span.iconoSubMenuAdm.imgDescarga{
+	background: url(../img/Ic_Descarga_Encendido.png) no-repeat;
+}
+
+ul.subMenuAdministracionAA  li.subMenu:hover a span.iconoSubMenuAdm.imgAdministracionSubMenu{
+	background: url(../img/Ic_Administrador2_Encendido.png) no-repeat;
+}
+.subMenuHorariosE{
+	margin-top:-165px;
+	margin-left: -1px;
+	height: 90px;
+	width: 475px;
+	position:absolute;
+	background-color: #FFFFFF;
+	background-color: rgba(255,255,255,0.8);	
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	display:none;
+	padding-left: 0px;
+}
+.horario:Hover ul.subMenuHorariosE{
+	display:table;
+	list-style: none;
+}
+
+.subMenuAdministracionA{
+	margin-top:-349px;
+	margin-left: -1px;
+	height: 183px;
+	width: 475px;
+	position:absolute;
+	background-color: #FFFFFF;
+	background-color: rgba(255,255,255,0.8);	
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	display:none;
+	padding-left: 0px;
+}
+.adm:Hover ul.subMenuAdministracionA {
+	display:table;
+	list-style: none;
+}
+
+ul.subMenuAdministracionA  li.subMenu:hover a span.iconoSubMenuAdm.imgCarga{
+	background: url(../img/Ic_Carga_Encendido.png) no-repeat;
+}
+
+ul.subMenuAdministracionA  li.subMenu:hover a span.iconoSubMenuAdm.imgDescarga{
+	background: url(../img/Ic_Descarga_Encendido.png) no-repeat;
+}
+
+ul.subMenuAdministracionA  li.subMenu:hover a span.iconoSubMenuAdm.imgAdministracionSubMenu{
+	background: url(../img/Ic_Administrador2_Encendido.png) no-repeat;
+}
+
+.subMenuHorariosSinSolicitud{
+	margin-top:-165px;
+	margin-left: -1px;
+	height: 92px;
+	width: 475px;
+	position:absolute;
+	background-color: #FFFFFF;
+	background-color: rgba(255,255,255,0.8);	
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	display:none;
+	padding-left: 0px;
+}
+.horario:Hover ul.subMenuHorariosSinSolicitud{
+	display:table;
+	list-style: none;
+}
+
+.subMenuHorariosESolicitud{
+	margin-top:-119px;
+	margin-left: -1px;
+	height: 46px;
+	width: 475px;
+	position:absolute;
+	background-color: #FFFFFF;
+	background-color: rgba(255,255,255,0.8);	
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	display:none;
+	padding-left: 0px;
+}
+.horario:Hover ul.subMenuHorariosESolicitud{
+	display:table;
+	list-style: none;
+}
+
+ul.subMenuHorariosSinSolicitud  li.subMenu:hover a span.iconoSubMenuAdm.imgCarga{
+	background: url(../img/Ic_Carga_Encendido.png) no-repeat;
+}
+
+ul.subMenuHorariosSinSolicitud  li.subMenu:hover a span.iconoSubMenuAdm.imgDescarga{
+	background: url(../img/Ic_Descarga_Encendido.png) no-repeat;
+}
+
+ul.subMenuHorariosSinSolicitud  li.subMenu:hover a span.iconoSubMenuAdm.imgAdministracionSubMenu{
+	background: url(../img/Ic_Administrador2_Encendido.png) no-repeat;
+}
+
+
+
+	
+
+
+.ventana {
+	display: none;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #999999;
+	line-height: 28px;
+	font-size: 15px;
+	text-align: justify;
+
+}
+.ventanaMensajes{
+	display: none;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	line-height: 28px;
+	font-size: 15px;
+	text-align: justify;
+	background-color:#999999;
+	border-radius:10px;
+	opacity:.8;
+	position:absolute;
+	left:-50px;
+	top:-120px;
+}
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}
+.ui-dialog-content{
+	
+}
+
+.botonCandidato2 {
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	font: 12px arial, sans-serif;
+	color: #FFFFFF;
+	/*border: 1px solid #094FA4;*/
+	border: 1px solid #BACCE0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #005698;
+	/*background: #00559D;
+	/*background: -moz-linear-gradient(top,  #0079C1 0%, #00559D 100%); /* FF3.6+ */
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0079C1), color-stop(100%,#00559D)); /* Chrome,Safari4+ */
+	/*background: -webkit-linear-gradient(top,  #0079C1 0%,#00559D 100%); /* Chrome10+,Safari5.1+ */
+	/*background: -o-linear-gradient(top,  #0079C1 0%,#00559D 100%); /* Opera 11.10+ */
+	/*background: -ms-linear-gradient(top,  #0079C1 0%,#00559D 100%); /* IE10+ */
+	/*background: linear-gradient(to bottom,  #0079C1 0%,#00559D 100%); /* W3C */
+	/*filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#0079C1', endColorstr='#00559D');*/
+	cursor: pointer;
+	height: 32px;
+	margin: 5px 0px 0px 493px;
+}
+
+.botonMsg {
+ text-align: center;
+ text-decoration: none;
+ vertical-align: middle;
+ font: 12px arial, sans-serif;
+ color: #FFFFFF;
+ border: 1px solid #BACCE0;
+ -webkit-border-radius: 4px;
+ -moz-border-radius: 4px;
+ border-radius: 4px;
+ background: url(../img/Bt_Azul.png) center no-repeat;
+ cursor: pointer;
+ height: 32px;
+}
