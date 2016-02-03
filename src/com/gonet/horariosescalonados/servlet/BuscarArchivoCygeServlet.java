@@ -68,7 +68,7 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		/*OBTENER LLAVE DEL CERTIFICADO*/
 		KeyStore keystore = KeyStore.getInstance("PKCS12");
 		ServletContext context1 = getServletContext();
-		InputStream keyFileStream  = context.getResourceAsStream("/WEB-INF/bbva-gapis-horarios-escalonados.p12");
+		InputStream keyFileStream  = context.getResourceAsStream("/WEB-INF/dev-bbva-gapis-horarios-escalonados.p12");
 		if (keyFileStream == null){throw new Exception("No se encuentra archivo");}
 		keystore.load(keyFileStream, "notasecret".toCharArray());
         PrivateKey key = (PrivateKey)keystore.getKey("privatekey", "notasecret".toCharArray());

@@ -97,8 +97,8 @@ public class BusquedaUsuarioNuevo
 
 			List<String> SCOPES = Arrays.asList("email");
 			
-			String emailAddressDev = "655437132761-r6s117vkdnpv19qtohncn0eh5rf9360m@developer.gserviceaccount.com";
-			//String emailAddressDev = "766407286522-pbcsl1nr2f5cf89833o41j9ntnu5v2u7@developer.gserviceaccount.com";
+			//String emailAddressDev = "655437132761-r6s117vkdnpv19qtohncn0eh5rf9360m@developer.gserviceaccount.com";
+			String emailAddressDev = "766407286522-pbcsl1nr2f5cf89833o41j9ntnu5v2u7@developer.gserviceaccount.com";
 
 			JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 			NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -110,7 +110,7 @@ public class BusquedaUsuarioNuevo
 					.setServiceAccountId(emailAddressDev)
 					.setServiceAccountPrivateKey(key)
 					.setServiceAccountScopes(SCOPES)
-					.setServiceAccountUser("juancarlos.ramirez.contractor@bbva.com")
+					.setServiceAccountUser("juancarlos.ramirez.contractor@dev.bbva.com")
 					.build();
 
 			if(listaRegistrosCyge != null)
@@ -126,7 +126,7 @@ public class BusquedaUsuarioNuevo
 
 						try 
 						{
-						String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+registroCyge.getEmail();
+						String URI = "https://dev-bbva-gapis.appspot.com/gprofile/users/"+registroCyge.getEmail();
 						HttpRequestFactory requestFactory = httpTransport.createRequestFactory(credential);
 						GenericUrl url = new GenericUrl(URI);
 						HttpRequest request = requestFactory.buildGetRequest(url);
@@ -161,7 +161,7 @@ public class BusquedaUsuarioNuevo
 
 					/*PRUEBA OFFLINE*/
 
-					String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+strEmailUsuario;
+					String URI = "https://dev-bbva-gapis.appspot.com/gprofile/users/"+strEmailUsuario;
 					HttpRequestFactory requestFactory = httpTransport.createRequestFactory(credential);
 					GenericUrl url = new GenericUrl(URI);
 					HttpRequest request = requestFactory.buildGetRequest(url);
