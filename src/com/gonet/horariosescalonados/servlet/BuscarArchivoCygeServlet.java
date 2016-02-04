@@ -64,11 +64,13 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		RequestDispatcher dispatcher;
 		try 
 		{
-						 
+			
+			 
 		/*OBTENER LLAVE DEL CERTIFICADO*/
 		KeyStore keystore = KeyStore.getInstance("PKCS12");
 		ServletContext context1 = getServletContext();
-		InputStream keyFileStream  = context.getResourceAsStream("/WEB-INF/dev-bbva-gapis-horarios-escalonados.p12");
+		InputStream keyFileStream  = context1.getResourceAsStream("/WEB-INF/bbva-gapis-horarios-escalonados.p12");
+
 		if (keyFileStream == null){throw new Exception("No se encuentra archivo");}
 		keystore.load(keyFileStream, "notasecret".toCharArray());
         PrivateKey key = (PrivateKey)keystore.getKey("privatekey", "notasecret".toCharArray());
@@ -89,13 +91,12 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
         
         
 		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/Basecyge280116.txt");
-
-		/*String appName = "enteratvdos";
+/*
+		String appName = "enteratvdos";
         
-        GcsFilename fileName = new GcsFilename(appName, "Basecyge030216.txt");
+        GcsFilename fileName = new GcsFilename(appName, "Basecyge280116.txt");
 		
-       System.out.println(fileName);
-        
+       
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		
 		
@@ -114,13 +115,14 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		carga.CargaAutomaticaArchivo();
 		
 		System.out.println("Mapeo Correcto Cyge");
-	
+		
 		req.setAttribute("resultado", inputString);
 		
 		dispatcher = getServletContext().getRequestDispatcher("/bloqueo2.jsp");
 		
 		dispatcher.forward(req, resp);
-			
+		
+		
 		}
 		catch(Exception e)
 		{

@@ -54,7 +54,7 @@ public class BeanCumplimiento {
 	private String tae;
 	
 	@Persistent
-	@Column(name="tde")
+	@Column(name="entrada")
 	private String entrada;
 	
 	@Persistent
@@ -82,7 +82,7 @@ public class BeanCumplimiento {
 	private String tds;
 	
 	@Persistent
-	@Column(name="apePaterno")
+	@Column(name="salidaReal")
 	private String salidaReal;
 	
 	@Persistent
