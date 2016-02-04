@@ -88,9 +88,9 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
         
         
         
-		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/Basecyge280116.txt");
+		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/Basecyge280116.txt");
 
-		String appName = "enteratvdos";
+		/*String appName = "enteratvdos";
         
         GcsFilename fileName = new GcsFilename(appName, "Basecyge030216.txt");
 		
@@ -100,10 +100,10 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		
 		
 		InputStream input =Channels.newInputStream(readChannel);
-		
+		*/
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		
-		copy(input,output);
+		copy(inputStreamArchivo,output);
 		
 		byte[] bytes = output.toByteArray();
 	    
