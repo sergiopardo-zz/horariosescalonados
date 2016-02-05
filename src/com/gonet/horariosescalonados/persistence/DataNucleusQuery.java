@@ -95,74 +95,6 @@ public class DataNucleusQuery
 		}
 	}
 	
-	public void PersisitirEmpleadoExterno (List<BeanEmpleadoExterno> registros)
-	{
-
-		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
-
-		try 
-		{		
-			//TODO: Remover contador de tiempo.
-
-			Transaction tx = pm.currentTransaction();
-
-			tx.begin();
-			long startTime = System.currentTimeMillis();
-			for (BeanEmpleadoExterno registro : registros)
-			{
-				try
-				{
-					BeanEmpleadoExterno registroCyge = (BeanEmpleadoExterno) pm.getObjectById(new BeanEmpleadoExterno.ComposedIdKey(BeanEmpleadoExterno.ComposedIdKey.class.getName()+"::"+registro.getNoCyge()+"::"+registro.getLugarAsignadoEdificio()));
-
-					registroCyge.setApeMaterno(registro.getApeMaterno());
-					registroCyge.setApePaterno(registro.getApePaterno());
-					registroCyge.setNombre(registro.getNombre());
-					registroCyge.setArea(registro.getArea());
-					registroCyge.setAutorizador(registro.getAutorizador());
-					registroCyge.setAutorizadorId(registro.getAutorizadorId());
-					registroCyge.setDirCorporativa(registro.getDirCorporativa());
-					registroCyge.setDirGeneral(registro.getDirGeneral());
-					registroCyge.setLugarAsignadoEdificio(registro.getLugarAsignadoEdificio());
-					registroCyge.setEntOficial(registro.getEntOficial());
-					registroCyge.setEspacioFisico(registro.getEspacioFisico());
-					registroCyge.setEstatus(registro.getEstatus());
-					registroCyge.setProveedor(registro.getProveedor());
-					registroCyge.setProyecto(registro.getProyecto());
-					registroCyge.setEmail(registro.getEmail());
-
-					//pm.makePersistent(registro);
-					
-				}
-
-				catch(JDOObjectNotFoundException e)
-				{
-					pm.makePersistent(registro);
-					
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-				finally
-				{
-
-				}
-			}
-
-			pm.currentTransaction().commit();
-
-			long endTime   = System.currentTimeMillis();
-			long totalTime = endTime - startTime;
-			System.out.println(totalTime);
-			long inSeconds = (totalTime)/1000;
-			System.out.println(inSeconds);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
 	public void InsertarRegistrosZeit (List<BeanZeit> registros)
 	{	
 		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
@@ -740,7 +672,7 @@ public class DataNucleusQuery
 					+ "CONCAT(horariosescalonadosv2.Cyge.nombre,' ' ,horariosescalonadosv2.Cyge.ApePaterno, "
 					+ "' ', horariosescalonadosv2.Cyge.ApeMaterno) as nombre, horariosescalonadosv2.Cyge.DirGeneral, "
 					+ "horariosescalonadosv2.Cyge.DirCorporativa, horariosescalonadosv2.Cyge.Area, "
-					+ "horariosescalonadosv2.Zeit.Fecha ,'1' as Mes, '1' as Quincena,horariosescalonadosv2.Cyge.EntOficial, "
+					+ "horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) ,'1' as Mes, '1' as Quincena,horariosescalonadosv2.Cyge.EntOficial, "
 					+ "max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'Entrada' then horariosescalonadosv2.Zeit.Hora end) as Entrada, "
 					+ "max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end) as Salida, "
 					+ " CONVERT(CalculoJornada.Jornada, CHAR(50)) as Jornada, horariosescalonadosv2.Zeit.estancia,horariosescalonadosv2.Zeit.edificio, horariosescalonadosv2.Cyge.autorizador, "
@@ -751,7 +683,6 @@ public class DataNucleusQuery
 					+ "and  horariosescalonadosv2.Zeit.Edificio = horariosescalonadosv2.Cyge.LugarAsignadoEdificio "
 					+ "inner join (SELECT  NoCyge, Fecha, SEC_TO_TIME( SUM( TIME_TO_SEC( estancia ) ) ) AS Jornada FROM horariosescalonadosv2.Zeit "
 					+ "Where TipoFuncion = 'ENTRADA'group by NoCyge, Fecha) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge "
-					+ "and horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) "
 					+ "group by horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Zeit.Edificio, horariosescalonadosv2.Zeit.Fecha;";
 
 			Query query = pm.newQuery("javax.jdo.query.SQL",strQuery);
@@ -782,7 +713,7 @@ public class DataNucleusQuery
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRDireccionGeneral, horariosescalonadosv2.EmpleadoExternoRRHH.DireccionGeneral, "
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRDireccionCorporativa, horariosescalonadosv2.EmpleadoExternoRRHH.DireccionCorporativa, "
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRArea, horariosescalonadosv2.EmpleadoExternoRRHH.Area, "
-					+ "horariosescalonadosv2.Zeit.Fecha, '1' as Quincena, '1' as Mes, '1' as TEA, horariosescalonadosv2.Cyge.EntOficial, "
+					+ "horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit), '1' as Quincena, '1' as Mes, '1' as TEA, horariosescalonadosv2.Cyge.EntOficial, "
 					+ "'1' as TED, max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'Entrada' then horariosescalonadosv2.Zeit.Hora end) as entradaReal, "
 					+ "'1' as CalificacionEntrada, '1' as TSA, '1' as SalidaOficial, '1' as TSD, max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end) as salidaReal, "
 					+ "'1' as CalificacionSalida, "
@@ -793,7 +724,6 @@ public class DataNucleusQuery
 					+ "inner join horariosescalonadosv2.EmpleadoExternoRRHH on horariosescalonadosv2.Cyge.usuario = horariosescalonadosv2.EmpleadoExternoRRHH.usuario "
 					+ "inner join (SELECT  NoCyge, Fecha, SEC_TO_TIME( SUM( TIME_TO_SEC( estancia ) ) ) AS Jornada FROM horariosescalonadosv2.Zeit "
 					+ "Where TipoFuncion = 'ENTRADA'group by NoCyge, Fecha) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge "
-					+ "and horariosescalonadosv2.Zeit.fecha = (select max(fecha) from horariosescalonadosv2.Zeit) "
 					+ "where horariosescalonadosv2.Cyge.usuario is not null and horariosescalonadosv2.Cyge.usuario <> '' "
 					+ "group by horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Zeit.Fecha;";
 

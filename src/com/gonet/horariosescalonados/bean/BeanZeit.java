@@ -17,9 +17,8 @@ import com.gonet.horariosescalonados.interfaces.Archivo;
 
 public class BeanZeit implements Archivo{
 	
-	@PrimaryKey
-	@Column (name = "id")
-	private int intId;
+	//@Column (name = "id")
+	//private int intId;
 	
 	@Persistent
 	@Column (name = "NoCyGE")
@@ -29,6 +28,7 @@ public class BeanZeit implements Archivo{
 	@Column (name = "Nombre")
 	private String strSubcontrataNombre;
 	
+	@PrimaryKey
 	@Persistent
 	@Column (name = "Fecha")
 	private Date strFecha;

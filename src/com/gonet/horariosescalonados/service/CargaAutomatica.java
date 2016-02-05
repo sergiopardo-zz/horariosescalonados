@@ -55,7 +55,7 @@ public class CargaAutomatica
 
 			CompletarReporteCumplimientoCyge reporteCumplimientoCyge = new CompletarReporteCumplimientoCyge();
 			
-//			query.InsertarRegistrosZeit((List<BeanZeit>) registrosArchivo);
+			query.InsertarRegistrosZeit((List<BeanZeit>) registrosArchivo);
 			
 			List<BeanCumplimientoExternoCyge> registrosIncompletosReporteCyge = query.RegistrosCumplimientoCyge();
 			
@@ -84,7 +84,7 @@ public class CargaAutomatica
 					
 			List<BeanCumplimientoExternoRRHH> reporteCumplimiettoCygeRRHH = reporteCumplimientoCyge.ReporteRRHH(registrosIncompletoCygeRRHH);
 			
-			query.InsertarCumplimientoCygeRH(reporteCumplimiettoCygeRRHH);
+//			query.InsertarCumplimientoCygeRH(reporteCumplimiettoCygeRRHH);
 			
 			break;
 
