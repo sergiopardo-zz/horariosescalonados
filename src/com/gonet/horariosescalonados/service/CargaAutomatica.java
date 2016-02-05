@@ -41,7 +41,7 @@ public class CargaAutomatica
 		{
 		case CYGE:
 			
-			//query.InsertarRegistrosCyge((List<BeanCyge>) registrosArchivo);
+			query.InsertarRegistrosCyge((List<BeanCyge>) registrosArchivo);
 			
 			
 			BusquedaUsuarioNuevo busquedaUsuario = new BusquedaUsuarioNuevo((List<BeanCyge>) registrosArchivo, key, 1);
@@ -55,13 +55,14 @@ public class CargaAutomatica
 
 			CompletarReporteCumplimientoCyge reporteCumplimientoCyge = new CompletarReporteCumplimientoCyge();
 			
-			query.InsertarRegistrosZeit((List<BeanZeit>) registrosArchivo);
+//			query.InsertarRegistrosZeit((List<BeanZeit>) registrosArchivo);
 			
 			List<BeanCumplimientoExternoCyge> registrosIncompletosReporteCyge = query.RegistrosCumplimientoCyge();
 			
 			List<BeanCumplimientoExternoCyge> registrosCompletosReporteCyge =  reporteCumplimientoCyge.ReporteCyge(registrosIncompletosReporteCyge);
 			
 			List<BeanIncumplimiento> registrosIncumplimientoCompletos = new ArrayList<BeanIncumplimiento>();
+			
 			List<BeanCumplimientoExternoCyge> registrosResultadosDelQuery = new ArrayList<BeanCumplimientoExternoCyge>();
 			
 			for (Iterator<BeanCumplimientoExternoCyge> iterator = registrosCompletosReporteCyge.iterator(); iterator.hasNext();) {
@@ -75,9 +76,9 @@ public class CargaAutomatica
 			    }
 			}
 			
-			query.InsertarRegistrosIncumplimiento(registrosIncumplimientoCompletos);
+//			query.InsertarRegistrosIncumplimiento(registrosIncumplimientoCompletos);
 			
-			query.InsertarRegistrosCumplimientoCyge(registrosResultadosDelQuery);
+//			query.InsertarRegistrosCumplimientoCyge(registrosResultadosDelQuery);
 					
 			List<BeanCumplimientoExternoRRHH> registrosIncompletoCygeRRHH = query.RegistrosCumplimientoRRHH();
 					

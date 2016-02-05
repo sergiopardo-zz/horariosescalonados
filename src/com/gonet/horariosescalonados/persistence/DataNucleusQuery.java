@@ -740,7 +740,7 @@ public class DataNucleusQuery
 					+ "CONCAT(horariosescalonadosv2.Cyge.nombre,' ' ,horariosescalonadosv2.Cyge.ApePaterno, "
 					+ "' ', horariosescalonadosv2.Cyge.ApeMaterno) as nombre, horariosescalonadosv2.Cyge.DirGeneral, "
 					+ "horariosescalonadosv2.Cyge.DirCorporativa, horariosescalonadosv2.Cyge.Area, "
-					+ "horariosescalonadosv2.Zeit.fecha ,'1' as Mes, '1' as Quincena,horariosescalonadosv2.Cyge.EntOficial, "
+					+ "horariosescalonadosv2.Zeit.Fecha ,'1' as Mes, '1' as Quincena,horariosescalonadosv2.Cyge.EntOficial, "
 					+ "max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'Entrada' then horariosescalonadosv2.Zeit.Hora end) as Entrada, "
 					+ "max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end) as Salida, "
 					+ " CONVERT(CalculoJornada.Jornada, CHAR(50)) as Jornada, horariosescalonadosv2.Zeit.estancia,horariosescalonadosv2.Zeit.edificio, horariosescalonadosv2.Cyge.autorizador, "
@@ -751,7 +751,7 @@ public class DataNucleusQuery
 					+ "and  horariosescalonadosv2.Zeit.Edificio = horariosescalonadosv2.Cyge.LugarAsignadoEdificio "
 					+ "inner join (SELECT  NoCyge, Fecha, SEC_TO_TIME( SUM( TIME_TO_SEC( estancia ) ) ) AS Jornada FROM horariosescalonadosv2.Zeit "
 					+ "Where TipoFuncion = 'ENTRADA'group by NoCyge, Fecha) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge "
-					+ "and horariosescalonadosv2.Zeit.fecha = (select max(fecha) from horariosescalonadosv2.Zeit) "
+					+ "and horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) "
 					+ "group by horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Zeit.Edificio, horariosescalonadosv2.Zeit.Fecha;";
 
 			Query query = pm.newQuery("javax.jdo.query.SQL",strQuery);
@@ -782,7 +782,7 @@ public class DataNucleusQuery
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRDireccionGeneral, horariosescalonadosv2.EmpleadoExternoRRHH.DireccionGeneral, "
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRDireccionCorporativa, horariosescalonadosv2.EmpleadoExternoRRHH.DireccionCorporativa, "
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRArea, horariosescalonadosv2.EmpleadoExternoRRHH.Area, "
-					+ "horariosescalonadosv2.Zeit.fecha, '1' as Quincena, '1' as Mes, '1' as TEA, horariosescalonadosv2.Cyge.EntOficial, "
+					+ "horariosescalonadosv2.Zeit.Fecha, '1' as Quincena, '1' as Mes, '1' as TEA, horariosescalonadosv2.Cyge.EntOficial, "
 					+ "'1' as TED, max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'Entrada' then horariosescalonadosv2.Zeit.Hora end) as entradaReal, "
 					+ "'1' as CalificacionEntrada, '1' as TSA, '1' as SalidaOficial, '1' as TSD, max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end) as salidaReal, "
 					+ "'1' as CalificacionSalida, "
