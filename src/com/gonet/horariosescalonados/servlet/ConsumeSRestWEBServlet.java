@@ -3,12 +3,28 @@ package com.gonet.horariosescalonados.servlet;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 
+import com.gonet.horariosescalonados.bean.BeanUsuarioDirectorio;
+import com.gonet.horariosescalonados.dao.InsertarRegistro;
+import com.gonet.horariosescalonados.dao.QueryTables;
+import com.gonet.horariosescalonados.service.ParsearJson;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.GenericUrl;
@@ -17,18 +33,6 @@ import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.gonet.horariosescalonados.service.ParsearJson;
-
-import java.io.StringWriter;
-import java.security.GeneralSecurityException;
-import java.security.KeyStore;
-import java.security.PrivateKey;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 
 @SuppressWarnings("serial")
 public class ConsumeSRestWEBServlet extends HttpServlet {
@@ -41,8 +45,21 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 		resp.setContentType("text/plain");
 
 		String resultado = null;
+		
+		ArrayList <String> listaCorreo = new ArrayList<String>();
 
 		try {
+			
+			QueryTables daoSelect = new QueryTables();
+			
+			listaCorreo = daoSelect.CorreosActual();
+			
+//			ArrayList <String> listaCorreo= new ArrayList<String>(); 
+//			
+//			listaCorreo.add("juancarlos.ramirez.contractor@bbva.com");
+//			listaCorreo.add("raul.juarez.contractor@bbva.com");
+//			listaCorreo.add("guadalupeelizeth.fajardo.contractor@bbva.com");
+			
 			
 			String parametro = req.getParameter("username"); 
 			
@@ -80,22 +97,83 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 					.setServiceAccountScopes(SCOPES)
 					.setServiceAccountUser("juancarlos.ramirez.contractor@bbva.com")
 					.build();
-
-
-			String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+parametro;
-			HttpRequestFactory requestFactory = httpTransport.createRequestFactory(credential);
-			GenericUrl url = new GenericUrl(URI);
-			HttpRequest request = requestFactory.buildGetRequest(url);
-			HttpResponse response = request.execute();
-			String content = response.parseAsString();
-			
-			resultado = content;
-			
-			ParsearJson parser = new ParsearJson();
-			
-			parser.ConvertirAUsuario(resultado);
-			
-			System.out.println(content);
+			int inicio = 0;
+			int maximo = listaCorreo.size();
+			while(inicio <= maximo)
+			{
+				String correo_prueba = listaCorreo.get(inicio);
+				System.out.println("----------------------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------------------------");
+				System.out.println(correo_prueba);
+				System.out.println("----------------------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------------------------");
+				
+				String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+correo_prueba;
+				HttpRequestFactory requestFactory = httpTransport.createRequestFactory(credential);
+				GenericUrl url = new GenericUrl(URI);
+				HttpRequest request = requestFactory.buildGetRequest(url);
+				HttpResponse response = request.execute();
+				String content = response.parseAsString();
+				
+				resultado = content;
+				
+				
+				////////////////////////////////////////////////
+				
+				BeanUsuarioDirectorio bean = new BeanUsuarioDirectorio();
+				BeanUsuarioDirectorio strResultadoPar=null;
+						
+				ParsearJson parser = new ParsearJson();
+				
+				strResultadoPar = parser.ConvertirAUsuario(resultado);
+				
+				InsertarRegistro dao  = new InsertarRegistro(); 
+				dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+				
+				System.out.println(content);
+				
+				inicio = inicio + 1;
+			}
+//			String correo_prueba = listaCorreo.get(2);
+//			
+//			String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+correo_prueba;
+//			HttpRequestFactory requestFactory = httpTransport.createRequestFactory(credential);
+//			GenericUrl url = new GenericUrl(URI);
+//			HttpRequest request = requestFactory.buildGetRequest(url);
+//			HttpResponse response = request.execute();
+//			String content = response.parseAsString();
+//			
+//			resultado = content;
+//			
+//			
+//			////////////////////////////////////////////////
+//			
+//			BeanUsuarioDirectorio bean = new BeanUsuarioDirectorio();
+//			
+//			BeanUsuarioDirectorio strResultadoPar=null;
+//					
+//			ParsearJson parser = new ParsearJson();
+//			
+//			strResultadoPar = parser.ConvertirAUsuario(resultado);
+//			
+////			strResultadoPar.getUid();// usuario
+////			strResultadoPar.getDescOUPadre();//direccion general
+////			strResultadoPar.getDescCentroCoste();//direccion corporativa
+////			strResultadoPar.getDescOUNivel10();//area
+////			strResultadoPar.getCodOUPadre();//CR direccion General
+////			strResultadoPar.getCodBancoOficinaPers();//CR Direccion Corporativa
+////			strResultadoPar.getCodOUNivel10();// CR Area
+////			strResultadoPar.getDescCentroTrabajo();//Edificio
+//			
+//			InsertarRegistro dao  = new InsertarRegistro(); 
+//			
+//			dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+//			
+//			System.out.println(content);
 
 		} catch (GeneralSecurityException e) {
 			

@@ -76,15 +76,15 @@ public class CargaAutomatica
 			    }
 			}
 			
-//			query.InsertarRegistrosIncumplimiento(registrosIncumplimientoCompletos);
+			query.InsertarRegistrosIncumplimiento(registrosIncumplimientoCompletos);
 			
-//			query.InsertarRegistrosCumplimientoCyge(registrosResultadosDelQuery);
+			query.InsertarRegistrosCumplimientoCyge(registrosResultadosDelQuery);
 					
 			List<BeanCumplimientoExternoRRHH> registrosIncompletoCygeRRHH = query.RegistrosCumplimientoRRHH();
 					
 			List<BeanCumplimientoExternoRRHH> reporteCumplimiettoCygeRRHH = reporteCumplimientoCyge.ReporteRRHH(registrosIncompletoCygeRRHH);
 			
-//			query.InsertarCumplimientoCygeRH(reporteCumplimiettoCygeRRHH);
+			query.InsertarCumplimientoCygeRH(reporteCumplimiettoCygeRRHH);
 			
 			break;
 

@@ -366,4 +366,41 @@ public class InsertarRegistro {
 			System.err.println(e);
 		}
 	}
+	
+	public void insertarUSER(String usuario, String direccion_general,
+			String direccion_corporativa, String area, String CR_direccion_General, 
+			String CR_Direccion_Corporativa, String CR_Area, String Edificio)
+	{
+		Connection conn=null;
+		try {
+			conn = Connector.getConexion();
+		
+		try {
+						
+			String statement = "INSERT INTO horariosescalonadosv2.EmpleadoExternoRRHH (Usuario, DireccionGeneral, DireccionCorporativa, Area, CRDireccionGeneral, CRDireccionCorporativa, CRArea, Edificio)"+
+					   "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			
+			PreparedStatement stmt = conn.prepareStatement(statement);
+			stmt.setString(1, usuario);
+			stmt.setString(2, direccion_general);
+			stmt.setString(3, direccion_corporativa);
+			stmt.setString(4, area);
+			stmt.setString(5, CR_direccion_General);
+			stmt.setString(6, CR_Direccion_Corporativa);
+			stmt.setString(7, CR_Area);
+			stmt.setString(8, Edificio);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			conn.close();
+		}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 }
