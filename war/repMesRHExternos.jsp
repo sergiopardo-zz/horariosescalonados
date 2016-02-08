@@ -22,8 +22,7 @@
 	
 	function onclickReporte(valor){	
 		var indice = document.getElementById("opcionReporte").value = valor;
-		document.getElementById("hiddenDesde").value = ('01/' + document.getElementById('fechaMes').value);
-		document.getElementById("hiddenHasta").value = ('31/' + document.getElementById('fechaMes').value);
+		document.getElementById("hiddenMes").value = (document.getElementById('fechaMes').value);
 		document.getElementById("hiddenUsuario").value = document.getElementById("hiddenUsuario").value = "<%=sUsuario%>";
 		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";
 	}
@@ -41,7 +40,7 @@
 <form id="formreportes" action="/generareporte" method="post">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
-		<input type="hidden" name="hiddenHasta" id="hiddenHasta" />
+		<input type="hidden" name="hiddenMes" id="hiddenMes" />
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
 		<input type="hidden" name="hiddenTipoUsuario" id="hiddenTipoUsuario" />
 		

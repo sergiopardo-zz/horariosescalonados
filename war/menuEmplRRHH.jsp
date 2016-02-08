@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"
-    %>
-    
+    pageEncoding="ISO-8859-1"%>
     <%@page import="java.text.SimpleDateFormat"%>
     <%@ page import="com.google.appengine.api.datastore.Entity"%>
 	<%@ page import="java.util.*"%>
@@ -14,7 +12,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Horarios Escalonados</title>
 	<link rel="stylesheet" type="text/css" href="config/css/estilo.css" />
-	<link rel='stylesheet' type="text/css" href='config/css/calendar.css'>
 		<script type="text/javascript" src="config/js/jquery-1.11.3.min.js"></script>
 	<script src='config/js/jquery-ui.min.js'></script>
 	<script type="text/javascript" src="config/js/acciones.js"></script>

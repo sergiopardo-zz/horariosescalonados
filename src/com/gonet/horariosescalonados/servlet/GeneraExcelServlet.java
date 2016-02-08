@@ -89,6 +89,7 @@ public class GeneraExcelServlet extends HttpServlet {
 			
 			
 	    }else if(opcion.equals("cumplimientoExternoCyge")){
+	    	fileName = "CumplimientoExternoCyge_" + ObtenFechas.fechaHoy();
 	    	if(tipousuario.equals("A") ||tipousuario.equals("SS") || tipousuario.equals("AA")){
 	    		try{
 	    	    	html += reportes.CumplimientoExternoAdmin(desde, hasta);
@@ -102,7 +103,7 @@ public class GeneraExcelServlet extends HttpServlet {
 	    			e.printStackTrace();
 	    		}
 	    	}
-	    	fileName = "CumplimientoExternoCyge_" + ObtenFechas.fechaHoy();
+	    	
 //-------------------------------------------------------------------------------------
 	    }else if(opcion.equals("incumplimiento")){
 	    	if(tipousuario.equals("A") ||tipousuario.equals("SS") || tipousuario.equals("AA")){
@@ -143,11 +144,12 @@ public class GeneraExcelServlet extends HttpServlet {
 	    }else if(opcion.equals("noasignacion")){
 	    	html += Reportes.vacio();			
 			fileName = "NoAsignacion_"+ObtenFechas.fechaHoy();
+			
 	    }else if(opcion.equals("cumplimiento")){
+	    	fileName = "Cumplimiento Interno_"+ObtenFechas.fechaHoy();
 	    		if(tipousuario.equals("A") || tipousuario.equals("SS") ||tipousuario.equals("AA")){
 	    			try {
 	    	    		html += reportes.CumplimientoInternoAdmin(desde, hasta);			
-	    				fileName = "Cumplimiento_"+ObtenFechas.fechaHoy();
 	    			} catch (Exception e) {
 	    				e.printStackTrace();
 	    			}
