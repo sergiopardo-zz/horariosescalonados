@@ -41,8 +41,8 @@
 <body>
 <div class="contenedor">
 
-	<c:if test="${tipEmp == 'A'}">
-		<%@include file="menuEmplA.jsp"%> 
+	<c:if test="${tipEmp == 'RH'}">
+		<%@include file="menuEmplAA.jsp"%> 
 	</c:if>
 
 	<c:if test="${tipEmp == 'SS'}">

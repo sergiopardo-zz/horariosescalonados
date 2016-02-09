@@ -300,8 +300,8 @@ public class Reportes {
 		return html;		
 	}
 	
-	public StringBuffer CumplimientoInternoAdmin(String desde, String hasta) throws IOException, ParseException{
-		StringBuffer html = new StringBuffer(ENCABEZADO);
+	public StringBuilder CumplimientoInternoAdmin(String desde, String hasta) throws IOException, ParseException{
+		StringBuilder html = new StringBuilder(ENCABEZADO);
 		html.append(CUMPLIMIENTO);
 	    String paginacion = "";
 	    int tamPag = 100;

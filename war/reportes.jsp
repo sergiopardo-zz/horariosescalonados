@@ -45,16 +45,16 @@
 <div class="contenedor">
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	<c:choose>
-		<c:when test="${tipEmp== 'AA'}">
+		<c:when test="${tipEmp== 'RH'}">
 			<%@include file="menuEmplAA.jsp"%> 
 		</c:when>
-		<c:when test="${tipEmp== 'A'}">
+		<c:when test="${tipEmp== 'GE'}">
 			<%@include file="menuEmplA.jsp"%> 
 		</c:when>
 		<c:otherwise>
 			<%@include file="header.jsp"%> 
 		</c:otherwise>
-	</c:choose>
+		</c:choose>
 	<!-- Inicia Contenido -->
 	<div class="contenidoMiga">
 				<ul class="posicionMiga">	

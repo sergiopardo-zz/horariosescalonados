@@ -54,7 +54,7 @@
 	<%@include file="header.jsp"%> 
 	</c:if>
 		
-	<c:if test="${tipEmp == 'AA'}">
+	<c:if test="${tipEmp == 'RH'}">
 	<%@include file="menuEmplAA.jsp"%> 
 	</c:if>
 	
@@ -66,7 +66,7 @@
 	<%@include file="menuEmplS.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'A'}">
+	<c:if test="${tipEmp == 'GE'}">
 	<%@include file="menuEmplA.jsp"%> 
 	</c:if>
 	
@@ -126,7 +126,7 @@
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0"  id="IDComboReporte" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
-											<c:if test="${tipEmp == 'A'}">
+											<c:if test="${tipEmp == 'GE'}">
 											<tr>
 												<td class="valorSeleccionado"><option value="cyge" onclick="onclickReporte(this.value)">Registros CYGE</option></td>
 											</tr>
@@ -134,10 +134,10 @@
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externo CYGE</option></td>
 											</tr>
 											<tr>
-												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incidencias Externos</option></td>
+												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incumplimiento Externos</option></td>
 											</tr>		
 										</c:if>
-										<c:if test="${tipEmp == 'SS'|| tipEmp == 'S'}">
+										<c:if test="${tipEmp == 'SS'">
 											<tr>
 												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
 											</tr>
@@ -157,12 +157,35 @@
 												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
 											</tr>
 											<tr>
+												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incumplimiento Externos</option></td>
+											</tr>
+											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externos CYGE</option></td>
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
 											</tr>
 											</c:if>
+											<c:if test="${tipEmp == 'RH'}">
+											<tr>
+												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option value="modificacoin" onclick="onclickReporte(this.value)">Modificacion</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option value="baja" onclick="onclickReporte(this.value)">Baja</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option value="noasignacion" onclick="onclickReporte(this.value)">No Asignacion</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
+											</tr>
+										</c:if>
 										</tbody>
 									</table>
 								</div>

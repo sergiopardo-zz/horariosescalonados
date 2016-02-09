@@ -115,16 +115,16 @@
 
 <div class="contenedor">
 	<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
-	<c:choose>
-	  	<c:when test="${tipEmp=='A' }">
-  			<%@include file="menuEmplA.jsp"%> 
-  		</c:when>
-  		<c:otherwise>
-    		<%@include file="header.jsp"%> 
-  		</c:otherwise>
-	</c:choose>
+	<c:if test="${tipEmp == 'SS'}">
+		<%@include file="header.jsp"%> 
+	</c:if> 
+  	<c:if test="${tipEmp == 'RH'}">
+		<%@include file="header.jsp"%> 
+	</c:if> 
+	 <c:if test="${tipEmp == 'GE'}">
+		<%@include file="header.jsp"%> 
+	</c:if> 
 
-	
 	<!-- Inicia Contenido -->
 	<div class="contenidoMiga">
 				<ul class="posicionMiga">	
@@ -190,11 +190,11 @@
 				<table   class="radio-group" border="0" style="margin: 0 auto;">
 					 <tbody>
 						 <tr>
-						 	
+						 	<c:if test="${tipEmp == 'RH'}">
 							<td><input type="checkbox" id="consInt" name="addreess" onclick="checkModal();estatusActivo();"/>
 								<!-- <label for="consInt"></label> --></td>							
 							<td ><label class="textoRadio_PC">Consulta Internos</label></td>
-							
+							</c:if> 
 							<td><input type="checkbox" id="consExt" name="addreess" onclick="checkModal();estatusActivo();"/>
 								<!-- <label for="consExt"></label> --></td>
 							<td><label class="textoRadio_PC">Consulta externos</label></td>

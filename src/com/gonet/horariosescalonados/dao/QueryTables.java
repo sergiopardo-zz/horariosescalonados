@@ -3,17 +3,23 @@ package com.gonet.horariosescalonados.dao;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+
+
+
 
 
 import com.gonet.horariosescalonados.bean.BeanCumplimiento;
@@ -452,5 +458,90 @@ public class QueryTables {
 			return null;
 		}
 	}
+	 
+	 public ArrayList <String> CorreosActual()
+	 {
+		 
+			Calendar c1 = Calendar.getInstance();
+			Calendar c2 = new GregorianCalendar();
+			
+			String dia, mes , annio;
+			
+			dia = Integer.toString(c2.get(Calendar.DATE));
+			mes = Integer.toString(c2.get(Calendar.MONTH));
+			annio = Integer.toString(c2.get(Calendar.YEAR));
+			
+			int mess = Integer.valueOf(mes);
+			
+			mess = mess + 1;
+			
+			mes= String.valueOf(mess);
+			
+			
+			//2016-02-04
+			System.out.println(annio+"-0"+ mes +"-0"+dia);
+			
+			String strfecha = annio+"-0"+ mes +"-0"+dia;
+			
+			ArrayList <String> lisCorreo = new ArrayList <String>();
+			
+			strfecha = "2016-02-08";
+		 
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT Email FROM horariosescalonadosv2.Cyge where FechaCreacionRegistro= ?";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+					stmt.setString(1, strfecha);					
+					ResultSet resultSet = stmt.executeQuery();
+					
+					while(resultSet.next()){
+						
+						lisCorreo.add(resultSet.getString(1));
+						
+					}
+					
+					return lisCorreo;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		return null;
+		 
+	 }
+	 
+	 public int Busquedaregistro()
+	 {
+		 int registro = 0;
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT registro FROM horariosescalonadosv2.registros ";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+									
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()){
+						
+						registro = resultSet.getInt(1);
+						
+					}
+					
+					return registro;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return 0;
+	 }
 
 }

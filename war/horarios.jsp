@@ -240,7 +240,7 @@ function LimpiaCamposAgregarHorario(){
 <div class="contenedor">
 <center>
 
-	<c:if test="${tipEmp == 'A'}">
+	<c:if test="${tipEmp == 'RH'}">
 		<%@include file="menuEmplA.jsp"%> 
 	</c:if>
 

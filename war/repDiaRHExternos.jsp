@@ -4,7 +4,7 @@
  	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <% String sUsuario = session.getAttribute("usuario")==null?"":(String)session.getAttribute("usuario");
-   String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.getAttribute("tipo_empleado");%>%>
+   String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.getAttribute("tipo_empleado");%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -48,10 +48,10 @@
 <div class="contenedor">
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	
-	<c:if test="${tipEmp == 'AA'}">
+	<c:if test="${tipEmp == 'RH'}">
 	<%@include file="menuEmplRRHH.jsp"%> 
 	</c:if>
-	
+		
 	<c:if test="${tipEmp == 'C'}">
 	<%@include file="menuEmplRRHH.jsp"%> 
 	</c:if>
