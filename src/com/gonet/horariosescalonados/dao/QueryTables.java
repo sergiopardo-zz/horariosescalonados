@@ -485,7 +485,7 @@ public class QueryTables {
 			
 			ArrayList <String> lisCorreo = new ArrayList <String>();
 			
-			//strfecha = "2016-02-04";
+			strfecha = "2016-02-08";
 		 
 		 try{
 				Connection conn = Connector.getConexion();
@@ -512,6 +512,36 @@ public class QueryTables {
 			}		 
 		return null;
 		 
+	 }
+	 
+	 public int Busquedaregistro()
+	 {
+		 int registro = 0;
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT registro FROM horariosescalonadosv2.registros ";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+									
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()){
+						
+						registro = resultSet.getInt(1);
+						
+					}
+					
+					return registro;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return 0;
 	 }
 
 }

@@ -10,6 +10,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.datanucleus.FetchPlan;
+
 import com.gonet.horariosescalonados.bean.BeanPerfilConsulta;
 import com.gonet.horariosescalonados.bean.BeanPerfilConsultaExternos;
 import com.gonet.horariosescalonados.bean.BeanZeit;
@@ -390,8 +392,9 @@ public class DataNucleusQuery
 		List<BeanCyge> resultadosBeanCyge = null;
 
 		try{
-
-			Query q = pm.newQuery("SQL", "SELECT horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Cyge.Usuario, "
+			
+			Query q = pm.newQuery("SQL", 
+					"SELECT horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Cyge.Usuario, "
 					+ "horariosescalonadosv2.Cyge.Nombre, horariosescalonadosv2.Cyge.ApePaterno, horariosescalonadosv2.Cyge.ApeMaterno, "
 					+ "horariosescalonadosv2.Cyge.DirGeneral, horariosescalonadosv2.Cyge.DirCorporativa, horariosescalonadosv2.Cyge.Area, "
 					+ "horariosescalonadosv2.Cyge.EntOficial, horariosescalonadosv2.Cyge.AutorizadorID, horariosescalonadosv2.Cyge.Autorizador, "
@@ -400,11 +403,13 @@ public class DataNucleusQuery
 					+ "horariosescalonadosv2.Cyge.FechaCreacionRegistro, horariosescalonadosv2.Cyge.CreadoPor, horariosescalonadosv2.Cyge.RegistroActivo "
 					+ "From horariosescalonadosv2.Cyge "
 					+ "where '"+desdeDate+"' <= horariosescalonadosv2.Cyge.FechaCreacionRegistro AND horariosescalonadosv2.Cyge.FechaCreacionRegistro <= '"+hastaDate+"' ");
+			q.addExtension ( "datanucleus.query.compilation.cached", "true");
 			q.setResultClass(BeanCyge.class);
 			resultadosBeanCyge = (List<BeanCyge>)q.execute();
+			
 
 			return resultadosBeanCyge;
-
+			
 		}
 		catch (Exception e)
 		{
@@ -460,14 +465,17 @@ public class DataNucleusQuery
 	}
 	
 	//----------------------REPORTE CUMPLIMIENTO INTERNO ADMIN---------------------------------------------	
+		@SuppressWarnings("unchecked")
 		public List<BeanCumplimiento> ReporteCumplimientoInternoAdmin (Date desdeDate, Date hastaDate)
 		{
 			PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
 			List<BeanCumplimiento> resultadosBeanCumplimiento = null;
+			Query q = null;
 
 			try{
 
-				Query q = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
+				 q = pm.newQuery("SQL", 
+						"SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
 						+ "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
 						+ "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
 						+ "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
@@ -478,8 +486,9 @@ public class DataNucleusQuery
 						+ "FROM horariosescalonadosv2.cumplimiento "
 						+ "where '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"'");
 				q.setResultClass(BeanCumplimiento.class);
+				q.addExtension( "datanucleus.query.jdoql.allowAll", "true");
 				resultadosBeanCumplimiento = (List<BeanCumplimiento>)q.execute();
-
+						
 				return resultadosBeanCumplimiento;
 
 			}
@@ -489,8 +498,7 @@ public class DataNucleusQuery
 			}
 
 			finally {
-
-				//pm.close();
+				pm.close();
 
 			}
 
@@ -498,7 +506,12 @@ public class DataNucleusQuery
 		}
 		
 	
-//-------------------------------------- REPORTE CUMPLIMIENTO CYGE -------------------------------------
+private void setFetchSize(int fetchSizeOptimal) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	//-------------------------------------- REPORTE CUMPLIMIENTO CYGE -------------------------------------
 	public List<BeanCumplimientoExternoCyge> CumplimientoCygeRH (Date desdeDate, Date hastaDate, String usuario)
 	{
 		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();

@@ -71,11 +71,11 @@ public class ReportesServlet extends HttpServlet{
 		String fechaActual = dateFormat.format(date).toString();
 		req.setAttribute("pFecha", fechaActual);
 		BeanEmpleado empleado = Empleado.getEmpleado(req);
-		if(empleado.getTipoEmpleado().equals("AA")||empleado.getTipoEmpleado().equals("C")){
+		if(empleado.getTipoEmpleado().equals("RH")||empleado.getTipoEmpleado().equals("C")){
 			dispatcher = getServletContext().getRequestDispatcher("/menuRRHH.jsp");
 			dispatcher.forward(req, resp);
 		}
-		if(empleado.getTipoEmpleado().equals("A") || empleado.getTipoEmpleado().equals("SS")){	
+		if(empleado.getTipoEmpleado().equals("GE") || empleado.getTipoEmpleado().equals("SS")){	
 		dispatcher = getServletContext().getRequestDispatcher("/reportes.jsp");
 		dispatcher.forward(req, resp);
 		}

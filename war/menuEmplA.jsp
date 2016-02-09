@@ -106,30 +106,14 @@ String sHrefBaja = bPermitirCambio ? "horario/baja.html" : "bloqueoCambio.jsp";
 							<span class="texto">Administración</span>
 						</a>
 						<ul class="subMenuAdministracionA">	
-							<li class="subMenu"><a href="/cargainicialmensajes">
-								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
-								<span class="textoSubMenu">Mensajes</span>
-							</a></li>
 							<li class="subMenu"><a href="/cargareportes">
 								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
 								<span class="textoSubMenu">Reportes</span>
 							</a></li>
-							<li class="subMenu"><a href="/cargainicial">
-								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
-								<span class="textoSubMenu">Carga horarios</span>
-							</a></li>
-							<li class="subMenu"><a href="/cargamanual">
-								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
-								<span class="textoSubMenu">Carga sistema</span>
-							</a></li>
 							<li class="subMenu"><a href="/perfilconsulta">
 								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
 								<span class="textoSubMenu">Asignar Perfil de consulta</span>
-							</a></li>
-							<li class="subMenu"><a href="/cargadocumentomes">
-								<span class="iconoSubMenuAdm imgCarga"></span>
-								<span class="textoSubMenu">Carga documento mes</span>
-							</a></li>
+							</a></li>	
 						
 						</ul>
 						
@@ -170,29 +154,13 @@ String sHrefBaja = bPermitirCambio ? "horario/baja.html" : "bloqueoCambio.jsp";
 							<span class="texto">Administración</span>
 						</a>
 						<ul class="subMenuAdministracionA">	
-							<li class="subMenu"><a href="/cargainicialmensajes">
-								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
-								<span class="textoSubMenu">Mensajes</span>
-							</a></li>
 							<li class="subMenu"><a href="/cargareportes">
 								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
 								<span class="textoSubMenu">Reportes</span>
 							</a></li>
-							<li class="subMenu"><a href="/cargainicial">
-								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
-								<span class="textoSubMenu">Carga horarios</span>
-							</a></li>
-							<li class="subMenu"><a href="/cargamanual">
-								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
-								<span class="textoSubMenu">Carga sistema</span>
-							</a></li>
 							<li class="subMenu"><a href="/perfilconsulta">
 								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
 								<span class="textoSubMenu">Asignar Perfil de consulta</span>
-							</a></li>
-							<li class="subMenu"><a href="/cargadocumentomes">
-								<span class="iconoSubMenuAdm imgCarga"></span>
-								<span class="textoSubMenu">Carga documento mes</span>
 							</a></li>
 						
 						</ul>
