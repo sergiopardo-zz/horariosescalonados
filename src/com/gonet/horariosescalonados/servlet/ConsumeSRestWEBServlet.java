@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,12 +48,27 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 		String resultado = null;
 		
 		ArrayList <String> listaCorreo = new ArrayList<String>();
-
+		
+		QueryTables daoSelect = new QueryTables();
+		InsertarRegistro dao  = new InsertarRegistro(); 
+		
+		listaCorreo = daoSelect.CorreosActual();
+		
+		int maximo = 0;
+		int inicio = daoSelect.Busquedaregistro();
+		int error = 0;
+		
+		maximo = listaCorreo.size();
+		if(inicio <= maximo - 1)
+		{
+			
+		int finwhile = inicio ; 
+		while(inicio <= finwhile)
+		{
+			
 		try {
 			
-			QueryTables daoSelect = new QueryTables();
 			
-			listaCorreo = daoSelect.CorreosActual();
 			
 //			ArrayList <String> listaCorreo= new ArrayList<String>(); 
 //			
@@ -97,10 +113,8 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 					.setServiceAccountScopes(SCOPES)
 					.setServiceAccountUser("juancarlos.ramirez.contractor@bbva.com")
 					.build();
-			int inicio = 0;
-			int maximo = listaCorreo.size();
-			while(inicio <= maximo)
-			{
+			
+			
 				String correo_prueba = listaCorreo.get(inicio);
 				System.out.println("----------------------------------------------------------------------------------------");
 				System.out.println("----------------------------------------------------------------------------------------");
@@ -131,13 +145,24 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 				
 				strResultadoPar = parser.ConvertirAUsuario(resultado);
 				
-				InsertarRegistro dao  = new InsertarRegistro(); 
-				dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+					int resultado1 = 0;
+					
+					resultado1 = dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+					
+					if(resultado1==1)
+					{
+						error = error + 1;
+					}
+					
+			
 				
 				System.out.println(content);
+				System.out.println(listaCorreo.size());
+				System.out.println(inicio);
+				System.out.println(error);
 				
-				inicio = inicio + 1;
-			}
+				
+			
 //			String correo_prueba = listaCorreo.get(2);
 //			
 //			String URI = "https://bbva-gapis.appspot.com/gprofile/users/"+correo_prueba;
@@ -177,48 +202,86 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 
 		} catch (GeneralSecurityException e) {
 			
+			error = error + 1;
+//			listaCorreo.remove(inicio);
+//			maximo = listaCorreo.size();
+//			inicio = inicio - 1;
 			e.printStackTrace();
 			
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			resultado = sw.toString();
+			
+			
+			
+//			StringWriter sw = new StringWriter();
+//			e.printStackTrace(new PrintWriter(sw));
+//			resultado = sw.toString();
 			
 		} catch (TransformerConfigurationException e) {
 
+			error = error + 1;
+//			listaCorreo.remove(inicio);
+//			maximo = listaCorreo.size();
+//			inicio = inicio - 1;
 			e.printStackTrace();
 			
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			resultado = sw.toString();
+//			StringWriter sw = new StringWriter();
+//			e.printStackTrace(new PrintWriter(sw));
+//			resultado = sw.toString();
 			
 		} catch (TransformerFactoryConfigurationError e) {
 			
+			error = error + 1;
+//			listaCorreo.remove(inicio);
+//			maximo = listaCorreo.size();
+//			inicio = inicio - 1;
 			e.printStackTrace();
 			
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			resultado = sw.toString();
+//			StringWriter sw = new StringWriter();
+//			e.printStackTrace(new PrintWriter(sw));
+//			resultado = sw.toString();
 			
 		} catch (TransformerException e) {
+			
+			error = error + 1;
+//			listaCorreo.remove(inicio);
+//			maximo = listaCorreo.size();
+//			inicio = inicio - 1;
 			e.printStackTrace();
 			
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			resultado = sw.toString();
+//			StringWriter sw = new StringWriter();
+//			e.printStackTrace(new PrintWriter(sw));
+//			resultado = sw.toString();
 			
 		} catch (Exception e) {
+			
+			error = error + 1;
+//			listaCorreo.remove(inicio);
+//			maximo = listaCorreo.size();
+//			inicio = inicio - 1;
 			e.printStackTrace();
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			resultado = sw.toString();
+//			StringWriter sw = new StringWriter();
+//			e.printStackTrace(new PrintWriter(sw));
+//			resultado = sw.toString();
+			
+		
+			System.out.println(listaCorreo.size());
+			System.out.println(inicio);
+			System.out.println(error);
+		}
+		
+		inicio = inicio + 1;
+		dao.updateRegistro(inicio);
 		}
 		
 		
-		req.setAttribute("resultado", resultado);
-		
-		dispatcher = getServletContext().getRequestDispatcher("/bloqueo2.jsp");
+		dispatcher = getServletContext().getRequestDispatcher("/trabajando.jsp");
 		
 		dispatcher.forward(req, resp);
+		}
+		
+		System.out.println(error);
+//		req.setAttribute("resultado", resultado);
+//		
+		
 
 	}
 

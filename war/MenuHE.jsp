@@ -91,7 +91,7 @@ String sHrefBaja = bPermitirCambio ? "horario/baja.html" : "bloqueo.html";
 					<li><a href="/solicitudhorario" target="ventana">Solicitud</a></li>
 					<%	} %>
 					<li><a href="<%=sHrefCambio%>" target="ventana">Cambio</a></li>
-					<%	if(sPerfil.equals("A") || sPerfil.equals("S") || sPerfil.equals("SS")) { %>
+					<%	if(sPerfil.equals("RH") || sPerfil.equals("S") || sPerfil.equals("SS")) { %>
 					<li><a href="/autorizarsolicitudes" target="ventana">Autorizar</a></li>
 					<%	} %>
 				</ul>

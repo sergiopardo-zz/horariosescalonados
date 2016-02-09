@@ -40,12 +40,9 @@
 	
 	<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	<c:choose>
-	  	<c:when test="${tipEmp=='A' }">
-  			<%@include file="menuEmplA.jsp"%> 
-  		</c:when>
-  		<c:otherwise>
-    		<%@include file="header.jsp"%> 
-  		</c:otherwise>
+	  	<c:if test="${tipEmp=='SS' }">
+  			<%@include file="header.jsp"%>  
+  		</c:if >		
 	</c:choose> 
 	
 	<!-- Inicia Contenido -->	

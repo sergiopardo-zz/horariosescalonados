@@ -24,9 +24,6 @@
 		<%@include file="header.jsp"%> 
 	</c:if>
 
-	<c:if test="${tipEmp == 'A'}">
-		<%@include file="menuEmplA.jsp"%> 
-	</c:if> 
 </center>
 </div>
 <form action="<%=blobstoreService.createUploadUrl("/uploadentradasalida") %>" 	method="post" enctype="multipart/form-data">

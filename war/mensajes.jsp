@@ -83,8 +83,8 @@
 	
 	<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	<c:choose>
-	  	<c:when test="${tipEmp=='A' }">
-  			<%@include file="menuEmplA.jsp"%> 
+	  	<c:when test="${tipEmp=='RH' }">
+  			<%@include file="menuEmplAA.jsp"%> 
   		</c:when>
   		<c:otherwise>
     		<%@include file="header.jsp"%> 
