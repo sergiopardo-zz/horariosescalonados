@@ -1,22 +1,19 @@
 package com.gonet.horariosescalonados.persistence;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Calendar;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import org.datanucleus.FetchPlan;
-
-import com.gonet.horariosescalonados.bean.BeanPerfilConsulta;
-import com.gonet.horariosescalonados.bean.BeanPerfilConsultaExternos;
-import com.gonet.horariosescalonados.bean.BeanZeit;
 import com.gonet.horariosescalonados.bean.BeanCumplimiento;
-import com.gonet.horariosescalonados.bean.BeanCumplimientoExterno;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoCyge;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoRRHH;
 import com.gonet.horariosescalonados.bean.BeanCyge;
@@ -25,6 +22,9 @@ import com.gonet.horariosescalonados.bean.BeanEmpleadoExterno;
 import com.gonet.horariosescalonados.bean.BeanEmpleadoExternoRRHH;
 import com.gonet.horariosescalonados.bean.BeanEmpleadoHorario;
 import com.gonet.horariosescalonados.bean.BeanIncumplimiento;
+import com.gonet.horariosescalonados.bean.BeanPerfilConsulta;
+import com.gonet.horariosescalonados.bean.BeanZeit;
+import com.gonet.horariosescalonados.dao.InsertarRegistro;
 import com.gonet.horariosescalonados.factory.DatanucleusPersistenceManager;
 
 
@@ -63,6 +63,79 @@ public class DataNucleusQuery
 					registroCyge.setEstatus(registro.getEstatus());
 					registroCyge.setProveedor(registro.getProveedor());
 					registroCyge.setProyecto(registro.getProyecto());
+
+					//pm.makePersistent(registro);
+					
+				}
+
+				catch(JDOObjectNotFoundException e)
+				{
+					pm.makePersistent(registro);
+					
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				finally
+				{
+
+				}
+			}
+
+			pm.currentTransaction().commit();
+			////////////////////
+			
+			InsertarRegistro insertdao = new InsertarRegistro();
+			insertdao.updateRegistroCero();
+			
+			///////////////////
+			long endTime   = System.currentTimeMillis();
+			long totalTime = endTime - startTime;
+			System.out.println(totalTime);
+			long inSeconds = (totalTime)/1000;
+			System.out.println(inSeconds);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void PersisitirEmpleadoExterno (List<BeanEmpleadoExterno> registros)
+	{
+
+		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
+
+		try 
+		{		
+			//TODO: Remover contador de tiempo.
+
+			Transaction tx = pm.currentTransaction();
+
+			tx.begin();
+			long startTime = System.currentTimeMillis();
+			for (BeanEmpleadoExterno registro : registros)
+			{
+				try
+				{
+					BeanEmpleadoExterno registroCyge = (BeanEmpleadoExterno) pm.getObjectById(new BeanEmpleadoExterno.ComposedIdKey(BeanEmpleadoExterno.ComposedIdKey.class.getName()+"::"+registro.getNoCyge()+"::"+registro.getLugarAsignadoEdificio()));
+
+					registroCyge.setApeMaterno(registro.getApeMaterno());
+					registroCyge.setApePaterno(registro.getApePaterno());
+					registroCyge.setNombre(registro.getNombre());
+					registroCyge.setArea(registro.getArea());
+					registroCyge.setAutorizador(registro.getAutorizador());
+					registroCyge.setAutorizadorId(registro.getAutorizadorId());
+					registroCyge.setDirCorporativa(registro.getDirCorporativa());
+					registroCyge.setDirGeneral(registro.getDirGeneral());
+					registroCyge.setLugarAsignadoEdificio(registro.getLugarAsignadoEdificio());
+					registroCyge.setEntOficial(registro.getEntOficial());
+					registroCyge.setEspacioFisico(registro.getEspacioFisico());
+					registroCyge.setEstatus(registro.getEstatus());
+					registroCyge.setProveedor(registro.getProveedor());
+					registroCyge.setProyecto(registro.getProyecto());
+					registroCyge.setEmail(registro.getEmail());
 
 					//pm.makePersistent(registro);
 					
@@ -392,9 +465,8 @@ public class DataNucleusQuery
 		List<BeanCyge> resultadosBeanCyge = null;
 
 		try{
-			
-			Query q = pm.newQuery("SQL", 
-					"SELECT horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Cyge.Usuario, "
+
+			Query q = pm.newQuery("SQL", "SELECT horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Cyge.Usuario, "
 					+ "horariosescalonadosv2.Cyge.Nombre, horariosescalonadosv2.Cyge.ApePaterno, horariosescalonadosv2.Cyge.ApeMaterno, "
 					+ "horariosescalonadosv2.Cyge.DirGeneral, horariosescalonadosv2.Cyge.DirCorporativa, horariosescalonadosv2.Cyge.Area, "
 					+ "horariosescalonadosv2.Cyge.EntOficial, horariosescalonadosv2.Cyge.AutorizadorID, horariosescalonadosv2.Cyge.Autorizador, "
@@ -403,13 +475,11 @@ public class DataNucleusQuery
 					+ "horariosescalonadosv2.Cyge.FechaCreacionRegistro, horariosescalonadosv2.Cyge.CreadoPor, horariosescalonadosv2.Cyge.RegistroActivo "
 					+ "From horariosescalonadosv2.Cyge "
 					+ "where '"+desdeDate+"' <= horariosescalonadosv2.Cyge.FechaCreacionRegistro AND horariosescalonadosv2.Cyge.FechaCreacionRegistro <= '"+hastaDate+"' ");
-			q.addExtension ( "datanucleus.query.compilation.cached", "true");
 			q.setResultClass(BeanCyge.class);
 			resultadosBeanCyge = (List<BeanCyge>)q.execute();
-			
 
 			return resultadosBeanCyge;
-			
+
 		}
 		catch (Exception e)
 		{
@@ -464,54 +534,98 @@ public class DataNucleusQuery
 		return resultadosBeanCumplimiento;
 	}
 	
+	public Date incrementalDias(Date fecha, int dias){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha);
+		calendar.add(Calendar.DAY_OF_YEAR, dias);
+		return calendar.getTime();
+	}
+	
+	
 	//----------------------REPORTE CUMPLIMIENTO INTERNO ADMIN---------------------------------------------	
-		@SuppressWarnings("unchecked")
-		public List<BeanCumplimiento> ReporteCumplimientoInternoAdmin (Date desdeDate, Date hastaDate)
-		{
-			PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
-			List<BeanCumplimiento> resultadosBeanCumplimiento = null;
-			Query q = null;
-
-			try{
-
-				 q = pm.newQuery("SQL", 
-						"SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
-						+ "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
-						+ "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
-						+ "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
-						+ "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
-						+ "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
-						+ "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
-						+ "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
-						+ "FROM horariosescalonadosv2.cumplimiento "
-						+ "where '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"'");
-				q.setResultClass(BeanCumplimiento.class);
-				q.addExtension( "datanucleus.query.jdoql.allowAll", "true");
-				resultadosBeanCumplimiento = (List<BeanCumplimiento>)q.execute();
-						
-				return resultadosBeanCumplimiento;
-
-			}
-			catch (Exception e)
+			public List<BeanCumplimiento> ReporteCumplimientoInternoAdmin (Date desdeDate, Date hastaDate)
 			{
-				e.printStackTrace();
+				PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
+				LinkedList<BeanCumplimiento> resultadosBeanCumplimiento = new LinkedList<BeanCumplimiento>();
+
+					Date Sem1 = new java.sql.Date(incrementalDias(desdeDate,7).getTime());
+				    Date Sem1I = new java.sql.Date(incrementalDias(Sem1,1).getTime());
+				    Date Sem2 =new java.sql.Date(incrementalDias(Sem1,7).getTime());
+				    Date Sem2I = new java.sql.Date(incrementalDias(Sem2,1).getTime());
+				    Date Sem3 = new java.sql.Date(incrementalDias(Sem2,7).getTime());
+				    Date Sem3I = new java.sql.Date(incrementalDias(Sem3,1).getTime());
+				    
+				    Query q1 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
+				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
+				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
+				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
+				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
+				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
+				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
+				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
+				      + "FROM horariosescalonadosv2.cumplimiento "
+				      + "where '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+Sem1+"'");
+				    q1.setResultClass(BeanCumplimiento.class);
+				    List<BeanCumplimiento> listSem1 = (List<BeanCumplimiento>)q1.execute();
+				    for (BeanCumplimiento Registro : listSem1){
+				     resultadosBeanCumplimiento.add(Registro);
+				    }
+				    q1.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
+				    Query q2 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
+				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
+				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
+				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
+				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
+				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
+				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
+				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
+				      + "FROM horariosescalonadosv2.cumplimiento "
+				      + "where '"+Sem1I+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+Sem2+"'");
+				    q2.setResultClass(BeanCumplimiento.class);
+				    listSem1 = (List<BeanCumplimiento>)q2.execute();
+				    for (BeanCumplimiento Registro : listSem1){
+				     resultadosBeanCumplimiento.add(Registro);
+				    }
+				    q2.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
+				    Query q3 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
+				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
+				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
+				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
+				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
+				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
+				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
+				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
+				      + "FROM horariosescalonadosv2.cumplimiento "
+				      + "where '"+Sem2I+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+Sem3+"'");
+				    q3.setResultClass(BeanCumplimiento.class);
+				    listSem1 = (List<BeanCumplimiento>)q3.execute();
+				    for (BeanCumplimiento Registro : listSem1){
+				     resultadosBeanCumplimiento.add(Registro);
+				    }
+				    q3.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
+				    Query q4 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
+				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
+				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
+				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
+				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
+				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
+				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
+				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
+				      + "FROM horariosescalonadosv2.cumplimiento "
+				      + "where '"+Sem3I+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"'");
+				    
+				    q4.setResultClass(BeanCumplimiento.class);
+				    listSem1 = (List<BeanCumplimiento>)q4.execute();
+				    for (BeanCumplimiento Registro : listSem1){
+				     resultadosBeanCumplimiento.add(Registro);
+				    }
+				    q4.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
+
+				return resultadosBeanCumplimiento;
 			}
-
-			finally {
-				pm.close();
-
-			}
-
-			return resultadosBeanCumplimiento;
-		}
 		
 	
-private void setFetchSize(int fetchSizeOptimal) {
-			// TODO Auto-generated method stub
-			
-		}
-
-	//-------------------------------------- REPORTE CUMPLIMIENTO CYGE -------------------------------------
+//-------------------------------------- REPORTE CUMPLIMIENTO CYGE -------------------------------------
 	public List<BeanCumplimientoExternoCyge> CumplimientoCygeRH (Date desdeDate, Date hastaDate, String usuario)
 	{
 		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
@@ -685,7 +799,7 @@ private void setFetchSize(int fetchSizeOptimal) {
 					+ "CONCAT(horariosescalonadosv2.Cyge.nombre,' ' ,horariosescalonadosv2.Cyge.ApePaterno, "
 					+ "' ', horariosescalonadosv2.Cyge.ApeMaterno) as nombre, horariosescalonadosv2.Cyge.DirGeneral, "
 					+ "horariosescalonadosv2.Cyge.DirCorporativa, horariosescalonadosv2.Cyge.Area, "
-					+ "horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) ,'1' as Mes, '1' as Quincena,horariosescalonadosv2.Cyge.EntOficial, "
+					+ "horariosescalonadosv2.Zeit.Fecha ,'1' as Mes, '1' as Quincena,horariosescalonadosv2.Cyge.EntOficial, "
 					+ "max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'Entrada' then horariosescalonadosv2.Zeit.Hora end) as Entrada, "
 					+ "max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end) as Salida, "
 					+ " CONVERT(CalculoJornada.Jornada, CHAR(50)) as Jornada, horariosescalonadosv2.Zeit.estancia,horariosescalonadosv2.Zeit.edificio, horariosescalonadosv2.Cyge.autorizador, "
@@ -696,6 +810,7 @@ private void setFetchSize(int fetchSizeOptimal) {
 					+ "and  horariosescalonadosv2.Zeit.Edificio = horariosescalonadosv2.Cyge.LugarAsignadoEdificio "
 					+ "inner join (SELECT  NoCyge, Fecha, SEC_TO_TIME( SUM( TIME_TO_SEC( estancia ) ) ) AS Jornada FROM horariosescalonadosv2.Zeit "
 					+ "Where TipoFuncion = 'ENTRADA'group by NoCyge, Fecha) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge "
+					+ "and horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) "
 					+ "group by horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Zeit.Edificio, horariosescalonadosv2.Zeit.Fecha;";
 
 			Query query = pm.newQuery("javax.jdo.query.SQL",strQuery);
@@ -726,7 +841,7 @@ private void setFetchSize(int fetchSizeOptimal) {
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRDireccionGeneral, horariosescalonadosv2.EmpleadoExternoRRHH.DireccionGeneral, "
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRDireccionCorporativa, horariosescalonadosv2.EmpleadoExternoRRHH.DireccionCorporativa, "
 					+ "horariosescalonadosv2.EmpleadoExternoRRHH.CRArea, horariosescalonadosv2.EmpleadoExternoRRHH.Area, "
-					+ "horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit), '1' as Quincena, '1' as Mes, '1' as TEA, horariosescalonadosv2.Cyge.EntOficial, "
+					+ "horariosescalonadosv2.Zeit.Fecha, '1' as Quincena, '1' as Mes, '1' as TEA, horariosescalonadosv2.Cyge.EntOficial, "
 					+ "'1' as TED, max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'Entrada' then horariosescalonadosv2.Zeit.Hora end) as entradaReal, "
 					+ "'1' as CalificacionEntrada, '1' as TSA, '1' as SalidaOficial, '1' as TSD, max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end) as salidaReal, "
 					+ "'1' as CalificacionSalida, "
@@ -737,6 +852,7 @@ private void setFetchSize(int fetchSizeOptimal) {
 					+ "inner join horariosescalonadosv2.EmpleadoExternoRRHH on horariosescalonadosv2.Cyge.usuario = horariosescalonadosv2.EmpleadoExternoRRHH.usuario "
 					+ "inner join (SELECT  NoCyge, Fecha, SEC_TO_TIME( SUM( TIME_TO_SEC( estancia ) ) ) AS Jornada FROM horariosescalonadosv2.Zeit "
 					+ "Where TipoFuncion = 'ENTRADA'group by NoCyge, Fecha) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge "
+					+ "and horariosescalonadosv2.Zeit.fecha = (select max(fecha) from horariosescalonadosv2.Zeit) "
 					+ "where horariosescalonadosv2.Cyge.usuario is not null and horariosescalonadosv2.Cyge.usuario <> '' "
 					+ "group by horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Zeit.Fecha;";
 

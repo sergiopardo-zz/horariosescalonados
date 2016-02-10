@@ -105,8 +105,7 @@ String sHrefBaja = bPermitirCambio ? "horario/baja.html" : "bloqueoCambio.jsp";
 							<span class="icono imgAdministracion" id="btnAdministracion"></span>
 							<span class="texto">Administración</span>
 						</a>
-						<ul class="subMenuAdministracionAA">		
-							
+						<ul class="subMenuAdministracionC">					
 							<li class="subMenu"><a href="/cargareportes">
 								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>
 								<span class="textoSubMenu">Reportes</span>
@@ -152,7 +151,7 @@ String sHrefBaja = bPermitirCambio ? "horario/baja.html" : "bloqueoCambio.jsp";
 							<span class="icono imgAdministracion" id="btnAdministracion"></span>
 							<span class="texto">Administración</span>
 						</a>
-						<ul class="subMenuAdministracionAA">		
+						<ul class="subMenuAdministracionC">		
 							
 							<li class="subMenu"><a href="/cargareportes">
 								<span class="iconoSubMenuAdm imgAdministracionSubMenu"></span>

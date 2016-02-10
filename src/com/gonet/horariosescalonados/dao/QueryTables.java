@@ -27,6 +27,7 @@ import com.gonet.horariosescalonados.bean.BeanCumplimientoExterno;
 import com.gonet.horariosescalonados.bean.BeanDocumento;
 import com.gonet.horariosescalonados.bean.BeanEmpleado;
 import com.gonet.horariosescalonados.bean.EmpleadoExterno;
+import com.gonet.horariosescalonados.classes.Fecha;
 import com.gonet.horariosescalonados.bean.BeanEmpleadoHorario;
 import com.gonet.horariosescalonados.bean.BeanHorario;
 import com.gonet.horariosescalonados.bean.BeanMensaje;
@@ -462,30 +463,15 @@ public class QueryTables {
 	 public ArrayList <String> CorreosActual()
 	 {
 		 
-			Calendar c1 = Calendar.getInstance();
-			Calendar c2 = new GregorianCalendar();
-			
-			String dia, mes , annio;
-			
-			dia = Integer.toString(c2.get(Calendar.DATE));
-			mes = Integer.toString(c2.get(Calendar.MONTH));
-			annio = Integer.toString(c2.get(Calendar.YEAR));
-			
-			int mess = Integer.valueOf(mes);
-			
-			mess = mess + 1;
-			
-			mes= String.valueOf(mess);
-			
-			
-			//2016-02-04
-			System.out.println(annio+"-0"+ mes +"-0"+dia);
-			
-			String strfecha = annio+"-0"+ mes +"-0"+dia;
-			
-			ArrayList <String> lisCorreo = new ArrayList <String>();
-			
-			strfecha = "2016-02-08";
+		 ArrayList<String> lisCorreo = new ArrayList<String>();
+		 
+		 Fecha fecha = new Fecha();
+		
+		 String strfecha="";
+		 strfecha=fecha.fechass();
+		 
+		
+		 System.out.println(strfecha);
 		 
 		 try{
 				Connection conn = Connector.getConexion();

@@ -442,4 +442,35 @@ public class InsertarRegistro {
 		return 0;
 		
 	}
+	
+	public int updateRegistroCero()
+	{
+		Connection conn=null;
+		try {
+			conn = Connector.getConexion();
+		
+		try {
+						
+			String statement = "UPDATE horariosescalonadosv2.registros SET registro=0 where ID_registro = 1";
+			
+			PreparedStatement stmt = conn.prepareStatement(statement);
+			stmt.executeUpdate();
+			
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		finally
+		{
+			conn.close();
+		}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+		return 0;
+		
+	}
 }

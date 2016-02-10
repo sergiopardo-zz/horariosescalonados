@@ -17,8 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="config/css/estilo.css" />
 	<link rel="stylesheet" type="text/css" href="config/css/estilo.css"/>
 	<link rel="stylesheet" type="text/css" href="config/css/jquery-ui.css" />
-	<script	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script src="config/js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="config/js/acciones.js"></script>
 	<script src="config/js/tooltip.js"></script>
@@ -81,7 +81,7 @@
 		document.forms["busquedaUsuarios"].submit();
 		}
 		
-		function generar(){
+		function generar(value){
 		
 		if(document.getElementById("consInt").checked && document.getElementById("consExt").checked){
 		
@@ -107,7 +107,7 @@
 			document.getElementById("iptExaminar").value = fileName;
 		}
 		
-		</script> 
+		</script>
 		
 </head>
 
@@ -116,15 +116,12 @@
 <div class="contenedor">
 	<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	<c:choose>
-	  	<c:when test="${tipEmp=='GE' }">
+	  	<c:when test="${tipEmp=='RH' }">
   			<%@include file="menuEmplA.jsp"%> 
   		</c:when>
-  		<c:when test="${tipEmp=='SS' }">
+  		<c:otherwise>
     		<%@include file="header.jsp"%> 
-  		</c:when>
-  		<c:when test="${tipEmp=='RH' }">
-    		<%@include file="menuEmplAA.jsp"%> 
-  		</c:when>
+  		</c:otherwise>
 	</c:choose>
 
 	
@@ -194,11 +191,9 @@
 					 <tbody>
 						 <tr>
 						 	
-						 	<c:if test="${tipEmp == 'RH'}">
 							<td><input type="checkbox" id="consInt" name="addreess" onclick="checkModal();estatusActivo();"/>
 								<!-- <label for="consInt"></label> --></td>							
 							<td ><label class="textoRadio_PC">Consulta Internos</label></td>
-							</c:if> 
 							
 							<td><input type="checkbox" id="consExt" name="addreess" onclick="checkModal();estatusActivo();"/>
 								<!-- <label for="consExt"></label> --></td>
@@ -245,7 +240,7 @@
 					<td><a href="menuv1.jsp" class="reposo" style="position:relative;top:-11px;" >Cancelar</a></td>
 				</tr>
 			</table>
-			<input type="hidden" value="" name="tipoConsulta" id="hidTipoConsulta"></input>
+			<input type="hidden" name="tipoConsulta" id="hidTipoConsulta" value=""></input>
 			<input type="hidden" value="<c:out value="${empleadoId}"/>"  name="idUsuarioHid"></input>
 		</div>
     </div>
