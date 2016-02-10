@@ -191,7 +191,7 @@
 	<%@include file="header.jsp"%> 
 	</c:if>
 		
-	<c:if test="${tipEmp == 'RH'}">
+	<c:if test="${tipEmp == 'AA'}">
 	<%@include file="menuEmplAA.jsp"%> 
 	</c:if>
 	
@@ -203,7 +203,7 @@
 	<%@include file="menuEmplS.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'GE'}">
+	<c:if test="${tipEmp == 'A'}">
 	<%@include file="menuEmplA.jsp"%> 
 	</c:if>
 	

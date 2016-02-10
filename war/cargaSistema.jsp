@@ -39,10 +39,14 @@
 <div class="contenedor">
 	
 	<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
-	  	<c:if test="${tipEmp=='SS' }">
-  			<%@include file="header.jsp"%>  
-  		</c:if >		
-
+	<c:choose>
+	  	<c:when test="${tipEmp=='A' }">
+  			<%@include file="menuEmplA.jsp"%> 
+  		</c:when>
+  		<c:otherwise>
+    		<%@include file="header.jsp"%> 
+  		</c:otherwise>
+	</c:choose> 
 	
 	<!-- Inicia Contenido -->	
 	<div id="contenido" class="contenido">
