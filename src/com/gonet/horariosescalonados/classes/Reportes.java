@@ -300,79 +300,79 @@ public class Reportes {
 		return html;		
 	}
 	
-	public StringBuilder CumplimientoInternoAdmin(String desde, String hasta) throws IOException, ParseException{
-		StringBuilder html = new StringBuilder(ENCABEZADO);
-		html.append(CUMPLIMIENTO);
-	    String paginacion = "";
-	    int tamPag = 100;
-	    BeanCumplimiento beanCumplimiento = new BeanCumplimiento();
-	    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		java.sql.Date desdeDate = new java.sql.Date(df.parse(desde).getTime());
-		java.sql.Date hastaDate = new java.sql.Date(df.parse(hasta).getTime());
-		System.out.println(desde+"------"+hasta);
-		System.out.println(desdeDate+"------"+hastaDate);
-		DataNucleusQuery query = new DataNucleusQuery();
-		List<BeanCumplimiento> result_1 = query.ReporteCumplimientoInternoAdmin(desdeDate, hastaDate);
-		int count = 0;	
-		try{
-			for(BeanCumplimiento result: result_1){
-				//System.out.println("Apaterno: "+result.getApePaterno()+"  Amaterno: "+result.getApeMaterno());	    	    	
-				   	try {
-				   		html.append(result.toString());				   		
-			    	}catch (Exception e) {
-			    		html.append("<tr><td>Exception</td> </tr>");
-			    	}
-			}
-	    }catch(Exception e){
-	    	System.err.println(e);
-	    	html.append("<tr><td>Exception</td> </tr>");
-	    	return html;
-	    }
-		html.append("</tbody> </table> </body>");
-		return html;		
-	}
+	public Date incrementalDias(Date fecha, int dias){
+		  Calendar calendar = Calendar.getInstance();
+		  calendar.setTime(fecha);
+		  calendar.add(Calendar.DAY_OF_YEAR, dias);
+		  return calendar.getTime();
+		 }
 	
-		
-	public static String llenaHtml(String html, 
-									String nombre,
-									String tempIdUser,
-									String nomCr, 
-									String dga_ln3,
-									String tempFecha,
-									String entOfi,
-									String entReal,
-									int intEntrada,
-									String salOfi,
-									String salReal,
-									int intSalida,
-									int intJornada,
-									int intTotal
-									) throws ParseException{
-		
-		html += "<tr class='tblSeguimientoI1'>";
-		html += "<td>"+nombre+"</td>";
-		html += "<td>"+tempIdUser+"</td>";
-		html += "<td>"+nomCr+"</td>";
-		html += "<td>"+dga_ln3+"</td>";
-		html += "<td>"+tempFecha+"</td>";
-		html += "<td>"+quincena(tempFecha)+"</td>";
-		html += "<td>"+mounth(tempFecha)+"</td>";
-		html += "<td>"+resta(entOfi)+"</td>";
-		html += "<td>"+entOfi+"</td>";
-		html += "<td>"+suma(entOfi)+"</td>";
-		html += "<td>"+entReal+"</td>";
-		html += "<td>"+intEntrada+"</td>";
-		html += "<td>"+resta(salOfi)+"</td>";
-		html += "<td>"+salOfi+"</td>";
-		html += "<td>"+suma(salOfi)+"</td>";
-		html += "<td>"+salReal+"</td>";
-		html += "<td>"+intSalida+"</td>";    	
-    	html += "<td>"+intJornada+"</td>";
-    	html += "<td>"+intTotal+"</td>";
-    	html += "<td>"+(intTotal==3?"100%":(intTotal==1?"33%":"0%"))+"</td>";
-    	html += "</tr>";
-		return html;
-	}
+	 public StringBuffer CumplimientoInternoAdmin(String desde, String hasta) throws IOException, ParseException{
+		  StringBuffer html = new StringBuffer(ENCABEZADO);
+		  html.append(CUMPLIMIENTO);
+		     String paginacion = "";
+		     int tamPag = 100;
+		     BeanCumplimiento beanCumplimiento = new BeanCumplimiento();
+		     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		  java.sql.Date desdeDate = new java.sql.Date(df.parse(desde).getTime());
+		  java.sql.Date hastaDate = new java.sql.Date(df.parse(hasta).getTime());
+		  System.out.println(desde+"------"+hasta);
+		  System.out.println(desdeDate+"------"+hastaDate);
+		  DataNucleusQuery query = new DataNucleusQuery();
+		  
+		  List<BeanCumplimiento> result_1 = new ArrayList<BeanCumplimiento>();
+		  float limt = query.CountCumplimientoInternoAdmin(desdeDate,hastaDate);
+		  limt =  limt/ 29000;
+		  int limtday = Integer.parseInt(hasta.substring(0, 2));
+		  int incremental = (int) (limtday/limt);
+		  Date startDay = new java.sql.Date(desdeDate.getTime());
+		  
+		  if (limt <= limtday){
+		   Date endDay = new java.sql.Date(incrementalDias(desdeDate,incremental).getTime());
+		   result_1 = query.ReporteCumplimientoInternoAdmin(startDay, endDay);
+		   for(BeanCumplimiento result: result_1){
+		    try {
+		     html.append(result.toString());
+		    }catch (Exception e) {
+		     html.append("<tr><td>Exception</td> </tr>");
+		    }
+		   }
+		   startDay = new java.sql.Date(incrementalDias(startDay,incremental+1).getTime());
+		   endDay = new java.sql.Date(incrementalDias(startDay,incremental+1).getTime());
+		   
+		   while (incremental <= (limtday/2) && endDay.getDay() < limtday){
+		    result_1 = query.ReporteCumplimientoInternoAdmin(startDay, endDay);
+		    for(BeanCumplimiento result: result_1){
+		     try {
+		      html.append(result.toString());
+		     }catch (Exception e) {
+		      html.append("<tr><td>Exception</td> </tr>");
+		     }
+		    }
+		    startDay = new java.sql.Date(incrementalDias(startDay,incremental+1).getTime());
+		    endDay = new java.sql.Date(incrementalDias(startDay,incremental+1).getTime());
+		   }
+		  }else{
+		   html.append("<tr><td>La cantidad de registros es excesivo para procesar.</td> </tr>");
+		  }
+		  result_1 = query.ReporteCumplimientoInternoAdmin(startDay, hastaDate);
+		  try{
+		   for(BeanCumplimiento result: result_1){
+		    //System.out.println("Apaterno: "+result.getApePaterno()+"  Amaterno: "+result.getApeMaterno());           
+		        try {
+		         html.append(result.toString());         
+		        }catch (Exception e) {
+		         html.append("<tr><td>Exception</td> </tr>");
+		        }
+		   }
+		     }catch(Exception e){
+		      System.err.println(e);
+		      html.append("<tr><td>Exception</td> </tr>");
+		      return html;
+		     }
+		  html.append("</tbody> </table> </body>");
+		  return html;  
+		 }
 	
 	//--------------------------------------------------------------------------------------------------------//
 		public StringBuffer Cyge(String desde, String hasta) throws IOException, ParseException{
