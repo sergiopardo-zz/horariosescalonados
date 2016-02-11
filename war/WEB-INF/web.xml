@@ -285,6 +285,28 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>MainMenu</servlet-name>
 		<url-pattern>/MainMenu</url-pattern>
 	</servlet-mapping>	
+	
+<!-- 		prueba -->
+
+<servlet>	
+		<servlet-name>prueba</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.prueba</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>prueba</servlet-name>
+		<url-pattern>/prueba</url-pattern>
+	</servlet-mapping>
+	
+<!-- 		Servlet_Archivo	 -->
+
+<servlet>	
+		<servlet-name>Servlet_Archivo</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.Servlet_Archivo</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>Servlet_Archivo</servlet-name>
+		<url-pattern>/Servlet_Archivo</url-pattern>
+	</servlet-mapping>	
 
 	<!-- Pantalla de Bienvenida -->
 	<welcome-file-list>

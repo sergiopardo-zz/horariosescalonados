@@ -117,11 +117,14 @@
 	<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	<c:choose>
 	  	<c:when test="${tipEmp=='RH' }">
+  			<%@include file="menuEmplAA.jsp"%> 
+  		</c:when>
+  		<c:when test="${tipEmp=='GE' }">
   			<%@include file="menuEmplA.jsp"%> 
   		</c:when>
-  		<c:otherwise>
+  		<c:when test="${tipEmp=='SS' }">
     		<%@include file="header.jsp"%> 
-  		</c:otherwise>
+  		</c:when>
 	</c:choose>
 
 	
@@ -190,11 +193,11 @@
 				<table   class="radio-group" border="0" style="margin: 0 auto;">
 					 <tbody>
 						 <tr>
-						 	
+						 	<c:when test="${tipEmp=='RH' }">
 							<td><input type="checkbox" id="consInt" name="addreess" onclick="checkModal();estatusActivo();"/>
 								<!-- <label for="consInt"></label> --></td>							
 							<td ><label class="textoRadio_PC">Consulta Internos</label></td>
-							
+							</c:when>
 							<td><input type="checkbox" id="consExt" name="addreess" onclick="checkModal();estatusActivo();"/>
 								<!-- <label for="consExt"></label> --></td>
 							<td><label class="textoRadio_PC">Consulta externos</label></td>

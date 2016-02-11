@@ -126,7 +126,7 @@
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0"  id="IDComboReporte" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
-											<c:if test="${tipEmp == 'GE'}">
+																					<c:if test="${tipEmp == 'GE'}">
 											<tr>
 												<td class="valorSeleccionado"><option value="cyge" onclick="onclickReporte(this.value)">Registros CYGE</option></td>
 											</tr>
@@ -142,7 +142,7 @@
 												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
 											</tr>
 											<tr>
-												<td class="valorSeleccionado"><option value="modificacoin" onclick="onclickReporte(this.value)">Modificacion</option></td>
+												<td class="valorSeleccionado"><option value="modificacion" onclick="onclickReporte(this.value)">Modificacion</option></td>
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option value="baja" onclick="onclickReporte(this.value)">Baja</option></td>
@@ -168,7 +168,7 @@
 												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
 											</tr>
 											<tr>
-												<td class="valorSeleccionado"><option value="modificacoin" onclick="onclickReporte(this.value)">Modificacion</option></td>
+												<td class="valorSeleccionado"><option value="modificacion" onclick="onclickReporte(this.value)">Modificacion</option></td>
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option value="baja" onclick="onclickReporte(this.value)">Baja</option></td>
@@ -178,9 +178,6 @@
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externos CYGE</option></td>
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>

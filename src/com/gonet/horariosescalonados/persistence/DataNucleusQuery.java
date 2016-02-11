@@ -543,87 +543,50 @@ public class DataNucleusQuery
 	
 	
 	//----------------------REPORTE CUMPLIMIENTO INTERNO ADMIN---------------------------------------------	
-			public List<BeanCumplimiento> ReporteCumplimientoInternoAdmin (Date desdeDate, Date hastaDate)
-			{
-				PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
-				LinkedList<BeanCumplimiento> resultadosBeanCumplimiento = new LinkedList<BeanCumplimiento>();
+	public List<BeanCumplimiento> ReporteCumplimientoInternoAdmin (Date desdeDate, Date hastaDate)
+	{
+		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
+		List<BeanCumplimiento> resultadosBeanCumplimiento = null;
+		Query q = null;
 
-					Date Sem1 = new java.sql.Date(incrementalDias(desdeDate,7).getTime());
-				    Date Sem1I = new java.sql.Date(incrementalDias(Sem1,1).getTime());
-				    Date Sem2 =new java.sql.Date(incrementalDias(Sem1,7).getTime());
-				    Date Sem2I = new java.sql.Date(incrementalDias(Sem2,1).getTime());
-				    Date Sem3 = new java.sql.Date(incrementalDias(Sem2,7).getTime());
-				    Date Sem3I = new java.sql.Date(incrementalDias(Sem3,1).getTime());
-				    
-				    Query q1 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
-				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
-				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
-				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
-				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
-				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
-				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
-				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
-				      + "FROM horariosescalonadosv2.cumplimiento "
-				      + "where '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+Sem1+"'");
-				    q1.setResultClass(BeanCumplimiento.class);
-				    List<BeanCumplimiento> listSem1 = (List<BeanCumplimiento>)q1.execute();
-				    for (BeanCumplimiento Registro : listSem1){
-				     resultadosBeanCumplimiento.add(Registro);
-				    }
-				    q1.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
-				    Query q2 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
-				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
-				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
-				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
-				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
-				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
-				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
-				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
-				      + "FROM horariosescalonadosv2.cumplimiento "
-				      + "where '"+Sem1I+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+Sem2+"'");
-				    q2.setResultClass(BeanCumplimiento.class);
-				    listSem1 = (List<BeanCumplimiento>)q2.execute();
-				    for (BeanCumplimiento Registro : listSem1){
-				     resultadosBeanCumplimiento.add(Registro);
-				    }
-				    q2.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
-				    Query q3 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
-				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
-				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
-				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
-				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
-				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
-				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
-				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
-				      + "FROM horariosescalonadosv2.cumplimiento "
-				      + "where '"+Sem2I+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+Sem3+"'");
-				    q3.setResultClass(BeanCumplimiento.class);
-				    listSem1 = (List<BeanCumplimiento>)q3.execute();
-				    for (BeanCumplimiento Registro : listSem1){
-				     resultadosBeanCumplimiento.add(Registro);
-				    }
-				    q3.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
-				    Query q4 = pm.newQuery("SQL", "SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
-				      + "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
-				      + "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
-				      + "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
-				      + "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
-				      + "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
-				      + "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
-				      + "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
-				      + "FROM horariosescalonadosv2.cumplimiento "
-				      + "where '"+Sem3I+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"'");
-				    
-				    q4.setResultClass(BeanCumplimiento.class);
-				    listSem1 = (List<BeanCumplimiento>)q4.execute();
-				    for (BeanCumplimiento Registro : listSem1){
-				     resultadosBeanCumplimiento.add(Registro);
-				    }
-				    q4.addExtension("datanucleus.rdbms.query.resultSetType", "scroll-insensitive");
+		try{
 
-				return resultadosBeanCumplimiento;
-			}
+			 q = pm.newQuery("SQL", 
+					"SELECT horariosescalonadosv2.cumplimiento.empleadoID, horariosescalonadosv2.cumplimiento.apePaterno, "
+					+ "horariosescalonadosv2.cumplimiento.apeMaterno, horariosescalonadosv2.cumplimiento.nombre, horariosescalonadosv2.cumplimiento.nombreCR, "
+					+ "horariosescalonadosv2.cumplimiento.dga, horariosescalonadosv2.cumplimiento.fecha, "
+					+ "horariosescalonadosv2.cumplimiento.quincena, horariosescalonadosv2.cumplimiento.mes, horariosescalonadosv2.cumplimiento.tae, "
+					+ "horariosescalonadosv2.cumplimiento.entrada, horariosescalonadosv2.cumplimiento.tde, horariosescalonadosv2.cumplimiento.entradaReal, horariosescalonadosv2.cumplimiento.califEntrada,"
+					+ "horariosescalonadosv2.cumplimiento.tas, horariosescalonadosv2.cumplimiento.salida, horariosescalonadosv2.cumplimiento.tds, horariosescalonadosv2.cumplimiento.salidaReal, "
+					+ "horariosescalonadosv2.cumplimiento.califSalida, horariosescalonadosv2.cumplimiento.jornada, "
+					+ "horariosescalonadosv2.cumplimiento.total, horariosescalonadosv2.cumplimiento.porcentaje "
+					+ "FROM horariosescalonadosv2.cumplimiento "
+					+ "where '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha  AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"'");
+			q.setResultClass(BeanCumplimiento.class);
+			q.addExtension( "datanucleus.query.jdoql.allowAll", "true");
+			resultadosBeanCumplimiento = (List<BeanCumplimiento>)q.execute();
+					
+			return resultadosBeanCumplimiento;
+
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		finally {
+			pm.close();
+
+		}
+
+		return resultadosBeanCumplimiento;
+	}
+	
+
+private void setFetchSize(int fetchSizeOptimal) {
+		// TODO Auto-generated method stub
 		
+	}
 	
 //-------------------------------------- REPORTE CUMPLIMIENTO CYGE -------------------------------------
 	public List<BeanCumplimientoExternoCyge> CumplimientoCygeRH (Date desdeDate, Date hastaDate, String usuario)
