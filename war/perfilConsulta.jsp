@@ -17,8 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="config/css/estilo.css" />
 	<link rel="stylesheet" type="text/css" href="config/css/estilo.css"/>
 	<link rel="stylesheet" type="text/css" href="config/css/jquery-ui.css" />
-	<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script src="config/js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="config/js/acciones.js"></script>
 	<script src="config/js/tooltip.js"></script>
