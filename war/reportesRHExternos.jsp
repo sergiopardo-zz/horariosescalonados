@@ -23,11 +23,15 @@
 <div class="contenedor">
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	
-	<c:if test="${tipEmp == 'RH'}">
+	<c:if test="${tipEmp == 'CI'}">
 	<%@include file="menuEmplRRHH.jsp"%> 
 	</c:if>
 	
-			<c:if test="${tipEmp == 'C'}">
+	<c:if test="${tipEmp == 'CE'}">
+	<%@include file="menuEmplRRHH.jsp"%> 
+	</c:if>
+
+	<c:if test="${tipEmp == 'CA'}">
 	<%@include file="menuEmplRRHH.jsp"%> 
 	</c:if>
 		

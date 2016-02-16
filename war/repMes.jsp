@@ -28,7 +28,7 @@
 	}
 				
 	function generar(){
-		formreportes.action = "/generaexcel";
+		formreportes.action = "/Servlet_Archivo";
 		formreportes.submit();
 	}
 	
@@ -37,12 +37,13 @@
 
 <body>
 
-<form id="formreportes" action="/generareporte" method="post">
+<form id="formreportes" action="/Servlet_Archivo" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenMes" id="hiddenMes" />
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
 		<input type="hidden" name="hiddenTipoUsuario" id="hiddenTipoUsuario" />
+		<input type="hidden" name="hiddenTipoReporte" id="hiddenTipoReport" value="mensual"/>
 
 
 <div class="contenedor">
@@ -82,7 +83,7 @@
 					</li>
 					<li class="menuMiga" >
 						<a href="/cargareportes"  style="text-decoration:none;" class="migaReporte tituloMiga">
-							- Reportes - CYGE</a>
+							- Reportes </a>
 					</li>
 					<li class="menuMiga">
 						<span class="separacionMiga">-</span>

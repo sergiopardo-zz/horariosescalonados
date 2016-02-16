@@ -307,6 +307,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Servlet_Archivo</servlet-name>
 		<url-pattern>/Servlet_Archivo</url-pattern>
 	</servlet-mapping>	
+	
+		
+	<servlet>	
+		<servlet-name>Servlet_Archivo_Semana</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.Servlet_Archivo_Semana</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>Servlet_Archivo_Semana</servlet-name>
+		<url-pattern>/Servlet_Archivo_Semana</url-pattern>
+	</servlet-mapping>	
 
 	<!-- Pantalla de Bienvenida -->
 	<welcome-file-list>

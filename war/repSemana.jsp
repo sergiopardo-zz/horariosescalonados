@@ -29,7 +29,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 	}
 	
 	function generar(){
-		formreportes.action = "/generaexcel";
+		formreportes.action = "/Servlet_Archivo_Semana";
 		formreportes.submit();
 	}
 	
@@ -40,7 +40,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 
 <!-- formulario para reporte cyge -->
 
-<form id="formreportes" action="/generareporte" method="post">
+<form id="formreportes" action="/Servlet_Archivo_Semana" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenSemana" id="hiddenSemana" /> 
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
@@ -87,7 +87,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 					</li>
 					<li class="menuMiga" >
 						<a href="/cargareportes"  style="text-decoration:none;" class="migaReporte tituloMiga">
-							- Reportes - CYGE</a>
+							- Reportes </a>
 					</li>
 					<li class="menuMiga">
 						<span class="separacionMiga">-</span>

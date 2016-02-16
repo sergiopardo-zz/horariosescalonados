@@ -86,7 +86,7 @@
 					</li>
 					<li class="menuMiga" >
 						<a href="/cargareportes"  style="text-decoration:none;" class="migaReporte tituloMiga">
-							- Reportes - CYGE</a>
+							- Reportes </a>
 					</li>
 					<li class="menuMiga">
 						<span class="separacionMiga">-</span>
