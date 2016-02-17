@@ -241,7 +241,7 @@ public class DataNucleusQuery
 		Query query3 = pm.newQuery("javax.jdo.query.SQL",strDeleteInt);
 		query3.execute();
 		
-		String strTipoEmpleado = ("UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='E' WHERE empleadoID = '"+ UsuarioRepren+ "'");
+		String strTipoEmpleado = ("UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='S' WHERE empleadoID = '"+ UsuarioRepren+ "'");
 		Query query4 = pm.newQuery("javax.jdo.query.SQL",strTipoEmpleado);
 		query4.execute();
 		
@@ -303,7 +303,7 @@ public class DataNucleusQuery
 						e.printStackTrace();
 					}
 				}	
-				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='C' WHERE empleadoID = '"+ UsuarioRepren+ "'";
+				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CE' WHERE empleadoID = '"+ UsuarioRepren+ "'";
 				Query query1 = pm.newQuery("javax.jdo.query.SQL",strActualiza);
 				query1.execute();
 			}else if(tipoConsulta.equals("INTERNOS")){
@@ -325,7 +325,7 @@ public class DataNucleusQuery
 						e.printStackTrace();
 					}
 				}
-				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='C' WHERE empleadoID = '"+ UsuarioRepren+ "'";
+				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CI' WHERE empleadoID = '"+ UsuarioRepren+ "'";
 				Query query1 = pm.newQuery("javax.jdo.query.SQL",strActualiza);
 				query1.execute();
 			}else if(tipoConsulta.equals("AMBOS")){
@@ -360,7 +360,7 @@ public class DataNucleusQuery
 					}
 					
 				}
-				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='C' WHERE empleadoID = '"+ UsuarioRepren+ "'";
+				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CA' WHERE empleadoID = '"+ UsuarioRepren+ "'";
 				Query query1 = pm.newQuery("javax.jdo.query.SQL",strActualiza);
 				query1.execute();
 			}
@@ -379,6 +379,137 @@ public class DataNucleusQuery
 		return strAccion;
 
 	}
+	
+	
+	public String agregarUsuarioCyge(String UsuarioRepren,String[] usuario,String tipoConsulta){
+
+		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
+
+		Transaction tx=(Transaction) pm.currentTransaction();
+		String strPrueba = null;
+		String strActualiza = null;
+		String strAccion="";
+
+		try{
+
+
+			tx.begin();
+
+
+			String strDeleteExt = "DELETE FROM horariosescalonadosv2.PerfilConsultaExternos WHERE IdUsuarioConsulta "+"='"+UsuarioRepren+ "';";
+			Query query2 = pm.newQuery("javax.jdo.query.SQL",strDeleteExt);
+			query2.execute();
+
+			String strDeleteInt = ("DELETE FROM horariosescalonadosv2.PerfilConsultaInternos WHERE IdUsuarioConsultaInterno "+"='"+UsuarioRepren+ "';");
+			Query query3 = pm.newQuery("javax.jdo.query.SQL",strDeleteInt);
+			query3.execute();
+
+			if(tipoConsulta.equals("EXTERNOS")){
+				for(int x = 1;x<usuario.length;x++){
+					try{
+						if(usuario[x].startsWith("X")){
+
+							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaExternos (IdUsuarioConsulta, IdUsuarioReporte)" +
+									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
+
+							Query query = pm.newQuery("javax.jdo.query.SQL",strPrueba);
+							query.execute();
+							
+							
+							
+							strAccion =strAccion+ "Se agrego el usuario a Externos:"+ usuario[x] +"\n";
+							System.out.println("Se agrega el usuario a la tabla PerfilConsultaExternos: "+usuario[x] );
+
+							}else{
+								strAccion =strAccion+ "El usuario no esta en formato Externo:"+ usuario[x] +"\n";
+								System.out.println("El usuario no esta en formato Externo y no se agrego: "+usuario[x] );
+	
+							}
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}	
+				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CC' WHERE empleadoID = '"+ UsuarioRepren+ "'";
+				Query query1 = pm.newQuery("javax.jdo.query.SQL",strActualiza);
+				query1.execute();
+			}else if(tipoConsulta.equals("INTERNOS")){
+				for(int x=1;x<usuario.length;x++){
+					try{
+						if(usuario[x].startsWith("M")){
+							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
+									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
+
+							Query query = pm.newQuery("javax.jdo.query.SQL",strPrueba);
+							query.execute();
+							strAccion =strAccion+ "Se agrego el usuario a Internos:"+ usuario[x]+ "\n";
+							System.out.println("Se agrega el usuario a la tabla PerfilConsultaInternos: " + usuario[x]);
+						}else{
+							strAccion =strAccion+ "El usuario no esta en formato Interno:"+ usuario[x] +"\n";
+							System.out.println("El usuario no esta en formato Interno y no se agrego: "+usuario[x] );
+						}
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CE' WHERE empleadoID = '"+ UsuarioRepren+ "'";
+				Query query1 = pm.newQuery("javax.jdo.query.SQL",strActualiza);
+				query1.execute();
+			}else if(tipoConsulta.equals("AMBOS")){
+				for(int x=1;x<usuario.length;x++){
+					try{
+						if(usuario[x].startsWith("M")){
+							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
+									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
+
+							Query query = pm.newQuery("javax.jdo.query.SQL",strPrueba);
+							query.execute();
+							strAccion =strAccion+ "Se agrego el usuario a Internos:"+ usuario[x]+ "\n";
+							System.out.println("Se agrega el usuario a la tabla PerfilConsultaInternos: " + usuario[x]);
+						}else if(usuario[x].startsWith("X")){
+
+							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaExternos (IdUsuarioConsulta, IdUsuarioReporte)" +
+									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
+
+							Query query = pm.newQuery("javax.jdo.query.SQL",strPrueba);
+							query.execute();
+							strAccion =strAccion+ "Se agrego el usuario a Externos:"+ usuario[x] +"\n";
+							System.out.println("Se agrega el usuario a la tabla PerfilConsultaExternos: "+usuario[x] );
+
+							}else{
+								strAccion =strAccion+ "El usuario no esta en formato Interno o Externo:"+ usuario[x] +"\n";
+								System.out.println("El usuario no esta en formato Interno o Externo y no se agrego: "+usuario[x] );
+							}
+						
+						
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					
+				}
+				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CI' WHERE empleadoID = '"+ UsuarioRepren+ "'";
+				Query query1 = pm.newQuery("javax.jdo.query.SQL",strActualiza);
+				query1.execute();
+			}
+			tx.commit();
+			return strAccion;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+		}
+		return strAccion;
+
+	}
+	
+	
+	
+	
+	
 	//--------------------------------------------------------------------------------------------------------
 	public void agregaPerfilConsulta(String idEmpleado,String TipoConsulta)
 	{

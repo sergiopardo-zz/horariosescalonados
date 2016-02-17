@@ -4,7 +4,9 @@
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory"%>
 	<%@ page import="com.google.appengine.api.blobstore.BlobstoreService"%>
-	<% BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();%>
+	<% BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+	String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.getAttribute("tipo_empleado");%>
+	
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -213,6 +215,7 @@
 			<!-- Fin -->
 				<!-- Fin -->
 				<form name="formsubir" action="<%=blobstoreService.createUploadUrl("/uploadusuario") %>" method="post" enctype="multipart/form-data">
+				
 			<input type="file" id="upload" class="" accept=".txt" style="display:none" name="myFile" onchange="cargaArchivo()"/> 
 			<div width="337px" align="center" style="margin-top: 30px">
 					<input class="examinar" id="iptExaminar" readonly>
@@ -243,6 +246,7 @@
 					<td><a href="menuv1.jsp" class="reposo" style="position:relative;top:-11px;" >Cancelar</a></td>
 				</tr>
 			</table>
+			<input type="hidden" name="tipoUsuario" id="hidTipoUsuario" value=<%=sTipo%>/>
 			<input type="hidden" name="tipoConsulta" id="hidTipoConsulta" value=""></input>
 			<input type="hidden" value="<c:out value="${empleadoId}"/>"  name="idUsuarioHid"></input>
 		</div>

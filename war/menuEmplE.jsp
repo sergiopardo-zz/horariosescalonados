@@ -18,8 +18,9 @@ Calendar calFechaAplicacion = new GregorianCalendar(); // Se crea Calendar para 
 Calendar calFechaProxSol = new GregorianCalendar(); // Se crea Calendar para la fecha de la próxima modificación/baja
 
 //boolean bEdificio = sEdificio.trim().equals("REFORMA") || sEdificio.trim().equals("POLANCO");
-boolean bMostrarAdministracion = (sPerfil.equals("A")|| sPerfil.equals("SS"));
+boolean bMostrarAdministracion = (sPerfil.equals("GE")|| sPerfil.equals("RH"));
 boolean bMostrarSuperAdministrador = sPerfil.equals("SS");
+boolean bMostrarEmpleado = sPerfil.equals("E");
 
 boolean bNuevaSolicitud = sFechaSolicitud.equals("");
 boolean bHorarioActual = sHorarioActual.equals("00000000");
@@ -48,8 +49,8 @@ if(!bSolicitudPendiente) {
 }
 
 //true si ya se cumplieron los tres meses de lapso
-//boolean bMasDe3Meses = calFechaActual.after(calFechaProxSol);
-boolean bMasDe3Meses = true;
+boolean bMasDe3Meses = calFechaActual.after(calFechaProxSol);
+//boolean bMasDe3Meses = true;
 //true si el edificio es correcto y se cumplieron mas de tres meses
 boolean validacion1 =  bMasDe3Meses;
 //true si es una nueva solicitud y es diferente de "0000000"

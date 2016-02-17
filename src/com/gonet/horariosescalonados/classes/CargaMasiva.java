@@ -570,6 +570,39 @@ public class CargaMasiva {
 		}
 		return swriter;
 	}
+	
+	public String cargaUsuariosCyge(List<BlobKey> blobKeys, HttpServletResponse resp,String idEmpleado,String TipoConsulta){
+		String swriter = "Carga de Empleados..\n ";
+		int iRenglones =0;
+		try{
+			InputStream isArchivo = new BlobstoreInputStream(blobKeys.get(0));
+
+			byte[] buffer = new byte[10000];
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			int byteRead;
+
+			while((byteRead = isArchivo.read(buffer)) != -1){
+				output.write(buffer,0,byteRead);
+			}
+
+			byte[] last = output.toByteArray();
+
+			String strUsuarios = new String(last);
+
+			String[] arrUsuarios = strUsuarios.split("\r?\n|\r");
+			DataNucleusQuery query = new DataNucleusQuery ();
+
+
+			swriter= swriter + query.agregarUsuarioCyge(idEmpleado, arrUsuarios,TipoConsulta) + "\n";
+
+
+
+		} catch (Exception e) {		
+			System.err.println(e);
+			return swriter+="--> Ocurrio un error al cargar el archivo.\n" + e;			
+		}
+		return swriter;
+	}
 
 }
 

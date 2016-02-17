@@ -428,7 +428,15 @@
 	<%@include file="menuEmplA.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'C'}">
+	<c:if test="${tipEmp == 'CI'}">
+	<%@include file="menuEmplC.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CE'}">
+	<%@include file="menuEmplC.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CA'}">
 	<%@include file="menuEmplC.jsp"%> 
 	</c:if>
 	

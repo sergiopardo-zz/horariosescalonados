@@ -29,6 +29,7 @@ public class UploadUsuario extends HttpServlet{
 		List<BlobKey> blobKeys = blobs.get("myFile");		
 		String idEmpleado = req.getParameter("idUsuarioHid");
 		String tipoConsulta = req.getParameter("tipoConsulta");
+		String tipoUsuario = req.getParameter("tipoUsuario");
 		CargaMasiva cargaMasiva = new CargaMasiva();
 		if(tipoConsulta.equals("QUITAR")||blobKeys == null){
 			DataNucleusQuery query = new DataNucleusQuery ();
@@ -37,7 +38,19 @@ public class UploadUsuario extends HttpServlet{
 			resp.sendRedirect("/");
 		
 		}else{
+		if(tipoUsuario.equals("GE")){
+			String html = cargaMasiva.cargaUsuariosCyge(blobKeys, resp,idEmpleado,tipoConsulta);
+			String perfilConsulta = cargaMasiva.cargaPerfilConsulta(idEmpleado, tipoConsulta);
+			String fileName = "logHorario_"+ObtenFechas.fechaHoy()+".txt ";
+			if (!fileName.endsWith(".txt")) {
+				fileName = fileName + ".txt";
+			}
+			req.setAttribute("sTexto", html);
+			req.setAttribute("sNombre", fileName);
+			dispatcher = getServletContext().getRequestDispatcher("/downLoad.jsp");
+			dispatcher.forward(req, resp);
 			
+		}else{
 			String html = cargaMasiva.cargaUsuarios(blobKeys, resp,idEmpleado,tipoConsulta);
 			String perfilConsulta = cargaMasiva.cargaPerfilConsulta(idEmpleado, tipoConsulta);
 			String fileName = "logHorario_"+ObtenFechas.fechaHoy()+".txt ";
@@ -47,7 +60,8 @@ public class UploadUsuario extends HttpServlet{
 			req.setAttribute("sTexto", html);
 			req.setAttribute("sNombre", fileName);
 			dispatcher = getServletContext().getRequestDispatcher("/downLoad.jsp");
-			dispatcher.forward(req, resp);						
+			dispatcher.forward(req, resp);
+			}
 		}
 	}
 }

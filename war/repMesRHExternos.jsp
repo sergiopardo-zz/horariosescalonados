@@ -125,9 +125,6 @@
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
 											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
-											</tr>
 										</c:if>
 										</tbody>
 									</table>

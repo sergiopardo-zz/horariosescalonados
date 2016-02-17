@@ -46,14 +46,18 @@
 <div class="contenedor">
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	
-	<c:if test="${tipEmp == 'RH'}">
+	<c:if test="${tipEmp == 'CA'}">
 	<%@include file="menuEmplRRHH.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'C'}">
+	<c:if test="${tipEmp == 'CI'}">
 	<%@include file="menuEmplRRHH.jsp"%> 
 	</c:if>
 	
+	<c:if test="${tipEmp == 'CE'}">
+	<%@include file="menuEmplRRHH.jsp"%> 
+	</c:if>
+		
 	<!-- Inicia Contenido -->
 	<div class="contenidoMiga">
 				<ul class="posicionMiga">	
@@ -104,9 +108,16 @@
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
+										<c:if test="${tipEmp == 'CI'}">
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
 											</tr>
+										</c:if>
+										<c:if test="${tipEmp == 'CA'}">
+											<tr>
+												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
+											</tr>
+										</c:if>
 										</tbody>
 									</table>
 								</div>
