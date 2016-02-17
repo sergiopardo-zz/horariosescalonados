@@ -308,16 +308,30 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/Servlet_Archivo</url-pattern>
 	</servlet-mapping>	
 	
-		
+<!-- 		Servlet_Archivodos -->
+	
+	
 	<servlet>	
-		<servlet-name>Servlet_Archivo_Semana</servlet-name>
-		<servlet-class>com.gonet.horariosescalonados.servlet.Servlet_Archivo_Semana</servlet-class>
+		<servlet-name>Servlet_Archivodos</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.Servlet_Archivodos</servlet-class>
 	</servlet>
 		<servlet-mapping>
-		<servlet-name>Servlet_Archivo_Semana</servlet-name>
-		<url-pattern>/Servlet_Archivo_Semana</url-pattern>
+		<servlet-name>Servlet_Archivodos</servlet-name>
+		<url-pattern>/Servlet_Archivodos</url-pattern>
 	</servlet-mapping>	
+	
+<!-- 		Servlet_Archivotres -->
 
+<servlet>	
+		<servlet-name>Servlet_Archivotres</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.Servlet_Archivotres</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>Servlet_Archivotres</servlet-name>
+		<url-pattern>/Servlet_Archivotres</url-pattern>
+	</servlet-mapping>	
+	
+	
 	<!-- Pantalla de Bienvenida -->
 	<welcome-file-list>
 		<welcome-file>inicio.jsp</welcome-file>

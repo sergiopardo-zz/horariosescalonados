@@ -54,11 +54,15 @@
 	</c:if>
 	
 	<c:if test="${tipEmp == 'CI'}">
-	<%@include file="menuEmplRRHH.jsp"%> 
+	<%@include file="menuEmplRRHHCI.jsp"%> 
 	</c:if>
 	
 	<c:if test="${tipEmp == 'CE'}">
-	<%@include file="menuEmplRRHH.jsp"%> 
+	<%@include file="menuEmplRRHHCE.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
+	<%@include file="menuEmplRRHHCE.jsp"%> 
 	</c:if>
 	
 	<!-- Inicia Contenido -->

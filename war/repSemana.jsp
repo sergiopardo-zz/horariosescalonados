@@ -29,7 +29,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 	}
 	
 	function generar(){
-		formreportes.action = "/Servlet_Archivo_Semana";
+		formreportes.action = "/generaexcel";
 		formreportes.submit();
 	}
 	
@@ -40,7 +40,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 
 <!-- formulario para reporte cyge -->
 
-<form id="formreportes" action="/Servlet_Archivo_Semana" method="get">
+<form id="formreportes" action="/generareporte" method="post">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenSemana" id="hiddenSemana" /> 
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
@@ -129,7 +129,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0" id="IDComboReporte" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
-																															<c:if test="${tipEmp == 'GE'}">
+										<c:if test="${tipEmp == 'GE'}">
 											<tr>
 												<td class="valorSeleccionado"><option value="cyge" onclick="onclickReporte(this.value)">Registros CYGE</option></td>
 											</tr>

@@ -23,7 +23,7 @@
 	<%@include file="header.jsp"%> 
 	</c:if>
 		
-	<c:if test="${tipEmp == 'AA'}">
+	<c:if test="${tipEmp == 'RH'}">
 	<%@include file="menuEmplAA.jsp"%> 
 	</c:if>
 	
@@ -35,11 +35,23 @@
 	<%@include file="menuEmplS.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'A'}">
+	<c:if test="${tipEmp == 'GE'}">
 	<%@include file="menuEmplA.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'C'}">
+	<c:if test="${tipEmp == 'CI'}">
+	<%@include file="menuEmplC.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CE'}">
+	<%@include file="menuEmplC.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CA'}">
+	<%@include file="menuEmplC.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
 	<%@include file="menuEmplC.jsp"%> 
 	</c:if>
 	</center>

@@ -71,14 +71,21 @@ public class ReportesServlet extends HttpServlet{
 		String fechaActual = dateFormat.format(date).toString();
 		req.setAttribute("pFecha", fechaActual);
 		BeanEmpleado empleado = Empleado.getEmpleado(req);
-		if(empleado.getTipoEmpleado().equals("CI")||empleado.getTipoEmpleado().equals("CE")||empleado.getTipoEmpleado().equals("CA")){
+		if(empleado.getTipoEmpleado().equals("CA")){
 			dispatcher = getServletContext().getRequestDispatcher("/menuRRHH.jsp");
 			dispatcher.forward(req, resp);
 		}
 		if(empleado.getTipoEmpleado().equals("GE") || empleado.getTipoEmpleado().equals("SS")||empleado.getTipoEmpleado().equals("RH")){	
 		dispatcher = getServletContext().getRequestDispatcher("/reportes.jsp");
 		dispatcher.forward(req, resp);
-		}
+		}if(empleado.getTipoEmpleado().equals("CE")||empleado.getTipoEmpleado().equals("CC")){
+			dispatcher = getServletContext().getRequestDispatcher("/menuEmplRRHHCE.jsp");
+			dispatcher.forward(req, resp);
+		}if(empleado.getTipoEmpleado().equals("CI")){
+		dispatcher = getServletContext().getRequestDispatcher("/menuEmplRRHHCI.jsp");
+		dispatcher.forward(req, resp);
+	}
+		
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException,ServletException{

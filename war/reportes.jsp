@@ -63,7 +63,7 @@
 					</li>
 					<li class="menuMiga">
 						<span class="separacionMiga">-</span>
-						<span class="tituloMiga">Reportes - CYGE</span>
+						<span class="tituloMiga">Reportes </span>
 					</li>
 				</ul>				
 	</div>

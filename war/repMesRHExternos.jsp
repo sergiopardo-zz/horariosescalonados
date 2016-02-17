@@ -48,16 +48,21 @@
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	
 	<c:if test="${tipEmp == 'CI'}">
-	<%@include file="menuEmplRRHH.jsp"%> 
+	<%@include file="menuEmplRRHHCI.jsp"%> 
 	</c:if>
 	
 	<c:if test="${tipEmp == 'CE'}">
-	<%@include file="menuEmplRRHH.jsp"%> 
+	<%@include file="menuEmplRRHHCE.jsp"%> 
 	</c:if>
 
 	<c:if test="${tipEmp == 'CA'}">
 	<%@include file="menuEmplRRHH.jsp"%> 
 	</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
+	<%@include file="menuEmplRRHHCE.jsp"%> 
+	</c:if>
+
 	
 	<!-- Inicia Contenido -->
 	<div class="contenidoMiga">
@@ -111,12 +116,12 @@
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
-										<c:if test="${tipEmp == 'CI'}">
+										<c:if test="${tipEmp == 'CE'}">
 											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
+												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
 											</tr>
 										</c:if>
-										<c:if test="${tipEmp == 'CE'}">
+										<c:if test="${tipEmp == 'CI'}">
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
 											</tr>
@@ -124,6 +129,11 @@
 										<c:if test="${tipEmp == 'CA'}">
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
+											</tr>
+										</c:if>
+										<c:if test="${tipEmp == 'CC'}">
+											<tr>
+												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
 											</tr>
 										</c:if>
 										</tbody>

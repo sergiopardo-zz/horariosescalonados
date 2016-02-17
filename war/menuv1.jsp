@@ -46,6 +46,10 @@
 	<c:if test="${tipEmp == 'CA'}">
 	<%@include file="menuEmplC.jsp"%> 
 	</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
+	<%@include file="menuEmplC.jsp"%> 
+	</c:if>
 
 	<!-- Inicia Contenido -->	
 	<div id="contenido" class="contenido">
