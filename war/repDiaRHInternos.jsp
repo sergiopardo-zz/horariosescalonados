@@ -16,7 +16,7 @@
 	<script src="config/js/jquery-1.11.3.min.js"></script>
 	<script src='config/js/jquery-ui.min.js'></script>
 	<script type="text/javascript" src="config/js/acciones.js"></script>
-	<script type="text/javascript" src='js/calendar.js'></script>
+	<script type="text/javascript" src='/config/js/calendar.js'></script>
 	<script type="text/javascript">
 	
 	function onclickReporte(valor){

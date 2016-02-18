@@ -31,6 +31,7 @@
 	function generar(){
 		formreportes.action = "/generaexcel";
 		formreportes.submit();
+		$("#fechaDesde").val{""};
 	}
 
 

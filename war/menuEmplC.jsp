@@ -131,12 +131,10 @@ String sHrefBaja = bPermitirCambio ? "horario/baja.html" : "bloqueoCambio.jsp";
 						</a>
 						<ul class="subMenuHorarios">							
 							<li class="subMenu">
-							<%	if(bPermitirSolicitud) { %>
 							<a href="/solicitudhorario">
 								<span class="iconoSubMenu imgHorarioSubMenu"></span>
 								<span class="textoSubMenu">Solicitud</span>
 							</a></li>
-							<%}%>
 							<li class="subMenu"><a href="<%=sHrefCambio%>">
 								<span class="iconoSubMenu imgHorarioSubMenu"></span>
 								<span class="textoSubMenu">Cambio</span>

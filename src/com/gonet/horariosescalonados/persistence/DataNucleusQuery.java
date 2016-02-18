@@ -309,7 +309,7 @@ public class DataNucleusQuery
 			}else if(tipoConsulta.equals("INTERNOS")){
 				for(int x=1;x<usuario.length;x++){
 					try{
-						if(usuario[x].startsWith("M")){
+						if(!usuario[x].startsWith("X")){
 							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
 									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
 
@@ -331,7 +331,7 @@ public class DataNucleusQuery
 			}else if(tipoConsulta.equals("AMBOS")){
 				for(int x=1;x<usuario.length;x++){
 					try{
-						if(usuario[x].startsWith("M")){
+						if(!usuario[x].startsWith("X")){
 							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
 									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
 
@@ -435,11 +435,7 @@ public class DataNucleusQuery
 			}else if(tipoConsulta.equals("INTERNOS")){
 				for(int x=1;x<usuario.length;x++){
 					try{
-						if(usuario[x].startsWith("X")){
-							strAccion =strAccion+ "El usuario no esta en formato Interno:"+ usuario[x] +"\n";
-							System.out.println("El usuario no esta en formato Interno y no se agrego: "+usuario[x] );
-							
-						}else{
+						if(!usuario[x].startsWith("X")){
 							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
 									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
 
@@ -447,6 +443,11 @@ public class DataNucleusQuery
 							query.execute();
 							strAccion =strAccion+ "Se agrego el usuario a Internos:"+ usuario[x]+ "\n";
 							System.out.println("Se agrega el usuario a la tabla PerfilConsultaInternos: " + usuario[x]);
+							
+						}else{
+							strAccion =strAccion+ "El usuario no esta en formato Interno:"+ usuario[x] +"\n";
+							System.out.println("El usuario no esta en formato Interno y no se agrego: "+usuario[x] );
+
 						}
 					}catch(Exception e){
 						e.printStackTrace();
@@ -468,9 +469,7 @@ public class DataNucleusQuery
 							strAccion =strAccion+ "Se agrego el usuario a Externos:"+ usuario[x] +"\n";
 							System.out.println("Se agrega el usuario a la tabla PerfilConsultaExternos: "+usuario[x] );
 
-							
-							
-							
+									
 						}else{
 							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
 									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
@@ -643,7 +642,7 @@ public class DataNucleusQuery
 			Query q = pm.newQuery("SQL", "SELECT * FROM horariosescalonadosv2.cumplimiento "
 					+ "where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno "
 					+ "from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' ) "
-					+ "and  '"+desdeDate+"' <= horariosescalonadosv2.cumplimiento.fecha AND horariosescalonadosv2.cumplimiento.fecha <= '"+hastaDate+"' ");
+					+ "and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ");
 			q.setResultClass(BeanCumplimiento.class);
 			resultadosBeanCumplimiento = (List<BeanCumplimiento>)q.execute();
 
@@ -792,45 +791,59 @@ public class DataNucleusQuery
 	
 	
 //---------------------------------------REPORTE CUMPLIMIENTO CYGE VISTA RRHH ----------------------------------------	
-	public List<BeanCumplimientoExternoRRHH> ReporteCumplimientoCygeRRHH (Date desdeDate, Date hastaDate, String usuario)
-	{
-		PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
+		public List<BeanCumplimientoExternoRRHH> ReporteCumplimientoCygeRRHH (Date desdeDate, Date hastaDate, String usuario)
+		 {
+		  PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
 
-		Transaction tx = (Transaction) pm.currentTransaction();
-		String strQuery = null;
-		List<BeanCumplimientoExternoRRHH> resultadosBeanCumplimientoExternoRRHH = null;
+		  Transaction tx = (Transaction) pm.currentTransaction();
+		  String strQuery = null;
+		  String strQueryNoCIni = null;
+		  String strQueryNoCFin = null;
+		  
+		  int intNoCIni = 0;
+		  int intNoCFin = 0;
+		  List<BeanCumplimientoExternoRRHH> resultadosBeanCumplimientoExternoRRHH = new ArrayList<BeanCumplimientoExternoRRHH>();
 
-		try{
+		  try{
+		   tx.begin();
+		   strQueryNoCIni = ("SELECT horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
+		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha = '"+ desdeDate +"'  LIMIT 1");
+		   Query query = pm.newQuery("javax.jdo.query.SQL",strQueryNoCIni);
+		   ArrayList<Integer> ConsecutiveNumber = (ArrayList<Integer>) query.execute();
+		   intNoCIni = ConsecutiveNumber.get(0);
+		   
+		   strQueryNoCFin = ("SELECT horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
+		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha = '"+ hastaDate +"'  ORDER BY horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep DESC LIMIT 1");
+		   query = pm.newQuery("javax.jdo.query.SQL",strQueryNoCFin);
+		   intNoCFin = (int)(float) query.execute();
+		   
+		   for (int i = intNoCIni; i <= intNoCFin; i++){
+		    strQuery = ("SELECT * FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
+		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep = '"+ i +"'");
+		    query = pm.newQuery("javax.jdo.query.SQL",strQuery);
+		    query.setResultClass(BeanCumplimientoExternoRRHH.class);
+		    resultadosBeanCumplimientoExternoRRHH.add((BeanCumplimientoExternoRRHH) query.execute());
+		   }
+		   
+		   return resultadosBeanCumplimientoExternoRRHH;
 
-			tx.begin();
+		  }
+		  catch (Exception e)
+		  {
+		   e.printStackTrace();
+		  }
 
-			strQuery = ("SELECT * FROM horariosescalonadosv2.CumplimientoExternoRRHH"
-					+ " WHERE Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' "
-					+ " and horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte "
-					+ "from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )");
-			Query query = pm.newQuery("javax.jdo.query.SQL",strQuery);
-			query.setResultClass(BeanCumplimientoExternoRRHH.class);
-			resultadosBeanCumplimientoExternoRRHH = (List<BeanCumplimientoExternoRRHH>) query.execute();
+		  finally {
+		   if (tx.isActive()) 
+		   {
+		    tx.rollback();
+		   }
+		   //pm.close();
 
-			return resultadosBeanCumplimientoExternoRRHH;
+		  }
 
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		finally {
-			if (tx.isActive()) 
-			{
-				tx.rollback();
-			}
-			//pm.close();
-
-		}
-
-		return resultadosBeanCumplimientoExternoRRHH;
-	}
+		  return resultadosBeanCumplimientoExternoRRHH;
+		 }
 	
 //-----------------------REPORTE ADMIN CYGE RRHH ---------------------------------------------
 		public List<BeanCumplimientoExternoRRHH> ReporteAdminCygeRRHH (Date desdeDate, Date hastaDate)

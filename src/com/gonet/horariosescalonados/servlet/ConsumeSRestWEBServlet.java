@@ -68,8 +68,7 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 			
 		try {
 			
-			
-			
+				
 //			ArrayList <String> listaCorreo= new ArrayList<String>(); 
 //			
 //			listaCorreo.add("juancarlos.ramirez.contractor@bbva.com");

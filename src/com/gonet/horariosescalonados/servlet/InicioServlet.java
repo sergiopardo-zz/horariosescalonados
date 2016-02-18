@@ -36,7 +36,7 @@ public class InicioServlet extends HttpServlet{
 		RequestDispatcher dispatcher;	
 		
 		try {
-			CargaInicial.carga();
+			//CargaInicial.carga();
 			DatanucleusPersistenceManager.getInstance();	
 			
 			//ServletContext context = getServletContext();

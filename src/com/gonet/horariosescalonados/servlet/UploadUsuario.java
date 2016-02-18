@@ -37,8 +37,7 @@ public class UploadUsuario extends HttpServlet{
 			String perfilConsulta = cargaMasiva.cargaPerfilConsulta(idEmpleado, tipoConsulta);
 			resp.sendRedirect("/");
 		
-		}else{
-		if(tipoUsuario.equals("GE")){
+		}if(tipoUsuario.equals("GE")){
 			String html = cargaMasiva.cargaUsuariosCyge(blobKeys, resp,idEmpleado,tipoConsulta);
 			String perfilConsulta = cargaMasiva.cargaPerfilConsulta(idEmpleado, tipoConsulta);
 			String fileName = "logHorario_"+ObtenFechas.fechaHoy()+".txt ";
@@ -64,4 +63,3 @@ public class UploadUsuario extends HttpServlet{
 			}
 		}
 	}
-}
