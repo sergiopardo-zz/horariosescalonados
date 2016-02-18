@@ -20,7 +20,6 @@ Calendar calFechaProxSol = new GregorianCalendar(); // Se crea Calendar para la 
 //boolean bEdificio = sEdificio.trim().equals("REFORMA") || sEdificio.trim().equals("POLANCO");
 boolean bMostrarAdministracion = (sPerfil.equals("GE")|| sPerfil.equals("RH"));
 boolean bMostrarSuperAdministrador = sPerfil.equals("SS");
-boolean bMostrarEmpleado = sPerfil.equals("E");
 
 boolean bNuevaSolicitud = sFechaSolicitud.equals("");
 boolean bHorarioActual = sHorarioActual.equals("00000000");

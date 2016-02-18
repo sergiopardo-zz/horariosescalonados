@@ -529,38 +529,5 @@ public class QueryTables {
 		 
 		 return 0;
 	 }
-	 
-	 
-	 
-	 public int maximoCumplimiento(Date desdeDate, Date hastaDate)
-	 {
-		 int intNumregistro = 0;
-		 try{
-				Connection conn = Connector.getConexion();
-				try {	
-					String selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento WHERE fecha between '"+desdeDate+"' and '"+hastaDate+"'";
-					PreparedStatement stmt = conn.prepareStatement(selectSql);
-									
-					ResultSet resultSet = stmt.executeQuery();
-					
-					if(resultSet.next()){
-						
-						intNumregistro = resultSet.getInt(1);
-						
-					}
-					
-					return intNumregistro;
-					
-				} finally {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				System.err.println(e);
-				
-			}		 
-		 
-		 return 0;
-	 }
-
 
 }

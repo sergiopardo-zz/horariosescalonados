@@ -119,11 +119,6 @@
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
 											</tr>
 										</c:if>
-										<c:if test="${tipEmp == 'CI'}">
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>
-											</tr>
-										</c:if>
 										<c:if test="${tipEmp == 'CA'}">
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos</option></td>

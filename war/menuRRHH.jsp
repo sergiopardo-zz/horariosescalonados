@@ -19,14 +19,7 @@
 	<script src='config/js/jquery-ui.min.js'></script>
 	<script type="text/javascript" src="config/js/acciones.js"></script>
 	<script type="text/javascript" src='config/js/calendar.js'></script>
-	
-	
-	
-	
-	
-	
-	
-	
+		
 </head>
 
 <body>

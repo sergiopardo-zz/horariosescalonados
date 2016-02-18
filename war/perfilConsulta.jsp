@@ -195,11 +195,16 @@
 				<table   class="radio-group" border="0" style="margin: 0 auto;">
 					 <tbody>
 						 <tr>
-						 	
-							<td><input type="checkbox" id="consInt" name="addreess" onclick="checkModal();estatusActivo();"/>
+						 	<c:if test="${tipEmp=='GE' }">	
+							<td><input type="checkbox" id="consInt" name="addreess" onclick="checkModal();estatusActivo();" disabled/>
 								<!-- <label for="consInt"></label> --></td>							
 							<td ><label class="textoRadio_PC">Consulta Internos</label></td>
-							
+							</c:if>
+						 	<c:if test="${tipEmp=='RH' }">	
+							<td><input type="checkbox" id="consInt" name="addreess" onclick="checkModal();estatusActivo();" />
+								<!-- <label for="consInt"></label> --></td>							
+							<td ><label class="textoRadio_PC">Consulta Internos</label></td>
+							</c:if>
 							<td><input type="checkbox" id="consExt" name="addreess" onclick="checkModal();estatusActivo();"/>
 								<!-- <label for="consExt"></label> --></td>
 							<td><label class="textoRadio_PC">Consulta externos</label></td>
@@ -246,7 +251,7 @@
 					<td><a href="menuv1.jsp" class="reposo" style="position:relative;top:-11px;" >Cancelar</a></td>
 				</tr>
 			</table>
-			<input type="hidden" name="tipoUsuario" id="hidTipoUsuario" value=<%=sTipo%>/>
+			<input type="hidden" name="tipoUsuario" id="hidTipoUsuario" value=<%=sTipo%>></input>
 			<input type="hidden" name="tipoConsulta" id="hidTipoConsulta" value=""></input>
 			<input type="hidden" value="<c:out value="${empleadoId}"/>"  name="idUsuarioHid"></input>
 		</div>

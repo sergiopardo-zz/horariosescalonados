@@ -218,6 +218,10 @@
 	<c:if test="${tipEmp == 'CA'}">
 	<%@include file="menuEmplC.jsp"%> 
 	</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
+	<%@include file="menuEmplC.jsp"%> 
+	</c:if>
 		
    <form name="frmCambio" action="/generarsolicitud" method="post" target="_self"> 
       <input type="hidden" id="hiddenSelectedRadio" name="hiddenSelectedRadio" value="0"> 

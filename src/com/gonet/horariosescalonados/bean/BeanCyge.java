@@ -19,7 +19,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 @PersistenceCapable(objectIdClass=BeanCyge.ComposedIdKey.class,catalog = "horariosescalonadosv2", table = "Cyge" )
 public class BeanCyge implements Archivo {
 	
-
 		@PrimaryKey
 		@Persistent (name = "noCyge")
 		private String NoCyge;
@@ -124,8 +123,8 @@ public class BeanCyge implements Archivo {
 			
 		public BeanCyge(String noCyge, String usuario, String nombre, String apePaterno, String apeMaterno,
 				String dirGeneral, String dirCorporativa, String area, String entOficial, String autorizadorId,
-				String autorizador, String proveedor, String proyecto, String estatus, String lugarAsignadoEdificio,
-				String creadoPor, String estatusArchivo, String espacioFisico, Date fechaRagistroArchivo, String email) {
+				String autorizador, String proveedor, String proyecto, String estatus, String espacioFisico, String lugarAsignadoEdificio,
+				String strEmail, Date fechaCreacionRegistro, String creadoPor,String estatusArchivo) {
 			super();
 			NoCyge = noCyge;
 			Usuario = usuario;
@@ -141,12 +140,13 @@ public class BeanCyge implements Archivo {
 			Proveedor = proveedor;
 			Proyecto = proyecto;
 			Estatus = estatus;
-			FechaCreacionRegistro = fechaRagistroArchivo;
+			EspacioFisico = espacioFisico;
+			LugarAsignadoEdificio = lugarAsignadoEdificio;			
+			Email = strEmail;
+			FechaCreacionRegistro = fechaCreacionRegistro;
 			CreadoPor = creadoPor;
 			EstatusArchivo = estatusArchivo;
-			EspacioFisico = espacioFisico;
-			LugarAsignadoEdificio = lugarAsignadoEdificio;
-			Email = email;
+		    
 		}
 
 		public BeanCyge(ResultSet resultSet) throws SQLException{

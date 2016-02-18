@@ -10,7 +10,7 @@ public class Fecha {
 	public Date fechas(){
 		SimpleDateFormat fechalec = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -1);
+		c.add(Calendar.DATE, - 1);
 		//Date date = c.getTime();
 		String fecha = fechalec.format(c.getTime());
 		Date fechas = null;

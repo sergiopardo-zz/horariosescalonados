@@ -108,7 +108,7 @@ public class BeanCumplimientoExternoRRHH {
 	public BeanCumplimientoExternoRRHH(String strUsuario, String strNombre, 
 			String strDireccionGeneral, String strDireccionCorporativa, 
 			String strArea, Date strFecha, String entradaOficial, String entradaReal, 
-			String strSalidaReal, String Edificio)
+			String strSalidaReal/*, String Edificio*/)
 	{
 		super();
 		this.Usuario = strUsuario;
@@ -120,7 +120,7 @@ public class BeanCumplimientoExternoRRHH {
 		this.EntradaOficial= entradaOficial;
 		this.EntradaReal = (entradaReal == null)?HeConstantes.DATO_INVALIDO_REPORTE:entradaReal;
 		this.SalidaReal = (strSalidaReal == null)?HeConstantes.DATO_INVALIDO_REPORTE:strSalidaReal;
-		this.EdificioAsignado=Edificio;
+		//this.EdificioAsignado=Edificio;
 		//this.strJornada=strJornada;
 	}
 

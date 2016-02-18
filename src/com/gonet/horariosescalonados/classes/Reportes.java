@@ -215,8 +215,8 @@ public class Reportes {
 	public static String altaBajaModif(String tipo, String desde, String hasta) throws IOException{
 		
 		System.out.println("--Entra a altaBajaModif TEST BETY " + tipo);
-		String html = ENCABEZADO;
-	    html += ALTA_BAJA_MODIF;
+		String html = (ENCABEZADO);
+	    html += (ALTA_BAJA_MODIF);
 	    //// Iterable<Entity> result = null;
 	    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 	    try {	    	

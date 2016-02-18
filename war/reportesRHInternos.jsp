@@ -39,10 +39,6 @@
 	<%@include file="menuEmplRRHHCE.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'CC'}">
-	<%@include file="menuEmplRRHHCE.jsp"%> 
-	</c:if>
-	
 	<!-- Inicia Contenido -->
 	<div class="contenidoMiga">
 				<ul class="posicionMiga">	

@@ -2,9 +2,9 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="com.gonet.horariosescalonados.bean.BeanEmpleado"%>
     <%@ page import="java.util.*"%>
+    <%String empleado = (String)(request.getAttribute("empleadoID")!=null?request.getAttribute("empleadoID"):"");%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <%String empleado = (String)(request.getAttribute("empleadoID")!=null?request.getAttribute("empleadoID"):"");%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -205,7 +205,7 @@
 		<input type="hidden" id="opcion" name="opcion" value="buscar" />
 	
 	<!-- Inicia Encabezado -->
-<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
+	<c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	<c:if test="${tipEmp == 'SS'}">
 	<%@include file="header.jsp"%> 
 	</c:if>
@@ -228,7 +228,7 @@
 	
 	<c:if test="${tipEmp == 'C'}">
 	<%@include file="menuEmplC.jsp"%> 
-	</c:if> 
+	</c:if>
 	<!-- Final Encabezado -->
 	 
 	<!-- Inicia Contenido -->

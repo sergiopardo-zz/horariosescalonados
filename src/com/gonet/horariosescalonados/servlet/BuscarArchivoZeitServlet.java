@@ -42,18 +42,19 @@ public class BuscarArchivoZeitServlet extends HttpServlet
 
 		ServletContext context = getServletContext();
 
-		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/carga zeit usuarios dos edificios del 8 al 11 de febrero.txt");
+		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/externos20160126123144.txt");
 		
-		/*String appName = "enteratvdos";
+		/*
+		String appName = "enteratvtres";
         
-        GcsFilename fileName = new GcsFilename(appName, "carga zeit usuarios dos edificios del 8 al 11 de febrero.txt");
+        GcsFilename fileName = new GcsFilename(appName, "externos20160126123144.txt");
        
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		
 		InputStream input =Channels.newInputStream(readChannel);
 		*/
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		
+	
 		copy(inputStreamArchivo,output);
 		
 		byte[] bytes = output.toByteArray();

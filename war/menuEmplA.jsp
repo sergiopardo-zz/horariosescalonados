@@ -18,7 +18,7 @@ Calendar calFechaAplicacion = new GregorianCalendar(); // Se crea Calendar para 
 Calendar calFechaProxSol = new GregorianCalendar(); // Se crea Calendar para la fecha de la próxima modificación/baja
 
 //boolean bEdificio = sEdificio.trim().equals("REFORMA") || sEdificio.trim().equals("POLANCO");
-boolean bMostrarAdministracion = (sPerfil.equals("A")|| sPerfil.equals("SS"));
+boolean bMostrarAdministracion = (sPerfil.equals("GE")|| sPerfil.equals("RH"));
 boolean bMostrarSuperAdministrador = sPerfil.equals("SS");
 
 boolean bNuevaSolicitud = sFechaSolicitud.equals("");

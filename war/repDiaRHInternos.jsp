@@ -103,7 +103,7 @@
 					<tr>
 					<td class="calendarioDia" style="text-align: center;">
       					 <label class="etiqueta1">Dia:</label><input class="inputSemanas campoObligatorio" type='text' id='fechaDesde' readonly> 
-     					  <!-- <label class="etiqueta1 separacionCalendario">Hasta:</label><input class="inputSemanas campoObligatorio" type='text' id='fechaHasta' readonly> -->
+      					 <!-- <label class="etiqueta1 separacionCalendario">Hasta:</label><input class="inputSemanas campoObligatorio" type='text' id='fechaHasta' readonly> -->
      				 </td>
 						<td class="tx3Tabla">
 							<div class="contenidoSelecciona tamSeleccionaAutorizar">

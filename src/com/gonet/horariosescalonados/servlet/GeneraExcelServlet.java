@@ -50,7 +50,6 @@ public class GeneraExcelServlet extends HttpServlet {
 		String mes = req.getParameter("hiddenMes")!=null?req.getParameter("hiddenMes").toString():"";
 		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
 		String tipousuario = req.getParameter("hiddenTipoUsuario")!=null?req.getParameter("hiddenTipoUsuario").toString():"";
-		String tipoReporte = req.getParameter("hiddenTipoReporte")!=null?req.getParameter("hiddenTipoReporte").toString():"";
 		String fileName="";	
 		if(semana!= ""){
 			TiempoReporte tiempo = new TiempoReporte();
@@ -70,6 +69,7 @@ public class GeneraExcelServlet extends HttpServlet {
 		if(opcion.equals("alta")){
 			html += Reportes.altaBajaModif("ALTA", desde, hasta);			
 			fileName = "Alta_"+ObtenFechas.fechaHoy();
+			
 	    }else if(opcion.equals("modificacion")){
 	    	html += Reportes.altaBajaModif("MODIFICACION", desde, hasta);			
 			fileName = "Modificacion_"+ObtenFechas.fechaHoy();
@@ -107,7 +107,7 @@ public class GeneraExcelServlet extends HttpServlet {
 	    	
 //-------------------------------------------------------------------------------------
 	    }else if(opcion.equals("incumplimiento")){
-	    	if(tipousuario.equals("GE") ||tipousuario.equals("SS")){
+	    	if(tipousuario.equals("GE") ||tipousuario.equals("SS") || tipousuario.equals("RH")){
 	    		try{
 	    	    	html += reportes.IncumplimientoExternoAdmin(desde, hasta);
 	    	    	}catch(Exception e){

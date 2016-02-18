@@ -435,7 +435,11 @@ public class DataNucleusQuery
 			}else if(tipoConsulta.equals("INTERNOS")){
 				for(int x=1;x<usuario.length;x++){
 					try{
-						if(usuario[x].startsWith("M")){
+						if(usuario[x].startsWith("X")){
+							strAccion =strAccion+ "El usuario no esta en formato Interno:"+ usuario[x] +"\n";
+							System.out.println("El usuario no esta en formato Interno y no se agrego: "+usuario[x] );
+							
+						}else{
 							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
 									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
 
@@ -443,30 +447,19 @@ public class DataNucleusQuery
 							query.execute();
 							strAccion =strAccion+ "Se agrego el usuario a Internos:"+ usuario[x]+ "\n";
 							System.out.println("Se agrega el usuario a la tabla PerfilConsultaInternos: " + usuario[x]);
-						}else{
-							strAccion =strAccion+ "El usuario no esta en formato Interno:"+ usuario[x] +"\n";
-							System.out.println("El usuario no esta en formato Interno y no se agrego: "+usuario[x] );
 						}
 					}catch(Exception e){
 						e.printStackTrace();
 					}
 				}
-				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CE' WHERE empleadoID = '"+ UsuarioRepren+ "'";
+				strActualiza = "UPDATE horariosescalonadosv2.empleado SET tipoEmpleado ='CC' WHERE empleadoID = '"+ UsuarioRepren+ "'";
 				Query query1 = pm.newQuery("javax.jdo.query.SQL",strActualiza);
 				query1.execute();
 			}else if(tipoConsulta.equals("AMBOS")){
 				for(int x=1;x<usuario.length;x++){
 					try{
-						if(usuario[x].startsWith("M")){
-							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
-									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
-
-							Query query = pm.newQuery("javax.jdo.query.SQL",strPrueba);
-							query.execute();
-							strAccion =strAccion+ "Se agrego el usuario a Internos:"+ usuario[x]+ "\n";
-							System.out.println("Se agrega el usuario a la tabla PerfilConsultaInternos: " + usuario[x]);
-						}else if(usuario[x].startsWith("X")){
-
+						if(usuario[x].startsWith("X")){
+							
 							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaExternos (IdUsuarioConsulta, IdUsuarioReporte)" +
 									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
 
@@ -475,11 +468,20 @@ public class DataNucleusQuery
 							strAccion =strAccion+ "Se agrego el usuario a Externos:"+ usuario[x] +"\n";
 							System.out.println("Se agrega el usuario a la tabla PerfilConsultaExternos: "+usuario[x] );
 
-							}else{
-								strAccion =strAccion+ "El usuario no esta en formato Interno o Externo:"+ usuario[x] +"\n";
-								System.out.println("El usuario no esta en formato Interno o Externo y no se agrego: "+usuario[x] );
+							
+							
+							
+						}else{
+							strPrueba = "INSERT INTO horariosescalonadosv2.PerfilConsultaInternos (IdUsuarioConsultaInterno, IdUsuarioReporteInterno)" +
+									"VALUES (" + "'"+ UsuarioRepren+ "'" + "," + "'"+ usuario[x]+ "'" + ")";
+
+							Query query = pm.newQuery("javax.jdo.query.SQL",strPrueba);
+							query.execute();
+							strAccion =strAccion+ "Se agrego el usuario a Internos:"+ usuario[x]+ "\n";
+							System.out.println("Se agrega el usuario a la tabla PerfilConsultaInternos: " + usuario[x]);
+
+							
 							}
-						
 						
 					}catch(Exception e){
 						e.printStackTrace();
