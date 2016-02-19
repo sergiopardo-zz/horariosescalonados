@@ -22,6 +22,7 @@ import com.gonet.horariosescalonados.bean.BeanZeit;
 import com.gonet.horariosescalonados.connector.Connector;
 
 
+
 public class InsertarRegistro {
 	
 	public static void empleado(BeanEmpleado empleado){		
@@ -454,6 +455,106 @@ public class InsertarRegistro {
 			String statement = "UPDATE horariosescalonadosv2.registros SET registro=0 where ID_registro = 1";
 			
 			PreparedStatement stmt = conn.prepareStatement(statement);
+			stmt.executeUpdate();
+			
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		finally
+		{
+			conn.close();
+		}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+		return 0;
+		
+	}
+	
+	public int usuarioInserreporte(String email)
+	{
+		Connection conn=null;
+		try {
+			conn = Connector.getConexion();
+		
+		try {
+						
+			//String statement = "UPDATE horariosescalonadosv2.registros SET registro=0 where ID_registro = 1";
+			String statement = "insert into horariosescalonadosv2.reporteValido (Usuario_Email) values (?)";
+			
+			PreparedStatement stmt = conn.prepareStatement(statement);
+			stmt.setString(1, email);
+			stmt.executeUpdate();
+			
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		finally
+		{
+			conn.close();
+		}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+		return 0;
+		
+	}
+	
+	public int updateReporteRegParimera(String email, String desde, String hasta, String mes)
+	{
+		Connection conn=null;
+		try {
+			conn = Connector.getConexion();
+		
+		try {
+						
+			String statement = "UPDATE horariosescalonadosv2.reporteValido SET registro=1 and desde = ? and hasta = ? and mes = ? where Usuario_Email = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(statement);
+			stmt.setString(1, desde);
+			stmt.setString(2, hasta);
+			stmt.setString(3, mes);
+			stmt.setString(4, email);
+			stmt.executeUpdate();
+			
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		finally
+		{
+			conn.close();
+		}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+		return 0;
+		
+	}
+	
+	public int updateReporteRegLimpia(String email)
+	{
+		Connection conn=null;
+		try {
+			conn = Connector.getConexion();
+		
+		try {
+						
+			String statement = "UPDATE horariosescalonadosv2.reporteValido SET registro=0 where Usuario_Email = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(statement);
+			stmt.setString(1, email);
 			stmt.executeUpdate();
 			
 			} catch (SQLException e) {

@@ -31,7 +31,8 @@
 	function generar(){
 		formreportes.action = "/generaexcel";
 		formreportes.submit();
-		$("#fechaDesde").val{""}
+		$('#fechaDesde').val("");
+		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
 	}
 
 

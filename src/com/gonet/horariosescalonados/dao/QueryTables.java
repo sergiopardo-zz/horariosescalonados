@@ -22,6 +22,7 @@ import javax.jdo.PersistenceManagerFactory;
 
 
 
+
 import com.gonet.horariosescalonados.bean.BeanCumplimiento;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExterno;
 import com.gonet.horariosescalonados.bean.BeanDocumento;
@@ -35,6 +36,7 @@ import com.gonet.horariosescalonados.bean.BeanSolicitud;
 import com.gonet.horariosescalonados.bean.BeanCyge;
 import com.gonet.horariosescalonados.bean.BeanPerfilConsulta;
 import com.gonet.horariosescalonados.connector.Connector;
+
 
 
 public class QueryTables {
@@ -529,5 +531,133 @@ public class QueryTables {
 		 
 		 return 0;
 	 }
+	 
+	 
+	 
+	 public int maximoCumplimiento(java.sql.Date desdeDate, java.sql.Date hastaDate)
+	 {
+		 int intNumregistro = 0;
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+									
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()){
+						
+						intNumregistro = resultSet.getInt(1);
+						
+					}
+					
+					return intNumregistro;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return 0;
+	 }
+	 
+	 
+	 
+	 public boolean ExisteUsuario(String email)
+	 {
+		 boolean existe = false;
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT Usuario_Email FROM horariosescalonadosv2.reporteValido where Usuario_Email = ?";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+					stmt.setString(1, email);	
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()){
+						
+						existe = true;
+						
+					}
+					
+					return existe;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return false;
+	 }
+
+
+	 public boolean Acceder(String email)
+	 {
+		 boolean existe = false;
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT Usuario_Email FROM horariosescalonadosv2.reporteValido where Usuario_Email = ? and registro = 1";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+					stmt.setString(1, email);	
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()){
+						
+						existe = true;
+						
+					}
+					
+					return existe;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return false;
+	 }
+	 
+	 public ArrayList<String> desdehasta (String email)
+	 {
+		 ArrayList<String> desdehasta = new ArrayList<String>();
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT desde, hasta, mes FROM horariosescalonadosv2.reporteValido where Usuario_Email = ? and registro = 1";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+					stmt.setString(1, email);	
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()){
+						
+						desdehasta.add(resultSet.getString(1));
+						desdehasta.add(resultSet.getString(2));
+						desdehasta.add(resultSet.getString(3));
+						
+					}
+					
+					return desdehasta;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return null;
+	 }
+
 
 }

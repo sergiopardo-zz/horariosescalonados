@@ -28,8 +28,10 @@
 	}
 				
 	function generar(){
-		formreportes.action = "/generaexcel";
+		formreportes.action = "/Servlet_Archivo";
 		formreportes.submit();
+		$('#fechaMes').val("");
+		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
 	}
 	
 	</script>
@@ -37,7 +39,7 @@
 
 <body>
 
-<form id="formreportes" action="/generareporte" method="post">
+<form id="formreportes" action="/Servlet_Archivo" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenMes" id="hiddenMes" />

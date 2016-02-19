@@ -276,7 +276,7 @@ public class TiempoReporte {
 		if (entero != 2){
 			f1 = hasta;
 		}else{
-		  dia = dia - 3;
+		  dia = dia - 2;
 		  String D = Integer.toString(dia);
 		  String Mes = "0" + Integer.toString (M);
 		  String A = Integer.toString(año);

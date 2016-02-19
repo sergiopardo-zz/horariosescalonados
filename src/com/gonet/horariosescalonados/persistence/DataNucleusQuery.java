@@ -795,38 +795,57 @@ public class DataNucleusQuery
 		 {
 		  PersistenceManager pm = DatanucleusPersistenceManager.getInstance().getPersistenceManager();
 
-		  Transaction tx = (Transaction) pm.currentTransaction();
-		  String strQuery = null;
-		  String strQueryNoCIni = null;
-		  String strQueryNoCFin = null;
-		  
-		  int intNoCIni = 0;
-		  int intNoCFin = 0;
+		  Transaction tx = (Transaction) pm.currentTransaction();  
 		  List<BeanCumplimientoExternoRRHH> resultadosBeanCumplimientoExternoRRHH = new ArrayList<BeanCumplimientoExternoRRHH>();
-
+		  List<Integer> ConsecutiveNumber = null;
+		  
 		  try{
 		   tx.begin();
-		   strQueryNoCIni = ("SELECT horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
-		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha = '"+ desdeDate +"'  LIMIT 1");
-		   Query query = pm.newQuery("javax.jdo.query.SQL",strQueryNoCIni);
-		   ArrayList<Integer> ConsecutiveNumber = (ArrayList<Integer>) query.execute();
-		   intNoCIni = ConsecutiveNumber.get(0);
 		   
-		   strQueryNoCFin = ("SELECT horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
-		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha = '"+ hastaDate +"'  ORDER BY horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep DESC LIMIT 1");
-		   query = pm.newQuery("javax.jdo.query.SQL",strQueryNoCFin);
-		   intNoCFin = (int)(float) query.execute();
+		   Query strQueryNoCIni = pm.newQuery("SQL","SELECT horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
+		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha = '"+ desdeDate +"' LIMIT 1");
+		   ConsecutiveNumber = (List<Integer>) strQueryNoCIni.execute();
+		   int intNoCIni = (int) ConsecutiveNumber.get(0);
+		   
+		   Query strQueryNoCFin = pm.newQuery("SQL","SELECT horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
+		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha = '"+ hastaDate +"'  ORDER BY horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha DESC LIMIT 1");
+		   ConsecutiveNumber = (List<Integer>) strQueryNoCFin.execute();
+		   int intNoCFin = (int) ConsecutiveNumber.get(0);
 		   
 		   for (int i = intNoCIni; i <= intNoCFin; i++){
-		    strQuery = ("SELECT * FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
-		     + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep = '"+ i +"'");
-		    query = pm.newQuery("javax.jdo.query.SQL",strQuery);
-		    query.setResultClass(BeanCumplimientoExternoRRHH.class);
-		    resultadosBeanCumplimientoExternoRRHH.add((BeanCumplimientoExternoRRHH) query.execute());
-		   }
-		   
-		   return resultadosBeanCumplimientoExternoRRHH;
+		    BeanCumplimientoExternoRRHH cumplimiento = null;
+		    Query QueryCount = pm.newQuery("SQL","SELECT COUNT(*) FROM horariosescalonadosv2.CumplimientoExternoRRHH2 WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep = '"+ i +"' "
+		      + "and horariosescalonadosv2.CumplimientoExternoRRHH2.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte " 
+		      + "from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+ usuario +"' )");
+		    
+		    List<Long> ExisteUsr = (List<Long>)QueryCount.execute();
+		    
+		    if (ExisteUsr.get(0) != 0){
+		     Query strQuery = pm.newQuery("SQL","SELECT horariosescalonadosv2.CumplimientoExternoRRHH2.Usuario, horariosescalonadosv2.CumplimientoExternoRRHH2.Nombre, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.CRDireccionGeneral, horariosescalonadosv2.CumplimientoExternoRRHH2.direccionGeneral, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.CRDireccionCorporativa, horariosescalonadosv2.CumplimientoExternoRRHH2.direccionCorporativa, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.CRArea, horariosescalonadosv2.CumplimientoExternoRRHH2.Area, horariosescalonadosv2.CumplimientoExternoRRHH2.Fecha, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.Quincena, horariosescalonadosv2.CumplimientoExternoRRHH2.Mes, horariosescalonadosv2.CumplimientoExternoRRHH2.TEA, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.entradaOficial, horariosescalonadosv2.CumplimientoExternoRRHH2.TED, horariosescalonadosv2.CumplimientoExternoRRHH2.entradaReal, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.CalificacionEntrada, horariosescalonadosv2.CumplimientoExternoRRHH2.TSA, horariosescalonadosv2.CumplimientoExternoRRHH2.salidaOficial, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.TSD, horariosescalonadosv2.CumplimientoExternoRRHH2.salidaReal, horariosescalonadosv2.CumplimientoExternoRRHH2.CalificacionSalida, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.Jornada, horariosescalonadosv2.CumplimientoExternoRRHH2.CalificacionJornada, horariosescalonadosv2.CumplimientoExternoRRHH2.CalificacionTotal, "
+		       + "horariosescalonadosv2.CumplimientoExternoRRHH2.PorcentajeCumplimiento, horariosescalonadosv2.CumplimientoExternoRRHH2.EdificioAsignado  "
+		       + "FROM horariosescalonadosv2.CumplimientoExternoRRHH2 "
+		       + "WHERE horariosescalonadosv2.CumplimientoExternoRRHH2.Idrep = '"+ i +"' and horariosescalonadosv2.CumplimientoExternoRRHH2.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte "
+		       + "from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+ usuario +"' );");
 
+		     strQuery.setResultClass(BeanCumplimientoExternoRRHH.class);
+		     List<BeanCumplimientoExternoRRHH> RegistroCumplimientoExtRH = (List<BeanCumplimientoExternoRRHH>) strQuery.execute();
+		     cumplimiento = RegistroCumplimientoExtRH.get(0);
+		    }
+		    
+		    if (cumplimiento != null){
+		     resultadosBeanCumplimientoExternoRRHH.add(cumplimiento);
+		    }
+		   }
+
+		   return resultadosBeanCumplimientoExternoRRHH;
 		  }
 		  catch (Exception e)
 		  {
