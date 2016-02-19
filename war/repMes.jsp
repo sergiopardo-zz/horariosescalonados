@@ -32,6 +32,7 @@
 		formreportes.submit();
 		$('#fechaMes').val("");
 		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
+		activaBoton();
 	}
 	
 	</script>
@@ -70,10 +71,6 @@
 	
 	<c:if test="${tipEmp == 'GE'}">
 	<%@include file="menuEmplA.jsp"%> 
-	</c:if>
-	
-	<c:if test="${tipEmp == 'C'}">
-	<%@include file="menuEmplC.jsp"%> 
 	</c:if>
 	<!-- Final Menu -->
 	<!-- Inicia Contenido -->

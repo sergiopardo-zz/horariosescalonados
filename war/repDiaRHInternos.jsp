@@ -31,6 +31,7 @@
 		formreportes.submit();
 		$('#fechaDesde').val("");
 		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
+		activaBoton();
 	}
 
 

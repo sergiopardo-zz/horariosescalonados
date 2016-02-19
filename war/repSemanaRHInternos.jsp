@@ -33,6 +33,7 @@
 		formreportes.submit();
 		$('#fechaSemana').val("");
 		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
+		activaBoton();
 	}
 	
 	</script>
