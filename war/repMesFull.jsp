@@ -4,7 +4,10 @@
    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
    <%@page import="com.google.appengine.api.datastore.Entity"%>
    <% String sUsuario = session.getAttribute("usuario")==null?"":(String)session.getAttribute("usuario");
-      String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.getAttribute("tipo_empleado");%>
+      String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.getAttribute("tipo_empleado");
+      String hiddenDesde = session.getAttribute("hiddenDesde")==null?"":(String)session.getAttribute("hiddenDesde");
+      String opcionReporte = session.getAttribute("opcionReporte")==null?"":(String)session.getAttribute("opcionReporte");
+      %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,10 +17,15 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
  	<link rel='stylesheet' type="text/css" href='config/css/NewCalendar.css'>
 	<script src="config/js/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src='config/js/jquery-ui.min.js'></script>
-	<script type="text/javascript" src="config/js/acciones.js"></script>
-	<script type="text/javascript" src='config/js/calendar.js'></script>
 	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#aviso2, #aviso3, #btnRegresar, #btn2do").hide();
+		document.getElementById("mes").value = "<%=hiddenDesde%>";
+		  document.getElementById("lstOpcion").value = "<%=opcionReporte%>";
+		
+	});
 	
 	function onclickReporte(valor){	
 		var indice = document.getElementById("opcionReporte").value = valor;
@@ -28,18 +36,21 @@
 				
 	function generar(){
 		formreportes.action = "/Servlet_Archivodos";
-		formreportes.submit();/*, function (){
-			$(".deshabilitado2").removeClass("deshabilitado2");
-			$(".deshabilitado2").addClass("muestraReposo");
-		};*/
+		formreportes.submit();
+		$(".muestraDeshabilitado").removeClass("noMostrar");
+		$(".muestraReposo").addClass("noMostrar");
+		$("#btn2do").focus( 10000 ,function(){
+			$("#btn2do, #aviso2").show();
+		});
 	}
 	
-	function generardos(){
+	function generarDos(){
 		formreportes.action = "/Servlet_Archivotres";
-		formreportes.submit();/*, function (){
-			$(".deshabilitado2").removeClass("deshabilitado2");
-			$(".deshabilitado2").addClass("muestraReposo");
-		};*/
+		formreportes.submit();
+		$("#btn2do").removeClass("noMostrar");
+		$("#btnRegresar").focus( 10000 ,function(){
+			$("#btnRegresar, #aviso3").show();
+		});
 	}
 	
 	</script>
@@ -47,7 +58,7 @@
 
 <body>
 
-<form id="formreportes" action="/Servlet_Archivo" method="get">
+<form id="formreportes" action="/Servlet_Archivo" >
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenMes" id="hiddenMes" />
@@ -64,7 +75,7 @@
 	<%@include file="header.jsp"%> 
 	</c:if>
 		
-	<c:if test="${tipEmp == 'AA'}">
+	<c:if test="${tipEmp == 'RH'}">
 	<%@include file="menuEmplAA.jsp"%> 
 	</c:if>
 	
@@ -76,12 +87,8 @@
 	<%@include file="menuEmplS.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'A'}">
+	<c:if test="${tipEmp == 'GE'}">
 	<%@include file="menuEmplA.jsp"%> 
-	</c:if>
-	
-	<c:if test="${tipEmp == 'C'}">
-	<%@include file="menuEmplC.jsp"%> 
 	</c:if>
 	<!-- Final Menu -->
 	<!-- Inicia Contenido -->
@@ -126,7 +133,7 @@
 						<tr class="tx3Tabla">
 							<td>						
 								<label class="etiqueta1 ">Mes:</label><input class="inputSemanas campoObligatorio" id='fechaMes' name="fechaMes" readonly=""> 
-								
+								<img class="ui-datepicker-trigger" src="config/img/calendar.png" alt="Seleccionar día" title="Seleccionar día">
 							</td>
 							
 							<td class="tx3Tabla">
@@ -136,7 +143,7 @@
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0"  id="IDComboReporte" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
-											<c:if test="${tipEmp == 'A'}">
+<c:if test="${tipEmp == 'GE'}">
 											<tr>
 												<td class="valorSeleccionado"><option value="cyge" onclick="onclickReporte(this.value)">Registros CYGE</option></td>
 											</tr>
@@ -147,12 +154,12 @@
 												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incidencias Externos</option></td>
 											</tr>		
 										</c:if>
-										<c:if test="${tipEmp == 'SS'|| tipEmp == 'S'}">
+										<c:if test="${tipEmp == 'SS'}">
 											<tr>
 												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
 											</tr>
 											<tr>
-												<td class="valorSeleccionado"><option value="modificacoin" onclick="onclickReporte(this.value)">Modificacion</option></td>
+												<td class="valorSeleccionado"><option value="modificacion" onclick="onclickReporte(this.value)">Modificacion</option></td>
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option value="baja" onclick="onclickReporte(this.value)">Baja</option></td>
@@ -173,6 +180,26 @@
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
 											</tr>
 											</c:if>
+											<c:if test="${tipEmp == 'RH'}">
+											<tr>
+												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option value="modificacion" onclick="onclickReporte(this.value)">Modificacion</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option value="baja" onclick="onclickReporte(this.value)">Baja</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option value="noasignacion" onclick="onclickReporte(this.value)">No Asignacion</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
+											</tr>
+											<tr>
+												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
+											</tr>
+											</c:if>
 										</tbody>
 									</table>
 								</div>
@@ -181,16 +208,33 @@
 						</tr>
 					</table>
 			</div>
-			
-			<div class="boton botonDerecho muestraReposo noMostrar" style="height: 40px;">		
+			<div class="aviso" style="margin-top: 10px">
+				 El reporte a generar es demasiado grande, por ello sera divido en dos segmentos.
+			</div>
+			<div class="boton botonDerecho muestraReposo" style="height: 40px;">		
 				<a class="reposo" id='BTNCONSULTAR' value='Generar' href="javascript:generar();" style="background-size: 103px 41px; height: 35px;">Generar 1ra Parte</a>
 			</div>
-			<div class="boton botonDerecho noMostrar muestraReposo" style="height: 40px;">		
-				<a class="reposo" id='BTNCONSULTAR' value='Generar' href="javascript:generardos();" style="background-size: 103px 41px; height: 35px;">Generar 2da parte</a>
-			</div>
-			<div class="boton botonDerecho muestraDeshabilitado" style="height: 40px;">		
+			<div class="boton botonDerecho muestraDeshabilitado noMostrar" style="height: 40px;">		
 				<a class="deshabilitado" style="background-size: 103px 41px; height: 35px;" >Generar 1ra Parte</a>
 			</div>
+			
+			<div id="aviso2" class="aviso" style="margin-top: 10px">
+				 Genere el reporte cuando haya confirmado que se descargo la primera parte.
+			</div>
+			<div class="boton botonDerecho muestraReposo2" id="btn2do" style="height: 40px;">		
+				<a class="reposo" id='BTNCONSULTAR' value='Generar' href="javascript:generarDos();" style="background-size: 103px 41px; height: 35px;">Generar 2da parte</a>
+			</div>
+			<div class="boton botonDerecho muestraDeshabilitado2 noMostrar" style="height: 40px;">		
+				<a class="deshabilitado" style="background-size: 103px 41px; height: 35px;" >Generar 2da Parte</a>
+			</div>
+			
+			<div id="aviso3" class="aviso" style="margin-top: 10px">
+				 Cuando se hayan terminado de descargar los reportes, regrese a la anterior vista.
+			</div>
+			<div class="boton muestraReposo" id="btnRegresar" align="center">		
+				<a class="reposo"  value="Regresar" href="repMes.jsp">Regresar</a>
+			</div>
+
 		</div>
 	</div>
 	

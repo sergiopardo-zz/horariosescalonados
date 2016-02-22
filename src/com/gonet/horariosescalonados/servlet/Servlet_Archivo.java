@@ -33,6 +33,11 @@ public class Servlet_Archivo extends HttpServlet {
 		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
 		String tipousuario = req.getParameter("hiddenTipoUsuario")!=null?req.getParameter("hiddenTipoUsuario").toString():"";
 		
+		
+		req.setAttribute("mes", mes);
+        req.setAttribute("lstOpcion", opcion);
+		
+		
 		RequestDispatcher dispatcher;
 		
 		TiempoReporte tiempo = new TiempoReporte();
@@ -133,9 +138,9 @@ public class Servlet_Archivo extends HttpServlet {
 	            out.write('\n');
 	            
 	            if(usuario!=""){
-	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.cumplimientoExternoRRHH where horariosescalonadosv2.cumplimientoExternoRRHH.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
+	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
 	            }else{
-	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.cumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
 	            }
 	        	conn = Connector.getConexion();
 	            st = conn.createStatement();
@@ -202,8 +207,7 @@ public class Servlet_Archivo extends HttpServlet {
 					e.printStackTrace();
 				}
 	        }
-	     }
-	        
+	     }		
 			
 		 
 	        
@@ -332,17 +336,6 @@ public class Servlet_Archivo extends HttpServlet {
 		        
 		      }
 	        
-	        else
-			{
-				
-				dispatcher = getServletContext().getRequestDispatcher("/repMesFull.jsp");
-				
-				dispatcher.forward(req, resp);
-				
-//				req.setAttribute("anuncios", daoAnuncio.Obtener_Anuncio());
-//				req.getRequestDispatcher("/repMesFull.jsp").forward(req, resp);
-				
-			}
 	        
 	        if(opcion.equals("cumplimientoExternoCyge")){
 		        try {
@@ -589,11 +582,7 @@ public class Servlet_Archivo extends HttpServlet {
 						e.printStackTrace();
 					}
 		        }
-	        }     
-	        
-	        
-	        
-	        
+	        } 
 	        
 	        if(opcion.equals("cyge")){
 		        try {
@@ -714,7 +703,8 @@ public class Servlet_Archivo extends HttpServlet {
 		        
 		         }
 	        }
-			else
+			
+	      }			else
 			{
 				
 				dispatcher = getServletContext().getRequestDispatcher("/repMesFull.jsp");
@@ -725,7 +715,5 @@ public class Servlet_Archivo extends HttpServlet {
 //				req.getRequestDispatcher("/repMesFull.jsp").forward(req, resp);
 				
 			}
-			
-	      }
 	}
 }

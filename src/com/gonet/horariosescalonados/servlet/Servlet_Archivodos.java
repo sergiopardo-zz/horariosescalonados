@@ -35,11 +35,13 @@ public class Servlet_Archivodos extends HttpServlet {
 		String mes = req.getParameter("hiddenMes")!=null?req.getParameter("hiddenMes").toString():"";
 		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
 		String tipousuario = req.getParameter("hiddenTipoUsuario")!=null?req.getParameter("hiddenTipoUsuario").toString():"";
-		
-		
+			
+	
+		req.setAttribute("mes", mes);
+        req.setAttribute("lstOpcion", opcion);
 			Generar_Archivo Archivo = new Generar_Archivo();
 						
-			Archivo.Archivouno(req, resp, desde, hasta, mes);
+			Archivo.Archivouno(req, resp, desde, hasta, mes, opcion, tipousuario, usuario);
 			
 	//		dispatcher = getServletContext().getRequestDispatcher("/Servlet_Archivodos");
 //			Archivo.Archivodos(req, resp, desde, hasta, mes);

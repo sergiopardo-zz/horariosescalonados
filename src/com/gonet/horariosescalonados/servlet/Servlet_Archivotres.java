@@ -23,11 +23,14 @@ public class Servlet_Archivotres extends HttpServlet {
 //		String semana = req.getParameter("hiddenSemana")!=null?req.getParameter("hiddenSemana").toString():"";
 //		String mes = req.getParameter("hiddenMes")!=null?req.getParameter("hiddenMes").toString():"";
 //		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
-//		String tipousuario = req.getParameter("hiddenTipoUsuario")!=null?req.getParameter("hiddenTipoUsuario").toString():"";
-		
+
+			
 		String desde = "";
 		String hasta = "";
 		String mes = "";
+		String opcion = "";
+		String tipousuario = "";
+		String usuario = "";
 		
 			Generar_Archivo Archivo = new Generar_Archivo();
 			QueryTables daoSelect = new QueryTables();
@@ -40,7 +43,7 @@ public class Servlet_Archivotres extends HttpServlet {
 			
 			if (acceder)
 			{
-				Archivo.Archivodos(req, resp, desde, hasta, mes);
+				Archivo.Archivodos(req, resp, desde, hasta, mes,opcion,tipousuario,usuario);
 			}
 
 			
