@@ -27,13 +27,18 @@
 		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";
 	}
 				
-	function generar(){
-		formreportes.action = "/Servlet_Archivo";
-		formreportes.submit();
-		$('#fechaMes').val("");
-		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
-		activaBoton();
-	}
+	 function generar(){
+		  if ($("#opcionReporte").val() == "alta" || $("#opcionReporte").val() == "modificacion" || $("#opcionReporte").val() == "baja"|| 
+		    $("#noasignacion").val() == "alta"){
+		   formreportes.action = "/generaexcel";
+		  }else{
+		   formreportes.action = "/Servlet_Archivo";
+		  }
+		  formreportes.submit();
+		  $('#fechaMes').val("");
+		  $(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
+		  activaBoton();
+		 }
 	
 	</script>
 </head>

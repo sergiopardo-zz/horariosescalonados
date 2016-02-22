@@ -49,7 +49,7 @@
 			  document.getElementById("lstOpcion").value = "Cumplimiento Externos RRHH";
 			break;
 		}
-		  document.getElementById("fechaMes").value = misVariablesGet.fechaMes.replace("+", " ");
+		  document.getElementById("fechaMes").value = misVariablesGet.hiddenMes.replace("+", " ");
 		  onclickReporte();
 		 });
 		 
