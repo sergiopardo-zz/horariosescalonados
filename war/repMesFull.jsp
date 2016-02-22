@@ -23,9 +23,34 @@
 	 $(document).ready(function(){
 		  $("#aviso2, #aviso3, #btnRegresar, #btn2do").hide();
 		  var misVariablesGet = getVarsUrl();
-		  document.getElementById("fechaMes").value = misVariablesGet.fechaMes;
-		  document.getElementById("lstOpcion").value = misVariablesGet.opcionReporte
-		  
+		  switch (misVariablesGet.opcionReporte) {
+		  case "alta":
+			  document.getElementById("lstOpcion").value = "Alta";
+		    break;
+		  case "modificacion":
+			  document.getElementById("lstOpcion").value = "Modificación";
+		  	break;
+		  case "baja":
+			  document.getElementById("lstOpcion").value = "Baja";
+		  	break;
+		  case "noasignacion":
+			  document.getElementById("lstOpcion").value = "No Asignación";
+			break;
+		  case "cyge":
+			  document.getElementById("lstOpcion").value = "Registros CYGE";
+			break;
+		  case "cumplimiento":
+			  document.getElementById("lstOpcion").value = "Cumplimiento Internos";
+			break;
+		  case "cumplimientoExternoCyge":
+			  document.getElementById("lstOpcion").value = "Cumplimiento Externos CYGE";
+			break;
+		  case "cumplimientoExternoRRHH":
+			  document.getElementById("lstOpcion").value = "Cumplimiento Externos RRHH";
+			break;
+		}
+		  document.getElementById("fechaMes").value = misVariablesGet.fechaMes.replace("+", " ");
+		  onclickReporte();
 		 });
 		 
 		 function getVarsUrl(){
@@ -39,8 +64,7 @@
 		     return urlObj;
 		 }
 	
-	function onclickReporte(valor){	
-		var indice = document.getElementById("opcionReporte").value = valor;
+	function onclickReporte(){	
 		document.getElementById("hiddenMes").value = (document.getElementById('fechaMes').value);
 		document.getElementById("hiddenUsuario").value = document.getElementById("hiddenUsuario").value = "<%=sUsuario%>";
 		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";
@@ -102,6 +126,22 @@
 	<c:if test="${tipEmp == 'GE'}">
 	<%@include file="menuEmplA.jsp"%> 
 	</c:if>
+	
+		<c:if test="${tipEmp == 'CI'}">
+	<%@include file="menuEmplRRHHCI.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CE'}">
+	<%@include file="menuEmplRRHHCE.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CA'}">
+	<%@include file="menuEmplRRHH.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
+	<%@include file="menuEmplRRHHCE.jsp"%> 
+	</c:if>
 	<!-- Final Menu -->
 	<!-- Inicia Contenido -->
 	<div class="contenidoMiga">
@@ -149,72 +189,9 @@
 							</td>
 							
 							<td class="tx3Tabla">
-							<div class="contenidoSelecciona tamSelecciona">
+							<div class="tamSelecciona">
 								<div class ="imgSelSemanas"></div>
-								<div class="primerOpcion campoObligatorio" id="lstOpcion">Selecciona</div>
-								<div class="opcionesSelecciona">
-									<table class="listaSeleccciona" cellpadding="0" cellspacing="0"  id="IDComboReporte" onclick="$('.opcionesSelecciona').css('display','none');">														
-										<tbody>
-<c:if test="${tipEmp == 'GE'}">
-											<tr>
-												<td class="valorSeleccionado"><option value="cyge" onclick="onclickReporte(this.value)">Registros CYGE</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externo CYGE</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incidencias Externos</option></td>
-											</tr>		
-										</c:if>
-										<c:if test="${tipEmp == 'SS'}">
-											<tr>
-												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option value="modificacion" onclick="onclickReporte(this.value)">Modificacion</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option value="baja" onclick="onclickReporte(this.value)">Baja</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option value="noasignacion" onclick="onclickReporte(this.value)">No Asignacion</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option value="cyge" onclick="onclickReporte(this.value)">Registros CYGE</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externos CYGE</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
-											</tr>
-											</c:if>
-											<c:if test="${tipEmp == 'RH'}">
-											<tr>
-												<td class="valorSeleccionado"><option value="alta" onclick="onclickReporte(this.value)">Alta</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option value="modificacion" onclick="onclickReporte(this.value)">Modificacion</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option value="baja" onclick="onclickReporte(this.value)">Baja</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option value="noasignacion" onclick="onclickReporte(this.value)">No Asignacion</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimiento" onclick="onclickReporte(this.value)">Cumplimiento Internos</option></td>
-											</tr>
-											<tr>
-												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
-											</tr>
-											</c:if>
-										</tbody>
-									</table>
-								</div>
+								<input class="primerOpcion campoObligatorio colorSeleccionado" id="lstOpcion" readonly=""/>
 							</div>
 							</td>
 						</tr>
