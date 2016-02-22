@@ -20,12 +20,24 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src='config/js/jquery-ui.min.js'></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$("#aviso2, #aviso3, #btnRegresar, #btn2do").hide();
-		document.getElementById("mes").value = "<%=hiddenDesde%>";
-		  document.getElementById("lstOpcion").value = "<%=opcionReporte%>";
-		
-	});
+	 $(document).ready(function(){
+		  $("#aviso2, #aviso3, #btnRegresar, #btn2do").hide();
+		  var misVariablesGet = getVarsUrl();
+		  document.getElementById("fechaMes").value = misVariablesGet.fechaMes;
+		  document.getElementById("lstOpcion").value = misVariablesGet.opcionReporte
+		  
+		 });
+		 
+		 function getVarsUrl(){
+		     var url= location.search.replace("?", "");
+		     var arrUrl = url.split("&");
+		     var urlObj={};   
+		     for(var i=0; i<arrUrl.length; i++){
+		         var x= arrUrl[i].split("=");
+		         urlObj[x[0]]=x[1]
+		     }
+		     return urlObj;
+		 }
 	
 	function onclickReporte(valor){	
 		var indice = document.getElementById("opcionReporte").value = valor;
@@ -139,7 +151,7 @@
 							<td class="tx3Tabla">
 							<div class="contenidoSelecciona tamSelecciona">
 								<div class ="imgSelSemanas"></div>
-								<div class="primerOpcion campoObligatorio">Selecciona</div>
+								<div class="primerOpcion campoObligatorio" id="lstOpcion">Selecciona</div>
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0"  id="IDComboReporte" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
