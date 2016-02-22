@@ -40,7 +40,7 @@
 
 <body>
 
-<form id="formreportes" action="/Servlet_Archivo" method="post">
+<form id="formreportes" action="/Servlet_Archivo" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenMes" id="hiddenMes" />
