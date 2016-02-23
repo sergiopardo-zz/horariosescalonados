@@ -41,7 +41,7 @@ public class GeneraExcelServlet extends HttpServlet {
 	}	
 	
 	@SuppressWarnings("static-access")
-	public void  doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	public void  doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String html = "";
 		String opcion = req.getParameter("opcionReporte")!=null?req.getParameter("opcionReporte").toString():"";
 		String desde = req.getParameter("hiddenDesde")!=null?req.getParameter("hiddenDesde").toString():"";
@@ -176,7 +176,7 @@ public class GeneraExcelServlet extends HttpServlet {
 		resp.getWriter().println(html);
 	}
 	
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException,ServletException{
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException,ServletException{
 		doPost(req,resp);
 	}	
 	

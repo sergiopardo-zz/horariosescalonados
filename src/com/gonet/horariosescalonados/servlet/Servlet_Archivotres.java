@@ -17,34 +17,34 @@ public class Servlet_Archivotres extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
-//		String opcion = req.getParameter("opcionReporte")!=null?req.getParameter("opcionReporte").toString():"";
-//		String desde = req.getParameter("hiddenDesde")!=null?req.getParameter("hiddenDesde").toString():"";
-//		String hasta = req.getParameter("hiddenHasta")!=null?req.getParameter("hiddenHasta").toString():"";
-//		String semana = req.getParameter("hiddenSemana")!=null?req.getParameter("hiddenSemana").toString():"";
-//		String mes = req.getParameter("hiddenMes")!=null?req.getParameter("hiddenMes").toString():"";
-//		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
-
+		String opcion = req.getParameter("opcionReporte")!=null?req.getParameter("opcionReporte").toString():"";
+		String desde = req.getParameter("hiddenDesde")!=null?req.getParameter("hiddenDesde").toString():"";
+		String hasta = req.getParameter("hiddenHasta")!=null?req.getParameter("hiddenHasta").toString():"";
+		String semana = req.getParameter("hiddenSemana")!=null?req.getParameter("hiddenSemana").toString():"";
+		String mes = req.getParameter("hiddenMes")!=null?req.getParameter("hiddenMes").toString():"";
+		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
+		String tipousuario = req.getParameter("hiddenTipoUsuario")!=null?req.getParameter("hiddenTipoUsuario").toString():"";
 			
-		String desde = "";
-		String hasta = "";
-		String mes = "";
-		String opcion = "";
-		String tipousuario = "";
-		String usuario = "";
+//		String desde = "";
+//		String hasta = "";
+//		String mes = "";
+//		String opcion = "";
+//		String tipousuario = "";
+//		String usuario = "";
 		
 			Generar_Archivo Archivo = new Generar_Archivo();
-			QueryTables daoSelect = new QueryTables();
+//			QueryTables daoSelect = new QueryTables();
 			
-			String cuenta = req.getUserPrincipal().getName();
+//			String cuenta = req.getUserPrincipal().getName();
 			
-			boolean acceder = false;
+//			boolean acceder = false;
 			
-			acceder = daoSelect.Acceder(cuenta);
+//			acceder = daoSelect.Acceder(cuenta);
 			
-			if (acceder)
-			{
+//			if (acceder)
+//			{
 				Archivo.Archivodos(req, resp, desde, hasta, mes,opcion,tipousuario,usuario);
-			}
+//			}
 
 			
 	

@@ -50,6 +50,7 @@
 			break;
 		}
 		  document.getElementById("fechaMes").value = misVariablesGet.hiddenMes.replace("+", " ");
+		  $("#opcionReporte").val(misVariablesGet.opcionReporte);
 		  onclickReporte();
 		 });
 		 
@@ -65,6 +66,7 @@
 		 }
 	
 	function onclickReporte(){	
+		debugger;
 		document.getElementById("hiddenMes").value = (document.getElementById('fechaMes').value);
 		document.getElementById("hiddenUsuario").value = document.getElementById("hiddenUsuario").value = "<%=sUsuario%>";
 		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";

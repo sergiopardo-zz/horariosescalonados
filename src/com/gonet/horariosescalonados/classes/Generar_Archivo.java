@@ -112,7 +112,7 @@ public class Generar_Archivo {
 				            out.write('\n');
 				            
 				            if(tipousuario.equals("CE")||tipousuario.equals("CA")){
-				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
+				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ";
 				            }else{
 				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
 				            }
@@ -237,7 +237,7 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CI")||tipousuario.equals("CA")){		            
-					             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "')";
+					             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 					         }else{
 					        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 					         }
@@ -313,7 +313,7 @@ public class Generar_Archivo {
 				        
 				        if(opcion.equals("cumplimientoExternoCyge")){
 					        try {
-					        		
+					        			
 					        	resp.setContentType("text/csv");
 
 					            out.write("empleado ID");
@@ -363,7 +363,7 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.cumplimientoExterno.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "')";
+					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 					         }else{
 					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 					         }
@@ -437,7 +437,7 @@ public class Generar_Archivo {
 				        
 				        if(opcion.equals("incumplimiento")){
 					        try {
-					        		
+					        			
 					        	resp.setContentType("text/csv");
 
 					            out.write("empleado ID");
@@ -487,9 +487,9 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.cumplimientoExterno.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
+					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
@@ -559,11 +559,10 @@ public class Generar_Archivo {
 				        } 
 				        
 				        if(opcion.equals("cyge")){
-				        	
 					        try {
 					        			
 					        	resp.setContentType("text/csv");
-					        	
+
 					            out.write("NoCyge");
 					            out.write(',');
 					            out.write("Usuario");
@@ -607,7 +606,7 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
+					             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 					         }else{
 					        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo FROM horariosescalonadosv2.Cyge where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 					         }
@@ -683,15 +682,15 @@ public class Generar_Archivo {
 	
 	public void Archivodos(HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes, String opcion, String tipousuario, String usuario) throws IOException
 	{
-		ArrayList<String> desdehasta = new ArrayList<String>();
+//		ArrayList<String> desdehasta = new ArrayList<String>();
 		String cuenta = req.getUserPrincipal().getName();
 		InsertarRegistro daoInsert = new InsertarRegistro();
 		QueryTables daoSelect = new QueryTables();
 		
-		desdehasta = daoSelect.desdehasta(cuenta);
-		desde = desdehasta.get(1);
-		hasta = desdehasta.get(2);
-		mes = desdehasta.get(3);
+//		desdehasta = daoSelect.desdehasta(cuenta);
+//		desde = desdehasta.get(0);
+//		hasta = desdehasta.get(1);
+//		mes = desdehasta.get(2);
 		
 		
 		TiempoReporte tiempo = new TiempoReporte();
@@ -785,7 +784,7 @@ public class Generar_Archivo {
 	            out.write('\n');
 	            
 	            if(tipousuario.equals("CE")||tipousuario.equals("CA")){
-	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
+	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ";
 	            }else{
 	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
 	            }
@@ -842,14 +841,12 @@ public class Generar_Archivo {
 	            }
 
 	            resp.setContentType("application/download");
-	            resp.setHeader("Content-disposition", "attachment; filename =reporte2.csv");
+	            resp.setHeader("Content-disposition", "attachment; filename =prueba.csv");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
-	        	
 	            out.close();
 	            try {
-	            	daoInsert.updateReporteRegLimpia(cuenta);
 					conn.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -912,7 +909,7 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CI")||tipousuario.equals("CA")){		            
-		             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "')";
+		             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 		         }else{
 		        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 		         }
@@ -970,14 +967,12 @@ public class Generar_Archivo {
 		         
 		         
 		            resp.setContentType("application/download");
-		            resp.setHeader("Content-disposition", "attachment; filename =reporte2.csv");
+		            resp.setHeader("Content-disposition", "attachment; filename = "+opcion+".csv");
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        } finally {
-		        	
 		            out.close();
 		            try {
-		            	daoInsert.updateReporteRegLimpia(cuenta);
 						conn.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -990,7 +985,7 @@ public class Generar_Archivo {
 	        
 	        if(opcion.equals("cumplimientoExternoCyge")){
 		        try {
-		        		
+		        			
 		        	resp.setContentType("text/csv");
 
 		            out.write("empleado ID");
@@ -1040,7 +1035,7 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.cumplimientoExterno.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "')";
+		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 		         }else{
 		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 		         }
@@ -1097,14 +1092,12 @@ public class Generar_Archivo {
 		         
 		         
 		            resp.setContentType("application/download");
-		            resp.setHeader("Content-disposition", "attachment; filename =reporte2.csv");
+		            resp.setHeader("Content-disposition", "attachment; filename = "+opcion+".csv");
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        } finally {
-		        	
 		            out.close();
 		            try {
-		            	daoInsert.updateReporteRegLimpia(cuenta);
 						conn.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -1116,7 +1109,7 @@ public class Generar_Archivo {
 	        
 	        if(opcion.equals("incumplimiento")){
 		        try {
-		        		
+		        			
 		        	resp.setContentType("text/csv");
 
 		            out.write("empleado ID");
@@ -1166,9 +1159,9 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.cumplimientoExterno.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
+		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
@@ -1223,14 +1216,12 @@ public class Generar_Archivo {
 		         
 		         
 		            resp.setContentType("application/download");
-		            resp.setHeader("Content-disposition", "attachment; filename =reporte2.csv");
+		            resp.setHeader("Content-disposition", "attachment; filename = "+opcion+".csv");
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        } finally {
-		        	
 		            out.close();
 		            try {
-		            	daoInsert.updateReporteRegLimpia(cuenta);
 						conn.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -1240,11 +1231,10 @@ public class Generar_Archivo {
 	        } 
 	        
 	        if(opcion.equals("cyge")){
-	        	
 		        try {
 		        			
 		        	resp.setContentType("text/csv");
-		        	
+
 		            out.write("NoCyge");
 		            out.write(',');
 		            out.write("Usuario");
@@ -1288,7 +1278,7 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "') ";
+		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 		         }else{
 		        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo FROM horariosescalonadosv2.Cyge where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 		         }
