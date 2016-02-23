@@ -138,7 +138,7 @@
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externo CYGE</option></td>
 											</tr>
 											<tr>
-												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incidencias Externos</option></td>
+												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incumplimiento</option></td>
 											</tr>		
 										</c:if>
 										<c:if test="${tipEmp == 'SS'}">
@@ -165,6 +165,9 @@
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
+											</tr>
+											<tr>
+											<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incumplimiento</option></td>
 											</tr>
 											</c:if>
 											<c:if test="${tipEmp == 'RH'}">

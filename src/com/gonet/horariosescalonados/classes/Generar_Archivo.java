@@ -66,6 +66,8 @@ public class Generar_Archivo {
 				            out.write(',');
 				            out.write("CR Direccion General");
 				            out.write(',');
+				            out.write("Direccion General");
+				            out.write(',');
 				            out.write("CR Direccion Corporativa");
 				            out.write(',');
 				            out.write("Direccion Corporativa");
@@ -112,9 +114,9 @@ public class Generar_Archivo {
 				            out.write('\n');
 				            
 				            if(tipousuario.equals("CE")||tipousuario.equals("CA")){
-				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ";
+				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 100000";
 				            }else{
-				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"' limit 100000";
 				            }
 				        	conn = Connector.getConexion();
 				            st = conn.createStatement();
@@ -122,7 +124,7 @@ public class Generar_Archivo {
 				            while (rs.next()) {
 				                out.write(rs.getString(1)); 
 				                out.write(',');
-				                out.write(rs.getString(2));
+				                out.write(rs.getString(2).replace(',',' '));
 				                out.write(',');
 				                out.write(rs.getString(3)); 
 				                out.write(',');
@@ -162,14 +164,22 @@ public class Generar_Archivo {
 				                out.write(',');
 				                out.write(rs.getString(21)); 
 				                out.write(',');
-				                out.write(rs.getString(22)); 
+				                out.write(rs.getString(22));
+				                out.write(',');
+				                out.write(rs.getString(23)); 
+				                out.write(',');
+				                out.write(rs.getString(24)); 
+				                out.write(',');
+				                out.write(rs.getString(25)); 
+				                out.write(',');
+				                out.write(rs.getString(26)); 
 				                out.write('\n');
 				              
 				                 	               
 				            }
 
 				            resp.setContentType("application/download");
-				            resp.setHeader("Content-disposition", "attachment; filename =prueba.csv");
+				            resp.setHeader("Content-disposition", "attachment; filename ="+opcion+".csv");
 				        } catch (Exception e) {
 				            e.printStackTrace();
 				        } finally {
@@ -237,9 +247,9 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CI")||tipousuario.equals("CA")){		            
-					             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+					             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 100000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+					        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 100000 ";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
@@ -316,62 +326,58 @@ public class Generar_Archivo {
 					        			
 					        	resp.setContentType("text/csv");
 
-					            out.write("empleado ID");
+					        	out.write("USUARIO");
 					            out.write(',');
-					            out.write("apellido paterno");
+					            out.write("EMPLEADO ID");
 					            out.write(',');
-					            out.write("apellido materno");
+					            out.write("NOMBRE");
 					            out.write(',');
-					            out.write("nombre");
+					            out.write("DIRECCION GENERAL");
 					            out.write(',');
-					            out.write("nombre CR");
+					            out.write("DIRECCION CORPORATIVA");
 					            out.write(',');
-					            out.write("DGA");
+					            out.write("AREA");
 					            out.write(',');
-					            out.write("fecha");
+					            out.write("FECHA");
 					            out.write(',');
-					            out.write("quincena");
+					            out.write("MES");
 					            out.write(',');
-					            out.write("mes");
+					            out.write("QUINCENA");
 					            out.write(',');
-					            out.write("tae");
+					            out.write("ENTRADA OFICIAL");
 					            out.write(',');
-					            out.write("Entrada");
+					            out.write("ENTRADA REAL");
 					            out.write(',');
-					            out.write("TDE");
+					            out.write("SALIDA REAL");
 					            out.write(',');
-					            out.write("Entrada Real");
+					            out.write("JORNADA");
 					            out.write(',');
-					            out.write("calif Entrada");
+					            out.write("ESTANCIA");
 					            out.write(',');
-					            out.write("TAS");
+					            out.write("EDIFICIO");
 					            out.write(',');
-					            out.write("Salida");
+					            out.write("AUTORIZADOR");
 					            out.write(',');
-					            out.write("TDS");
+					            out.write("PROVEEDOR");
 					            out.write(',');
-					            out.write("Salida Real");
+					            out.write("PROYECTO");
 					            out.write(',');
-					            out.write("calif Salida");
+					            out.write("ESTATUS");
 					            out.write(',');
-					            out.write("Jornada");
-					            out.write(',');
-					            out.write("total");
-					            out.write(',');
-					            out.write("porcentaje");
+					            out.write("EDIFICIO ASIGNADO");
 					            out.write('\n');
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 100000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 100000 ";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
 					            rs = st.executeQuery(selectSql);
 					            while (rs.next()) {
-					                out.write(rs.getString(1)); 
+					            	out.write(rs.getString(1)); 
 					                out.write(',');
 					                out.write(rs.getString(2));
 					                out.write(',');
@@ -410,10 +416,6 @@ public class Generar_Archivo {
 					                out.write(rs.getString(19)); 
 					                out.write(',');
 					                out.write(rs.getString(20)); 
-					                out.write(',');
-					                out.write(rs.getString(21)); 
-					                out.write(',');
-					                out.write(rs.getString(22)); 
 					                out.write('\n');
 					                  	               
 					            }
@@ -440,62 +442,58 @@ public class Generar_Archivo {
 					        			
 					        	resp.setContentType("text/csv");
 
-					            out.write("empleado ID");
+					        	out.write("USUARIO");
 					            out.write(',');
-					            out.write("apellido paterno");
+					            out.write("EMPLEADO ID");
 					            out.write(',');
-					            out.write("apellido materno");
+					            out.write("NOMBRE");
 					            out.write(',');
-					            out.write("nombre");
+					            out.write("DIRECCION GENERAL");
 					            out.write(',');
-					            out.write("nombre CR");
+					            out.write("DIRECCION CORPORATIVA");
 					            out.write(',');
-					            out.write("DGA");
+					            out.write("AREA");
 					            out.write(',');
-					            out.write("fecha");
+					            out.write("FECHA");
 					            out.write(',');
-					            out.write("quincena");
+					            out.write("MES");
 					            out.write(',');
-					            out.write("mes");
+					            out.write("QUINCENA");
 					            out.write(',');
-					            out.write("tae");
+					            out.write("ENTRADA OFICIAL");
 					            out.write(',');
-					            out.write("Entrada");
+					            out.write("ENTRADA REAL");
 					            out.write(',');
-					            out.write("TDE");
+					            out.write("SALIDA REAL");
 					            out.write(',');
-					            out.write("Entrada Real");
+					            out.write("JORNADA");
 					            out.write(',');
-					            out.write("calif Entrada");
+					            out.write("ESTANCIA");
 					            out.write(',');
-					            out.write("TAS");
+					            out.write("EDIFICIO");
 					            out.write(',');
-					            out.write("Salida");
+					            out.write("AUTORIZADOR");
 					            out.write(',');
-					            out.write("TDS");
+					            out.write("PROVEEDOR");
 					            out.write(',');
-					            out.write("Salida Real");
+					            out.write("PROYECTO");
 					            out.write(',');
-					            out.write("calif Salida");
+					            out.write("ESTATUS");
 					            out.write(',');
-					            out.write("Jornada");
-					            out.write(',');
-					            out.write("total");
-					            out.write(',');
-					            out.write("porcentaje");
+					            out.write("EDIFICIO ASIGNADO");
 					            out.write('\n');
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 100000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 100000 ";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
 					            rs = st.executeQuery(selectSql);
 					            while (rs.next()) {
-					                out.write(rs.getString(1)); 
+					            	out.write(rs.getString(1)); 
 					                out.write(',');
 					                out.write(rs.getString(2));
 					                out.write(',');
@@ -534,10 +532,6 @@ public class Generar_Archivo {
 					                out.write(rs.getString(19)); 
 					                out.write(',');
 					                out.write(rs.getString(20)); 
-					                out.write(',');
-					                out.write(rs.getString(21)); 
-					                out.write(',');
-					                out.write(rs.getString(22)); 
 					                out.write('\n');
 					                  	               
 					            }
@@ -606,9 +600,9 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+					             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Cyge.FechaRegistroArchivo BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 100000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo FROM horariosescalonadosv2.Cyge where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+					        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroAcitvo FROM horariosescalonadosv2.Cyge where FechaRegistroArchivo between '"+desdeDate+ "' and '"+hastaDate+ "' limit 100000";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
@@ -652,11 +646,7 @@ public class Generar_Archivo {
 					                out.write(',');
 					                out.write(rs.getString(19)); 
 					                out.write(',');
-					                out.write(rs.getString(20)); 
-					                out.write(',');
-					                out.write(rs.getString(21)); 
-					                out.write(',');
-					                out.write(rs.getString(22)); 
+					                out.write(rs.getString(20));  
 					                out.write('\n');
 					                  	               
 					            }
@@ -713,7 +703,7 @@ public class Generar_Archivo {
 		
 		int maximoreg = 0;
 		
-		maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate );
+		maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate,opcion,usuario );
 		
 		String selectSql = "";
 		resp.setContentType("application/vnd.ms-excel");
@@ -737,6 +727,8 @@ public class Generar_Archivo {
 	            out.write("Nombre");
 	            out.write(',');
 	            out.write("CR Direccion General");
+	            out.write(',');
+	            out.write("Direccion General");
 	            out.write(',');
 	            out.write("CR Direccion Corporativa");
 	            out.write(',');
@@ -784,9 +776,9 @@ public class Generar_Archivo {
 	            out.write('\n');
 	            
 	            if(tipousuario.equals("CE")||tipousuario.equals("CA")){
-	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ";
+	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 100000,"+maximoreg+"";
 	            }else{
-	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"' limit 100000,"+maximoreg+"";
 	            }
 	        	conn = Connector.getConexion();
 	            st = conn.createStatement();
@@ -794,7 +786,7 @@ public class Generar_Archivo {
 	            while (rs.next()) {
 	                out.write(rs.getString(1)); 
 	                out.write(',');
-	                out.write(rs.getString(2));
+	                out.write(rs.getString(2).replace(',',' '));
 	                out.write(',');
 	                out.write(rs.getString(3)); 
 	                out.write(',');
@@ -834,14 +826,22 @@ public class Generar_Archivo {
 	                out.write(',');
 	                out.write(rs.getString(21)); 
 	                out.write(',');
-	                out.write(rs.getString(22)); 
+	                out.write(rs.getString(22));
+	                out.write(',');
+	                out.write(rs.getString(23)); 
+	                out.write(',');
+	                out.write(rs.getString(24)); 
+	                out.write(',');
+	                out.write(rs.getString(25)); 
+	                out.write(',');
+	                out.write(rs.getString(26)); 
 	                out.write('\n');
 	              
 	                 	               
 	            }
 
 	            resp.setContentType("application/download");
-	            resp.setHeader("Content-disposition", "attachment; filename =prueba.csv");
+	            resp.setHeader("Content-disposition", "attachment; filename ="+opcion+".csv");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
@@ -909,9 +909,9 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CI")||tipousuario.equals("CA")){		            
-		             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+		             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 100000,"+maximoreg+"";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+		        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 100000,"+maximoreg+"";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
@@ -988,56 +988,52 @@ public class Generar_Archivo {
 		        			
 		        	resp.setContentType("text/csv");
 
-		            out.write("empleado ID");
+		        	out.write("USUARIO");
 		            out.write(',');
-		            out.write("apellido paterno");
+		            out.write("EMPLEADO ID");
 		            out.write(',');
-		            out.write("apellido materno");
+		            out.write("NOMBRE");
 		            out.write(',');
-		            out.write("nombre");
+		            out.write("DIRECCION GENERAL");
 		            out.write(',');
-		            out.write("nombre CR");
+		            out.write("DIRECCION CORPORATIVA");
 		            out.write(',');
-		            out.write("DGA");
+		            out.write("AREA");
 		            out.write(',');
-		            out.write("fecha");
+		            out.write("FECHA");
 		            out.write(',');
-		            out.write("quincena");
+		            out.write("MES");
 		            out.write(',');
-		            out.write("mes");
+		            out.write("QUINCENA");
 		            out.write(',');
-		            out.write("tae");
+		            out.write("ENTRADA OFICIAL");
 		            out.write(',');
-		            out.write("Entrada");
+		            out.write("ENTRADA REAL");
 		            out.write(',');
-		            out.write("TDE");
+		            out.write("SALIDA REAL");
 		            out.write(',');
-		            out.write("Entrada Real");
+		            out.write("JORNADA");
 		            out.write(',');
-		            out.write("calif Entrada");
+		            out.write("ESTANCIA");
 		            out.write(',');
-		            out.write("TAS");
+		            out.write("EDIFICIO");
 		            out.write(',');
-		            out.write("Salida");
+		            out.write("AUTORIZADOR");
 		            out.write(',');
-		            out.write("TDS");
+		            out.write("PROVEEDOR");
 		            out.write(',');
-		            out.write("Salida Real");
+		            out.write("PROYECTO");
 		            out.write(',');
-		            out.write("calif Salida");
+		            out.write("ESTATUS");
 		            out.write(',');
-		            out.write("Jornada");
-		            out.write(',');
-		            out.write("total");
-		            out.write(',');
-		            out.write("porcentaje");
+		            out.write("EDIFICIO ASIGNADO");
 		            out.write('\n');
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 100000,"+maximoreg+"";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 100000,"+maximoreg+"";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
@@ -1082,10 +1078,6 @@ public class Generar_Archivo {
 		                out.write(rs.getString(19)); 
 		                out.write(',');
 		                out.write(rs.getString(20)); 
-		                out.write(',');
-		                out.write(rs.getString(21)); 
-		                out.write(',');
-		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }
@@ -1112,56 +1104,52 @@ public class Generar_Archivo {
 		        			
 		        	resp.setContentType("text/csv");
 
-		            out.write("empleado ID");
+		        	out.write("USUARIO");
 		            out.write(',');
-		            out.write("apellido paterno");
+		            out.write("EMPLEADO ID");
 		            out.write(',');
-		            out.write("apellido materno");
+		            out.write("NOMBRE");
 		            out.write(',');
-		            out.write("nombre");
+		            out.write("DIRECCION GENERAL");
 		            out.write(',');
-		            out.write("nombre CR");
+		            out.write("DIRECCION CORPORATIVA");
 		            out.write(',');
-		            out.write("DGA");
+		            out.write("AREA");
 		            out.write(',');
-		            out.write("fecha");
+		            out.write("FECHA");
 		            out.write(',');
-		            out.write("quincena");
+		            out.write("MES");
 		            out.write(',');
-		            out.write("mes");
+		            out.write("QUINCENA");
 		            out.write(',');
-		            out.write("tae");
+		            out.write("ENTRADA OFICIAL");
 		            out.write(',');
-		            out.write("Entrada");
+		            out.write("ENTRADA REAL");
 		            out.write(',');
-		            out.write("TDE");
+		            out.write("SALIDA REAL");
 		            out.write(',');
-		            out.write("Entrada Real");
+		            out.write("JORNADA");
 		            out.write(',');
-		            out.write("calif Entrada");
+		            out.write("ESTANCIA");
 		            out.write(',');
-		            out.write("TAS");
+		            out.write("EDIFICIO");
 		            out.write(',');
-		            out.write("Salida");
+		            out.write("AUTORIZADOR");
 		            out.write(',');
-		            out.write("TDS");
+		            out.write("PROVEEDOR");
 		            out.write(',');
-		            out.write("Salida Real");
+		            out.write("PROYECTO");
 		            out.write(',');
-		            out.write("calif Salida");
+		            out.write("ESTATUS");
 		            out.write(',');
-		            out.write("Jornada");
-		            out.write(',');
-		            out.write("total");
-		            out.write(',');
-		            out.write("porcentaje");
+		            out.write("EDIFICIO ASIGNADO");
 		            out.write('\n');
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 100000,"+maximoreg+"";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 100000,"+maximoreg+"";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
@@ -1206,10 +1194,6 @@ public class Generar_Archivo {
 		                out.write(rs.getString(19)); 
 		                out.write(',');
 		                out.write(rs.getString(20)); 
-		                out.write(',');
-		                out.write(rs.getString(21)); 
-		                out.write(',');
-		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }
@@ -1278,9 +1262,9 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Cyge.FechaRegistroArchivo BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 100000,"+maximoreg+"";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo FROM horariosescalonadosv2.Cyge where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+		        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where FechaRegistroArchivo between '"+desdeDate+ "' and '"+hastaDate+ "'limit 100000,"+maximoreg+"";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
@@ -1325,10 +1309,6 @@ public class Generar_Archivo {
 		                out.write(rs.getString(19)); 
 		                out.write(',');
 		                out.write(rs.getString(20)); 
-		                out.write(',');
-		                out.write(rs.getString(21)); 
-		                out.write(',');
-		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }

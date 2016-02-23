@@ -88,9 +88,9 @@
 				<table width="100%" border="0" class="centro">
 				 <tbody>
 					 <tr>
-						<td><a href="repDiaRHExternos.jsp"><img src="config/img/Bt_PorDia.png"></a>
-							<a href="repSemanaRHExternos.jsp" class="consultaRepo"><img src="config/img/Bt_PorSemana.png"></a>
-							<a href="repMesRHExternos.jsp"><img src="config/img/Bt_PorMes.png"></a>
+						<td><a href="repDiaRHInternos.jsp"><img src="config/img/Bt_PorDia.png"></a>
+							<a href="repSemanaRHInternos.jsp" class="consultaRepo"><img src="config/img/Bt_PorSemana.png"></a>
+							<a href="repMesRHInternos.jsp"><img src="config/img/Bt_PorMes.png"></a>
 						</td>
 					
 					</tr>

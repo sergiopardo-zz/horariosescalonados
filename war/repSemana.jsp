@@ -132,7 +132,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 								<div class="opcionesSelecciona">
 									<table class="listaSeleccciona" cellpadding="0" cellspacing="0" id="IDComboReporte" onclick="$('.opcionesSelecciona').css('display','none');">														
 										<tbody>
-										<c:if test="${tipEmp == 'GE'}">
+																				<c:if test="${tipEmp == 'GE'}">
 											<tr>
 												<td class="valorSeleccionado"><option value="cyge" onclick="onclickReporte(this.value)">Registros CYGE</option></td>
 											</tr>
@@ -140,7 +140,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoCyge" onclick="onclickReporte(this.value)">Cumplimiento Externo CYGE</option></td>
 											</tr>
 											<tr>
-												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incidencias Externos</option></td>
+												<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incumplimiento</option></td>
 											</tr>		
 										</c:if>
 										<c:if test="${tipEmp == 'SS'}">
@@ -167,6 +167,9 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 											</tr>
 											<tr>
 												<td class="valorSeleccionado"><option  value="cumplimientoExternoRRHH" onclick="onclickReporte(this.value)">Cumplimiento Externos RRHH</option></td>
+											</tr>
+											<tr>
+											<td class="valorSeleccionado"><option  value="incumplimiento" onclick="onclickReporte(this.value)">Incumplimiento</option></td>
 											</tr>
 											</c:if>
 											<c:if test="${tipEmp == 'RH'}">

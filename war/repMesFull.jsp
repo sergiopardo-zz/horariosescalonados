@@ -7,6 +7,7 @@
       String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.getAttribute("tipo_empleado");
       String hiddenDesde = session.getAttribute("hiddenDesde")==null?"":(String)session.getAttribute("hiddenDesde");
       String opcionReporte = session.getAttribute("opcionReporte")==null?"":(String)session.getAttribute("opcionReporte");
+      String strTitulo = "";
       %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -52,6 +53,7 @@
 		  document.getElementById("fechaMes").value = misVariablesGet.hiddenMes.replace("+", " ");
 		  $("#opcionReporte").val(misVariablesGet.opcionReporte);
 		  onclickReporte();
+		  direccionamiento();
 		 });
 		 
 		 function getVarsUrl(){
@@ -66,7 +68,6 @@
 		 }
 	
 	function onclickReporte(){	
-		debugger;
 		document.getElementById("hiddenMes").value = (document.getElementById('fechaMes').value);
 		document.getElementById("hiddenUsuario").value = document.getElementById("hiddenUsuario").value = "<%=sUsuario%>";
 		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";
@@ -85,10 +86,35 @@
 	function generarDos(){
 		formreportes.action = "/Servlet_Archivotres";
 		formreportes.submit();
-		$("#btn2do").removeClass("noMostrar");
+		$(".muestraDeshabilitado2").removeClass("noMostrar");
+		$("#btn2do").hide();
 		$("#btnRegresar").focus( 10000 ,function(){
 			$("#btnRegresar, #aviso3").show();
 		});
+	}
+	
+	function direccionamiento(){
+		var misVariablesGet = getVarsUrl();
+		var varTitulo = "";
+		if (misVariablesGet.hiddenTipoUsuario == "SS" || misVariablesGet.hiddenTipoUsuario == "RH" || misVariablesGet.hiddenTipoUsuario == "GE"){
+			$("#aRegresar").attr("href","/repMes.jsp" );
+			$("#txtTitulo").hide();
+		}else if(misVariablesGet.hiddenTipoUsuario == "CI"){
+			$("#aRegresar").attr("href","/repMesRHInternos.jsp" );
+			$("#txtTitulo").val("- Internos");
+		}else if(misVariablesGet.hiddenTipoUsuario == "CE" || misVariablesGet.hiddenTipoUsuario == "CC"){
+			$("#aRegresar").attr("href","/repMesRHExternos.jsp" );
+			$("#txtTitulo").val("- Externos");
+		}else if(misVariablesGet.hiddenTipoUsuario == "CA"){
+			debugger;
+			if(misVariablesGet.opcionReporte == "cumplimiento"){
+				$("#aRegresar").attr("href","/repMesRHInternos.jsp" );
+				$("#txtTitulo").val("- Internos");
+			}else{
+				$("#aRegresar").attr("href","/repMesRHExternos.jsp" );
+				$("#txtTitulo").val("- Externos");
+			}
+		}
 	}
 	
 	</script>
@@ -129,7 +155,7 @@
 	<%@include file="menuEmplA.jsp"%> 
 	</c:if>
 	
-		<c:if test="${tipEmp == 'CI'}">
+	<c:if test="${tipEmp == 'CI'}">
 	<%@include file="menuEmplRRHHCI.jsp"%> 
 	</c:if>
 	
@@ -153,9 +179,10 @@
 					</li>
 					<li class="menuMiga" >
 						<a href="/cargareportes"  style="text-decoration:none;" class="migaReporte tituloMiga">
-							- Reportes - CYGE</a>
+						- Reportes </a>
 					</li>
 					<li class="menuMiga">
+						<input class="tituloMiga" id="txtTitulo" readonly="" style="width: 105px; border: none;"/>
 						<span class="separacionMiga">-</span>
 						<span class="tituloMiga">Mes</span>
 					</li>
@@ -223,7 +250,7 @@
 				 Cuando se hayan terminado de descargar los reportes, regrese a la anterior vista.
 			</div>
 			<div class="boton muestraReposo" id="btnRegresar" align="center">		
-				<a class="reposo"  value="Regresar" href="repMes.jsp">Regresar</a>
+				<a class="reposo"  value="Regresar" id="aRegresar">Regresar</a>
 			</div>
 
 		</div>

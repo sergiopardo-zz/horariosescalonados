@@ -129,7 +129,7 @@ public class TiempoReporte {
 		if(meses.equals("Agosto")){
 			M = 8;
 		}
-		if(meses.equals("Septirmbre")){
+		if(meses.equals("Septiembre")){
 		    M = 9;
 		}
 		if(meses.equals("Octubre")){
@@ -205,7 +205,7 @@ public class TiempoReporte {
 		if(meses.equals("Agosto")){
 			M = 8;
 		}
-		if(meses.equals("Septirmbre")){
+		if(meses.equals("Septiembre")){
 		    M = 9;
 		}
 		if(meses.equals("Octubre")){

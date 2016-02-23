@@ -61,7 +61,7 @@ public class Servlet_Archivo extends HttpServlet {
 			
 			QueryTables daoSelect = new QueryTables();
 			
-			maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate );
+			maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate,opcion,usuario );
 			
 			String selectSql = "";
 			
@@ -91,6 +91,8 @@ public class Servlet_Archivo extends HttpServlet {
 	            out.write("Nombre");
 	            out.write(',');
 	            out.write("CR Direccion General");
+	            out.write(',');
+	            out.write("Direccion General");
 	            out.write(',');
 	            out.write("CR Direccion Corporativa");
 	            out.write(',');
@@ -148,7 +150,7 @@ public class Servlet_Archivo extends HttpServlet {
 	            while (rs.next()) {
 	                out.write(rs.getString(1)); 
 	                out.write(',');
-	                out.write(rs.getString(2));
+	                out.write(rs.getString(2).replace(',',' '));
 	                out.write(',');
 	                out.write(rs.getString(3)); 
 	                out.write(',');
@@ -188,14 +190,22 @@ public class Servlet_Archivo extends HttpServlet {
 	                out.write(',');
 	                out.write(rs.getString(21)); 
 	                out.write(',');
-	                out.write(rs.getString(22)); 
+	                out.write(rs.getString(22));
+	                out.write(',');
+	                out.write(rs.getString(23)); 
+	                out.write(',');
+	                out.write(rs.getString(24)); 
+	                out.write(',');
+	                out.write(rs.getString(25)); 
+	                out.write(',');
+	                out.write(rs.getString(26)); 
 	                out.write('\n');
 	              
 	                 	               
 	            }
 
 	            resp.setContentType("application/download");
-	            resp.setHeader("Content-disposition", "attachment; filename =prueba.csv");
+	            resp.setHeader("Content-disposition", "attachment; filename ="+opcion+".csv");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
@@ -342,49 +352,45 @@ public class Servlet_Archivo extends HttpServlet {
 		        			
 		        	resp.setContentType("text/csv");
 
-		            out.write("empleado ID");
+		            out.write("USUARIO");
 		            out.write(',');
-		            out.write("apellido paterno");
+		            out.write("EMPLEADO ID");
 		            out.write(',');
-		            out.write("apellido materno");
+		            out.write("NOMBRE");
 		            out.write(',');
-		            out.write("nombre");
+		            out.write("DIRECCION GENERAL");
 		            out.write(',');
-		            out.write("nombre CR");
+		            out.write("DIRECCION CORPORATIVA");
 		            out.write(',');
-		            out.write("DGA");
+		            out.write("AREA");
 		            out.write(',');
-		            out.write("fecha");
+		            out.write("FECHA");
 		            out.write(',');
-		            out.write("quincena");
+		            out.write("MES");
 		            out.write(',');
-		            out.write("mes");
+		            out.write("QUINCENA");
 		            out.write(',');
-		            out.write("tae");
+		            out.write("ENTRADA OFICIAL");
 		            out.write(',');
-		            out.write("Entrada");
+		            out.write("ENTRADA REAL");
 		            out.write(',');
-		            out.write("TDE");
+		            out.write("SALIDA REAL");
 		            out.write(',');
-		            out.write("Entrada Real");
+		            out.write("JORNADA");
 		            out.write(',');
-		            out.write("calif Entrada");
+		            out.write("ESTANCIA");
 		            out.write(',');
-		            out.write("TAS");
+		            out.write("EDIFICIO");
 		            out.write(',');
-		            out.write("Salida");
+		            out.write("AUTORIZADOR");
 		            out.write(',');
-		            out.write("TDS");
+		            out.write("PROVEEDOR");
 		            out.write(',');
-		            out.write("Salida Real");
+		            out.write("PROYECTO");
 		            out.write(',');
-		            out.write("calif Salida");
+		            out.write("ESTATUS");
 		            out.write(',');
-		            out.write("Jornada");
-		            out.write(',');
-		            out.write("total");
-		            out.write(',');
-		            out.write("porcentaje");
+		            out.write("EDIFICIO ASIGNADO");
 		            out.write('\n');
 
 		            
@@ -436,10 +442,6 @@ public class Servlet_Archivo extends HttpServlet {
 		                out.write(rs.getString(19)); 
 		                out.write(',');
 		                out.write(rs.getString(20)); 
-		                out.write(',');
-		                out.write(rs.getString(21)); 
-		                out.write(',');
-		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }
@@ -466,54 +468,50 @@ public class Servlet_Archivo extends HttpServlet {
 		        			
 		        	resp.setContentType("text/csv");
 
-		            out.write("empleado ID");
-		            out.write(',');
-		            out.write("apellido paterno");
-		            out.write(',');
-		            out.write("apellido materno");
-		            out.write(',');
-		            out.write("nombre");
-		            out.write(',');
-		            out.write("nombre CR");
-		            out.write(',');
-		            out.write("DGA");
-		            out.write(',');
-		            out.write("fecha");
-		            out.write(',');
-		            out.write("quincena");
-		            out.write(',');
-		            out.write("mes");
-		            out.write(',');
-		            out.write("tae");
-		            out.write(',');
-		            out.write("Entrada");
-		            out.write(',');
-		            out.write("TDE");
-		            out.write(',');
-		            out.write("Entrada Real");
-		            out.write(',');
-		            out.write("calif Entrada");
-		            out.write(',');
-		            out.write("TAS");
-		            out.write(',');
-		            out.write("Salida");
-		            out.write(',');
-		            out.write("TDS");
-		            out.write(',');
-		            out.write("Salida Real");
-		            out.write(',');
-		            out.write("calif Salida");
-		            out.write(',');
-		            out.write("Jornada");
-		            out.write(',');
-		            out.write("total");
-		            out.write(',');
-		            out.write("porcentaje");
-		            out.write('\n');
+		        	    out.write("USUARIO");
+			            out.write(',');
+			            out.write("EMPLEADO ID");
+			            out.write(',');
+			            out.write("NOMBRE");
+			            out.write(',');
+			            out.write("DIRECCION GENERAL");
+			            out.write(',');
+			            out.write("DIRECCION CORPORATIVA");
+			            out.write(',');
+			            out.write("AREA");
+			            out.write(',');
+			            out.write("FECHA");
+			            out.write(',');
+			            out.write("MES");
+			            out.write(',');
+			            out.write("QUINCENA");
+			            out.write(',');
+			            out.write("ENTRADA OFICIAL");
+			            out.write(',');
+			            out.write("ENTRADA REAL");
+			            out.write(',');
+			            out.write("SALIDA REAL");
+			            out.write(',');
+			            out.write("JORNADA");
+			            out.write(',');
+			            out.write("ESTANCIA");
+			            out.write(',');
+			            out.write("EDIFICIO");
+			            out.write(',');
+			            out.write("AUTORIZADOR");
+			            out.write(',');
+			            out.write("PROVEEDOR");
+			            out.write(',');
+			            out.write("PROYECTO");
+			            out.write(',');
+			            out.write("ESTATUS");
+			            out.write(',');
+			            out.write("EDIFICIO ASIGNADO");
+			            out.write('\n');
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 		         }else{
 		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 		         }
@@ -521,50 +519,46 @@ public class Servlet_Archivo extends HttpServlet {
 		            st = conn.createStatement();
 		            rs = st.executeQuery(selectSql);
 		            while (rs.next()) {
-		                out.write(rs.getString(1)); 
-		                out.write(',');
-		                out.write(rs.getString(2));
-		                out.write(',');
-		                out.write(rs.getString(3)); 
-		                out.write(',');
-		                out.write(rs.getString(4)); 
-		                out.write(',');
-		                out.write(rs.getString(5)); 
-		                out.write(',');
-		                out.write(rs.getString(6)); 
-		                out.write(',');
-		                out.write(rs.getString(7)); 
-		                out.write(',');
-		                out.write(rs.getString(8)); 
-		                out.write(',');
-		                out.write(rs.getString(9)); 
-		                out.write(',');
-		                out.write(rs.getString(10)); 
-		                out.write(',');
-		                out.write(rs.getString(11)); 
-		                out.write(',');
-		                out.write(rs.getString(12)); 
-		                out.write(',');
-		                out.write(rs.getString(13)); 
-		                out.write(',');
-		                out.write(rs.getString(14)); 
-		                out.write(',');
-		                out.write(rs.getString(15)); 
-		                out.write(',');
-		                out.write(rs.getString(16)); 
-		                out.write(',');
-		                out.write(rs.getString(17)); 
-		                out.write(',');
-		                out.write(rs.getString(18)); 
-		                out.write(',');
-		                out.write(rs.getString(19)); 
-		                out.write(',');
-		                out.write(rs.getString(20)); 
-		                out.write(',');
-		                out.write(rs.getString(21)); 
-		                out.write(',');
-		                out.write(rs.getString(22)); 
-		                out.write('\n');
+		            	 out.write(rs.getString(1)); 
+			                out.write(',');
+			                out.write(rs.getString(2));
+			                out.write(',');
+			                out.write(rs.getString(3)); 
+			                out.write(',');
+			                out.write(rs.getString(4)); 
+			                out.write(',');
+			                out.write(rs.getString(5)); 
+			                out.write(',');
+			                out.write(rs.getString(6)); 
+			                out.write(',');
+			                out.write(rs.getString(7)); 
+			                out.write(',');
+			                out.write(rs.getString(8)); 
+			                out.write(',');
+			                out.write(rs.getString(9)); 
+			                out.write(',');
+			                out.write(rs.getString(10)); 
+			                out.write(',');
+			                out.write(rs.getString(11)); 
+			                out.write(',');
+			                out.write(rs.getString(12)); 
+			                out.write(',');
+			                out.write(rs.getString(13)); 
+			                out.write(',');
+			                out.write(rs.getString(14)); 
+			                out.write(',');
+			                out.write(rs.getString(15)); 
+			                out.write(',');
+			                out.write(rs.getString(16)); 
+			                out.write(',');
+			                out.write(rs.getString(17)); 
+			                out.write(',');
+			                out.write(rs.getString(18)); 
+			                out.write(',');
+			                out.write(rs.getString(19)); 
+			                out.write(',');
+			                out.write(rs.getString(20)); 
+			                out.write('\n');
 		                  	               
 		            }
 		         
@@ -632,9 +626,9 @@ public class Servlet_Archivo extends HttpServlet {
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Cyge.FechaCreacionRegistro BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroArchivo FROM horariosescalonadosv2.Cyge where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' ";
+		        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where FechaCreacionRegistro between '"+desdeDate+ "' and '"+hastaDate+ "' ";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
@@ -679,17 +673,14 @@ public class Servlet_Archivo extends HttpServlet {
 		                out.write(rs.getString(19)); 
 		                out.write(',');
 		                out.write(rs.getString(20)); 
-		                out.write(',');
-		                out.write(rs.getString(21)); 
-		                out.write(',');
-		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }
 		         
 		         
 		            resp.setContentType("application/download");
-		            resp.setHeader("Content-disposition", "attachment; filename = "+opcion+".csv");
+		            resp.setHeader("Content-disposition", "attachment; filename ="+opcion+".csv");
+		            
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        } finally {
@@ -700,12 +691,11 @@ public class Servlet_Archivo extends HttpServlet {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+		        }
 		        
-		         }
-	        }
+		      }
 			
-	      }			else
-			{
+	      }else{
 				
 				dispatcher = getServletContext().getRequestDispatcher("/repMesFull.jsp");
 				

@@ -534,13 +534,42 @@ public class QueryTables {
 	 
 	 
 	 
-	 public int maximoCumplimiento(java.sql.Date desdeDate, java.sql.Date hastaDate)
+	 public int maximoCumplimiento(java.sql.Date desdeDate, java.sql.Date hastaDate, String opcion, String usuario)
 	 {
 		 int intNumregistro = 0;
+		 String selectSql = "";
 		 try{
 				Connection conn = Connector.getConexion();
 				try {	
-					String selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+					
+				if(opcion.equals("cumplimiento")){
+					if(usuario.equals("CI")||usuario.equals("CA")){
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";;
+					}else{
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+					}
+				}
+				if(opcion.equals("cumplimientoExternoRRHH")){
+					if(usuario.equals("CE")||usuario.equals("CA")){
+					 selectSql = "SELECT  COUNT(*) FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ";
+					}else{
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+					}
+				}
+				if(opcion.equals("cumplimientoExternoCyge")){
+					if(usuario.equals("CC")){
+				     selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
+						}else{
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+						}
+				}
+				if(opcion.equals("incumplimiento")){
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+				}
+				if(opcion.equals("cyge")){
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.Cyge where FechaCreacionRegistro between '"+desdeDate+"' and '"+hastaDate+"'";
+				}
+				
 					PreparedStatement stmt = conn.prepareStatement(selectSql);
 									
 					ResultSet resultSet = stmt.executeQuery();
