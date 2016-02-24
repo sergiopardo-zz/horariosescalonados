@@ -29,7 +29,12 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 	}
 	
 	function generar(){
-		formreportes.action = "/generaexcel";
+		if ($("#opcionReporte").val() == "alta" || $("#opcionReporte").val() == "modificacion" || $("#opcionReporte").val() == "baja"|| 
+			 $("#noasignacion").val() == "alta"){
+			   formreportes.action = "/generaexcel";
+			  }else{
+		formreportes.action = "/Servlet_Archivo";
+			  }
 		formreportes.submit();
 		$('#fechaSemana').val("");
 		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
@@ -43,7 +48,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 
 <!-- formulario para reporte cyge -->
 
-<form id="formreportes" action="/generareporte" method="post">
+<form id="formreportes" action="/Servlet_Archivo" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenSemana" id="hiddenSemana" /> 
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
@@ -100,7 +105,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 	</div>
 
 	
-	<div id="contenido" class="contenido">	
+	<div id="contenido" class="contenido" style="height: 295px;">	
 		<div class="contenidoSolicitud">
 			<table width="100%" border="0" class="centro">
 				<tbody>

@@ -2,18 +2,22 @@ package com.gonet.horariosescalonados.persistence;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Calendar;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.datanucleus.FetchPlan;
+
+import com.gonet.horariosescalonados.bean.BeanPerfilConsulta;
+import com.gonet.horariosescalonados.bean.BeanPerfilConsultaExternos;
+import com.gonet.horariosescalonados.bean.BeanZeit;
 import com.gonet.horariosescalonados.bean.BeanCumplimiento;
+import com.gonet.horariosescalonados.bean.BeanCumplimientoExterno;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoCyge;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoRRHH;
 import com.gonet.horariosescalonados.bean.BeanCyge;
@@ -22,9 +26,6 @@ import com.gonet.horariosescalonados.bean.BeanEmpleadoExterno;
 import com.gonet.horariosescalonados.bean.BeanEmpleadoExternoRRHH;
 import com.gonet.horariosescalonados.bean.BeanEmpleadoHorario;
 import com.gonet.horariosescalonados.bean.BeanIncumplimiento;
-import com.gonet.horariosescalonados.bean.BeanPerfilConsulta;
-import com.gonet.horariosescalonados.bean.BeanZeit;
-import com.gonet.horariosescalonados.dao.InsertarRegistro;
 import com.gonet.horariosescalonados.factory.DatanucleusPersistenceManager;
 
 
@@ -63,6 +64,9 @@ public class DataNucleusQuery
 					registroCyge.setEstatus(registro.getEstatus());
 					registroCyge.setProveedor(registro.getProveedor());
 					registroCyge.setProyecto(registro.getProyecto());
+					registroCyge.setEmail(registro.getEmail());
+					registroCyge.setFechaCreacionRegistro(registro.getFechaCreacionRegistro());
+					
 
 					//pm.makePersistent(registro);
 					
@@ -84,12 +88,7 @@ public class DataNucleusQuery
 			}
 
 			pm.currentTransaction().commit();
-			////////////////////
-			
-			InsertarRegistro insertdao = new InsertarRegistro();
-			insertdao.updateRegistroCero();
-			
-			///////////////////
+
 			long endTime   = System.currentTimeMillis();
 			long totalTime = endTime - startTime;
 			System.out.println(totalTime);
@@ -1317,7 +1316,7 @@ public class DataNucleusQuery
 				try
 				{
 					BeanEmpleadoExternoRRHH registroRRHH = (BeanEmpleadoExternoRRHH) pm.getObjectById(registro.getStrUsuario());
-
+					
 					registroRRHH.setStrArea(registro.getStrArea());
 					registroRRHH.setStrDirCorporativa(registro.getStrDirCorporativa());
 					registroRRHH.setStrDirGeneral(registro.getStrDirGeneral());

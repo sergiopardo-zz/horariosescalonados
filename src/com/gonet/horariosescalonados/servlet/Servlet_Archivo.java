@@ -35,14 +35,23 @@ public class Servlet_Archivo extends HttpServlet {
 		
 		
 		req.setAttribute("mes", mes);
+		req.setAttribute("semana", semana);
         req.setAttribute("lstOpcion", opcion);
 		
 		
-		RequestDispatcher dispatcher;
-		
-		TiempoReporte tiempo = new TiempoReporte();
-		desde = tiempo.Tiempo4(mes, desde);
-		hasta = tiempo.Tiempo3(mes, hasta);
+		RequestDispatcher dispatcher = null;
+		if(desde !=""){
+	    TiempoReporte tiempo = new TiempoReporte();
+	    hasta = tiempo.Tiempo5(hasta, desde);
+		}if(mes!=""){
+			TiempoReporte tiempo = new TiempoReporte();
+			desde = tiempo.Tiempo4(mes, desde);
+			hasta = tiempo.Tiempo3(mes, hasta);
+		}if(semana!=""){
+		    TiempoReporte tiempo = new TiempoReporte();
+			desde = tiempo.Tiempo(semana, desde);
+			hasta = tiempo.Tiempo2(desde, hasta);
+		}
 		java.sql.Date desdeDate = null;
 		java.sql.Date hastaDate = null;
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -696,9 +705,11 @@ public class Servlet_Archivo extends HttpServlet {
 		      }
 			
 	      }else{
-				
+				if(mes!=""){
 				dispatcher = getServletContext().getRequestDispatcher("/repMesFull.jsp");
-				
+				}if(semana!=""){
+					dispatcher = getServletContext().getRequestDispatcher("/repSemanaFull.jsp");
+				}
 				dispatcher.forward(req, resp);
 				
 //				req.setAttribute("anuncios", daoAnuncio.Obtener_Anuncio());

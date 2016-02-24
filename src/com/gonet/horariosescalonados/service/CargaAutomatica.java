@@ -2,6 +2,7 @@ package com.gonet.horariosescalonados.service;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoCyge;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoRRHH;
 import com.gonet.horariosescalonados.bean.BeanCyge;
@@ -19,6 +22,7 @@ import com.gonet.horariosescalonados.bean.BeanZeit;
 import com.gonet.horariosescalonados.interfaces.Archivo;
 import com.gonet.horariosescalonados.persistence.DataNucleusQuery;
 import com.gonet.horariosescalonados.persistence.TipoArchivo;
+import com.gonet.horariosescalonados.servlet.ConsumeSRestWEBServlet;
 import com.gonet.horariosescalonados.util.CompletarReporteCumplimientoCyge;
 
 public class CargaAutomatica 
@@ -44,9 +48,8 @@ public class CargaAutomatica
 			query.InsertarRegistrosCyge((List<BeanCyge>) registrosArchivo);
 			
 			
-			BusquedaUsuarioNuevo busquedaUsuario = new BusquedaUsuarioNuevo((List<BeanCyge>) registrosArchivo, key, 1);
 			String pruebaDeEntrada = "asdasd";
-			busquedaUsuario.BuscarUsuarioExterno();
+			//busquedaUsuario.BuscarUsuarioExterno();
 			String segundaPrueba = "No entro";
 			
 			break;

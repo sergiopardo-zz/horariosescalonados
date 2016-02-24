@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,23 +21,38 @@ import com.gonet.horariosescalonados.dao.QueryTables;
 
 public class Generar_Archivo {
 	
-	public void Archivouno (HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes,String opcion, String tipousuario, String usuario ) throws IOException
+	public void Archivouno (HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes,String opcion, String tipousuario, String usuario, String semana ) throws IOException
 	{
 		
 		String cuenta = req.getUserPrincipal().getName();
 		InsertarRegistro daoInsert = new InsertarRegistro();
 		
 		
-		TiempoReporte tiempo = new TiempoReporte();
-		String desde1 = tiempo.Tiempo4(mes, desde);
-		String hasta1 = tiempo.Tiempo3(mes, hasta);
+		req.setAttribute("mes", mes);
+		req.setAttribute("semana", semana);
+        req.setAttribute("lstOpcion", opcion);
+		
+		
+		RequestDispatcher dispatcher;
+		if(desde !=""){
+	    TiempoReporte tiempo = new TiempoReporte();
+	    hasta = tiempo.Tiempo5(hasta, desde);
+		}if(mes!=""){
+			TiempoReporte tiempo = new TiempoReporte();
+			desde = tiempo.Tiempo4(mes, desde);
+			hasta = tiempo.Tiempo3(mes, hasta);
+		}if(semana!=""){
+		    TiempoReporte tiempo = new TiempoReporte();
+			desde = tiempo.Tiempo(semana, desde);
+			hasta = tiempo.Tiempo2(desde, hasta);
+		}
 		java.sql.Date desdeDate = null;
 		java.sql.Date hastaDate = null;
 		 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		 
 			try {
-				desdeDate = new java.sql.Date(df.parse(desde1).getTime());
-				hastaDate = new java.sql.Date(df.parse(hasta1).getTime());
+				desdeDate = new java.sql.Date(df.parse(desde).getTime());
+				hastaDate = new java.sql.Date(df.parse(hasta).getTime());
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -670,7 +686,7 @@ public class Generar_Archivo {
 						
 				      }
 	
-	public void Archivodos(HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes, String opcion, String tipousuario, String usuario) throws IOException
+	public void Archivodos(HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes, String opcion, String tipousuario, String usuario, String semana) throws IOException
 	{
 //		ArrayList<String> desdehasta = new ArrayList<String>();
 		String cuenta = req.getUserPrincipal().getName();
@@ -683,9 +699,24 @@ public class Generar_Archivo {
 //		mes = desdehasta.get(2);
 		
 		
-		TiempoReporte tiempo = new TiempoReporte();
-		desde = tiempo.Tiempo4(mes, desde);
-		hasta = tiempo.Tiempo3(mes, hasta);
+		req.setAttribute("mes", mes);
+		req.setAttribute("semana", semana);
+        req.setAttribute("lstOpcion", opcion);
+		
+		
+		RequestDispatcher dispatcher;
+		if(desde !=""){
+	    TiempoReporte tiempo = new TiempoReporte();
+	    hasta = tiempo.Tiempo5(hasta, desde);
+		}if(mes!=""){
+			TiempoReporte tiempo = new TiempoReporte();
+			desde = tiempo.Tiempo4(mes, desde);
+			hasta = tiempo.Tiempo3(mes, hasta);
+		}if(semana!=""){
+		    TiempoReporte tiempo = new TiempoReporte();
+			desde = tiempo.Tiempo(semana, desde);
+			hasta = tiempo.Tiempo2(desde, hasta);
+		}
 		
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		

@@ -90,11 +90,11 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
         
         
         
-		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/1bis.txt");
+		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/cygeprueba.txt");
 		
 		//System.out.println(inputStreamArchivo);
-
-		String appName = "enteratvtres";
+/*
+		String appName = "enteratvdos";
         
         GcsFilename fileName = new GcsFilename(appName, "CargaPrueba.txt");
 		
@@ -103,10 +103,10 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		
 		
 		InputStream input =Channels.newInputStream(readChannel);
-		
+		*/
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		
-		copy(input,output);
+		copy(inputStreamArchivo,output);
 		
 		byte[] bytes = output.toByteArray();
 	    
@@ -118,9 +118,9 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		
 		System.out.println("Mapeo Correcto Cyge");
 		
-		req.setAttribute("resultado", inputString);
+		//req.setAttribute("resultado", inputString);
 		
-		dispatcher = getServletContext().getRequestDispatcher("/bloqueo2.jsp");
+	    dispatcher = getServletContext().getRequestDispatcher("/ConsumeSRestWEBServlet");
 		
 		dispatcher.forward(req, resp);
 		

@@ -41,7 +41,7 @@ public class Servlet_Archivodos extends HttpServlet {
         req.setAttribute("lstOpcion", opcion);
 			Generar_Archivo Archivo = new Generar_Archivo();
 						
-			Archivo.Archivouno(req, resp, desde, hasta, mes, opcion, tipousuario, usuario);
+			Archivo.Archivouno(req, resp, desde, hasta, mes, opcion, tipousuario, usuario,semana);
 			
 	//		dispatcher = getServletContext().getRequestDispatcher("/Servlet_Archivodos");
 //			Archivo.Archivodos(req, resp, desde, hasta, mes);

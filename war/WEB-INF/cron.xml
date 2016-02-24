@@ -6,9 +6,7 @@
       <schedule>every day 04:00</schedule>
       <timezone>America/Mexico_City</timezone>
   </cron>
-  
-  
-  
+    
   <cron>
       <url>/BuscarArchivoZeit</url>
       <description>Testing Upload Zeit</description>

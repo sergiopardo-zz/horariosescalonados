@@ -42,20 +42,19 @@ public class BuscarArchivoZeitServlet extends HttpServlet
 
 		ServletContext context = getServletContext();
 
-		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/externos20160126123144.txt");
+		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/externos20160126123144.txt");
 		
-		/*
-		String appName = "enteratvtres";
+		String appName = "enteratvdos";
         
-        GcsFilename fileName = new GcsFilename(appName, "externos20160126123144.txt");
+        GcsFilename fileName = new GcsFilename(appName, "CargaZeit.txt");
        
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		
 		InputStream input =Channels.newInputStream(readChannel);
-		*/
+		
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 	
-		copy(inputStreamArchivo,output);
+		copy(input,output);
 		
 		byte[] bytes = output.toByteArray();
 		
