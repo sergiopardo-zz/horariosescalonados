@@ -21,7 +21,7 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
-		  $("#aviso2, #aviso3,  #btn2do").hide();
+		  $("#aviso2, #aviso3, #btnRegresar, #btn2do").hide();
 		  var misVariablesGet = getVarsUrl();
 		  switch (misVariablesGet.opcionReporte) {
 		  case "alta":
@@ -49,7 +49,7 @@
 			  document.getElementById("lstOpcion").value = "Cumplimiento Externos RRHH";
 			break;
 		}
-		  document.getElementById("fechaDesde").value = misVariablesGet.hiddenMes.replace("+", " ");
+		  document.getElementById("fechaDesde").value = misVariablesGet.hiddenHasta.replace("+", " ");
 		  $("#opcionReporte").val(misVariablesGet.opcionReporte);
 		  onclickReporte();
 		  direccionamiento();
@@ -67,7 +67,7 @@
 		 }
 	
 	function onclickReporte(){	
-		document.getElementById("hiddenMes").value = (document.getElementById('fechaDesde').value);
+		document.getElementById("hiddenHasta").value = document.getElementById('fechaDesde').value;
 		document.getElementById("hiddenUsuario").value = document.getElementById("hiddenUsuario").value = "<%=sUsuario%>";
 		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";
 	}
@@ -92,28 +92,29 @@
 		});
 	}
 	
+	Reporte Dia
 	function direccionamiento(){
-		var misVariablesGet = getVarsUrl();
-		var varTitulo = "";
-		if (misVariablesGet.hiddenTipoUsuario == "SS" || misVariablesGet.hiddenTipoUsuario == "RH" || misVariablesGet.hiddenTipoUsuario == "GE"){
-			$("#aRegresar").attr("href","/repDia.jsp" );
-			$("#txtTitulo").hide();
-		}else if(misVariablesGet.hiddenTipoUsuario == "CI"){
-			$("#aRegresar").attr("href","/repDiaRHInternos.jsp" );
-			$("#txtTitulo").val("- Internos");
-		}else if(misVariablesGet.hiddenTipoUsuario == "CE" || misVariablesGet.hiddenTipoUsuario == "CC"){
-			$("#aRegresar").attr("href","/repDiaRHExternos.jsp" );
-			$("#txtTitulo").val("- Externos");
-		}else if(misVariablesGet.hiddenTipoUsuario == "CA"){
-			debugger;
-			if(misVariablesGet.opcionReporte == "cumplimiento"){
-				$("#aRegresar").attr("href","/repDiaRHInternos.jsp" );
-				$("#txtTitulo").val("- Internos");
-			}else{
-				$("#aRegresar").attr("href","/repDiaRHExternos.jsp" );
-				$("#txtTitulo").val("- Externos");
-			}
-		}
+	  var TipoUsr = "<%=sTipo%>";
+	  if (TipoUsr == "SS" || TipoUsr == "RH" || TipoUsr == "GE"){
+	   $("#aRegresar").attr("href","/repDia.jsp" );
+	   $("#txtTitulo").hide();
+	  }else if(TipoUsr == "CI"){
+	   $("#aRegresar").attr("href","/repDiaRHInternos.jsp" );
+	   $("#txtTitulo").val("- Internos");
+	  }else if(TipoUsr == "CE" || TipoUsr == "CC"){
+	   $("#aRegresar").attr("href","/repDiaRHExternos.jsp" );
+	   $("#txtTitulo").val("- Externos");
+	  }else if(TipoUsr == "CA"){
+	   debugger;
+	   if(misVariablesGet.opcionReporte == "cumplimiento"){
+	    $("#aRegresar").attr("href","/repDiaRHInternos.jsp" );
+	    $("#txtTitulo").val("- Internos");
+	   }else{
+	    $("#aRegresar").attr("href","/repDiaRHExternos.jsp" );
+	    $("#txtTitulo").val("- Externos");
+	   }
+	  }
+	 }
 	}
 	</script>
 </head>
@@ -121,7 +122,7 @@
 <body>
 <!-- formulario para reporte cyge -->
 
-<form id="formreportes" action="/generareporte" method="post">
+<form id="formreportes" action="/generareporte" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenHasta" id="hiddenHasta" />
@@ -153,8 +154,20 @@
 	<%@include file="menuEmplA.jsp"%> 
 	</c:if>
 	
-	<c:if test="${tipEmp == 'C'}">
-	<%@include file="menuEmplC.jsp"%> 
+	<c:if test="${tipEmp == 'CI'}">
+	<%@include file="menuEmplRRHHCI.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CE'}">
+	<%@include file="menuEmplRRHHCE.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CA'}">
+	<%@include file="menuEmplRRHH.jsp"%> 
+	</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
+	<%@include file="menuEmplRRHHCE.jsp"%> 
 	</c:if>
 
 	<!-- Final Menu -->
@@ -202,7 +215,7 @@
 					<tr class="tx3Tabla">
 						<td>
 							<label class="etiqueta1 ">Dia:</label>
-							<input class="inputSemanas campoObligatorio" id='fechaMes' name="fechaDesde" readonly> 
+							<input class="inputSemanas campoObligatorio" id='fechaDesde' name="fechaDesde" readonly> 
 							<img class="ui-datepicker-trigger" src="config/img/calendar.png" alt="Seleccionar día" title="Seleccionar día">
 						</td>
 

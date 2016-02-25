@@ -93,28 +93,29 @@
 		});
 	}
 	
+	RepMes
 	function direccionamiento(){
-		var misVariablesGet = getVarsUrl();
-		var varTitulo = "";
-		if (misVariablesGet.hiddenTipoUsuario == "SS" || misVariablesGet.hiddenTipoUsuario == "RH" || misVariablesGet.hiddenTipoUsuario == "GE"){
-			$("#aRegresar").attr("href","/repMes.jsp" );
-			$("#txtTitulo").hide();
-		}else if(misVariablesGet.hiddenTipoUsuario == "CI"){
-			$("#aRegresar").attr("href","/repMesRHInternos.jsp" );
-			$("#txtTitulo").val("- Internos");
-		}else if(misVariablesGet.hiddenTipoUsuario == "CE" || misVariablesGet.hiddenTipoUsuario == "CC"){
-			$("#aRegresar").attr("href","/repMesRHExternos.jsp" );
-			$("#txtTitulo").val("- Externos");
-		}else if(misVariablesGet.hiddenTipoUsuario == "CA"){
-			debugger;
-			if(misVariablesGet.opcionReporte == "cumplimiento"){
-				$("#aRegresar").attr("href","/repMesRHInternos.jsp" );
-				$("#txtTitulo").val("- Internos");
-			}else{
-				$("#aRegresar").attr("href","/repMesRHExternos.jsp" );
-				$("#txtTitulo").val("- Externos");
-			}
-		}
+	  var TipoUsr = "<%=sTipo%>";
+	  if (TipoUsr == "SS" || TipoUsr == "RH" || TipoUsr == "GE"){
+	   $("#aRegresar").attr("href","/repMes.jsp" );
+	   $("#txtTitulo").hide();
+	  }else if(TipoUsr == "CI"){
+	   $("#aRegresar").attr("href","/repMesRHInternos.jsp" );
+	   $("#txtTitulo").val("- Internos");
+	  }else if(TipoUsr == "CE" || TipoUsr == "CC"){
+	   $("#aRegresar").attr("href","/repMesRHExternos.jsp" );
+	   $("#txtTitulo").val("- Externos");
+	  }else if(TipoUsr == "CA"){
+	   debugger;
+	   if(misVariablesGet.opcionReporte == "cumplimiento"){
+	    $("#aRegresar").attr("href","/repMesRHInternos.jsp" );
+	    $("#txtTitulo").val("- Internos");
+	   }else{
+	    $("#aRegresar").attr("href","/repMesRHExternos.jsp" );
+	    $("#txtTitulo").val("- Externos");
+	   }
+	  }
+	 }
 	}
 	
 	</script>

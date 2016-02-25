@@ -24,7 +24,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	  $("#aviso2, #aviso3,  #btn2do").hide();
+	  $("#aviso2, #aviso3, #btnRegresar, #btn2do").hide();
 	  var misVariablesGet = getVarsUrl();
 	  switch (misVariablesGet.opcionReporte) {
 	  case "alta":
@@ -52,7 +52,7 @@ $(document).ready(function(){
 		  document.getElementById("lstOpcion").value = "Cumplimiento Externos RRHH";
 		break;
 	}
-	  document.getElementById("fechaDesde").value = misVariablesGet.hiddenMes.replace("+", " ");
+	  document.getElementById("fechaSemana").value = misVariablesGet.hiddenSemana.replace("+", " ");
 	  $("#opcionReporte").val(misVariablesGet.opcionReporte);
 	  onclickReporte();
 	  direccionamiento();
@@ -70,7 +70,7 @@ $(document).ready(function(){
 		 }
 	
 	function onclickReporte(){	
-		document.getElementById("hiddenMes").value = (document.getElementById('fechaSemana').value);
+		document.getElementById("hiddenSemana").value = (document.getElementById('fechaSemana').value);
 		document.getElementById("hiddenUsuario").value = document.getElementById("hiddenUsuario").value = "<%=sUsuario%>";
 		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";
 	}
@@ -95,38 +95,35 @@ $(document).ready(function(){
 		});
 	}
 
+	RepSemana
 	function direccionamiento() {
-		var misVariablesGet = getVarsUrl();
-		var varTitulo = "";
-		if (misVariablesGet.hiddenTipoUsuario == "SS"
-				|| misVariablesGet.hiddenTipoUsuario == "RH"
-				|| misVariablesGet.hiddenTipoUsuario == "GE") {
-			$("#aRegresar").attr("href", "/repSemana.jsp");
-			$("#txtTitulo").hide();
-		} else if (misVariablesGet.hiddenTipoUsuario == "CI") {
-			$("#aRegresar").attr("href", "/repSemanaRHInternos.jsp");
-			$("#txtTitulo").val("- Internos");
-		} else if (misVariablesGet.hiddenTipoUsuario == "CE"
-				|| misVariablesGet.hiddenTipoUsuario == "CC") {
-			$("#aRegresar").attr("href", "/repSemanaRHExternos.jsp");
-			$("#txtTitulo").val("- Externos");
-		} else if (misVariablesGet.hiddenTipoUsuario == "CA") {
-			debugger;
-			if (misVariablesGet.opcionReporte == "cumplimiento") {
-				$("#aRegresar").attr("href", "/repSemanaRHInternos.jsp");
-				$("#txtTitulo").val("- Internos");
-			} else {
-				$("#aRegresar").attr("href", "/repSemanaRHExternos.jsp");
-				$("#txtTitulo").val("- Externos");
-			}
-		}
+	  var TipoUsr = "<%=sTipo%>";
+	  if (TipoUsr == "SS" || TipoUsr == "RH" || TipoUsr == "GE") {
+	   $("#aRegresar").attr("href", "/repSemana.jsp");
+	   $("#txtTitulo").hide();
+	  } else if (TipoUsr == "CI") {
+	   $("#aRegresar").attr("href", "/repSemanaRHInternos.jsp");
+	   $("#txtTitulo").val("- Internos");
+	  } else if (TipoUsr == "CE" || TipoUsr == "CC") {
+	   $("#aRegresar").attr("href", "/repSemanaRHExternos.jsp");
+	   $("#txtTitulo").val("- Externos");
+	  } else if (TipoUsr == "CA") {
+	   if (misVariablesGet.opcionReporte == "cumplimiento") {
+	    $("#aRegresar").attr("href", "/repSemanaRHInternos.jsp");
+	    $("#txtTitulo").val("- Internos");
+	   } else {
+	    $("#aRegresar").attr("href", "/repSemanaRHExternos.jsp");
+	    $("#txtTitulo").val("- Externos");
+	   }
+	  }
+	 }
 	}
 </script>
 </head>
 <body>
 	:
 	<!-- formulario para reporte cyge -->
-	<form id="formreportes" action="/generareporte" method="post">
+	<form id="formreportes" action="/generareporte" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" /> 
 		<input type="hidden" name="hiddenSemana" id="hiddenSemana" /> 
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" /> 
@@ -156,9 +153,21 @@ $(document).ready(function(){
 				<%@include file="menuEmplA.jsp"%>
 			</c:if>
 
-			<c:if test="${tipEmp == 'C'}">
-				<%@include file="menuEmplC.jsp"%>
+			<c:if test="${tipEmp == 'CI'}">
+			<%@include file="menuEmplRRHHCI.jsp"%> 
 			</c:if>
+	
+			<c:if test="${tipEmp == 'CE'}">
+			<%@include file="menuEmplRRHHCE.jsp"%> 
+			</c:if>
+	
+			<c:if test="${tipEmp == 'CA'}">
+			<%@include file="menuEmplRRHH.jsp"%> 
+			</c:if>
+	
+	<c:if test="${tipEmp == 'CC'}">
+	<%@include file="menuEmplRRHHCE.jsp"%> 
+	</c:if>
 
 			<!-- Final Menu -->
 

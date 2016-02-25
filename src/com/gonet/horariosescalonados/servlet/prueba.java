@@ -153,6 +153,9 @@ public class prueba extends HttpServlet {
 
 					StrUsuarioExist = daoSelect.ConsultarUsuario(correo_prueba);
 					
+					StrUsuarioExist = daoSelect.ConsultarUsuarioRH(StrUsuarioExist);
+					
+					
 					if(StrUsuarioExist.equalsIgnoreCase("SN"))
 					{
 						resultado1 = dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());

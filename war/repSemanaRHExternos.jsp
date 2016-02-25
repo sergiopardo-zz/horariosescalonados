@@ -29,7 +29,7 @@
 	}
 	
 	function generar(){
-		formreportes.action = "/generaexcel";
+		formreportes.action = "/Servlet_Archivo";
 		formreportes.submit();
 		$('#fechaSemana').val("");
 		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
@@ -43,11 +43,12 @@
 
 <!-- formulario para reporte cyge -->
 
-<form id="formreportes" action="/generareporte" method="post">
+<form id="formreportes" action="/generareporte" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenSemana" id="hiddenSemana" /> 
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
+		<input type="hidden" name="hiddenTipoUsuario" id="hiddenTipoUsuario" />
 		
 <div class="contenedor">
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>

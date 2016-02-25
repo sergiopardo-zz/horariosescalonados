@@ -485,7 +485,10 @@ public class QueryTables {
 					
 					while(resultSet.next()){
 						
-						lisCorreo.add(resultSet.getString(1));
+						 if(!(resultSet.getString(1).isEmpty()))
+					      {
+					       lisCorreo.add(resultSet.getString(1));
+					      }
 						
 					}
 					
@@ -697,6 +700,38 @@ public class QueryTables {
 					String selectSql = "SELECT Usuario FROM horariosescalonadosv2.Cyge where Email = ?";
 					PreparedStatement stmt = conn.prepareStatement(selectSql);
 					stmt.setString(1, email);	
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next())
+					{
+						strExiste = resultSet.getString(1);
+						return strExiste;
+					
+					}
+					
+					return strExiste;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return strExiste;
+	 }
+	 
+	 
+	 public String ConsultarUsuarioRH(String numUsuario)
+	 {
+		String strExiste = "SN";
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT Usuario FROM horariosescalonadosv2.EmpleadoExternoRRHH where Usuario = ?";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+					stmt.setString(1, numUsuario);	
 					ResultSet resultSet = stmt.executeQuery();
 					
 					if(resultSet.next())
