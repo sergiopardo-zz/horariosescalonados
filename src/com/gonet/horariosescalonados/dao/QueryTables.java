@@ -537,7 +537,7 @@ public class QueryTables {
 	 
 	 
 	 
-	 public int maximoCumplimiento(java.sql.Date desdeDate, java.sql.Date hastaDate, String opcion, String usuario)
+	 public int maximoCumplimiento(java.sql.Date desdeDate, java.sql.Date hastaDate, String opcion, String usuario, String tipousuario)
 	 {
 		 int intNumregistro = 0;
 		 String selectSql = "";
@@ -547,7 +547,7 @@ public class QueryTables {
 					
 				if(opcion.equals("cumplimiento")){
 					if(usuario.equals("CI")||usuario.equals("CA")){
-					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";;
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 					}else{
 					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
 					}

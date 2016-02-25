@@ -71,11 +71,11 @@ public class Servlet_Archivo extends HttpServlet {
 			
 			QueryTables daoSelect = new QueryTables();
 			
-			maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate,opcion,usuario );
+			maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate,opcion,usuario,tipousuario);
 			
 			String selectSql = "";
 			
-			if (maximoreg>=10000)
+			if (maximoreg >= 105000)
 				
 			{
 							
