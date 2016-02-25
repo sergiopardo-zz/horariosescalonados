@@ -574,4 +574,50 @@ public class InsertarRegistro {
 		return 0;
 		
 	}
+	
+	public int updateUsuarioRecursos( String direccion_general,
+			String direccion_corporativa, String area, String CR_direccion_General, 
+			String CR_Direccion_Corporativa, String CR_Area, String Edificio, String StrUsuarioExist)
+	{
+		Connection conn=null;
+		try {
+			conn = Connector.getConexion();
+		
+		try {
+			//Usuario, DireccionGeneral, DireccionCorporativa, Area, CRDireccionGeneral, CRDireccionCorporativa, CRArea, Edificio
+						
+			String statement = "UPDATE horariosescalonadosv2.EmpleadoExternoRRHH SET  DireccionGeneral = ?, DireccionCorporativa = ?, Area = ?, CRDireccionGeneral = ?, CRDireccionCorporativa = ?, CRArea = ?, Edificio = ? where Usuario = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(statement);
+			stmt.setString(1, direccion_general);
+			stmt.setString(2, direccion_corporativa);
+			stmt.setString(3, area);
+			stmt.setString(4, CR_direccion_General);
+			stmt.setString(5, CR_Direccion_Corporativa);
+			stmt.setString(6, CR_Area);
+			stmt.setString(7, Edificio);
+			stmt.setString(8, StrUsuarioExist);
+			stmt.executeUpdate();
+			
+			System.out.println("Se actualizo correctamente");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		finally
+		{
+			conn.close();
+		}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+		return 0;
+		
+	}
 }
+
+	

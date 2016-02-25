@@ -48,7 +48,7 @@ String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.ge
 
 <!-- formulario para reporte cyge -->
 
-<form id="formreportes" action="/Servlet_Archivo" method="get">
+<form id="formreportes" action="/generareporte" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenSemana" id="hiddenSemana" /> 
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />

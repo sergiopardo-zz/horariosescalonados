@@ -18,6 +18,7 @@ public class Servlet_Archivotres extends HttpServlet {
 			throws IOException, ServletException {
 
 		String opcion = req.getParameter("opcionReporte")!=null?req.getParameter("opcionReporte").toString():"";
+		String dia = req.getParameter("hiddenHasta")!=null?req.getParameter("hiddenHasta").toString():"";
 		String desde = req.getParameter("hiddenDesde")!=null?req.getParameter("hiddenDesde").toString():"";
 		String hasta = req.getParameter("hiddenHasta")!=null?req.getParameter("hiddenHasta").toString():"";
 		String semana = req.getParameter("hiddenSemana")!=null?req.getParameter("hiddenSemana").toString():"";
@@ -43,7 +44,7 @@ public class Servlet_Archivotres extends HttpServlet {
 			
 //			if (acceder)
 //			{
-				Archivo.Archivodos(req, resp, desde, hasta, mes,opcion,tipousuario,usuario,semana);
+				Archivo.Archivodos(req, resp, desde, hasta, mes,opcion,tipousuario,usuario,semana,dia);
 //			}
 
 			

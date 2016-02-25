@@ -321,7 +321,7 @@ public class BeanCyge implements Archivo {
 
 
 		public void setFechaCreacionRegistro(Date FechaCreacionRegistro) {
-			FechaCreacionRegistro = FechaCreacionRegistro;
+			this.FechaCreacionRegistro = FechaCreacionRegistro;
 		}
 
 

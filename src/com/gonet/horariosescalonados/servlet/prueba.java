@@ -58,6 +58,8 @@ public class prueba extends HttpServlet {
 		int inicio = daoSelect.Busquedaregistro();
 		int error = 0;
 		
+		String StrUsuarioExist = "SN";
+		
 		maximo = listaCorreo.size();
 		if(inicio <= maximo - 1)
 		{
@@ -145,9 +147,20 @@ public class prueba extends HttpServlet {
 				
 				strResultadoPar = parser.ConvertirAUsuario(resultado);
 				
+				
+				
 					int resultado1 = 0;
+
+					StrUsuarioExist = daoSelect.ConsultarUsuario(correo_prueba);
 					
-					resultado1 = dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+					if(StrUsuarioExist.equalsIgnoreCase("SN"))
+					{
+						resultado1 = dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+					}
+					else
+					{
+						dao.updateUsuarioRecursos( strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo(), StrUsuarioExist);
+					}					
 					
 					if(resultado1==1)
 					{

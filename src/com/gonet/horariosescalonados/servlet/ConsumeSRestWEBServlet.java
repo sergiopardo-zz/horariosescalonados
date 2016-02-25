@@ -46,6 +46,7 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 		resp.setContentType("text/plain");
 
 		String resultado = null;
+		String StrUsuarioExist = "SN";
 		
 		ArrayList <String> listaCorreo = new ArrayList<String>();
 		
@@ -147,7 +148,16 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 				
 					int resultado1 = 0;
 					
-					resultado1 = dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+					StrUsuarioExist = daoSelect.ConsultarUsuario(correo_prueba);
+					
+					if(StrUsuarioExist.equalsIgnoreCase("SN"))
+					{
+						resultado1 = dao.insertarUSER(strResultadoPar.getUid(), strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo());
+					}
+					else
+					{
+						dao.updateUsuarioRecursos( strResultadoPar.getDescOUPadre(), strResultadoPar.getDescCentroCoste(), strResultadoPar.getDescOUNivel10(), strResultadoPar.getCodOUPadre(), strResultadoPar.getCodBancoOficinaPers(), strResultadoPar.getCodOUNivel10(), strResultadoPar.getDescCentroTrabajo(), StrUsuarioExist);
+					}	
 					
 					if(resultado1==1)
 					{
@@ -273,7 +283,7 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 		}
 		
 		
-		dispatcher = getServletContext().getRequestDispatcher("/trabajando.jsp");
+		dispatcher = getServletContext().getRequestDispatcher("/prueba");
 		
 		dispatcher.forward(req, resp);
 		}

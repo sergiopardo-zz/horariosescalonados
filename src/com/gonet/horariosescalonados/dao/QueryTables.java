@@ -687,6 +687,37 @@ public class QueryTables {
 		 
 		 return null;
 	 }
+	 
+	 public String ConsultarUsuario(String email)
+	 {
+		String strExiste = "SN";
+		 try{
+				Connection conn = Connector.getConexion();
+				try {	
+					String selectSql = "SELECT Usuario FROM horariosescalonadosv2.Cyge where Email = ?";
+					PreparedStatement stmt = conn.prepareStatement(selectSql);
+					stmt.setString(1, email);	
+					ResultSet resultSet = stmt.executeQuery();
+					
+					if(resultSet.next())
+					{
+						strExiste = resultSet.getString(1);
+						return strExiste;
+					
+					}
+					
+					return strExiste;
+					
+				} finally {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.err.println(e);
+				
+			}		 
+		 
+		 return strExiste;
+	 }
 
 
 }

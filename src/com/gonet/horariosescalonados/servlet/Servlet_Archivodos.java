@@ -29,19 +29,21 @@ public class Servlet_Archivodos extends HttpServlet {
 		RequestDispatcher dispatcher;
 		
 		String opcion = req.getParameter("opcionReporte")!=null?req.getParameter("opcionReporte").toString():"";
+		String dia = req.getParameter("hiddenHasta")!=null?req.getParameter("hiddenHasta").toString():"";
 		String desde = req.getParameter("hiddenDesde")!=null?req.getParameter("hiddenDesde").toString():"";
 		String hasta = req.getParameter("hiddenHasta")!=null?req.getParameter("hiddenHasta").toString():"";
 		String semana = req.getParameter("hiddenSemana")!=null?req.getParameter("hiddenSemana").toString():"";
 		String mes = req.getParameter("hiddenMes")!=null?req.getParameter("hiddenMes").toString():"";
 		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
 		String tipousuario = req.getParameter("hiddenTipoUsuario")!=null?req.getParameter("hiddenTipoUsuario").toString():"";
-			
-	
+		
+		req.setAttribute("dia", dia);
+		req.setAttribute("semana", semana);
 		req.setAttribute("mes", mes);
         req.setAttribute("lstOpcion", opcion);
 			Generar_Archivo Archivo = new Generar_Archivo();
 						
-			Archivo.Archivouno(req, resp, desde, hasta, mes, opcion, tipousuario, usuario,semana);
+			Archivo.Archivouno(req, resp, desde, hasta, mes, opcion, tipousuario, usuario, semana, dia);
 			
 	//		dispatcher = getServletContext().getRequestDispatcher("/Servlet_Archivodos");
 //			Archivo.Archivodos(req, resp, desde, hasta, mes);

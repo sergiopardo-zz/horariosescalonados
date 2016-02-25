@@ -16,6 +16,7 @@ import org.datanucleus.FetchPlan;
 import com.gonet.horariosescalonados.bean.BeanPerfilConsulta;
 import com.gonet.horariosescalonados.bean.BeanPerfilConsultaExternos;
 import com.gonet.horariosescalonados.bean.BeanZeit;
+import com.gonet.horariosescalonados.classes.Fecha;
 import com.gonet.horariosescalonados.bean.BeanCumplimiento;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExterno;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoCyge;
@@ -65,7 +66,8 @@ public class DataNucleusQuery
 					registroCyge.setProveedor(registro.getProveedor());
 					registroCyge.setProyecto(registro.getProyecto());
 					registroCyge.setEmail(registro.getEmail());
-					registroCyge.setFechaCreacionRegistro(registro.getFechaCreacionRegistro());
+					Fecha tiempo = new Fecha();
+				    registroCyge.setFechaCreacionRegistro((Date) tiempo.fechas());
 					
 
 					//pm.makePersistent(registro);

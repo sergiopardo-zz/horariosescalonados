@@ -29,7 +29,12 @@
 	}
 				
 	function generar(){
-		formreportes.action = "/generaexcel";
+		if ($("#opcionReporte").val() == "alta" || $("#opcionReporte").val() == "modificacion" || $("#opcionReporte").val() == "baja"|| 
+			 $("#noasignacion").val() == "alta"){
+			   formreportes.action = "/generaexcel";
+			  }else{
+		formreportes.action = "/Servlet_Archivo";
+			  }
 		formreportes.submit();
 		$('#fechaDesde').val("");
 		$(".contenidoSelecciona div.primerOpcion").addClass("campoObligatorio").removeClass("colorSeleccionado").text("Selecciona");
@@ -43,7 +48,7 @@
 <body>
 <!-- formulario para reporte cyge -->
 
-<form id="formreportes" action="/generareporte" method="post">
+<form id="formreportes" action="/Servlet_Archivo" method="get">
 		<input type="hidden" name="opcionReporte" id="opcionReporte" />
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenHasta" id="hiddenHasta" />
