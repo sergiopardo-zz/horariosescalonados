@@ -92,8 +92,8 @@
 		});
 	}
 	
-	Reporte Dia
 	function direccionamiento(){
+	  var misVariablesGet = getVarsUrl();
 	  var TipoUsr = "<%=sTipo%>";
 	  if (TipoUsr == "SS" || TipoUsr == "RH" || TipoUsr == "GE"){
 	   $("#aRegresar").attr("href","/repDia.jsp" );
@@ -115,7 +115,7 @@
 	   }
 	  }
 	 }
-	}
+	
 	</script>
 </head>
 

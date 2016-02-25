@@ -95,8 +95,8 @@ $(document).ready(function(){
 		});
 	}
 
-	RepSemana
 	function direccionamiento() {
+	  var misVariablesGet = getVarsUrl();
 	  var TipoUsr = "<%=sTipo%>";
 	  if (TipoUsr == "SS" || TipoUsr == "RH" || TipoUsr == "GE") {
 	   $("#aRegresar").attr("href", "/repSemana.jsp");
@@ -117,7 +117,6 @@ $(document).ready(function(){
 	   }
 	  }
 	 }
-	}
 </script>
 </head>
 <body>

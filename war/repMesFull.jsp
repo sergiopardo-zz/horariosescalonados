@@ -93,8 +93,8 @@
 		});
 	}
 	
-	RepMes
 	function direccionamiento(){
+	  var misVariablesGet = getVarsUrl();
 	  var TipoUsr = "<%=sTipo%>";
 	  if (TipoUsr == "SS" || TipoUsr == "RH" || TipoUsr == "GE"){
 	   $("#aRegresar").attr("href","/repMes.jsp" );
@@ -116,7 +116,6 @@
 	   }
 	  }
 	 }
-	}
 	
 	</script>
 </head>

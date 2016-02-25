@@ -34,10 +34,11 @@ public class Servlet_Archivo extends HttpServlet {
 		String usuario = req.getParameter("hiddenUsuario")!=null?req.getParameter("hiddenUsuario").toString():"";
 		String tipousuario = req.getParameter("hiddenTipoUsuario")!=null?req.getParameter("hiddenTipoUsuario").toString():"";
 		
-		
+		req.setAttribute("dia", dia);
 		req.setAttribute("mes", mes);
 		req.setAttribute("semana", semana);
         req.setAttribute("lstOpcion", opcion);
+        req.setAttribute("tipousuario", dia);
 		
 		
 		RequestDispatcher dispatcher = null;
@@ -71,11 +72,11 @@ public class Servlet_Archivo extends HttpServlet {
 			
 			QueryTables daoSelect = new QueryTables();
 			
-			maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate,opcion,usuario,tipousuario);
+			maximoreg = daoSelect.maximoCumplimiento(desdeDate, hastaDate, opcion, tipousuario, usuario);
 			
 			String selectSql = "";
 			
-			if (maximoreg >= 105000)
+			if (maximoreg < 105000)
 				
 			{
 							
@@ -706,6 +707,8 @@ public class Servlet_Archivo extends HttpServlet {
 		      }
 			
 	      }else{
+
+	          
 				if(mes!=""){
 					dispatcher = getServletContext().getRequestDispatcher("/repMesFull.jsp");
 				}if(semana!=""){

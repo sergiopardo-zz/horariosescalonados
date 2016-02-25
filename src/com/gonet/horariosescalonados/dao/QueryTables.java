@@ -537,7 +537,7 @@ public class QueryTables {
 	 
 	 
 	 
-	 public int maximoCumplimiento(java.sql.Date desdeDate, java.sql.Date hastaDate, String opcion, String usuario, String tipousuario)
+	 public int maximoCumplimiento(java.sql.Date desdeDate, java.sql.Date hastaDate, String opcion, String tipousuario, String usuario)
 	 {
 		 int intNumregistro = 0;
 		 String selectSql = "";
@@ -546,21 +546,21 @@ public class QueryTables {
 				try {	
 					
 				if(opcion.equals("cumplimiento")){
-					if(usuario.equals("CI")||usuario.equals("CA")){
+					if(tipousuario.equals("CI")||tipousuario.equals("CA")){
 					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 					}else{
 					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
 					}
 				}
 				if(opcion.equals("cumplimientoExternoRRHH")){
-					if(usuario.equals("CE")||usuario.equals("CA")){
+					if(tipousuario.equals("CE")||tipousuario.equals("CA")){
 					 selectSql = "SELECT  COUNT(*) FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ";
 					}else{
 					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
 					}
 				}
 				if(opcion.equals("cumplimientoExternoCyge")){
-					if(usuario.equals("CC")){
+					if(tipousuario.equals("CC")){
 				     selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'";
 						}else{
 					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
