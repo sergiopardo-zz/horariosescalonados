@@ -48,6 +48,8 @@
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenHasta" id="hiddenHasta" />
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
+		<input type="hidden" name="hiddenTipoUsuario" id="hiddenTipoUsuario" />
+		
 <div class="contenedor">
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 			

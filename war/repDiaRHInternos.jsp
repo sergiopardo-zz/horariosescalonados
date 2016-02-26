@@ -3,7 +3,8 @@
 <%@page import="com.google.appengine.api.datastore.Entity"%>
  	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% String sUsuario = session.getAttribute("usuario")==null?"":(String)session.getAttribute("usuario");%>
+<% String sUsuario = session.getAttribute("usuario")==null?"":(String)session.getAttribute("usuario");
+   String sTipo = session.getAttribute("tipo_empleado")==null?"":(String)session.getAttribute("tipo_empleado");%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,6 +25,7 @@
 		document.getElementById("hiddenDesde").value = document.getElementById('fechaDesde').value;
 		document.getElementById("hiddenHasta").value = document.getElementById('fechaDesde').value;
 		document.getElementById("hiddenUsuario").value = document.getElementById("hiddenUsuario").value = "<%=sUsuario%>";
+		document.getElementById("hiddenTipoUsuario").value = document.getElementById("hiddenTipoUsuario").value = "<%=sTipo%>";
 	}
 				
 	function generar(){
@@ -46,6 +48,8 @@
 		<input type="hidden" name="hiddenDesde" id="hiddenDesde" />
 		<input type="hidden" name="hiddenHasta" id="hiddenHasta" />
 		<input type="hidden" name="hiddenUsuario" id="hiddenUsuario" />
+		<input type="hidden" name="hiddenTipoUsuario" id="hiddenTipoUsuario" />
+		
 <div class="contenedor">
 <c:set var="tipEmp" scope="session" value="${sessionScope.tipo_empleado}"/>
 	
