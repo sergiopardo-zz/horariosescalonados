@@ -291,6 +291,11 @@ public class ConsumeSRestWEBServlet extends HttpServlet {
 		dispatcher.forward(req, resp);
 		}
 		
+		else
+		  {
+		   dao.updateRegistroCero();
+		  }
+		
 		System.out.println(error);
 //		req.setAttribute("resultado", resultado);
 //		

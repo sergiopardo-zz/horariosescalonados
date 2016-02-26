@@ -485,7 +485,7 @@ public class QueryTables {
 					
 					while(resultSet.next()){
 						
-						 if(!(resultSet.getString(1).isEmpty()))
+						if(!(resultSet.getString(1).equalsIgnoreCase(" ")))
 					      {
 					       lisCorreo.add(resultSet.getString(1));
 					      }

@@ -294,7 +294,10 @@ public class prueba extends HttpServlet {
 		dispatcher.forward(req, resp);
 		}
 		
-	
+		else
+		  {
+		   dao.updateRegistroCero();
+		  }
 //		req.setAttribute("resultado", resultado);
 //		
 		
