@@ -1,12 +1,8 @@
 package com.gonet.horariosescalonados.servlet;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
@@ -18,28 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
-
+import com.gonet.horariosescalonados.dao.InsertarRegistro;
 import com.gonet.horariosescalonados.persistence.TipoArchivo;
 import com.gonet.horariosescalonados.service.CargaAutomatica;
-
-import com.google.appengine.tools.cloudstorage.*;
-import com.google.appengine.tools.cloudstorage.GcsFileOptions;
-import com.google.appengine.tools.cloudstorage.GcsFilename;
-import com.google.appengine.tools.cloudstorage.GcsInputChannel;
-import com.google.appengine.tools.cloudstorage.GcsOutputChannel;
+import com.google.appengine.api.appidentity.AppIdentityService;
 import com.google.appengine.tools.cloudstorage.GcsService;
 import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
-
-import com.google.appengine.api.appidentity.AppIdentityService;
-
-import java.nio.channels.Channels;
-import java.nio.charset.StandardCharsets;
-import java.io.InputStreamReader;
-
-
-
-import java.nio.ByteBuffer;
+import com.google.appengine.tools.cloudstorage.RetryParams;
 
 
 public class BuscarArchivoCygeServlet extends HttpServlet{
@@ -90,7 +71,7 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
         
         
         
-		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaPruebaStorage.txt");
+		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaPrueba1.txt");
 		
 		//System.out.println(inputStreamArchivo);
 
@@ -119,6 +100,13 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		System.out.println("Mapeo Correcto Cyge");
 		
 		//req.setAttribute("resultado", inputString);
+		
+		//////////////
+		InsertarRegistro dao  = new InsertarRegistro(); 
+		
+		dao.updateRegistroCero();
+		
+		//////////////////////
 		
 	    dispatcher = getServletContext().getRequestDispatcher("/ConsumeSRestWEBServlet");
 		

@@ -78,7 +78,7 @@
 		formreportes.submit();
 		$(".muestraDeshabilitado").removeClass("noMostrar");
 		$(".muestraReposo").addClass("noMostrar");
-		$("#btn2do").focus( 10000 ,function(){
+		$("#btn2do").focus( 60000 ,function(){
 			$("#btn2do, #aviso2").show();
 		});
 	}
@@ -88,7 +88,7 @@
 		formreportes.submit();
 		$(".muestraDeshabilitado2").removeClass("noMostrar");
 		$("#btn2do").hide();
-		$("#btnRegresar").focus( 10000 ,function(){
+		$("#btnRegresar").focus( 60000 ,function(){
 			$("#btnRegresar, #aviso3").show();
 		});
 	}
