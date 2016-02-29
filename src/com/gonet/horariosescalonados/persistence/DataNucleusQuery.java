@@ -927,7 +927,7 @@ public class DataNucleusQuery
 					+ "horariosescalonadosv2.Cyge.EspacioFisico "
 					+ "From horariosescalonadosv2.Cyge "
 					+ "inner join horariosescalonadosv2.Zeit on horariosescalonadosv2.Zeit.NoCyge = horariosescalonadosv2.Cyge.NoCyge "
-					//+ "and  horariosescalonadosv2.Zeit.Edificio = horariosescalonadosv2.Cyge.LugarAsignadoEdificio "
+					+ "and  horariosescalonadosv2.Zeit.Edificio = horariosescalonadosv2.Cyge.LugarAsignadoEdificio "
 					+ "inner join (SELECT  NoCyge, Fecha, SEC_TO_TIME( SUM( TIME_TO_SEC( estancia ) ) ) AS Jornada FROM horariosescalonadosv2.Zeit "
 					+ "Where TipoFuncion = 'ENTRADA'group by NoCyge, Fecha) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge "
 					+ "and horariosescalonadosv2.Cyge.Estatus = 'VIGENTE' and horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) "
