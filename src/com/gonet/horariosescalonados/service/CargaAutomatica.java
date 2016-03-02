@@ -70,7 +70,20 @@ public class CargaAutomatica
 			
 			List<BeanIncumplimiento> registrosIncumplimientoCompleto = reporteCumplimientoCyge.ReportesIncumplimiento(registrosIncompletosIncumplimiento);
 			
-			List<BeanCumplimientoExternoCyge> registrosResultadosDelQuery = new ArrayList<BeanCumplimientoExternoCyge>();			
+//			List<BeanCumplimientoExternoCyge> registrosResultadosDelQuery = new ArrayList<BeanCumplimientoExternoCyge>();
+//			
+//			for (Iterator<BeanCumplimientoExternoCyge> iterator = registrosCompletosReporteCyge.iterator(); iterator.hasNext();) {
+//				BeanCumplimientoExternoCyge registro = iterator.next();
+//			    if (!(registro.getStrEstatus().equals("VIGENTE"))) {
+//			        BeanIncumplimiento registroIncumplimiento = new BeanIncumplimiento(registro);
+//			        registrosIncumplimientoCompletos.add(registroIncumplimiento);
+//			    }
+//			    else{
+//			    	registrosResultadosDelQuery.add(registro);
+////			    }
+////			}
+//			
+			query.InsertarRegistrosIncumplimiento(registrosIncumplimientoCompleto);
 								
 			List<BeanCumplimientoExternoRRHH> registrosIncompletoCygeRRHH = query.RegistrosCumplimientoRRHH();
 					

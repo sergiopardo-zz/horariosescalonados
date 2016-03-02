@@ -100,6 +100,9 @@ public class BeanCumplimientoExternoRRHH {
 	
 
 
+	
+
+
 	public BeanCumplimientoExternoRRHH(){
 		super();
 	}

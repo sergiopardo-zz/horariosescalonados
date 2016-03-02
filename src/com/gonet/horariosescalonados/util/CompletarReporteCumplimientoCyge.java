@@ -20,6 +20,8 @@ public class CompletarReporteCumplimientoCyge {
 	{
 
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");	
+		DateTimeFormatter formatterHorario = DateTimeFormat.forPattern("HH:mm");
+		DateTimeFormatter formatterJornada = DateTimeFormat.forPattern("HH:mm:ss");
 		DateTime fecha = null;	
 
 		for (BeanCumplimientoExternoCyge registro : registrosReporte)
@@ -30,12 +32,22 @@ public class CompletarReporteCumplimientoCyge {
 			registro.setStrMes(fecha.toString("MMM", spanish));
 
 			registro.setStrQuincena(fecha.getDayOfMonth()<= 15 ?"Q1":"Q2");
+			
+			String strEntrada = registro.getStrEntradaReal();
+			String strSalida = registro.getStrSalidaReal();
+			
+			DateTime horaEntradaReal =  (!(strEntrada.equals(HeConstantes.DATO_INVALIDO_REPORTE)))? formatterHorario.parseDateTime(strEntrada): null;
+			DateTime horaSalidaReal =  (!(strSalida.equals(HeConstantes.DATO_INVALIDO_REPORTE))) ? formatterHorario.parseDateTime(strSalida) : null;
 
 			if ((!(registro.getStrEntradaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))) && (!(registro.getStrSalidaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))))
 			{
-				registro.setStrJornada(registro.getStrJornada());	
+				if (horaEntradaReal.isAfter(horaSalidaReal)){
+					registro.setStrJornada(HeConstantes.DATO_INVALIDO_REPORTE);
+				}else{
+				registro.setStrJornada(registro.getStrJornada());
+				}
 			}
-
+			
 			else 
 			{
 				registro.setStrJornada(HeConstantes.DATO_INVALIDO_REPORTE);
@@ -50,6 +62,9 @@ public class CompletarReporteCumplimientoCyge {
 	{
 
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");	
+		DateTimeFormatter formatterHorario = DateTimeFormat.forPattern("HH:mm");
+		DateTimeFormatter formatterJornada = DateTimeFormat.forPattern("HH:mm:ss");
+		
 		DateTime fecha = null;	
 
 		for (BeanIncumplimiento registro : registrosReporte)
@@ -60,12 +75,24 @@ public class CompletarReporteCumplimientoCyge {
 			registro.setStrMes(fecha.toString("MMM", spanish));
 
 			registro.setStrQuincena(fecha.getDayOfMonth()<= 15 ?"Q1":"Q2");
-
+			
+			String strEntrada = registro.getStrEntradaReal();
+			String strSalida = registro.getStrSalidaReal();
+			
+			DateTime horaEntradaReal =  (!(strEntrada.equals(HeConstantes.DATO_INVALIDO_REPORTE)))? formatterHorario.parseDateTime(strEntrada): null;
+			DateTime horaSalidaReal =  (!(strSalida.equals(HeConstantes.DATO_INVALIDO_REPORTE))) ? formatterHorario.parseDateTime(strSalida) : null;
+			
+			
+			
 			if ((!(registro.getStrEntradaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))) && (!(registro.getStrSalidaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))))
 			{
-				registro.setStrJornada(registro.getStrJornada());	
+				if (horaEntradaReal.isAfter(horaSalidaReal)){
+					registro.setStrJornada(HeConstantes.DATO_INVALIDO_REPORTE);
+				}else{
+				registro.setStrJornada(registro.getStrJornada());
+				}
 			}
-
+			
 			else 
 			{
 				registro.setStrJornada(HeConstantes.DATO_INVALIDO_REPORTE);
@@ -98,7 +125,7 @@ public class CompletarReporteCumplimientoCyge {
 
 			DateTimeFormatter formatterHorario = DateTimeFormat.forPattern("HH:mm");
 			DateTimeFormatter formatterJornada = DateTimeFormat.forPattern("HH:mm:ss");
-
+			 
 			String strEntrada = registro.getEntradaReal();
 			String strSalida = registro.getSalidaReal();
 
@@ -110,9 +137,12 @@ public class CompletarReporteCumplimientoCyge {
 			DateTime horaSalidaOficial = horaEntradaOficial.plusHours(9);
 			DateTime toleranciaSalidaAntes = horaSalidaOficial.minusMinutes(15);
 			DateTime toleranciaSalidaDespues = horaSalidaOficial.plusMinutes(15);
-
-			DateTime jornada = formatterJornada.parseDateTime(registro.getJornada().equals("DATO INVÁLIDO") ? "00:00:00" : registro.getJornada());
+			if (horaEntradaReal.isAfter(horaSalidaReal))
+			{
+				registro.setJornada("DATO INVÁLIDO");
+			}
 			
+			DateTime jornada = formatterJornada.parseDateTime(registro.getJornada().equals("DATO INVÁLIDO") ? "00:00:00" : registro.getJornada());
 			DateTime dt8horas = formatterJornada.parseDateTime("08:30:00");
 			DateTime dt9horas = formatterJornada.parseDateTime("09:30:00");
 			
