@@ -10,6 +10,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoCyge;
 import com.gonet.horariosescalonados.bean.BeanCumplimientoExternoRRHH;
+import com.gonet.horariosescalonados.bean.BeanIncumplimiento;
 
 public class CompletarReporteCumplimientoCyge {
 
@@ -44,6 +45,38 @@ public class CompletarReporteCumplimientoCyge {
 		return registrosReporte;
 
 	}
+	
+	public List<BeanIncumplimiento> ReportesIncumplimiento (List<BeanIncumplimiento> registrosReporte)
+	{
+
+		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");	
+		DateTime fecha = null;	
+
+		for (BeanIncumplimiento registro : registrosReporte)
+		{
+			fecha = new DateTime(registro.getStrFecha());
+			//fecha = formatter.parseDateTime(registro.getStrFecha());
+
+			registro.setStrMes(fecha.toString("MMM", spanish));
+
+			registro.setStrQuincena(fecha.getDayOfMonth()<= 15 ?"Q1":"Q2");
+
+			if ((!(registro.getStrEntradaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))) && (!(registro.getStrSalidaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))))
+			{
+				registro.setStrJornada(registro.getStrJornada());	
+			}
+
+			else 
+			{
+				registro.setStrJornada(HeConstantes.DATO_INVALIDO_REPORTE);
+			}
+		}
+
+		return registrosReporte;
+
+	}
+	
+	
 
 
 	public List <BeanCumplimientoExternoRRHH> ReporteRRHH (List <BeanCumplimientoExternoRRHH> registrosReporte)
@@ -78,11 +111,13 @@ public class CompletarReporteCumplimientoCyge {
 			DateTime toleranciaSalidaAntes = horaSalidaOficial.minusMinutes(15);
 			DateTime toleranciaSalidaDespues = horaSalidaOficial.plusMinutes(15);
 
-			DateTime jornada = formatterJornada.parseDateTime(registro.getJornada());
-
+			DateTime jornada = formatterJornada.parseDateTime(registro.getJornada().equals("DATO INVÁLIDO") ? "00:00:00" : registro.getJornada());
+			
 			DateTime dt8horas = formatterJornada.parseDateTime("08:30:00");
 			DateTime dt9horas = formatterJornada.parseDateTime("09:30:00");
-
+			
+			
+			
 			int intCalificacionSalida = ((horaSalidaReal != null)&&(horaSalidaReal.isBefore(toleranciaSalidaDespues)&& (horaSalidaReal.isAfter(toleranciaSalidaAntes)))? 1:0);
 			int intCalificacionEntrada = ((horaEntradaReal != null)&&(horaEntradaReal.isBefore(toleranciaEntradaDespues)&& (horaEntradaReal.isAfter(toleranciaEntradaAntes)))? 1: 0);
 			int intCalificacionJornada = ((jornada != null) && (jornada.isBefore(dt9horas)&& (jornada.isAfter(dt8horas))) ? 1 :0);

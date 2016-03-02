@@ -153,7 +153,7 @@ public class BeanCumplimientoExternoRRHH {
 		TSD = tSD;
 		SalidaReal =(salidaReal == null)?HeConstantes.DATO_INVALIDO_REPORTE:salidaReal;
 		CalificacionSalida = calificacionSalida;
-		Jornada = jornada;
+		Jornada = (jornada == null)?HeConstantes.DATO_INVALIDO_REPORTE :jornada;;
 		CalificacionJornada = calificacionJornada;
 		CalificacionTotal = calificacionTotal;
 		PorcentajeCumplimiento = porcentajeCumplimiento;
