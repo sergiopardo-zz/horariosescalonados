@@ -137,9 +137,19 @@ public class CompletarReporteCumplimientoCyge {
 			DateTime horaSalidaOficial = horaEntradaOficial.plusHours(9);
 			DateTime toleranciaSalidaAntes = horaSalidaOficial.minusMinutes(15);
 			DateTime toleranciaSalidaDespues = horaSalidaOficial.plusMinutes(15);
-			if (horaEntradaReal.isAfter(horaSalidaReal))
+			
+			if ((!(registro.getEntradaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))) && (!(registro.getSalidaReal().equals(HeConstantes.DATO_INVALIDO_REPORTE))))
 			{
-				registro.setJornada("DATO INVÁLIDO");
+				if (horaEntradaReal.isAfter(horaSalidaReal)){
+					registro.setJornada(HeConstantes.DATO_INVALIDO_REPORTE);
+				}else{
+				registro.setJornada(registro.getJornada());
+				}
+			}
+			
+			else 
+			{
+				registro.setJornada(HeConstantes.DATO_INVALIDO_REPORTE);
 			}
 			
 			DateTime jornada = formatterJornada.parseDateTime(registro.getJornada().equals("DATO INVÁLIDO") ? "00:00:00" : registro.getJornada());
