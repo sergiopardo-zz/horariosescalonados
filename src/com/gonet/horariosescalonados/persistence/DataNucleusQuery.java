@@ -1096,7 +1096,8 @@ public class DataNucleusQuery
 
 			+ "and (horariosescalonadosv2.Zeit.Edificio not in ( "
 			 + "select horariosescalonadosv2.Cyge.LugarAsignadoEdificio from horariosescalonadosv2.Cyge " 
-			 + "where horariosescalonadosv2.Zeit.NoCyge = horariosescalonadosv2.Cyge.NoCyge)) "
+			 + "where horariosescalonadosv2.Zeit.NoCyge = horariosescalonadosv2.Cyge.NoCyge and horariosescalonadosv2.Cyge.Estatus = 'BAJA' or horariosescalonadosv2.Cyge.Estatus = 'VETADO' "
+			 + "or horariosescalonadosv2.Cyge.Estatus='BAJA PROVEEDOR' or horariosescalonadosv2.Cyge.Estatus='VENCIDO')))) "
 			 
 			+ "inner join (SELECT  NoCyge, Fecha, edificio, "
 			+ "TIME_FORMAT (TIMEDIFF((max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end)), "
@@ -1130,7 +1131,7 @@ public class DataNucleusQuery
 
 			+ "and (horariosescalonadosv2.Zeit.Edificio not in ( "
 			 + "select horariosescalonadosv2.Cyge.LugarAsignadoEdificio from horariosescalonadosv2.Cyge " 
-			 + "where horariosescalonadosv2.Zeit.NoCyge = horariosescalonadosv2.Cyge.NoCyge)) "
+			 + "where horariosescalonadosv2.Zeit.NoCyge = horariosescalonadosv2.Cyge.NoCyge and horariosescalonadosv2.Cyge.Estatus = 'VIGENTE')) "
 			 
 			+ "inner join (SELECT  NoCyge, Fecha, edificio, "
 			+ "TIME_FORMAT (TIMEDIFF((max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end)), "
