@@ -46,7 +46,7 @@ public class BuscarArchivoZeitServlet extends HttpServlet
 		
 		String appName = "enteratvdos";
         
-        GcsFilename fileName = new GcsFilename(appName, "CargaZeitStorage.txt");
+        GcsFilename fileName = new GcsFilename(appName, "externos20160216030023.txt");
        
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		
