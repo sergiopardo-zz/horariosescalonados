@@ -947,7 +947,7 @@ public class DataNucleusQuery
 			+ "From horariosescalonadosv2.Cyge inner join horariosescalonadosv2.Zeit on horariosescalonadosv2.Zeit.NoCyge = horariosescalonadosv2.Cyge.NoCyge " 
 			+ "and  horariosescalonadosv2.Zeit.Edificio = horariosescalonadosv2.Cyge.LugarAsignadoEdificio "
 			+ "inner join (SELECT  NoCyge, Fecha, edificio,TIME_FORMAT(TIMEDIFF((max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end)), (min(case when horariosescalonadosv2.Zeit.TipoFuncion= 'ENTRADA' then horariosescalonadosv2.Zeit.Hora end))), '%T') as Jornada " 
-			+ "FROM horariosescalonadosv2.Zeit group by NoCyge, Fecha, Edificio) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge and CalculoJornada.Edificio = horariosescalonadosv2.Zeit.Edificio and horariosescalonadosv2.Cyge.Estatus = 'BAJA' or horariosescalonadosv2.Cyge.Estatus = 'VETADO' or horariosescalonadosv2.Cyge.Estatus ='VENCIDO' or horariosescalonadosv2.Cyge.Estatus ='BAJA PROVEEDOR' " 
+			+ "FROM horariosescalonadosv2.Zeit group by NoCyge, Fecha, Edificio) as CalculoJornada on CalculoJornada.NoCyge = horariosescalonadosv2.Zeit.NoCyge and CalculoJornada.Edificio = horariosescalonadosv2.Zeit.Edificio and horariosescalonadosv2.Cyge.Estatus = 'VIGENTE' " 
 			+ "and horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) group by horariosescalonadosv2.Cyge.NoCyge, horariosescalonadosv2.Zeit.Edificio, horariosescalonadosv2.Zeit.Fecha ";
 								
 			Query query = pm.newQuery("javax.jdo.query.SQL",strQuery);
@@ -1097,7 +1097,7 @@ public class DataNucleusQuery
 			+ "and (horariosescalonadosv2.Zeit.Edificio not in ( "
 			 + "select horariosescalonadosv2.Cyge.LugarAsignadoEdificio from horariosescalonadosv2.Cyge " 
 			 + "where horariosescalonadosv2.Zeit.NoCyge = horariosescalonadosv2.Cyge.NoCyge and horariosescalonadosv2.Cyge.Estatus = 'BAJA' or horariosescalonadosv2.Cyge.Estatus = 'VETADO' "
-			 + "or horariosescalonadosv2.Cyge.Estatus='BAJA PROVEEDOR' or horariosescalonadosv2.Cyge.Estatus='VENCIDO')))) "
+			 + "or horariosescalonadosv2.Cyge.Estatus='BAJA PROVEEDOR' or horariosescalonadosv2.Cyge.Estatus='VENCIDO')) "
 			 
 			+ "inner join (SELECT  NoCyge, Fecha, edificio, "
 			+ "TIME_FORMAT (TIMEDIFF((max(case when horariosescalonadosv2.Zeit.TipoFuncion= 'SALIDA' then horariosescalonadosv2.Zeit.Hora end)), "
@@ -1107,8 +1107,6 @@ public class DataNucleusQuery
 			 
 			+ "and CalculoJornada.Edificio = horariosescalonadosv2.Zeit.Edificio "
 
-			+ "and horariosescalonadosv2.Cyge.Estatus = 'BAJA' or horariosescalonadosv2.Cyge.Estatus = 'VETADO' "
-			+ "or horariosescalonadosv2.Cyge.Estatus = 'VENCIDO' or horariosescalonadosv2.Cyge.Estatus = 'BAJA PROVEEDOR' "
 
 			+ "and horariosescalonadosv2.Zeit.Fecha = (select max(Fecha) from horariosescalonadosv2.Zeit) "
 			 
