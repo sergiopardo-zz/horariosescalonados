@@ -91,6 +91,8 @@ public class CargaAutomatica
 			
 			query.InsertarCumplimientoCygeRH(reporteCumplimiettoCygeRRHH);
 			
+			query.borrarZeit();
+			
 			break;
 
 		case PERFILCONSULTA:
