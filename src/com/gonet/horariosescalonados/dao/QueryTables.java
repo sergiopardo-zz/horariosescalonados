@@ -556,7 +556,7 @@ public class QueryTables {
 					if(tipousuario.equals("CE")||tipousuario.equals("CA")){
 					 selectSql = "SELECT  COUNT(*) FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' ";
 					}else{
-					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.cumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
+					 selectSql = "SELECT COUNT(*) FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"'";
 					}
 				}
 				if(opcion.equals("cumplimientoExternoCyge")){

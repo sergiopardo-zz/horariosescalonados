@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.Channels;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -44,10 +47,10 @@ public class BuscarArchivoZeitServlet extends HttpServlet
 		ServletContext context = getServletContext();
 
 		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaZeit.txt");
-		
+					
 		String appName = "enteratvdos";
         
-        GcsFilename fileName = new GcsFilename(appName, "CargaZeit.txt");
+        GcsFilename fileName = new GcsFilename(appName, "1.txt");
        
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		

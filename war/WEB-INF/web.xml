@@ -326,6 +326,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Servlet_Archivotres</servlet-name>
 		<url-pattern>/Servlet_Archivotres</url-pattern>
 	</servlet-mapping>	
+	
+	<!-- 		Servlet_prueba -->
+
+	<servlet>	
+		<servlet-name>Servletprueba</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.Servletprueba</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>Servletprueba</servlet-name>
+		<url-pattern>/Servletprueba</url-pattern>
+	</servlet-mapping>	
 
 	<!-- Pantalla de Bienvenida -->
 	<welcome-file-list>

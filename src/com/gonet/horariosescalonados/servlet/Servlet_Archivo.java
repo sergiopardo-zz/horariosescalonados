@@ -76,7 +76,7 @@ public class Servlet_Archivo extends HttpServlet {
 			
 			String selectSql = "";
 			
-			if (maximoreg < 105000)
+			if (maximoreg < 75000)
 				
 			{
 							

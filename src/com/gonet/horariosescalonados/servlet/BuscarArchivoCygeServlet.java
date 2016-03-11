@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.channels.Channels;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 
@@ -18,6 +19,8 @@ import com.gonet.horariosescalonados.dao.InsertarRegistro;
 import com.gonet.horariosescalonados.persistence.TipoArchivo;
 import com.gonet.horariosescalonados.service.CargaAutomatica;
 import com.google.appengine.api.appidentity.AppIdentityService;
+import com.google.appengine.tools.cloudstorage.GcsFilename;
+import com.google.appengine.tools.cloudstorage.GcsInputChannel;
 import com.google.appengine.tools.cloudstorage.GcsService;
 import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
 import com.google.appengine.tools.cloudstorage.RetryParams;
@@ -71,23 +74,23 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
         
         
         
-		InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaPrueba1.txt");
+		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaPrueba1.txt");
 		
 		//System.out.println(inputStreamArchivo);
 
-//		String appName = "enteratvdos";
-//        
-//        GcsFilename fileName = new GcsFilename(appName, "CargaPruebaStorage.txt");
-//		
-//       
-//		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
-//		
-//		
-//		InputStream input =Channels.newInputStream(readChannel);
+		String appName = "enteratvdos";
+        
+        GcsFilename fileName = new GcsFilename(appName, "CargaPruebaStorage.txt");
+		
+       
+		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
+		
+		
+		InputStream input =Channels.newInputStream(readChannel);
 		
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		
-		copy(inputStreamArchivo,output);
+		copy(input,output);
 		
 		byte[] bytes = output.toByteArray();
 	    
