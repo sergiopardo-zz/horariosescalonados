@@ -1,12 +1,18 @@
 package com.gonet.horariosescalonados.servlet;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.nio.channels.Channels;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,15 +21,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+
 import com.gonet.horariosescalonados.dao.InsertarRegistro;
 import com.gonet.horariosescalonados.persistence.TipoArchivo;
 import com.gonet.horariosescalonados.service.CargaAutomatica;
-import com.google.appengine.api.appidentity.AppIdentityService;
+
+import com.google.appengine.tools.cloudstorage.*;
+import com.google.appengine.tools.cloudstorage.GcsFileOptions;
 import com.google.appengine.tools.cloudstorage.GcsFilename;
 import com.google.appengine.tools.cloudstorage.GcsInputChannel;
+import com.google.appengine.tools.cloudstorage.GcsOutputChannel;
 import com.google.appengine.tools.cloudstorage.GcsService;
 import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
-import com.google.appengine.tools.cloudstorage.RetryParams;
+
+import com.google.appengine.api.appidentity.AppIdentityService;
+
+import java.nio.channels.Channels;
+import java.nio.charset.StandardCharsets;
+import java.io.InputStreamReader;
+
+
+
+import java.nio.ByteBuffer;
 
 
 public class BuscarArchivoCygeServlet extends HttpServlet{
@@ -74,13 +94,18 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
         
         
         
-		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaPrueba1.txt");
+		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaPrueba.txt");
 		
 		//System.out.println(inputStreamArchivo);
-
-		String appName = "enteratvdos";
         
-        GcsFilename fileName = new GcsFilename(appName, "CargaPruebaStorage.txt");
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		Date date = new Date();
+		
+		String fechaa = dateFormat.format(date);
+
+		String appName = "demostorage";
+        
+        GcsFilename fileName = new GcsFilename(appName, "externoscyge"+fechaa+".txt");
 		
        
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
@@ -102,19 +127,19 @@ public class BuscarArchivoCygeServlet extends HttpServlet{
 		
 		System.out.println("Mapeo Correcto Cyge");
 		
+		
+		
 		//req.setAttribute("resultado", inputString);
 		
-		//////////////
 		InsertarRegistro dao  = new InsertarRegistro(); 
 		
 		dao.updateRegistroCero();
-		
-		//////////////////////
 		
 	    dispatcher = getServletContext().getRequestDispatcher("/ConsumeSRestWEBServlet");
 		
 		dispatcher.forward(req, resp);
 		
+		System.out.println("CARGA CORRECTA A EMPLEADO EXTERNO RRHH");
 		
 		}
 		catch(Exception e)

@@ -327,16 +327,27 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/Servlet_Archivotres</url-pattern>
 	</servlet-mapping>	
 	
-	<!-- 		Servlet_prueba -->
+<!-- 		Servlet_tercera parte reporte -->
 
-	<servlet>	
-		<servlet-name>Servletprueba</servlet-name>
-		<servlet-class>com.gonet.horariosescalonados.servlet.Servletprueba</servlet-class>
+<servlet>	
+		<servlet-name>Servlet_Archivocuatro</servlet-name>
+		<servlet-class>com.gonet.horariosescalonados.servlet.Servlet_Archivocuatro</servlet-class>
 	</servlet>
 		<servlet-mapping>
-		<servlet-name>Servletprueba</servlet-name>
-		<url-pattern>/Servletprueba</url-pattern>
+		<servlet-name>Servlet_Archivocuatro</servlet-name>
+		<url-pattern>/Servlet_Archivocuatro</url-pattern>
 	</servlet-mapping>	
+	
+<!-- 		Servlet_prueba -->
+
+<!-- <servlet>	 -->
+<!-- 		<servlet-name>Servletprueba</servlet-name> -->
+<!-- 		<servlet-class>com.gonet.horariosescalonados.servlet.Servletprueba</servlet-class> -->
+<!-- 	</servlet> -->
+<!-- 		<servlet-mapping> -->
+<!-- 		<servlet-name>Servletprueba</servlet-name> -->
+<!-- 		<url-pattern>/Servletprueba</url-pattern> -->
+<!-- 	</servlet-mapping>	 -->
 
 	<!-- Pantalla de Bienvenida -->
 	<welcome-file-list>

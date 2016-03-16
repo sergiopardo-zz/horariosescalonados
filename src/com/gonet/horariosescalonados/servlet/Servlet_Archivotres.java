@@ -44,7 +44,7 @@ public class Servlet_Archivotres extends HttpServlet {
 			
 //			if (acceder)
 //			{
-				Archivo.Archivodos(req, resp, desde, hasta, mes,opcion,tipousuario,usuario,semana,dia);
+				Archivo.Archivodos(req, resp, desde, hasta, mes,opcion,tipousuario,usuario);
 //			}
 
 			

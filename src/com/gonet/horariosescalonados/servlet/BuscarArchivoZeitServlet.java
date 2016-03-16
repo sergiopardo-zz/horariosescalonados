@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 
-import com.gonet.horariosescalonados.persistence.DataNucleusQuery;
 import com.gonet.horariosescalonados.persistence.TipoArchivo;
 import com.gonet.horariosescalonados.service.CargaAutomatica;
 import com.google.appengine.tools.cloudstorage.GcsFilename;
@@ -46,11 +45,16 @@ public class BuscarArchivoZeitServlet extends HttpServlet
 
 		ServletContext context = getServletContext();
 
-		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/CargaZeit.txt");
-					
+		//InputStream inputStreamArchivo = context.getResourceAsStream("/WEB-INF/externos20160311.txt");
+		
+//		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+//		Date date = new Date();
+//		
+//		String fechaa = dateFormat.format(date);
+//		
 		String appName = "enteratvdos";
         
-        GcsFilename fileName = new GcsFilename(appName, "1.txt");
+        GcsFilename fileName = new GcsFilename(appName, "14.txt");
        
 		GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
 		
@@ -71,7 +75,7 @@ public class BuscarArchivoZeitServlet extends HttpServlet
 		System.out.println("Mapeo Correcto Zeit");
 		
 		req.setAttribute("resultado", inputString);
-				
+		
 		dispatcher = getServletContext().getRequestDispatcher("/bloqueo2.jsp");
 		
 		dispatcher.forward(req, resp);

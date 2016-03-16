@@ -43,8 +43,8 @@ boolean bSolicitudPendiente = ((!bNuevaSolicitud && sFechaAplicacion.equals(""))
 
 if(!bSolicitudPendiente) {
 	calFechaProxSol = calFechaAplicacion;
-	//calFechaProxSol.add(Calendar.MONTH,3); // Se suman 3 meses a la fecha
-	calFechaProxSol.add(Calendar.MINUTE,10);
+	calFechaProxSol.add(Calendar.MONTH,3); // Se suman 3 meses a la fecha
+	//calFechaProxSol.add(Calendar.MINUTE,10);
 }
 
 //true si ya se cumplieron los tres meses de lapso
@@ -64,17 +64,6 @@ boolean bPermitirBaja =  bMasDe3Meses;
 String sHrefCambio = bPermitirCambio ? "/cambiohorario" : "bloqueoCambio.jsp";
 String sHrefBaja = bPermitirCambio ? "horario/baja.html" : "bloqueoCambio.jsp";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Horarios Escalonados</title>
-	<link rel="stylesheet" type="text/css" href="config/css/estilo.css"/>
-	<script type="text/javascript" src="config/js/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="config/js/acciones.js"></script>
-</head>
-<body>
-
 	
 	<!-- Inicia Encabezado -->
 	<div class="cabecera">

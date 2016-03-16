@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,39 +20,23 @@ import com.gonet.horariosescalonados.dao.QueryTables;
 
 public class Generar_Archivo {
 	
-	public void Archivouno (HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes,String opcion, String tipousuario, String usuario, String semana, String dia ) throws IOException
+	public void Archivouno (HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes,String opcion, String tipousuario, String usuario ) throws IOException
 	{
 		
 		String cuenta = req.getUserPrincipal().getName();
 		InsertarRegistro daoInsert = new InsertarRegistro();
 		
-		req.setAttribute("dia", dia);
-		req.setAttribute("mes", mes);
-		req.setAttribute("semana", semana);
-        req.setAttribute("lstOpcion", opcion);
-        req.setAttribute("tipousuario", dia);
 		
-		
-		RequestDispatcher dispatcher;
-		if(dia !=""){
-	    TiempoReporte tiempo = new TiempoReporte();
-	    hasta = tiempo.Tiempo5(hasta, desde);
-		}if(mes!=""){
-			TiempoReporte tiempo = new TiempoReporte();
-			desde = tiempo.Tiempo4(mes, desde);
-			hasta = tiempo.Tiempo3(mes, hasta);
-		}if(semana!=""){
-		    TiempoReporte tiempo = new TiempoReporte();
-			desde = tiempo.Tiempo(semana, desde);
-			hasta = tiempo.Tiempo2(desde, hasta);
-		}
+		TiempoReporte tiempo = new TiempoReporte();
+		String desde1 = tiempo.Tiempo4(mes, desde);
+		String hasta1 = tiempo.Tiempo3(mes, hasta);
 		java.sql.Date desdeDate = null;
 		java.sql.Date hastaDate = null;
 		 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		 
 			try {
-				desdeDate = new java.sql.Date(df.parse(desde).getTime());
-				hastaDate = new java.sql.Date(df.parse(hasta).getTime());
+				desdeDate = new java.sql.Date(df.parse(desde1).getTime());
+				hastaDate = new java.sql.Date(df.parse(hasta1).getTime());
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -82,8 +65,6 @@ public class Generar_Archivo {
 				            out.write("Nombre");
 				            out.write(',');
 				            out.write("CR Direccion General");
-				            out.write(',');
-				            out.write("Direccion General");
 				            out.write(',');
 				            out.write("CR Direccion Corporativa");
 				            out.write(',');
@@ -131,72 +112,64 @@ public class Generar_Archivo {
 				            out.write('\n');
 				            
 				            if(tipousuario.equals("CE")||tipousuario.equals("CA")){
-				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 75000";
+				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 70000";
 				            }else{
-				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal"+/*, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado*/" FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"' limit 75000";
+				             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"' limit 70000";
 				            }
 				        	conn = Connector.getConexion();
 				            st = conn.createStatement();
 				            rs = st.executeQuery(selectSql);
 				            while (rs.next()) {
-				                out.write(rs.getString(1).replace(',',' ')); 
+				                out.write(rs.getString(1)); 
 				                out.write(',');
-				                out.write(rs.getString(2).replace(',',' '));
+				                out.write(rs.getString(2));
 				                out.write(',');
-				                out.write(rs.getString(3).replace(',',' ')); 
+				                out.write(rs.getString(3)); 
 				                out.write(',');
-				                out.write(rs.getString(4).replace(',',' ')); 
+				                out.write(rs.getString(4)); 
 				                out.write(',');
-				                out.write(rs.getString(5).replace(',',' ')); 
+				                out.write(rs.getString(5)); 
 				                out.write(',');
-				                out.write(rs.getString(6).replace(',',' ')); 
+				                out.write(rs.getString(6)); 
 				                out.write(',');
-				                out.write(rs.getString(7).replace(',',' ')); 
+				                out.write(rs.getString(7)); 
 				                out.write(',');
-				                out.write(rs.getString(8).replace(',',' ')); 
+				                out.write(rs.getString(8)); 
 				                out.write(',');
-				                out.write(rs.getString(9).replace(',',' ')); 
+				                out.write(rs.getString(9)); 
 				                out.write(',');
-				                out.write(rs.getString(10).replace(',',' ')); 
+				                out.write(rs.getString(10)); 
 				                out.write(',');
-				                out.write(rs.getString(11).replace(',',' ')); 
+				                out.write(rs.getString(11)); 
 				                out.write(',');
-				                out.write(rs.getString(12).replace(',',' ')); 
+				                out.write(rs.getString(12)); 
 				                out.write(',');
-				                out.write(rs.getString(13).replace(',',' ')); 
+				                out.write(rs.getString(13)); 
 				                out.write(',');
-				                out.write(rs.getString(14).replace(',',' ')); 
+				                out.write(rs.getString(14)); 
 				                out.write(',');
-				                out.write(rs.getString(15).replace(',',' ')); 
+				                out.write(rs.getString(15)); 
 				                out.write(',');
-				                out.write(rs.getString(16).replace(',',' ')); 
+				                out.write(rs.getString(16)); 
 				                out.write(',');
-				                out.write(rs.getString(17).replace(',',' ')); 
+				                out.write(rs.getString(17)); 
 				                out.write(',');
-				                out.write(rs.getString(18).replace(',',' ')); 
+				                out.write(rs.getString(18)); 
 				                out.write(',');
-				                out.write(rs.getString(19).replace(',',' ')); 
+				                out.write(rs.getString(19)); 
 				                out.write(',');
-				                out.write(rs.getString(20).replace(',',' ')); 
+				                out.write(rs.getString(20)); 
 				                out.write(',');
-				                out.write(rs.getString(21).replace(',',' ')); 
+				                out.write(rs.getString(21)); 
 				                out.write(',');
-				                out.write(rs.getString(22).replace(',',' '));
-				                out.write(',');
-				                out.write(rs.getString(23).replace(',',' ')); 
-				                out.write(',');
-				                out.write(rs.getString(24).replace(',',' ')); 
-				                out.write(',');
-				                out.write(rs.getString(25).replace(',',' ')); 
-				                out.write(',');
-				                out.write(rs.getString(26).replace(',',' ')); 
+				                out.write(rs.getString(22)); 
 				                out.write('\n');
 				              
 				                 	               
 				            }
 
 				            resp.setContentType("application/download");
-				            resp.setHeader("Content-disposition", "attachment; filename ="+opcion+".csv");
+				            resp.setHeader("Content-disposition", "attachment; filename =prueba.csv");
 				        } catch (Exception e) {
 				            e.printStackTrace();
 				        } finally {
@@ -212,7 +185,7 @@ public class Generar_Archivo {
 						
 					 
 				        
-				        if(opcion.equals("cumplimiento")){
+			        else  if(opcion.equals("cumplimiento")){
 					        try {
 					        			
 					        	resp.setContentType("text/csv");
@@ -264,57 +237,57 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CI")||tipousuario.equals("CA")){		            
-					             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 75000";
+					             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 70000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 75000 ";
+					        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 70000 ";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
 					            rs = st.executeQuery(selectSql);
 					            while (rs.next()) {
-					                out.write(rs.getString(1).replace(',',' ')); 
+					                out.write(rs.getString(1)); 
 					                out.write(',');
-					                out.write(rs.getString(2).replace(',',' '));
+					                out.write(rs.getString(2));
 					                out.write(',');
-					                out.write(rs.getString(3).replace(',',' ')); 
+					                out.write(rs.getString(3)); 
 					                out.write(',');
-					                out.write(rs.getString(4).replace(',',' ')); 
+					                out.write(rs.getString(4)); 
 					                out.write(',');
-					                out.write(rs.getString(5).replace(',',' ')); 
+					                out.write(rs.getString(5)); 
 					                out.write(',');
-					                out.write(rs.getString(6).replace(',',' ')); 
+					                out.write(rs.getString(6)); 
 					                out.write(',');
-					                out.write(rs.getString(7).replace(',',' ')); 
+					                out.write(rs.getString(7)); 
 					                out.write(',');
-					                out.write(rs.getString(8).replace(',',' ')); 
+					                out.write(rs.getString(8)); 
 					                out.write(',');
-					                out.write(rs.getString(9).replace(',',' ')); 
+					                out.write(rs.getString(9)); 
 					                out.write(',');
-					                out.write(rs.getString(10).replace(',',' ')); 
+					                out.write(rs.getString(10)); 
 					                out.write(',');
-					                out.write(rs.getString(11).replace(',',' ')); 
+					                out.write(rs.getString(11)); 
 					                out.write(',');
-					                out.write(rs.getString(12).replace(',',' ')); 
+					                out.write(rs.getString(12)); 
 					                out.write(',');
-					                out.write(rs.getString(13).replace(',',' ')); 
+					                out.write(rs.getString(13)); 
 					                out.write(',');
-					                out.write(rs.getString(14).replace(',',' ')); 
+					                out.write(rs.getString(14)); 
 					                out.write(',');
-					                out.write(rs.getString(15).replace(',',' ')); 
+					                out.write(rs.getString(15)); 
 					                out.write(',');
-					                out.write(rs.getString(16).replace(',',' '));
+					                out.write(rs.getString(16)); 
 					                out.write(',');
-					                out.write(rs.getString(17).replace(',',' ')); 
+					                out.write(rs.getString(17)); 
 					                out.write(',');
-					                out.write(rs.getString(18).replace(',',' ')); 
+					                out.write(rs.getString(18)); 
 					                out.write(',');
-					                out.write(rs.getString(19).replace(',',' ')); 
+					                out.write(rs.getString(19)); 
 					                out.write(',');
-					                out.write(rs.getString(20).replace(',',' ')); 
+					                out.write(rs.getString(20)); 
 					                out.write(',');
-					                out.write(rs.getString(21).replace(',',' ')); 
+					                out.write(rs.getString(21)); 
 					                out.write(',');
-					                out.write(rs.getString(22).replace(',',' ')); 
+					                out.write(rs.getString(22)); 
 					                out.write('\n');
 					               
 					                	               
@@ -386,53 +359,53 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 75000";
+					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 70000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 75000 ";
+					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 70000 ";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
 					            rs = st.executeQuery(selectSql);
 					            while (rs.next()) {
-					            	out.write(rs.getString(1).replace(',',' '));
+					            	out.write(rs.getString(1)); 
 					                out.write(',');
-					                out.write(rs.getString(2).replace(',',' '));
+					                out.write(rs.getString(2));
 					                out.write(',');
-					                out.write(rs.getString(3).replace(',',' '));
+					                out.write(rs.getString(3)); 
 					                out.write(',');
-					                out.write(rs.getString(4).replace(',',' ')); 
+					                out.write(rs.getString(4)); 
 					                out.write(',');
-					                out.write(rs.getString(5).replace(',',' ')); 
+					                out.write(rs.getString(5)); 
 					                out.write(',');
-					                out.write(rs.getString(6).replace(',',' ')); 
+					                out.write(rs.getString(6)); 
 					                out.write(',');
-					                out.write(rs.getString(7).replace(',',' ')); 
+					                out.write(rs.getString(7)); 
 					                out.write(',');
-					                out.write(rs.getString(8).replace(',',' '));
+					                out.write(rs.getString(8)); 
 					                out.write(',');
-					                out.write(rs.getString(9).replace(',',' ')); 
+					                out.write(rs.getString(9)); 
 					                out.write(',');
-					                out.write(rs.getString(10).replace(',',' '));
+					                out.write(rs.getString(10)); 
 					                out.write(',');
-					                out.write(rs.getString(11).replace(',',' ')); 
+					                out.write(rs.getString(11)); 
 					                out.write(',');
-					                out.write(rs.getString(12).replace(',',' '));
+					                out.write(rs.getString(12)); 
 					                out.write(',');
-					                out.write(rs.getString(13).replace(',',' '));
+					                out.write(rs.getString(13)); 
 					                out.write(',');
-					                out.write(rs.getString(14).replace(',',' ')); 
+					                out.write(rs.getString(14)); 
 					                out.write(',');
-					                out.write(rs.getString(15).replace(',',' ')); 
+					                out.write(rs.getString(15)); 
 					                out.write(',');
-					                out.write(rs.getString(16).replace(',',' ')); 
+					                out.write(rs.getString(16)); 
 					                out.write(',');
-					                out.write(rs.getString(17).replace(',',' ')); 
+					                out.write(rs.getString(17)); 
 					                out.write(',');
-					                out.write(rs.getString(18).replace(',',' ')); 
+					                out.write(rs.getString(18)); 
 					                out.write(',');
-					                out.write(rs.getString(19).replace(',',' ')); 
+					                out.write(rs.getString(19)); 
 					                out.write(',');
-					                out.write(rs.getString(20).replace(',',' '));
+					                out.write(rs.getString(20)); 
 					                out.write('\n');
 					                  	               
 					            }
@@ -502,53 +475,53 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 75000";
+					             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 70000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 75000 ";
+					        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 70000 ";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
 					            rs = st.executeQuery(selectSql);
 					            while (rs.next()) {
-					            	out.write(rs.getString(1).replace(',',' '));
+					            	out.write(rs.getString(1)); 
 					                out.write(',');
-					                out.write(rs.getString(2).replace(',',' '));
+					                out.write(rs.getString(2));
 					                out.write(',');
-					                out.write(rs.getString(3).replace(',',' ')); 
+					                out.write(rs.getString(3)); 
 					                out.write(',');
-					                out.write(rs.getString(4).replace(',',' '));
+					                out.write(rs.getString(4)); 
 					                out.write(',');
-					                out.write(rs.getString(5).replace(',',' ')); 
+					                out.write(rs.getString(5)); 
 					                out.write(',');
-					                out.write(rs.getString(6).replace(',',' '));
+					                out.write(rs.getString(6)); 
 					                out.write(',');
-					                out.write(rs.getString(7).replace(',',' '));
+					                out.write(rs.getString(7)); 
 					                out.write(',');
-					                out.write(rs.getString(8).replace(',',' ')); 
+					                out.write(rs.getString(8)); 
 					                out.write(',');
-					                out.write(rs.getString(9).replace(',',' ')); 
+					                out.write(rs.getString(9)); 
 					                out.write(',');
-					                out.write(rs.getString(10).replace(',',' '));
+					                out.write(rs.getString(10)); 
 					                out.write(',');
-					                out.write(rs.getString(11).replace(',',' '));
+					                out.write(rs.getString(11)); 
 					                out.write(',');
-					                out.write(rs.getString(12).replace(',',' ')); 
+					                out.write(rs.getString(12)); 
 					                out.write(',');
-					                out.write(rs.getString(13).replace(',',' ')); 
+					                out.write(rs.getString(13)); 
 					                out.write(',');
-					                out.write(rs.getString(14).replace(',',' ')); 
+					                out.write(rs.getString(14)); 
 					                out.write(',');
-					                out.write(rs.getString(15).replace(',',' ')); 
+					                out.write(rs.getString(15)); 
 					                out.write(',');
-					                out.write(rs.getString(16).replace(',',' ')); 
+					                out.write(rs.getString(16)); 
 					                out.write(',');
-					                out.write(rs.getString(17).replace(',',' '));
+					                out.write(rs.getString(17)); 
 					                out.write(',');
-					                out.write(rs.getString(18).replace(',',' '));
+					                out.write(rs.getString(18)); 
 					                out.write(',');
-					                out.write(rs.getString(19).replace(',',' ')); 
+					                out.write(rs.getString(19)); 
 					                out.write(',');
-					                out.write(rs.getString(20).replace(',',' '));
+					                out.write(rs.getString(20)); 
 					                out.write('\n');
 					                  	               
 					            }
@@ -617,53 +590,57 @@ public class Generar_Archivo {
 
 					            
 					         if(tipousuario.equals("CC")){		            
-					             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Cyge.FechaRegistroArchivo BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 75000";
+					             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Cyge.FechaRegistroArchivo BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 70000";
 					         }else{
-					        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroAcitvo FROM horariosescalonadosv2.Cyge where FechaRegistroArchivo between '"+desdeDate+ "' and '"+hastaDate+ "' limit 75000";
+					        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroAcitvo FROM horariosescalonadosv2.Cyge where FechaRegistroArchivo between '"+desdeDate+ "' and '"+hastaDate+ "' limit 70000";
 					         }
 					        	conn = Connector.getConexion();
 					            st = conn.createStatement();
 					            rs = st.executeQuery(selectSql);
 					            while (rs.next()) {
-					                out.write(rs.getString(1).replace(',',' '));
+					                out.write(rs.getString(1)); 
 					                out.write(',');
-					                out.write(rs.getString(2).replace(',',' '));
+					                out.write(rs.getString(2));
 					                out.write(',');
-					                out.write(rs.getString(3).replace(',',' ')); 
+					                out.write(rs.getString(3)); 
 					                out.write(',');
-					                out.write(rs.getString(4).replace(',',' ')); 
+					                out.write(rs.getString(4)); 
 					                out.write(',');
-					                out.write(rs.getString(5).replace(',',' '));
+					                out.write(rs.getString(5)); 
 					                out.write(',');
-					                out.write(rs.getString(6).replace(',',' ')); 
+					                out.write(rs.getString(6)); 
 					                out.write(',');
-					                out.write(rs.getString(7).replace(',',' ')); 
+					                out.write(rs.getString(7)); 
 					                out.write(',');
-					                out.write(rs.getString(8).replace(',',' ')); 
+					                out.write(rs.getString(8)); 
 					                out.write(',');
-					                out.write(rs.getString(9).replace(',',' ')); 
+					                out.write(rs.getString(9)); 
 					                out.write(',');
-					                out.write(rs.getString(10).replace(',',' ')); 
+					                out.write(rs.getString(10)); 
 					                out.write(',');
-					                out.write(rs.getString(11).replace(',',' ')); 
+					                out.write(rs.getString(11)); 
 					                out.write(',');
-					                out.write(rs.getString(12).replace(',',' ')); 
+					                out.write(rs.getString(12)); 
 					                out.write(',');
-					                out.write(rs.getString(13).replace(',',' '));
+					                out.write(rs.getString(13)); 
 					                out.write(',');
-					                out.write(rs.getString(14).replace(',',' ')); 
+					                out.write(rs.getString(14)); 
 					                out.write(',');
-					                out.write(rs.getString(15).replace(',',' '));
+					                out.write(rs.getString(15)); 
 					                out.write(',');
-					                out.write(rs.getString(16).replace(',',' '));
+					                out.write(rs.getString(16)); 
 					                out.write(',');
-					                out.write(rs.getString(17).replace(',',' '));
+					                out.write(rs.getString(17)); 
 					                out.write(',');
-					                out.write(rs.getString(18).replace(',',' '));
+					                out.write(rs.getString(18)); 
 					                out.write(',');
-					                out.write(rs.getString(19).replace(',',' '));
+					                out.write(rs.getString(19)); 
 					                out.write(',');
-					                out.write(rs.getString(20).replace(',',' '));  
+					                out.write(rs.getString(20)); 
+					                out.write(',');
+					                out.write(rs.getString(21)); 
+					                out.write(',');
+					                out.write(rs.getString(22)); 
 					                out.write('\n');
 					                  	               
 					            }
@@ -687,7 +664,7 @@ public class Generar_Archivo {
 						
 				      }
 	
-	public void Archivodos(HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes, String opcion, String tipousuario, String usuario, String semana, String dia) throws IOException
+	public void Archivodos(HttpServletRequest req, HttpServletResponse resp, String desde, String hasta, String mes, String opcion, String tipousuario, String usuario) throws IOException
 	{
 //		ArrayList<String> desdehasta = new ArrayList<String>();
 		String cuenta = req.getUserPrincipal().getName();
@@ -699,25 +676,10 @@ public class Generar_Archivo {
 //		hasta = desdehasta.get(1);
 //		mes = desdehasta.get(2);
 		
-		req.setAttribute("dia", dia);
-		req.setAttribute("mes", mes);
-		req.setAttribute("semana", semana);
-        req.setAttribute("lstOpcion", opcion);
 		
-		
-		RequestDispatcher dispatcher;
-		if(dia !=""){
-	    TiempoReporte tiempo = new TiempoReporte();
-	    desde = tiempo.Tiempo5(hasta, desde);
-		}if(mes!=""){
-			TiempoReporte tiempo = new TiempoReporte();
-			desde = tiempo.Tiempo4(mes, desde);
-			hasta = tiempo.Tiempo3(mes, hasta);
-		}if(semana!=""){
-		    TiempoReporte tiempo = new TiempoReporte();
-			desde = tiempo.Tiempo(semana, desde);
-			hasta = tiempo.Tiempo2(desde, hasta);
-		}
+		TiempoReporte tiempo = new TiempoReporte();
+		desde = tiempo.Tiempo4(mes, desde);
+		hasta = tiempo.Tiempo3(mes, hasta);
 		
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		
@@ -759,8 +721,6 @@ public class Generar_Archivo {
 	            out.write("Nombre");
 	            out.write(',');
 	            out.write("CR Direccion General");
-	            out.write(',');
-	            out.write("Direccion General");
 	            out.write(',');
 	            out.write("CR Direccion Corporativa");
 	            out.write(',');
@@ -808,65 +768,57 @@ public class Generar_Archivo {
 	            out.write('\n');
 	            
 	            if(tipousuario.equals("CE")||tipousuario.equals("CA")){
-	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 75000,"+maximoreg+"";
+	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where horariosescalonadosv2.CumplimientoExternoRRHH.Usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"')and Fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 70000,140000";
 	            }else{
-	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"' limit 75000,"+maximoreg+"";
+	             selectSql = "SELECT HIGH_PRIORITY Usuario, Nombre, CRDireccionGeneral, direccionGeneral, CRDireccionCorporativa, direccionCorporativa, CRArea, Area, Fecha, Quincena, Mes, TEA, entradaOficial, TED, entradaReal, CalificacionEntrada, TSA, salidaOficial ,TSD, salidaReal, CalificacionSalida, Jornada, CalificacionJornada, CalificacionTotal, PorcentajeCumplimiento, EdificioAsignado FROM horariosescalonadosv2.CumplimientoExternoRRHH where fecha between '"+desdeDate+"' and '"+hastaDate+"' limit 70000,140000";
 	            }
 	        	conn = Connector.getConexion();
 	            st = conn.createStatement();
 	            rs = st.executeQuery(selectSql);
 	            while (rs.next()) {
-	                out.write(rs.getString(1).replace(',',' '));
+	                out.write(rs.getString(1)); 
 	                out.write(',');
-	                out.write(rs.getString(2).replace(',',' '));
+	                out.write(rs.getString(2));
 	                out.write(',');
-	                out.write(rs.getString(3).replace(',',' '));
+	                out.write(rs.getString(3)); 
 	                out.write(',');
-	                out.write(rs.getString(4).replace(',',' ')); 
+	                out.write(rs.getString(4)); 
 	                out.write(',');
-	                out.write(rs.getString(5).replace(',',' ')); 
+	                out.write(rs.getString(5)); 
 	                out.write(',');
-	                out.write(rs.getString(6).replace(',',' '));
+	                out.write(rs.getString(6)); 
 	                out.write(',');
-	                out.write(rs.getString(7).replace(',',' ')); 
+	                out.write(rs.getString(7)); 
 	                out.write(',');
-	                out.write(rs.getString(8).replace(',',' ')); 
+	                out.write(rs.getString(8)); 
 	                out.write(',');
-	                out.write(rs.getString(9).replace(',',' ')); 
+	                out.write(rs.getString(9)); 
 	                out.write(',');
-	                out.write(rs.getString(10).replace(',',' ')); 
+	                out.write(rs.getString(10)); 
 	                out.write(',');
-	                out.write(rs.getString(11).replace(',',' '));
+	                out.write(rs.getString(11)); 
 	                out.write(',');
-	                out.write(rs.getString(12).replace(',',' '));
+	                out.write(rs.getString(12)); 
 	                out.write(',');
-	                out.write(rs.getString(13).replace(',',' ')); 
+	                out.write(rs.getString(13)); 
 	                out.write(',');
-	                out.write(rs.getString(14).replace(',',' ')); 
+	                out.write(rs.getString(14)); 
 	                out.write(',');
-	                out.write(rs.getString(15).replace(',',' ')); 
+	                out.write(rs.getString(15)); 
 	                out.write(',');
-	                out.write(rs.getString(16).replace(',',' '));
+	                out.write(rs.getString(16)); 
 	                out.write(',');
-	                out.write(rs.getString(17).replace(',',' ')); 
+	                out.write(rs.getString(17)); 
 	                out.write(',');
-	                out.write(rs.getString(18).replace(',',' ')); 
+	                out.write(rs.getString(18)); 
 	                out.write(',');
-	                out.write(rs.getString(19).replace(',',' ')); 
+	                out.write(rs.getString(19)); 
 	                out.write(',');
-	                out.write(rs.getString(20).replace(',',' ')); 
+	                out.write(rs.getString(20)); 
 	                out.write(',');
-	                out.write(rs.getString(21).replace(',',' ')); 
+	                out.write(rs.getString(21)); 
 	                out.write(',');
-	                out.write(rs.getString(22).replace(',',' '));
-	                out.write(',');
-	                out.write(rs.getString(23).replace(',',' ')); 
-	                out.write(',');
-	                out.write(rs.getString(24).replace(',',' ')); 
-	                out.write(',');
-	                out.write(rs.getString(25).replace(',',' ')); 
-	                out.write(',');
-	                out.write(rs.getString(26).replace(',',' ')); 
+	                out.write(rs.getString(22)); 
 	                out.write('\n');
 	              
 	                 	               
@@ -941,57 +893,57 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CI")||tipousuario.equals("CA")){		            
-		             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 75000,"+maximoreg+"";
+		             selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where horariosescalonadosv2.cumplimiento.empleadoID in (select horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioReporteInterno from horariosescalonadosv2.PerfilConsultaInternos where horariosescalonadosv2.PerfilConsultaInternos.IdUsuarioConsultaInterno = '"+usuario+"' )and horariosescalonadosv2.cumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'  limit 70000,140000";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 75000,"+maximoreg+"";
+		        	 selectSql = "SELECT HIGH_PRIORITY empleadoID, apePaterno, apeMaterno, nombre, nombreCR, dga, fecha, quincena, mes, tae, entrada, tde, entradaReal, califEntrada, tas, salida, tds, salidaReal ,califSalida, jornada, total, porcentaje FROM horariosescalonadosv2.cumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 70000,140000";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
 		            rs = st.executeQuery(selectSql);
 		            while (rs.next()) {
-		                out.write(rs.getString(1).replace(',',' ')); 
+		                out.write(rs.getString(1)); 
 		                out.write(',');
-		                out.write(rs.getString(2).replace(',',' '));
+		                out.write(rs.getString(2));
 		                out.write(',');
-		                out.write(rs.getString(3).replace(',',' ')); 
+		                out.write(rs.getString(3)); 
 		                out.write(',');
-		                out.write(rs.getString(4).replace(',',' ')); 
+		                out.write(rs.getString(4)); 
 		                out.write(',');
-		                out.write(rs.getString(5).replace(',',' ')); 
+		                out.write(rs.getString(5)); 
 		                out.write(',');
-		                out.write(rs.getString(6).replace(',',' ')); 
+		                out.write(rs.getString(6)); 
 		                out.write(',');
-		                out.write(rs.getString(7).replace(',',' ')); 
+		                out.write(rs.getString(7)); 
 		                out.write(',');
-		                out.write(rs.getString(8).replace(',',' '));
+		                out.write(rs.getString(8)); 
 		                out.write(',');
-		                out.write(rs.getString(9).replace(',',' ')); 
+		                out.write(rs.getString(9)); 
 		                out.write(',');
-		                out.write(rs.getString(10).replace(',',' ')); 
+		                out.write(rs.getString(10)); 
 		                out.write(',');
-		                out.write(rs.getString(11).replace(',',' ')); 
+		                out.write(rs.getString(11)); 
 		                out.write(',');
-		                out.write(rs.getString(12).replace(',',' ')); 
+		                out.write(rs.getString(12)); 
 		                out.write(',');
-		                out.write(rs.getString(13).replace(',',' ')); 
+		                out.write(rs.getString(13)); 
 		                out.write(',');
-		                out.write(rs.getString(14).replace(',',' ')); 
+		                out.write(rs.getString(14)); 
 		                out.write(',');
-		                out.write(rs.getString(15).replace(',',' ')); 
+		                out.write(rs.getString(15)); 
 		                out.write(',');
-		                out.write(rs.getString(16).replace(',',' ')); 
+		                out.write(rs.getString(16)); 
 		                out.write(',');
-		                out.write(rs.getString(17).replace(',',' ')); 
+		                out.write(rs.getString(17)); 
 		                out.write(',');
-		                out.write(rs.getString(18).replace(',',' ')); 
+		                out.write(rs.getString(18)); 
 		                out.write(',');
-		                out.write(rs.getString(19).replace(',',' ')); 
+		                out.write(rs.getString(19)); 
 		                out.write(',');
-		                out.write(rs.getString(20).replace(',',' '));
+		                out.write(rs.getString(20)); 
 		                out.write(',');
-		                out.write(rs.getString(21).replace(',',' ')); 
+		                out.write(rs.getString(21)); 
 		                out.write(',');
-		                out.write(rs.getString(22).replace(',',' ')); 
+		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		               
 		                	               
@@ -1020,96 +972,104 @@ public class Generar_Archivo {
 		        			
 		        	resp.setContentType("text/csv");
 
-		        	out.write("USUARIO");
+		            out.write("empleado ID");
 		            out.write(',');
-		            out.write("EMPLEADO ID");
+		            out.write("apellido paterno");
 		            out.write(',');
-		            out.write("NOMBRE");
+		            out.write("apellido materno");
 		            out.write(',');
-		            out.write("DIRECCION GENERAL");
+		            out.write("nombre");
 		            out.write(',');
-		            out.write("DIRECCION CORPORATIVA");
+		            out.write("nombre CR");
 		            out.write(',');
-		            out.write("AREA");
+		            out.write("DGA");
 		            out.write(',');
-		            out.write("FECHA");
+		            out.write("fecha");
 		            out.write(',');
-		            out.write("MES");
+		            out.write("quincena");
 		            out.write(',');
-		            out.write("QUINCENA");
+		            out.write("mes");
 		            out.write(',');
-		            out.write("ENTRADA OFICIAL");
+		            out.write("tae");
 		            out.write(',');
-		            out.write("ENTRADA REAL");
+		            out.write("Entrada");
 		            out.write(',');
-		            out.write("SALIDA REAL");
+		            out.write("TDE");
 		            out.write(',');
-		            out.write("JORNADA");
+		            out.write("Entrada Real");
 		            out.write(',');
-		            out.write("ESTANCIA");
+		            out.write("calif Entrada");
 		            out.write(',');
-		            out.write("EDIFICIO");
+		            out.write("TAS");
 		            out.write(',');
-		            out.write("AUTORIZADOR");
+		            out.write("Salida");
 		            out.write(',');
-		            out.write("PROVEEDOR");
+		            out.write("TDS");
 		            out.write(',');
-		            out.write("PROYECTO");
+		            out.write("Salida Real");
 		            out.write(',');
-		            out.write("ESTATUS");
+		            out.write("calif Salida");
 		            out.write(',');
-		            out.write("EDIFICIO ASIGNADO");
+		            out.write("Jornada");
+		            out.write(',');
+		            out.write("total");
+		            out.write(',');
+		            out.write("porcentaje");
 		            out.write('\n');
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 75000,"+maximoreg+"";
+		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where horariosescalonadosv2.cumplimientoExterno.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.cumplimientoExterno.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 70000,140000";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "'limit 75000,"+maximoreg+"";
+		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.cumplimientoExterno where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 70000,140000";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
 		            rs = st.executeQuery(selectSql);
 		            while (rs.next()) {
-		                out.write(rs.getString(1).replace(',',' ')); 
+		                out.write(rs.getString(1)); 
 		                out.write(',');
-		                out.write(rs.getString(2).replace(',',' '));
+		                out.write(rs.getString(2));
 		                out.write(',');
-		                out.write(rs.getString(3).replace(',',' ')); 
+		                out.write(rs.getString(3)); 
 		                out.write(',');
-		                out.write(rs.getString(4).replace(',',' ')); 
+		                out.write(rs.getString(4)); 
 		                out.write(',');
-		                out.write(rs.getString(5).replace(',',' ')); 
+		                out.write(rs.getString(5)); 
 		                out.write(',');
-		                out.write(rs.getString(6).replace(',',' ')); 
+		                out.write(rs.getString(6)); 
 		                out.write(',');
-		                out.write(rs.getString(7).replace(',',' ')); 
+		                out.write(rs.getString(7)); 
 		                out.write(',');
-		                out.write(rs.getString(8).replace(',',' ')); 
+		                out.write(rs.getString(8)); 
 		                out.write(',');
-		                out.write(rs.getString(9).replace(',',' '));
+		                out.write(rs.getString(9)); 
 		                out.write(',');
-		                out.write(rs.getString(10).replace(',',' ')); 
+		                out.write(rs.getString(10)); 
 		                out.write(',');
-		                out.write(rs.getString(11).replace(',',' ')); 
+		                out.write(rs.getString(11)); 
 		                out.write(',');
-		                out.write(rs.getString(12).replace(',',' ')); 
+		                out.write(rs.getString(12)); 
 		                out.write(',');
-		                out.write(rs.getString(13).replace(',',' '));
+		                out.write(rs.getString(13)); 
 		                out.write(',');
-		                out.write(rs.getString(14).replace(',',' ')); 
+		                out.write(rs.getString(14)); 
 		                out.write(',');
-		                out.write(rs.getString(15).replace(',',' ')); 
+		                out.write(rs.getString(15)); 
 		                out.write(',');
-		                out.write(rs.getString(16).replace(',',' ')); 
+		                out.write(rs.getString(16)); 
 		                out.write(',');
-		                out.write(rs.getString(17).replace(',',' ')); 
+		                out.write(rs.getString(17)); 
 		                out.write(',');
-		                out.write(rs.getString(18).replace(',',' ')); 
+		                out.write(rs.getString(18)); 
 		                out.write(',');
-		                out.write(rs.getString(19).replace(',',' '));
+		                out.write(rs.getString(19)); 
 		                out.write(',');
-		                out.write(rs.getString(20).replace(',',' ')); 
+		                out.write(rs.getString(20)); 
+		                out.write(',');
+		                out.write(rs.getString(21)); 
+		                out.write(',');
+		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }
@@ -1136,96 +1096,104 @@ public class Generar_Archivo {
 		        			
 		        	resp.setContentType("text/csv");
 
-		        	out.write("USUARIO");
+		            out.write("empleado ID");
 		            out.write(',');
-		            out.write("EMPLEADO ID");
+		            out.write("apellido paterno");
 		            out.write(',');
-		            out.write("NOMBRE");
+		            out.write("apellido materno");
 		            out.write(',');
-		            out.write("DIRECCION GENERAL");
+		            out.write("nombre");
 		            out.write(',');
-		            out.write("DIRECCION CORPORATIVA");
+		            out.write("nombre CR");
 		            out.write(',');
-		            out.write("AREA");
+		            out.write("DGA");
 		            out.write(',');
-		            out.write("FECHA");
+		            out.write("fecha");
 		            out.write(',');
-		            out.write("MES");
+		            out.write("quincena");
 		            out.write(',');
-		            out.write("QUINCENA");
+		            out.write("mes");
 		            out.write(',');
-		            out.write("ENTRADA OFICIAL");
+		            out.write("tae");
 		            out.write(',');
-		            out.write("ENTRADA REAL");
+		            out.write("Entrada");
 		            out.write(',');
-		            out.write("SALIDA REAL");
+		            out.write("TDE");
 		            out.write(',');
-		            out.write("JORNADA");
+		            out.write("Entrada Real");
 		            out.write(',');
-		            out.write("ESTANCIA");
+		            out.write("calif Entrada");
 		            out.write(',');
-		            out.write("EDIFICIO");
+		            out.write("TAS");
 		            out.write(',');
-		            out.write("AUTORIZADOR");
+		            out.write("Salida");
 		            out.write(',');
-		            out.write("PROVEEDOR");
+		            out.write("TDS");
 		            out.write(',');
-		            out.write("PROYECTO");
+		            out.write("Salida Real");
 		            out.write(',');
-		            out.write("ESTATUS");
+		            out.write("calif Salida");
 		            out.write(',');
-		            out.write("EDIFICIO ASIGNADO");
+		            out.write("Jornada");
+		            out.write(',');
+		            out.write("total");
+		            out.write(',');
+		            out.write("porcentaje");
 		            out.write('\n');
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 75000,"+maximoreg+"";
+		             selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where horariosescalonadosv2.Incumplimiento.usuario in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Incumplimiento.fecha BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 70000,140000";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 75000,"+maximoreg+"";
+		        	 selectSql = "SELECT HIGH_PRIORITY usuario, ncyge, nombre, direccionGeneral, direccionCorporativa, area, fecha, mes, quincena, entradaOficial, entradaReal, salidaReal, jornada, estancia, edificio, autorizador, provedor, proyecto ,estatus, edificioAsignado FROM horariosescalonadosv2.Incumplimiento where fecha between '"+desdeDate+ "' and '"+hastaDate+ "' limit 70000,140000";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
 		            rs = st.executeQuery(selectSql);
 		            while (rs.next()) {
-		                out.write(rs.getString(1).replace(',',' ')); 
+		                out.write(rs.getString(1)); 
 		                out.write(',');
-		                out.write(rs.getString(2).replace(',',' '));
+		                out.write(rs.getString(2));
 		                out.write(',');
-		                out.write(rs.getString(3).replace(',',' ')); 
+		                out.write(rs.getString(3)); 
 		                out.write(',');
-		                out.write(rs.getString(4).replace(',',' ')); 
+		                out.write(rs.getString(4)); 
 		                out.write(',');
-		                out.write(rs.getString(5).replace(',',' '));
+		                out.write(rs.getString(5)); 
 		                out.write(',');
-		                out.write(rs.getString(6).replace(',',' ')); 
+		                out.write(rs.getString(6)); 
 		                out.write(',');
-		                out.write(rs.getString(7).replace(',',' ')); 
+		                out.write(rs.getString(7)); 
 		                out.write(',');
-		                out.write(rs.getString(8).replace(',',' ')); 
+		                out.write(rs.getString(8)); 
 		                out.write(',');
-		                out.write(rs.getString(9).replace(',',' ')); 
+		                out.write(rs.getString(9)); 
 		                out.write(',');
-		                out.write(rs.getString(10).replace(',',' ')); 
+		                out.write(rs.getString(10)); 
 		                out.write(',');
-		                out.write(rs.getString(11).replace(',',' ')); 
+		                out.write(rs.getString(11)); 
 		                out.write(',');
-		                out.write(rs.getString(12).replace(',',' ')); 
+		                out.write(rs.getString(12)); 
 		                out.write(',');
-		                out.write(rs.getString(13).replace(',',' ')); 
+		                out.write(rs.getString(13)); 
 		                out.write(',');
-		                out.write(rs.getString(14).replace(',',' ')); 
+		                out.write(rs.getString(14)); 
 		                out.write(',');
-		                out.write(rs.getString(15).replace(',',' ')); 
+		                out.write(rs.getString(15)); 
 		                out.write(',');
-		                out.write(rs.getString(16).replace(',',' ')); 
+		                out.write(rs.getString(16)); 
 		                out.write(',');
-		                out.write(rs.getString(17).replace(',',' ')); 
+		                out.write(rs.getString(17)); 
 		                out.write(',');
-		                out.write(rs.getString(18).replace(',',' ')); 
+		                out.write(rs.getString(18)); 
 		                out.write(',');
-		                out.write(rs.getString(19).replace(',',' ')); 
+		                out.write(rs.getString(19)); 
 		                out.write(',');
-		                out.write(rs.getString(20).replace(',',' ')); 
+		                out.write(rs.getString(20)); 
+		                out.write(',');
+		                out.write(rs.getString(21)); 
+		                out.write(',');
+		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }
@@ -1294,60 +1262,64 @@ public class Generar_Archivo {
 
 		            
 		         if(tipousuario.equals("CC")){		            
-		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Cyge.FechaRegistroArchivo BETWEEN '"+desdeDate+"' AND '"+hastaDate+"'limit 75000,"+maximoreg+"";
+		             selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where horariosescalonadosv2.Cyge.empleadoID in (select horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioReporte from horariosescalonadosv2.PerfilConsultaExternos where horariosescalonadosv2.PerfilConsultaExternos.IdUsuarioConsulta = '"+usuario+"' )and horariosescalonadosv2.Cyge.FechaRegistroArchivo BETWEEN '"+desdeDate+"' AND '"+hastaDate+"' limit 70000,140000";
 		         }else{
-		        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where FechaRegistroArchivo between '"+desdeDate+ "' and '"+hastaDate+ "'limit 75000,"+maximoreg+"";
+		        	 selectSql = "SELECT HIGH_PRIORITY NoCyge, Usuario, Nombre, ApePaterno, ApeMaterno, DirGeneral, DirCorporativa, Area, EntOficial, AutorizadorID, Autorizador, Proveedor, Proyecto, Estatus, EspacioFisico, LugarAsignadoEdificio, Email ,FechaCreacionRegistro, CreadoPor, RegistroActivo FROM horariosescalonadosv2.Cyge where FechaRegistroArchivo between '"+desdeDate+ "' and '"+hastaDate+ "' limit 70000,140000";
 		         }
 		        	conn = Connector.getConexion();
 		            st = conn.createStatement();
 		            rs = st.executeQuery(selectSql);
 		            while (rs.next()) {
-		                out.write(rs.getString(1).replace(',',' ')); 
+		                out.write(rs.getString(1)); 
 		                out.write(',');
-		                out.write(rs.getString(2).replace(',',' '));
+		                out.write(rs.getString(2));
 		                out.write(',');
-		                out.write(rs.getString(3).replace(',',' ')); 
+		                out.write(rs.getString(3)); 
 		                out.write(',');
-		                out.write(rs.getString(4).replace(',',' ')); 
+		                out.write(rs.getString(4)); 
 		                out.write(',');
-		                out.write(rs.getString(5).replace(',',' '));
+		                out.write(rs.getString(5)); 
 		                out.write(',');
-		                out.write(rs.getString(6).replace(',',' ')); 
+		                out.write(rs.getString(6)); 
 		                out.write(',');
-		                out.write(rs.getString(7).replace(',',' ')); 
+		                out.write(rs.getString(7)); 
 		                out.write(',');
-		                out.write(rs.getString(8).replace(',',' ')); 
+		                out.write(rs.getString(8)); 
 		                out.write(',');
-		                out.write(rs.getString(9).replace(',',' ')); 
+		                out.write(rs.getString(9)); 
 		                out.write(',');
-		                out.write(rs.getString(10).replace(',',' ')); 
+		                out.write(rs.getString(10)); 
 		                out.write(',');
-		                out.write(rs.getString(11).replace(',',' ')); 
+		                out.write(rs.getString(11)); 
 		                out.write(',');
-		                out.write(rs.getString(12).replace(',',' ')); 
+		                out.write(rs.getString(12)); 
 		                out.write(',');
-		                out.write(rs.getString(13).replace(',',' ')); 
+		                out.write(rs.getString(13)); 
 		                out.write(',');
-		                out.write(rs.getString(14).replace(',',' '));
+		                out.write(rs.getString(14)); 
 		                out.write(',');
-		                out.write(rs.getString(15).replace(',',' ')); 
+		                out.write(rs.getString(15)); 
 		                out.write(',');
-		                out.write(rs.getString(16).replace(',',' ')); 
+		                out.write(rs.getString(16)); 
 		                out.write(',');
-		                out.write(rs.getString(17).replace(',',' ')); 
+		                out.write(rs.getString(17)); 
 		                out.write(',');
-		                out.write(rs.getString(18).replace(',',' '));
+		                out.write(rs.getString(18)); 
 		                out.write(',');
-		                out.write(rs.getString(19).replace(',',' ')); 
+		                out.write(rs.getString(19)); 
 		                out.write(',');
-		                out.write(rs.getString(20).replace(',',' ')); 
+		                out.write(rs.getString(20)); 
+		                out.write(',');
+		                out.write(rs.getString(21)); 
+		                out.write(',');
+		                out.write(rs.getString(22)); 
 		                out.write('\n');
 		                  	               
 		            }
 	         
       
 	            resp.setContentType("application/download");
-	            resp.setHeader("Content-disposition", "attachment; filename =reporte2.csv");
+	            resp.setHeader("Content-disposition", "attachment; filename ="+opcion+".csv");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
